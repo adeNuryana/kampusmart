@@ -60,7 +60,15 @@
                 {{ session('success') }}
             </div>
         @endif
-
+        @if (session('error'))
+            <div
+                class="mb-5 rounded-xl
+               border border-red-200
+               bg-red-50 px-4 py-3
+               text-sm text-red-700">
+                {{ session('error') }}
+            </div>
+        @endif
 
         <section
             class="overflow-hidden
@@ -232,7 +240,7 @@
                                 {{-- PRODUCT COUNT --}}
                                 <td class="px-5 py-4
                                        text-slate-600">
-                                    0
+                                    {{ $category->products_count }}
                                 </td>
 
 
@@ -271,8 +279,7 @@
                justify-end gap-1">
 
                                         {{-- EDIT --}}
-                                        <a href="{{ route('admin.categories.edit', $category) }}"
-                                            title="Edit kategori"
+                                        <a href="{{ route('admin.categories.edit', $category) }}" title="Edit kategori"
                                             class="inline-flex size-9
                    items-center justify-center
                    rounded-lg text-slate-500
@@ -285,17 +292,15 @@
                                                 <path d="M12 20h9" />
 
                                                 <path d="M16.5 3.5
-                           a2.1 2.1 0 0 1 3 3
-                           L8 18l-4 1 1-4Z" />
+                               a2.1 2.1 0 0 1 3 3
+                               L8 18l-4 1 1-4Z" />
                                             </svg>
 
                                         </a>
 
 
                                         {{-- ACTIVE / INACTIVE --}}
-                                        <form
-                                            action="{{ route('admin.categories.status', $category) }}"
-                                            method="POST">
+                                        <form action="{{ route('admin.categories.status', $category) }}" method="POST">
 
                                             @csrf
                                             @method('PATCH')
@@ -332,9 +337,7 @@
 
 
                                         {{-- DELETE --}}
-                                        <form
-                                            action="{{ route('admin.categories.destroy', $category) }}"
-                                            method="POST">
+                                        <form action="{{ route('admin.categories.destroy', $category) }}" method="POST">
 
                                             @csrf
                                             @method('DELETE')

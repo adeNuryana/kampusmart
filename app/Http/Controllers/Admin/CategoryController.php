@@ -17,9 +17,11 @@ class CategoryController extends Controller
         $search = $request->string('search')->trim();
 
         $categories = Category::query()
+            ->withCount('products')
             ->when(
                 $search->isNotEmpty(),
                 function ($query) use ($search) {
+
                     $query->where(
                         'name',
                         'like',
@@ -86,7 +88,7 @@ class CategoryController extends Controller
                 ?? null,
 
             'description' =>
-                $validated['description']
+            $validated['description']
                 ?? null,
 
             'status' => $validated['status'],
@@ -101,126 +103,136 @@ class CategoryController extends Controller
             );
     }
     public function edit(Category $category): View
-{
-    return view(
-        'admin.categories.edit',
-        compact('category')
-    );
-}
-public function update(
-    Request $request,
-    Category $category
-): RedirectResponse {
+    {
+        return view(
+            'admin.categories.edit',
+            compact('category')
+        );
+    }
+    public function update(
+        Request $request,
+        Category $category
+    ): RedirectResponse {
 
-    $validated = $request->validate([
-        'name' => [
-            'required',
-            'string',
-            'max:100',
+        $validated = $request->validate([
+            'name' => [
+                'required',
+                'string',
+                'max:100',
 
-            Rule::unique('categories', 'name')
-                ->ignore($category),
-        ],
+                Rule::unique('categories', 'name')
+                    ->ignore($category),
+            ],
 
-        'icon' => [
-            'nullable',
-            'string',
-            'max:50',
-        ],
+            'icon' => [
+                'nullable',
+                'string',
+                'max:50',
+            ],
 
-        'description' => [
-            'nullable',
-            'string',
-            'max:500',
-        ],
+            'description' => [
+                'nullable',
+                'string',
+                'max:500',
+            ],
 
-        'status' => [
-            'required',
-            Rule::in([
-                'active',
-                'inactive',
-            ]),
-        ],
-    ]);
-
-
-    $newSlug = Str::slug($validated['name']);
+            'status' => [
+                'required',
+                Rule::in([
+                    'active',
+                    'inactive',
+                ]),
+            ],
+        ]);
 
 
-    /*
+        $newSlug = Str::slug($validated['name']);
+
+
+        /*
     |--------------------------------------------------------------------------
     | Pastikan slug tidak bertabrakan
     |--------------------------------------------------------------------------
     */
 
-    $slugExists = Category::query()
-        ->where('slug', $newSlug)
-        ->whereKeyNot($category->getKey())
-        ->exists();
+        $slugExists = Category::query()
+            ->where('slug', $newSlug)
+            ->whereKeyNot($category->getKey())
+            ->exists();
 
 
-    if ($slugExists) {
-        return back()
-            ->withErrors([
-                'name' => 'Nama kategori menghasilkan slug yang sudah digunakan.',
-            ])
-            ->withInput();
+        if ($slugExists) {
+            return back()
+                ->withErrors([
+                    'name' => 'Nama kategori menghasilkan slug yang sudah digunakan.',
+                ])
+                ->withInput();
+        }
+
+
+        $category->name = $validated['name'];
+
+        $category->slug = $newSlug;
+
+        $category->icon =
+            $validated['icon'] ?? null;
+
+        $category->description =
+            $validated['description'] ?? null;
+
+        $category->status =
+            $validated['status'];
+
+        $category->save();
+
+
+        return redirect()
+            ->route('admin.categories.index')
+            ->with(
+                'success',
+                'Kategori berhasil diperbarui.'
+            );
     }
+    public function updateStatus(
+        Category $category
+    ): RedirectResponse {
 
-
-    $category->name = $validated['name'];
-
-    $category->slug = $newSlug;
-
-    $category->icon =
-        $validated['icon'] ?? null;
-
-    $category->description =
-        $validated['description'] ?? null;
-
-    $category->status =
-        $validated['status'];
-
-    $category->save();
-
-
-    return redirect()
-        ->route('admin.categories.index')
-        ->with(
-            'success',
-            'Kategori berhasil diperbarui.'
-        );
-}
-public function updateStatus(
-    Category $category
-): RedirectResponse {
-
-    $category->status =
-        $category->status === 'active'
+        $category->status =
+            $category->status === 'active'
             ? 'inactive'
             : 'active';
 
-    $category->save();
+        $category->save();
 
 
-    return back()->with(
-        'success',
-        $category->status === 'active'
-            ? 'Kategori berhasil diaktifkan.'
-            : 'Kategori berhasil dinonaktifkan.'
-    );
-}
-public function destroy(
-    Category $category
-): RedirectResponse {
-
-    $category->delete();
-
-    return redirect()
-        ->route('admin.categories.index')
-        ->with(
+        return back()->with(
             'success',
-            'Kategori berhasil dihapus.'
+            $category->status === 'active'
+                ? 'Kategori berhasil diaktifkan.'
+                : 'Kategori berhasil dinonaktifkan.'
         );
-}
+    }
+    public function destroy(
+        Category $category
+    ): RedirectResponse {
+
+        if ($category->products()->exists()) {
+
+            return back()->with(
+                'error',
+                'Kategori tidak dapat dihapus karena masih digunakan oleh produk.'
+            );
+        }
+
+
+        $category->delete();
+
+
+        return redirect()
+            ->route('admin.categories.index')
+            ->with(
+                'success',
+                'Kategori berhasil dihapus.'
+            );
+    }
 }
