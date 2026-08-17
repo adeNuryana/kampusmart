@@ -67,15 +67,15 @@
 
 
                 {{-- PEMBELI --}}
-                <a href="#"
+                <a href="{{ route('admin.buyers.index') }}"
                     class="flex items-center gap-4 rounded-xl
-                       px-4 py-3 text-sm font-medium
-                       text-slate-600
-                       hover:bg-slate-50">
+           px-4 py-3 text-sm font-medium transition
+           {{ request()->routeIs('admin.buyers.*') ? 'bg-violet-50 text-violet-700' : 'text-slate-600 hover:bg-slate-50' }}">
 
                     <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                        <circle cx="12" cy="8" r="3" />
-                        <path d="M5 20c0-4 3-7 7-7s7 3 7 7" />
+                        <circle cx="12" cy="8" r="4" />
+
+                        <path d="M4 21a8 8 0 0 1 16 0" />
                     </svg>
 
                     Pembeli
@@ -95,10 +95,25 @@
 
                     Penjual
                 </a>
+                <a href="{{ route('admin.orders.index') }}"
+                    class="flex items-center gap-4
+           rounded-xl px-4 py-3
+           text-sm font-medium transition
+           {{ request()->routeIs('admin.orders.*') ? 'bg-violet-50 text-violet-700' : 'text-slate-600 hover:bg-slate-50' }}">
 
+                    <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M6 3h12v18H6z" />
+                        <path d="M9 8h6" />
+                        <path d="M9 12h6" />
+                        <path d="M9 16h4" />
+                    </svg>
+
+                    Pesanan
+
+                </a>
 
                 {{-- PRODUK --}}
-                <a href="#"
+                <a href="{{ route('admin.products.index') }}"
                     class="flex items-center gap-4 rounded-xl
                        px-4 py-3 text-sm font-medium
                        text-slate-600
@@ -164,21 +179,45 @@
             {{-- BOTTOM MENU --}}
             <div class="space-y-1 border-t border-slate-200 p-3">
 
-                <a href="#"
+                <a href="{{ route('admin.settings.index') }}"
                     class="flex items-center gap-4 rounded-xl
-                       px-4 py-3 text-sm font-medium
-                       text-slate-600 hover:bg-slate-50">
-                    ⚙
+           px-4 py-3 text-sm font-medium transition
+           {{ request()->routeIs('admin.settings.*') ? 'bg-violet-50 text-violet-700' : 'text-slate-600 hover:bg-slate-50' }}">
+                    <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <circle cx="12" cy="12" r="3" />
+
+                        <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06
+                 a2 2 0 1 1-2.83 2.83l-.06-.06
+                 A1.7 1.7 0 0 0 15 19.4
+                 a1.7 1.7 0 0 0-1 .6
+                 1.7 1.7 0 0 0-.4 1.1V21
+                 a2 2 0 1 1-4 0v-.09
+                 A1.7 1.7 0 0 0 8.6 19.4
+                 a1.7 1.7 0 0 0-1.88.34l-.06.06
+                 a2 2 0 1 1-2.83-2.83l.06-.06
+                 A1.7 1.7 0 0 0 4.6 15
+                 a1.7 1.7 0 0 0-.6-1
+                 1.7 1.7 0 0 0-1.1-.4H3
+                 a2 2 0 1 1 0-4h.09
+                 A1.7 1.7 0 0 0 4.6 8.6
+                 a1.7 1.7 0 0 0-.34-1.88l-.06-.06
+                 a2 2 0 1 1 2.83-2.83l.06.06
+                 A1.7 1.7 0 0 0 9 4.6
+                 a1.7 1.7 0 0 0 1-.6
+                 1.7 1.7 0 0 0 .4-1.1V3
+                 a2 2 0 1 1 4 0v.09
+                 A1.7 1.7 0 0 0 15.4 4.6
+                 a1.7 1.7 0 0 0 1.88-.34l.06-.06
+                 a2 2 0 1 1 2.83 2.83l-.06.06
+                 A1.7 1.7 0 0 0 19.4 9
+                 a1.7 1.7 0 0 0 .6 1
+                 1.7 1.7 0 0 0 1.1.4H21
+                 a2 2 0 1 1 0 4h-.09
+                 A1.7 1.7 0 0 0 19.4 15Z" />
+                    </svg>
                     Pengaturan
                 </a>
 
-                <a href="#"
-                    class="flex items-center gap-4 rounded-xl
-                       px-4 py-3 text-sm font-medium
-                       text-slate-600 hover:bg-slate-50">
-                    ◯
-                    Profil
-                </a>
 
 
                 <form action="{{ route('logout') }}" method="POST">

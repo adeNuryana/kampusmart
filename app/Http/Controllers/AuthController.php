@@ -51,7 +51,7 @@ class AuthController extends Controller
         return match ($user->role) {
             'admin' => redirect()->route('admin.dashboard'),
             'seller' => redirect()->route('seller.dashboard'),
-            'buyer' => redirect()->route('buyer.home'),
+            'buyer' => redirect()->route('buyer.dashboard'),
 
             default => $this->logout($request),
         };

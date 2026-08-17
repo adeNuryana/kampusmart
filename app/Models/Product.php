@@ -2,58 +2,41 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Product extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
+        'user_id',
         'category_id',
         'name',
-        'slug',
         'description',
         'price',
         'stock',
-        'condition',
         'image',
         'status',
     ];
 
+    protected $casts = [
+        'price' => 'decimal:2',
+        'stock' => 'integer',
+    ];
 
-    protected function casts(): array
+    public function user()
     {
-        return [
-            'price' => 'decimal:2',
-            'stock' => 'integer',
-        ];
+        return $this->belongsTo(User::class);
     }
 
-
-    /*
-    |--------------------------------------------------------------------------
-    | Seller
-    |--------------------------------------------------------------------------
-    */
-
-    public function seller(): BelongsTo
+    public function category()
     {
-        return $this->belongsTo(
-            User::class,
-            'seller_id'
-        );
+        return $this->belongsTo(Category::class);
     }
 
-
-    /*
-    |--------------------------------------------------------------------------
-    | Category
-    |--------------------------------------------------------------------------
-    */
-
-    public function category(): BelongsTo
+    public function cartItems()
     {
-        return $this->belongsTo(
-            Category::class
-        );
+        return $this->hasMany(CartItem::class);
     }
 }

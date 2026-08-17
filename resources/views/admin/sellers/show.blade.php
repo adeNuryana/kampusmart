@@ -45,14 +45,17 @@
                    border-slate-200 bg-white
                    p-6 shadow-sm">
 
-                <div
-                    class="mx-auto flex size-20
-                       items-center justify-center
-                       rounded-full bg-violet-100
-                       text-3xl font-bold
-                       text-violet-700">
-                    {{ strtoupper(substr($seller->name, 0, 1)) }}
-                </div>
+                @if ($seller->sellerProfile?->photo)
+                    <img src="{{ asset('storage/' . $seller->sellerProfile->photo) }}" alt="{{ $seller->name }}"
+                        class="size-24 rounded-2xl border border-slate-200 object-cover">
+                @else
+                    <div
+                        class="flex size-24 items-center justify-center
+                   rounded-2xl bg-violet-100
+                   text-3xl font-bold text-violet-700">
+                        {{ strtoupper(substr($seller->name, 0, 1)) }}
+                    </div>
+                @endif
 
 
                 <div class="mt-4 text-center">

@@ -13,6 +13,8 @@ class SellerProfile extends Model
         'nim',
         'faculty',
         'description',
+        'photo',
+        
     ];
 
     public function user(): BelongsTo

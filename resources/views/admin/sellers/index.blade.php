@@ -125,6 +125,7 @@
                             class="text-left text-xs
                            font-semibold uppercase
                            tracking-wide text-slate-500">
+
                             <th class="px-5 py-4">Penjual</th>
                             <th class="px-5 py-4">Nama Toko</th>
                             <th class="px-5 py-4">WhatsApp</th>
@@ -140,31 +141,34 @@
 
                         @forelse ($sellers as $seller)
                             <tr class="text-sm">
-
                                 <td class="px-5 py-4">
 
                                     <div class="flex items-center gap-3">
 
-                                        <div
-                                            class="flex size-10
-                                           items-center justify-center
-                                           rounded-full
-                                           bg-violet-100
-                                           font-semibold
-                                           text-violet-700">
-                                            {{ strtoupper(substr($seller->name, 0, 1)) }}
-                                        </div>
+                                        @if ($seller->sellerProfile?->photo)
+                                            <img src="{{ asset('storage/' . $seller->sellerProfile->photo) }}"
+                                                alt="{{ $seller->name }}"
+                                                class="size-12 rounded-full border border-slate-200 object-cover">
+                                        @else
+                                            <div
+                                                class="flex size-12 items-center justify-center
+                       rounded-full bg-slate-100
+                       text-sm font-bold text-slate-500">
+                                                {{ strtoupper(substr($seller->name, 0, 1)) }}
+                                            </div>
+                                        @endif
+
 
                                         <div>
-                                            <p class="font-semibold">
+
+                                            <p class="font-semibold text-slate-900">
                                                 {{ $seller->name }}
                                             </p>
 
-                                            <p
-                                                class="mt-1 text-xs
-                                               text-slate-500">
-                                                {{ $seller->sellerProfile?->nim ?? $seller->email }}
+                                            <p class="mt-0.5 text-sm text-slate-500">
+                                                {{ $seller->email }}
                                             </p>
+
                                         </div>
 
                                     </div>
@@ -232,8 +236,8 @@
                                             <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                 stroke-width="1.8">
                                                 <path d="M2 12s3.5-6 10-6
-                           10 6 10 6-3.5 6-10 6
-                          S2 12 2 12Z" />
+                               10 6 10 6-3.5 6-10 6
+                              S2 12 2 12Z" />
                                                 <circle cx="12" cy="12" r="3" />
                                             </svg>
                                         </a>
@@ -251,8 +255,8 @@
                                                 <path d="M12 20h9" />
 
                                                 <path d="M16.5 3.5
-                           a2.1 2.1 0 0 1 3 3
-                           L8 18l-4 1 1-4Z" />
+                               a2.1 2.1 0 0 1 3 3
+                               L8 18l-4 1 1-4Z" />
                                             </svg>
                                         </a>
 
