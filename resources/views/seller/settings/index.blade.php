@@ -233,7 +233,7 @@
 
                     <form
                         action="{{ route(
-                            'seller.settings.profile'
+                            'seller.settings.profile.update'
                         ) }}"
                         method="POST"
                         enctype="multipart/form-data"
@@ -734,7 +734,7 @@
 
                     <form
                         action="{{ route(
-                            'seller.settings.password'
+                            'seller.settings.password.update'
                         ) }}"
                         method="POST"
                     >

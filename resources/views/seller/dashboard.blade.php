@@ -36,28 +36,6 @@
 
         </div>
 
-
-        @if (Route::has('seller.products.create'))
-
-            <a
-                href="{{ route('seller.products.create') }}"
-                class="inline-flex h-11 items-center
-                       justify-center gap-2 rounded-xl
-                       bg-violet-600 px-5
-                       text-sm font-semibold text-white
-                       transition hover:bg-violet-700"
-            >
-
-                <span class="text-xl leading-none">
-                    +
-                </span>
-
-                Tambah Produk
-
-            </a>
-
-        @endif
-
     </div>
 
 
@@ -232,11 +210,7 @@
 
 
         {{-- OMZET --}}
-        <div
-            class="rounded-2xl border
-                   border-slate-200
-                   bg-white p-5 shadow-sm"
-        >
+        <a  href="{{ route('seller.sales.index') }}"class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 
             <div class="flex items-start justify-between gap-4">
 
@@ -290,7 +264,7 @@
 
             </div>
 
-        </div>
+        </a>
 
     </div>
 

@@ -5,7 +5,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\SellerController;
-use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\SettingController as AdminSettingController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Buyer\CartController;
 use App\Http\Controllers\Buyer\OrderController as BuyerOrderController;
@@ -19,6 +19,7 @@ use App\Http\Controllers\Seller\OrderController as SellerOrderController;
 use App\Http\Controllers\Seller\DashboardController as SellerDashboardController;
 use App\Http\Controllers\Buyer\ProfileController;
 use App\Http\Controllers\Seller\SettingController as SellerSettingController;
+use App\Http\Controllers\Seller\SalesController;
 
 
 /*
@@ -108,13 +109,13 @@ Route::middleware(['auth', 'role:admin',])->prefix('admin')->name('admin.')
 
 
         // setting
-        Route::get('/pengaturan', [SettingController::class, 'index'])
+        Route::get('/settings', [AdminSettingController::class, 'index'])
             ->name('settings.index');
 
-        Route::put('/pengaturan/profil', [SettingController::class, 'updateProfile'])
+        Route::put('/settings/profil', [AdminSettingController::class, 'updateProfile'])
             ->name('settings.profile');
 
-        Route::put('/pengaturan/password', [SettingController::class, 'updatePassword'])
+        Route::put('/settings/password', [AdminSettingController::class, 'updatePassword'])
             ->name('settings.password');
     });
 
@@ -136,7 +137,30 @@ Route::middleware([
         Route::get('/dashboard', [SellerDashboardController::class, 'index'])->name('dashboard');
         Route::get('/produk', [ProductController::class, 'index'])->name('products.index');
         Route::get('/produk/tambah', [ProductController::class, 'create'])->name('products.create');
+        Route::post('/produk', [ProductController::class, 'store'])
+            ->name('products.store');
 
+        Route::get('/produk/{product}/edit', [ProductController::class, 'edit'])
+            ->name('products.edit');
+
+        Route::put('/produk/{product}', [ProductController::class, 'update'])
+            ->name('products.update');
+
+        Route::patch('/produk/{product}/status', [ProductController::class, 'updateStatus'])
+            ->name('products.status');
+
+        Route::delete('/produk/{product}', [ProductController::class, 'destroy'])
+            ->name('products.destroy');
+
+
+        Route::get('/settings', [SellerSettingController::class, 'index'])
+            ->name('settings.index');
+
+        Route::put('/settings/profile', [SellerSettingController::class, 'updateProfile'])
+            ->name('settings.profile.update');
+
+        Route::put('/settings/password', [SellerSettingController::class, 'updatePassword'])
+            ->name('settings.password.update');
         /*
         |--------------------------------------------------------------------------
         | Pesanan
@@ -146,6 +170,8 @@ Route::middleware([
         Route::get('/pesanan', [SellerOrderController::class, 'index'])->name('orders.index');
         Route::get('/pesanan/{order}', [SellerOrderController::class, 'show'])->name('orders.show');
         Route::patch('/pesanan/{order}/status', [SellerOrderController::class, 'updateStatus'])->name('orders.status');
+
+        Route::get('/penjualan', [SalesController::class, 'index'])->name('sales.index');
     });
 
 
@@ -186,7 +212,7 @@ Route::middleware([
 */
 
         Route::get(
-            '/checkout',
+            '/checkout/{seller}',
             [CheckoutController::class, 'index']
         )->name('checkout.index');
 
@@ -207,6 +233,11 @@ Route::middleware([
             '/pesanan',
             [BuyerOrderController::class, 'index']
         )->name('orders.index');
+
+        Route::get(
+            '/pesanan/{order}/whatsapp',
+            [BuyerOrderController::class, 'whatsapp']
+        )->name('orders.whatsapp');
         /*
 |--------------------------------------------------------------------------
 | Profile Buyer
@@ -230,26 +261,4 @@ Route::middleware([
             [ProfileController::class, 'updatePassword']
         )->name('profile.password');
 
-        /*
-|--------------------------------------------------------------------------
-| Pengaturan Seller
-|--------------------------------------------------------------------------
-*/
-
-        Route::get(
-            '/pengaturan',
-            [SellerSettingController::class, 'index']
-        )->name('settings.index');
-
-
-        Route::put(
-            '/pengaturan/profile',
-            [SellerSettingController::class, 'updateProfile']
-        )->name('settings.profile');
-
-
-        Route::put(
-            '/pengaturan/password',
-            [SellerSettingController::class, 'updatePassword']
-        )->name('settings.password');
     });

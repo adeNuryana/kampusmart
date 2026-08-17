@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>
-        @yield('title', 'Super Admin') - KampusMart
+        @yield('title', 'Admin') - KampusMart
     </title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -283,26 +283,6 @@
 
                 <div class="ml-auto flex items-center gap-5">
 
-                    {{-- NOTIFICATION --}}
-                    <button type="button"
-                        class="relative flex size-10 items-center
-                           justify-center rounded-full
-                           text-slate-600
-                           hover:bg-slate-100">
-
-                        <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="1.8">
-                            <path d="M18 8a6 6 0 0 0-12 0
-                               c0 7-3 7-3 9h18
-                               c0-2-3-2-3-9" />
-                            <path d="M10 21h4" />
-                        </svg>
-
-                        <span
-                            class="absolute right-2 top-2
-                               size-2 rounded-full bg-red-500"></span>
-
-                    </button>
 
 
                     <div class="h-8 w-px bg-slate-200"></div>

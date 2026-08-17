@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Seller;
 
 use App\Http\Controllers\Controller;
+use App\Services\ActivityLogger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
@@ -173,26 +174,33 @@ class SettingController extends Controller
             ],
             [
                 'store_name' =>
-                    $validated['store_name'],
+                $validated['store_name'],
 
                 'whatsapp' =>
-                    $validated['whatsapp'],
+                $validated['whatsapp'],
 
                 'nim' =>
-                    $validated['nim'] ?? null,
+                $validated['nim'] ?? null,
 
                 'faculty' =>
-                    $validated['faculty'] ?? null,
+                $validated['faculty'] ?? null,
 
                 'description' =>
-                    $validated['description'] ?? null,
+                $validated['description'] ?? null,
 
                 'photo' =>
-                    $photoPath,
+                $photoPath,
             ]
         );
 
-
+        ActivityLogger::log(
+            'seller_profile_updated',
+            'memperbarui profil toko',
+            $profile,
+            [
+                'store_name' => $profile->store_name,
+            ]
+        );
         return back()->with(
             'profile_success',
             'Profil toko berhasil diperbarui.'

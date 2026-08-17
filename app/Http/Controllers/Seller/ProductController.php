@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Seller;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use App\Services\ActivityLogger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
@@ -47,9 +49,7 @@ class ProductController extends Controller
                             'like',
                             "%{$search}%"
                         );
-
                 });
-
             })
 
             /*
@@ -70,7 +70,6 @@ class ProductController extends Controller
                         'status',
                         $status->value()
                     );
-
                 }
             )
 
@@ -88,7 +87,6 @@ class ProductController extends Controller
                         'category_id',
                         $category
                     );
-
                 }
             )
 
@@ -201,36 +199,41 @@ class ProductController extends Controller
                     'products',
                     'public'
                 );
-
         }
 
 
-        Product::create([
-            'user_id' => $request->user()->id,
+        $product = Product::create([
+            'seller_id' => $request->user()->id,
 
             'category_id' =>
-                $validated['category_id'],
+            $validated['category_id'],
 
             'name' =>
-                $validated['name'],
+            $validated['name'],
 
             'description' =>
-                $validated['description'] ?? null,
+            $validated['description'] ?? null,
+
+            'slug' => $this->generateUniqueSlug($validated['name']),
 
             'price' =>
-                $validated['price'],
+            $validated['price'],
 
             'stock' =>
-                $validated['stock'],
+            $validated['stock'],
 
             'status' =>
-                $validated['status'],
+            $validated['status'],
 
             'image' =>
-                $imagePath,
+            $imagePath,
         ]);
 
-
+        ActivityLogger::log(
+            'product_created',
+            'menambahkan produk "' . $product->name . '"',
+            $product
+        );
         return redirect()
             ->route('seller.products.index')
             ->with(
@@ -355,12 +358,11 @@ class ProductController extends Controller
             if (
                 $imagePath &&
                 Storage::disk('public')
-                    ->exists($imagePath)
+                ->exists($imagePath)
             ) {
 
                 Storage::disk('public')
                     ->delete($imagePath);
-
             }
 
 
@@ -375,27 +377,31 @@ class ProductController extends Controller
 
         $product->update([
             'category_id' =>
-                $validated['category_id'],
+            $validated['category_id'],
 
             'name' =>
-                $validated['name'],
+            $validated['name'],
 
             'description' =>
-                $validated['description'] ?? null,
+            $validated['description'] ?? null,
 
             'price' =>
-                $validated['price'],
+            $validated['price'],
 
             'stock' =>
-                $validated['stock'],
+            $validated['stock'],
 
             'status' =>
-                $validated['status'],
+            $validated['status'],
 
             'image' =>
-                $imagePath,
+            $imagePath,
         ]);
-
+        ActivityLogger::log(
+            'product_updated',
+            'mengubah produk "' . $product->name . '"',
+            $product
+        );
 
         return redirect()
             ->route('seller.products.index')
@@ -436,7 +442,7 @@ class ProductController extends Controller
 
         $product->update([
             'status' =>
-                $validated['status'],
+            $validated['status'],
         ]);
 
 
@@ -475,15 +481,18 @@ class ProductController extends Controller
         if (
             $product->image &&
             Storage::disk('public')
-                ->exists($product->image)
+            ->exists($product->image)
         ) {
 
             Storage::disk('public')
                 ->delete($product->image);
-
         }
-
-
+        $productName = $product->name;
+        ActivityLogger::log(
+            'product_deleted',
+            'menghapus produk "' . $productName . '"',
+            $product
+        );
         $product->delete();
 
 
@@ -506,10 +515,27 @@ class ProductController extends Controller
     ): void {
 
         abort_if(
-            $product->user_id !==
+            $product->seller_id !==
                 $request->user()->id,
             403
         );
+    }
+    private function generateUniqueSlug(string $name): string
+    {
+        $slug = Str::slug($name);
 
+        $originalSlug = $slug;
+
+        $counter = 1;
+
+        while (
+            Product::where('slug', $slug)->exists()
+        ) {
+            $slug = $originalSlug . '-' . $counter;
+
+            $counter++;
+        }
+
+        return $slug;
     }
 }

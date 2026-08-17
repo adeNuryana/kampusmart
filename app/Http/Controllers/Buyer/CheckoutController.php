@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\CartItem;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\User;
+use App\Services\ActivityLogger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -16,55 +18,123 @@ class CheckoutController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
-    | Halaman Checkout
+    | Halaman Checkout Per Seller
     |--------------------------------------------------------------------------
     */
 
-    public function index(Request $request): View
-    {
+    public function index(
+        Request $request,
+        User $seller
+    ): View {
+
+        /*
+        |--------------------------------------------------------------------------
+        | Pastikan Seller Valid
+        |--------------------------------------------------------------------------
+        */
+
+        abort_if(
+            $seller->role !== 'seller' ||
+                $seller->status !== 'active',
+            404
+        );
+
+
+        $buyer = $request->user();
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Ambil Cart Hanya Dari Seller Yang Dipilih
+        |--------------------------------------------------------------------------
+        */
+
         $cartItems = CartItem::query()
             ->with([
                 'product.category',
                 'product.user.sellerProfile',
             ])
-            ->where('user_id', $request->user()->id)
+            ->where('user_id', $buyer->id)
+            ->whereHas(
+                'product',
+                function ($query) use ($seller) {
+
+                    $query->where(
+                        'seller_id',
+                        $seller->id
+                    );
+                }
+            )
             ->get();
 
+
         if ($cartItems->isEmpty()) {
-            return view('buyer.checkout.index', [
-                'cartItems' => $cartItems,
-                'subtotal' => 0,
-            ]);
+
+            abort(404);
         }
 
 
-        $subtotal = $cartItems->sum(function ($item) {
+        /*
+        |--------------------------------------------------------------------------
+        | Seller Profile
+        |--------------------------------------------------------------------------
+        */
 
-            if (!$item->product) {
-                return 0;
+        $seller->load('sellerProfile');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Subtotal
+        |--------------------------------------------------------------------------
+        */
+
+        $subtotal = $cartItems->sum(
+            function ($item) {
+
+                if (!$item->product) {
+                    return 0;
+                }
+
+                return
+                    $item->product->price *
+                    $item->quantity;
             }
-
-            return $item->product->price
-                * $item->quantity;
-        });
+        );
 
 
-        return view('buyer.checkout.index', compact(
-            'cartItems',
-            'subtotal'
-        ));
+        return view(
+            'buyer.checkout.index',
+            compact(
+                'cartItems',
+                'subtotal',
+                'seller'
+            )
+        );
     }
 
 
     /*
     |--------------------------------------------------------------------------
-    | Proses Checkout
+    | Buat Pesanan
     |--------------------------------------------------------------------------
     */
 
     public function store(Request $request)
     {
+        /*
+        |--------------------------------------------------------------------------
+        | Validation
+        |--------------------------------------------------------------------------
+        */
+
         $validated = $request->validate([
+            'seller_id' => [
+                'required',
+                'integer',
+                'exists:users,id',
+            ],
+
             'buyer_name' => [
                 'required',
                 'string',
@@ -90,161 +160,229 @@ class CheckoutController extends Controller
 
         /*
         |--------------------------------------------------------------------------
-        | Ambil Keranjang
+        | Ambil Seller
         |--------------------------------------------------------------------------
         */
 
-        $cartItems = CartItem::query()
-            ->with([
-                'product.user',
-            ])
-            ->where('user_id', $buyer->id)
-            ->get();
+        $seller = User::query()
+            ->with('sellerProfile')
+            ->where(
+                'id',
+                $validated['seller_id']
+            )
+            ->where(
+                'role',
+                'seller'
+            )
+            ->where(
+                'status',
+                'active'
+            )
+            ->first();
 
 
-        if ($cartItems->isEmpty()) {
+        if (!$seller) {
 
             return redirect()
                 ->route('buyer.cart.index')
-                ->withErrors([
-                    'cart' => 'Keranjang belanja masih kosong.',
-                ]);
+                ->with(
+                    'error',
+                    'Penjual sudah tidak tersedia.'
+                );
         }
 
 
         /*
         |--------------------------------------------------------------------------
-        | Kelompokkan Berdasarkan Seller
+        | Ambil Cart Seller Yang Dipilih
+        |--------------------------------------------------------------------------
+        |
+        | INI $cartItems yang tadi kita bahas.
+        |
+        */
+
+        $cartItems = CartItem::query()
+            ->with('product')
+            ->where(
+                'user_id',
+                $buyer->id
+            )
+            ->whereHas(
+                'product',
+                function ($query) use ($seller) {
+
+                    $query->where(
+                        'seller_id',
+                        $seller->id
+                    );
+                }
+            )
+            ->get();
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Tidak Ada Cart Seller
         |--------------------------------------------------------------------------
         */
 
-        $itemsBySeller = $cartItems
-            ->groupBy(function ($item) {
-                return $item->product?->user_id;
-            });
+        if ($cartItems->isEmpty()) {
+
+            return redirect()
+                ->route('buyer.cart.index')
+                ->with(
+                    'error',
+                    'Produk dari penjual tersebut tidak ditemukan di keranjang.'
+                );
+        }
 
 
-        $orders = DB::transaction(function () use (
-            $itemsBySeller,
-            $buyer,
-            $validated
-        ) {
+        /*
+        |--------------------------------------------------------------------------
+        | Transaction
+        |--------------------------------------------------------------------------
+        */
 
-            $createdOrders = collect();
-
-
-            foreach ($itemsBySeller as $sellerId => $items) {
-
-                /*
-                |--------------------------------------------------------------------------
-                | Validasi Seller
-                |--------------------------------------------------------------------------
-                */
-
-                $seller = $items
-                    ->first()
-                    ?->product
-                    ?->user;
-
-
-                if (
-                    !$seller ||
-                    $seller->role !== 'seller' ||
-                    $seller->status !== 'active'
-                ) {
-
-                    throw ValidationException::withMessages([
-                        'cart' =>
-                            'Salah satu seller sudah tidak tersedia.',
-                    ]);
-                }
-
+        $order = DB::transaction(
+            function () use (
+                $buyer,
+                $seller,
+                $cartItems,
+                $validated
+            ) {
 
                 /*
                 |--------------------------------------------------------------------------
-                | Buat Order
+                | Create Order
                 |--------------------------------------------------------------------------
                 */
 
                 $order = Order::create([
-                    'order_number' => $this->generateOrderNumber(),
+                    'order_number' =>
+                    $this->generateOrderNumber(),
 
-                    'buyer_id' => $buyer->id,
+                    'buyer_id' =>
+                    $buyer->id,
 
-                    'seller_id' => $seller->id,
+                    'seller_id' =>
+                    $seller->id,
 
-                    'buyer_name' => $validated['buyer_name'],
+                    'buyer_name' =>
+                    $validated['buyer_name'],
 
-                    'buyer_phone' => $validated['buyer_phone'],
+                    'buyer_phone' =>
+                    $validated['buyer_phone'],
 
-                    'subtotal' => 0,
+                    'subtotal' =>
+                    0,
 
-                    'status' => 'pending',
+                    'status' =>
+                    'processing',
 
-                    'notes' => $validated['notes'] ?? null,
+                    'notes' =>
+                    $validated['notes'] ?? null,
                 ]);
 
+                ActivityLogger::log(
+                    'order_created',
+                    'membuat pesanan #' . $order->id,
+                    $order,
+                    [
+                        'total' => $order->total_amount,
+                        'seller_id' => $order->seller_id,
+                    ]
+                );
 
-                $orderSubtotal = 0;
+                $total = 0;
 
 
-                foreach ($items as $cartItem) {
+                /*
+                |--------------------------------------------------------------------------
+                | Loop Cart Seller
+                |--------------------------------------------------------------------------
+                */
+
+                foreach ($cartItems as $cartItem) {
 
                     /*
                     |--------------------------------------------------------------------------
-                    | Lock Produk Saat Checkout
+                    | Lock Produk
                     |--------------------------------------------------------------------------
                     */
 
                     $product = Product::query()
-                        ->whereKey($cartItem->product_id)
                         ->lockForUpdate()
-                        ->first();
+                        ->find(
+                            $cartItem->product_id
+                        );
 
 
                     if (!$product) {
 
                         throw ValidationException::withMessages([
                             'cart' =>
-                                'Salah satu produk sudah tidak tersedia.',
+                            'Salah satu produk sudah tidak tersedia.',
                         ]);
                     }
 
 
                     /*
                     |--------------------------------------------------------------------------
-                    | Cek Status Produk
+                    | Pastikan Seller Produk Sesuai
                     |--------------------------------------------------------------------------
                     */
 
-                    if ($product->status !== 'active') {
+                    if (
+                        (int) $product->seller_id
+                        !==
+                        (int) $seller->id
+                    ) {
 
                         throw ValidationException::withMessages([
                             'cart' =>
-                                "Produk {$product->name} sudah tidak aktif.",
+                            'Produk tidak sesuai dengan penjual.',
                         ]);
                     }
 
 
                     /*
                     |--------------------------------------------------------------------------
-                    | Cek Stok
+                    | Produk Harus Aktif
                     |--------------------------------------------------------------------------
                     */
 
-                    if ($product->stock < $cartItem->quantity) {
+                    if (
+                        $product->status !== 'active'
+                    ) {
 
                         throw ValidationException::withMessages([
                             'cart' =>
-                                "Stok {$product->name} tidak mencukupi. "
-                                . "Stok tersedia: {$product->stock}.",
+                            "Produk {$product->name} sudah tidak aktif.",
                         ]);
                     }
 
 
                     /*
                     |--------------------------------------------------------------------------
-                    | Snapshot Harga
+                    | Cek Stock
+                    |--------------------------------------------------------------------------
+                    */
+
+                    if (
+                        $product->stock <
+                        $cartItem->quantity
+                    ) {
+
+                        throw ValidationException::withMessages([
+                            'cart' =>
+                            "Stok {$product->name} tidak mencukupi.",
+                        ]);
+                    }
+
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Hitung Subtotal
                     |--------------------------------------------------------------------------
                     */
 
@@ -253,22 +391,35 @@ class CheckoutController extends Controller
                         $cartItem->quantity;
 
 
-                    $order->items()->create([
-                        'product_id' => $product->id,
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Simpan Snapshot Order Item
+                    |--------------------------------------------------------------------------
+                    */
 
-                        'product_name' => $product->name,
+                    $order
+                        ->items()
+                        ->create([
+                            'product_id' =>
+                            $product->id,
 
-                        'price' => $product->price,
+                            'product_name' =>
+                            $product->name,
 
-                        'quantity' => $cartItem->quantity,
+                            'price' =>
+                            $product->price,
 
-                        'subtotal' => $itemSubtotal,
-                    ]);
+                            'quantity' =>
+                            $cartItem->quantity,
+
+                            'subtotal' =>
+                            $itemSubtotal,
+                        ]);
 
 
                     /*
                     |--------------------------------------------------------------------------
-                    | Kurangi Stok
+                    | Kurangi Stock
                     |--------------------------------------------------------------------------
                     */
 
@@ -278,7 +429,13 @@ class CheckoutController extends Controller
                     );
 
 
-                    $orderSubtotal += $itemSubtotal;
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Tambahkan Total
+                    |--------------------------------------------------------------------------
+                    */
+
+                    $total += $itemSubtotal;
                 }
 
 
@@ -289,51 +446,70 @@ class CheckoutController extends Controller
                 */
 
                 $order->update([
-                    'subtotal' => $orderSubtotal,
+                    'subtotal' => $total,
                 ]);
 
 
-                $createdOrders->push($order);
+                /*
+                |--------------------------------------------------------------------------
+                | Hapus HANYA Cart Seller Ini
+                |--------------------------------------------------------------------------
+                */
+
+                CartItem::query()
+                    ->where(
+                        'user_id',
+                        $buyer->id
+                    )
+                    ->whereIn(
+                        'id',
+                        $cartItems->pluck('id')
+                    )
+                    ->delete();
+
+
+                /*
+                |--------------------------------------------------------------------------
+                | Return Satu Order
+                |--------------------------------------------------------------------------
+                */
+
+                return $order;
             }
+        );
 
+        ActivityLogger::log(
+            'order_sold',
+            'menandai pesanan #' . $order->id . ' sebagai sudah terjual',
+            $order
+        );
+        /*
+        |--------------------------------------------------------------------------
+        | Redirect Langsung Ke WhatsApp Seller
+        |--------------------------------------------------------------------------
+        */
 
-            /*
-            |--------------------------------------------------------------------------
-            | Kosongkan Keranjang Setelah Berhasil
-            |--------------------------------------------------------------------------
-            */
-
-            CartItem::query()
-                ->where('user_id', $buyer->id)
-                ->delete();
-
-
-            return $createdOrders;
-        });
-
-
-        return redirect()
-            ->route('buyer.orders.index')
-            ->with(
-                'success',
-                $orders->count() > 1
-                    ? 'Pesanan berhasil dibuat untuk beberapa penjual.'
-                    : 'Pesanan berhasil dibuat.'
-            );
+        return redirect()->route(
+            'buyer.orders.whatsapp',
+            $order
+        );
     }
 
 
     /*
     |--------------------------------------------------------------------------
-    | Generate Nomor Pesanan
+    | Generate Order Number
     |--------------------------------------------------------------------------
     */
 
     private function generateOrderNumber(): string
     {
-        return 'KM-'
-            . now()->format('Ymd')
-            . '-'
-            . Str::upper(Str::random(8));
+        return
+            'KM-' .
+            now()->format('Ymd') .
+            '-' .
+            Str::upper(
+                Str::random(8)
+            );
     }
 }

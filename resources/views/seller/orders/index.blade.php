@@ -342,63 +342,26 @@
                             {{-- STATUS --}}
                             <td class="px-5 py-4">
 
-                                @php
+                               @php
+    $statusClass = match($order->status) {
+        'processing' => 'bg-amber-100 text-amber-700',
+        'sold' => 'bg-green-100 text-green-700',
+        default => 'bg-gray-100 text-gray-700',
+    };
 
-                                    $statusClass = match ($order->status) {
+    $statusLabel = match($order->status) {
+        'processing' => 'Lagi Diproses',
+        'sold' => 'Sudah Terjual',
+        default => 'Tidak Diketahui',
+    };
+@endphp
 
-                                        'pending' =>
-                                            'bg-amber-50 text-amber-700',
-
-                                        'confirmed' =>
-                                            'bg-blue-50 text-blue-700',
-
-                                        'processing' =>
-                                            'bg-violet-50 text-violet-700',
-
-                                        'completed' =>
-                                            'bg-green-50 text-green-700',
-
-                                        'cancelled' =>
-                                            'bg-red-50 text-red-700',
-
-                                        default =>
-                                            'bg-slate-100 text-slate-600',
-                                    };
-
-
-                                    $statusLabel = match ($order->status) {
-
-                                        'pending' =>
-                                            'Menunggu',
-
-                                        'confirmed' =>
-                                            'Dikonfirmasi',
-
-                                        'processing' =>
-                                            'Diproses',
-
-                                        'completed' =>
-                                            'Selesai',
-
-                                        'cancelled' =>
-                                            'Dibatalkan',
-
-                                        default =>
-                                            ucfirst($order->status),
-                                    };
-
-                                @endphp
-
-
-                                <span
-                                    class="inline-flex
-                                           rounded-full
-                                           px-3 py-1.5
-                                           text-xs font-semibold
-                                           {{ $statusClass }}"
-                                >
-                                    {{ $statusLabel }}
-                                </span>
+<span
+    class="inline-flex w-fit rounded-full px-3 py-1
+           text-sm font-semibold {{ $statusClass }}"
+>
+    {{ $statusLabel }}
+</span>
 
                             </td>
 

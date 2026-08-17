@@ -30,13 +30,9 @@ return new class extends Migration
             $table->decimal('subtotal', 15, 2);
 
             $table->enum('status', [
-                'pending',
-                'confirmed',
                 'processing',
-                'completed',
-                'cancelled',
-            ])->default('pending');
-
+                'sold',
+            ])->default('processing');
             $table->text('notes')->nullable();
 
             $table->timestamps();

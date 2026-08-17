@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
+use App\Services\ActivityLogger;
 
 class ProfileController extends Controller
 {
@@ -67,7 +68,11 @@ class ProfileController extends Controller
             'phone' => $validated['phone'] ?? null,
         ]);
 
-
+        ActivityLogger::log(
+            'profile_updated',
+            'memperbarui profil',
+            $buyer
+        );
         return back()->with(
             'profile_success',
             'Profil berhasil diperbarui.'

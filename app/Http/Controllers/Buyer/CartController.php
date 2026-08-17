@@ -24,25 +24,79 @@ class CartController extends Controller
                 'product.category',
                 'product.user.sellerProfile',
             ])
-            ->where('user_id', $request->user()->id)
+            ->where(
+                'user_id',
+                $request->user()->id
+            )
             ->latest()
             ->get();
 
 
-        $subtotal = $cartItems->sum(function ($item) {
+        /*
+        |--------------------------------------------------------------------------
+        | Total Semua Keranjang
+        |--------------------------------------------------------------------------
+        */
 
-            if (!$item->product) {
-                return 0;
+        $subtotal = $cartItems->sum(
+            function ($item) {
+
+                if (!$item->product) {
+                    return 0;
+                }
+
+                return
+                    $item->product->price *
+                    $item->quantity;
             }
-
-            return $item->product->price * $item->quantity;
-        });
+        );
 
 
-        return view('buyer.cart.index', compact(
-            'cartItems',
-            'subtotal'
-        ));
+        /*
+        |--------------------------------------------------------------------------
+        | Group Berdasarkan Seller
+        |--------------------------------------------------------------------------
+        */
+
+        $sellerGroups = $cartItems
+            ->filter(
+                fn ($item) =>
+                    $item->product !== null
+            )
+            ->groupBy(
+                fn ($item) =>
+                    $item->product->seller_id
+            );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Subtotal Per Seller
+        |--------------------------------------------------------------------------
+        */
+
+        $sellerSubtotals = $sellerGroups
+            ->map(
+                function ($items) {
+
+                    return $items->sum(
+                        fn ($item) =>
+                            $item->product->price *
+                            $item->quantity
+                    );
+                }
+            );
+
+
+        return view(
+            'buyer.cart.index',
+            compact(
+                'cartItems',
+                'subtotal',
+                'sellerGroups',
+                'sellerSubtotals'
+            )
+        );
     }
 
 
@@ -59,35 +113,42 @@ class CartController extends Controller
 
         /*
         |--------------------------------------------------------------------------
-        | Validasi Produk
-        |--------------------------------------------------------------------------
-        */
-
-        abort_if($product->status !== 'active', 404);
-
-        abort_if($product->stock <= 0, 404);
-
-
-        $product->load('user');
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | Seller Harus Aktif
+        | Produk Harus Aktif
         |--------------------------------------------------------------------------
         */
 
         abort_if(
-            !$product->user ||
-                $product->user->role !== 'seller' ||
-                $product->user->status !== 'active',
+            $product->status !== 'active',
+            404
+        );
+
+
+        abort_if(
+            $product->stock <= 0,
             404
         );
 
 
         /*
         |--------------------------------------------------------------------------
-        | Validasi Quantity
+        | Seller
+        |--------------------------------------------------------------------------
+        */
+
+        $product->load('user');
+
+
+        abort_if(
+            !$product->user ||
+            $product->user->role !== 'seller' ||
+            $product->user->status !== 'active',
+            404
+        );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Quantity
         |--------------------------------------------------------------------------
         */
 
@@ -103,21 +164,21 @@ class CartController extends Controller
 
         /*
         |--------------------------------------------------------------------------
-        | Cari Produk Yang Sudah Ada
+        | Produk Sudah Ada?
         |--------------------------------------------------------------------------
         */
 
         $cartItem = CartItem::query()
-            ->where('user_id', $request->user()->id)
-            ->where('product_id', $product->id)
+            ->where(
+                'user_id',
+                $request->user()->id
+            )
+            ->where(
+                'product_id',
+                $product->id
+            )
             ->first();
 
-
-        /*
-        |--------------------------------------------------------------------------
-        | Kalau Sudah Ada, Tambahkan Quantity
-        |--------------------------------------------------------------------------
-        */
 
         if ($cartItem) {
 
@@ -126,43 +187,43 @@ class CartController extends Controller
                 $validated['quantity'];
 
 
-            /*
-            |--------------------------------------------------------------------------
-            | Jangan Melebihi Stok
-            |--------------------------------------------------------------------------
-            */
-
-            if ($newQuantity > $product->stock) {
+            if (
+                $newQuantity >
+                $product->stock
+            ) {
 
                 return back()
                     ->withErrors([
                         'quantity' =>
-                        'Jumlah produk di keranjang melebihi stok tersedia.',
+                            'Jumlah produk di keranjang melebihi stok tersedia.',
                     ]);
             }
 
 
             $cartItem->update([
-                'quantity' => $newQuantity,
+                'quantity' =>
+                    $newQuantity,
             ]);
+
         } else {
 
-            /*
-            |--------------------------------------------------------------------------
-            | Belum Ada Di Keranjang
-            |--------------------------------------------------------------------------
-            */
-
             CartItem::create([
-                'user_id' => $request->user()->id,
-                'product_id' => $product->id,
-                'quantity' => $validated['quantity'],
+                'user_id' =>
+                    $request->user()->id,
+
+                'product_id' =>
+                    $product->id,
+
+                'quantity' =>
+                    $validated['quantity'],
             ]);
         }
 
 
         return redirect()
-            ->route('buyer.cart.index')
+            ->route(
+                'buyer.cart.index'
+            )
             ->with(
                 'success',
                 'Produk berhasil ditambahkan ke keranjang.'
@@ -183,12 +244,13 @@ class CartController extends Controller
 
         /*
         |--------------------------------------------------------------------------
-        | Pastikan Keranjang Milik User Login
+        | Ownership
         |--------------------------------------------------------------------------
         */
 
         abort_if(
-            $cartItem->user_id !== $request->user()->id,
+            (int) $cartItem->user_id !==
+            (int) $request->user()->id,
             403
         );
 
@@ -196,7 +258,10 @@ class CartController extends Controller
         $cartItem->load('product');
 
 
-        abort_if(!$cartItem->product, 404);
+        abort_if(
+            !$cartItem->product,
+            404
+        );
 
 
         /*
@@ -210,13 +275,17 @@ class CartController extends Controller
                 'required',
                 'integer',
                 'min:1',
-                'max:' . $cartItem->product->stock,
+                'max:' .
+                    $cartItem
+                        ->product
+                        ->stock,
             ],
         ]);
 
 
         $cartItem->update([
-            'quantity' => $validated['quantity'],
+            'quantity' =>
+                $validated['quantity'],
         ]);
 
 
@@ -239,7 +308,8 @@ class CartController extends Controller
     ): RedirectResponse {
 
         abort_if(
-            $cartItem->user_id !== $request->user()->id,
+            (int) $cartItem->user_id !==
+            (int) $request->user()->id,
             403
         );
 
