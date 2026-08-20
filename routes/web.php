@@ -20,44 +20,47 @@ use App\Http\Controllers\Seller\DashboardController as SellerDashboardController
 use App\Http\Controllers\Buyer\ProfileController;
 use App\Http\Controllers\Seller\SettingController as SellerSettingController;
 use App\Http\Controllers\Seller\SalesController;
-
+use App\Http\Controllers\Buyer\HomeController;
 
 /*
 |--------------------------------------------------------------------------
 | Guest
 |--------------------------------------------------------------------------
 */
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/products/filter', [HomeController::class, 'filterProducts'])->name('products.filter');
+
+Route::get('/buyer/produk/{product}', [BuyerProductController::class, 'show'])->name('buyer.products.show');
 
 Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 
-    Route::get('/login', [AuthController::class, 'showLogin'])
-        ->name('login');
+    Route::post('/login', [AuthController::class, 'login'])->name('login.process');
+    Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 
-    Route::post('/login', [AuthController::class, 'login'])
-        ->name('login.process');
+    Route::post('/register', [AuthController::class, 'register'])->name('register.process');
 });
 
-
 /*
-|--------------------------------------------------------------------------
-| Logout
-|--------------------------------------------------------------------------
-*/
+    |--------------------------------------------------------------------------
+    | Logout
+    |--------------------------------------------------------------------------
+    */
 
 Route::post('/logout', [AuthController::class, 'logout'])
     ->middleware('auth')
     ->name('logout');
 
-
 /*
-|--------------------------------------------------------------------------
-| Super Admin
-|--------------------------------------------------------------------------
-*/
+    |--------------------------------------------------------------------------
+    | Super Admin
+    |--------------------------------------------------------------------------
+    */
 
-Route::middleware(['auth', 'role:admin',])->prefix('admin')->name('admin.')
+Route::middleware(['auth', 'role:admin'])
+    ->prefix('admin')
+    ->name('admin.')
     ->group(function () {
-
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         // pembeli
         Route::get('/pembeli', [BuyerController::class, 'index'])->name('buyers.index');
@@ -67,8 +70,6 @@ Route::middleware(['auth', 'role:admin',])->prefix('admin')->name('admin.')
         Route::patch('/pembeli/{buyer}/status', [BuyerController::class, 'updateStatus'])->name('buyers.status');
         Route::get('/pembeli/{buyer}/edit', [BuyerController::class, 'edit'])->name('buyers.edit');
         Route::put('/pembeli/{buyer}', [BuyerController::class, 'update'])->name('buyers.update');
-
-
 
         /*
         |--------------------------------------------------------------------------
@@ -103,69 +104,50 @@ Route::middleware(['auth', 'role:admin',])->prefix('admin')->name('admin.')
         Route::patch('/categories/{category}/status', [CategoryController::class, 'updateStatus'])->name('categories.status');
         Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 
-
         // product
         Route::get('/produk', [AdminProductController::class, 'index'])->name('products.index');
 
-
         // setting
-        Route::get('/settings', [AdminSettingController::class, 'index'])
-            ->name('settings.index');
+        Route::get('/settings', [AdminSettingController::class, 'index'])->name('settings.index');
 
-        Route::put('/settings/profil', [AdminSettingController::class, 'updateProfile'])
-            ->name('settings.profile');
+        Route::put('/settings/profil', [AdminSettingController::class, 'updateProfile'])->name('settings.profile');
 
-        Route::put('/settings/password', [AdminSettingController::class, 'updatePassword'])
-            ->name('settings.password');
+        Route::put('/settings/password', [AdminSettingController::class, 'updatePassword'])->name('settings.password');
     });
 
-
 /*
-|--------------------------------------------------------------------------
-| Seller
-|--------------------------------------------------------------------------
-*/
+        |--------------------------------------------------------------------------
+        | Seller
+        |--------------------------------------------------------------------------
+        */
 
-Route::middleware([
-    'auth',
-    'role:seller',
-])
+Route::middleware(['auth', 'role:seller'])
     ->prefix('seller')
     ->name('seller.')
     ->group(function () {
-
         Route::get('/dashboard', [SellerDashboardController::class, 'index'])->name('dashboard');
         Route::get('/produk', [ProductController::class, 'index'])->name('products.index');
         Route::get('/produk/tambah', [ProductController::class, 'create'])->name('products.create');
-        Route::post('/produk', [ProductController::class, 'store'])
-            ->name('products.store');
+        Route::post('/produk', [ProductController::class, 'store'])->name('products.store');
 
-        Route::get('/produk/{product}/edit', [ProductController::class, 'edit'])
-            ->name('products.edit');
+        Route::get('/produk/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
 
-        Route::put('/produk/{product}', [ProductController::class, 'update'])
-            ->name('products.update');
+        Route::put('/produk/{product}', [ProductController::class, 'update'])->name('products.update');
 
-        Route::patch('/produk/{product}/status', [ProductController::class, 'updateStatus'])
-            ->name('products.status');
+        Route::patch('/produk/{product}/status', [ProductController::class, 'updateStatus'])->name('products.status');
 
-        Route::delete('/produk/{product}', [ProductController::class, 'destroy'])
-            ->name('products.destroy');
+        Route::delete('/produk/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
 
+        Route::get('/settings', [SellerSettingController::class, 'index'])->name('settings.index');
 
-        Route::get('/settings', [SellerSettingController::class, 'index'])
-            ->name('settings.index');
+        Route::put('/settings/profile', [SellerSettingController::class, 'updateProfile'])->name('settings.profile.update');
 
-        Route::put('/settings/profile', [SellerSettingController::class, 'updateProfile'])
-            ->name('settings.profile.update');
-
-        Route::put('/settings/password', [SellerSettingController::class, 'updatePassword'])
-            ->name('settings.password.update');
+        Route::put('/settings/password', [SellerSettingController::class, 'updatePassword'])->name('settings.password.update');
         /*
-        |--------------------------------------------------------------------------
-        | Pesanan
-        |--------------------------------------------------------------------------
-        */
+                |--------------------------------------------------------------------------
+                | Pesanan
+                |--------------------------------------------------------------------------
+                */
 
         Route::get('/pesanan', [SellerOrderController::class, 'index'])->name('orders.index');
         Route::get('/pesanan/{order}', [SellerOrderController::class, 'show'])->name('orders.show');
@@ -174,31 +156,24 @@ Route::middleware([
         Route::get('/penjualan', [SalesController::class, 'index'])->name('sales.index');
     });
 
-
 /*
-|--------------------------------------------------------------------------
-| Buyer
-|--------------------------------------------------------------------------
-*/
+                |--------------------------------------------------------------------------
+                | Buyer
+                |--------------------------------------------------------------------------
+                */
 
-Route::middleware([
-    'auth',
-    'role:buyer',
-])
+Route::middleware(['auth', 'role:buyer'])
     ->prefix('buyer')
     ->name('buyer.')
     ->group(function () {
-
         Route::get('/dashboard', [BuyerDashboardController::class, 'index'])->name('dashboard');
         Route::get('/produk', [BuyerProductController::class, 'index'])->name('products.index');
-        Route::get('/produk/{product}', [BuyerProductController::class, 'show'])->name('products.show');
-
 
         /*
-        |--------------------------------------------------------------------------
-        | Keranjang
-        |--------------------------------------------------------------------------
-        */
+                        |--------------------------------------------------------------------------
+                        | Keranjang
+                        |--------------------------------------------------------------------------
+                        */
 
         Route::get('/keranjang', [CartController::class, 'index'])->name('cart.index');
         Route::post('/keranjang/{product}', [CartController::class, 'store'])->name('cart.store');
@@ -206,59 +181,35 @@ Route::middleware([
         Route::delete('/keranjang/{cartItem}', [CartController::class, 'destroy'])->name('cart.destroy');
 
         /*
-|--------------------------------------------------------------------------
-| Checkout
-|--------------------------------------------------------------------------
-*/
+                        |--------------------------------------------------------------------------
+                        | Checkout
+                        |--------------------------------------------------------------------------
+                        */
 
-        Route::get(
-            '/checkout/{seller}',
-            [CheckoutController::class, 'index']
-        )->name('checkout.index');
+        Route::get('/checkout/{seller}', [CheckoutController::class, 'index'])->name('checkout.index');
 
-
-        Route::post(
-            '/checkout',
-            [CheckoutController::class, 'store']
-        )->name('checkout.store');
-
+        Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 
         /*
-|--------------------------------------------------------------------------
-| Pesanan
-|--------------------------------------------------------------------------
-*/
+                                |--------------------------------------------------------------------------
+                                | Pesanan
+                                |--------------------------------------------------------------------------
+                                */
 
-        Route::get(
-            '/pesanan',
-            [BuyerOrderController::class, 'index']
-        )->name('orders.index');
+        Route::get('/pesanan', [BuyerOrderController::class, 'index'])->name('orders.index');
 
-        Route::get(
-            '/pesanan/{order}/whatsapp',
-            [BuyerOrderController::class, 'whatsapp']
-        )->name('orders.whatsapp');
+        Route::get('/pesanan/{order}/whatsapp', [BuyerOrderController::class, 'whatsapp'])->name('orders.whatsapp');
+        Route::get('/produk', [BuyerProductController::class, 'index'])->name('products.index');
+
         /*
-|--------------------------------------------------------------------------
-| Profile Buyer
-|--------------------------------------------------------------------------
-*/
+                                        |--------------------------------------------------------------------------
+                                        | Profile Buyer
+                                        |--------------------------------------------------------------------------
+                                        */
 
-        Route::get(
-            '/profile',
-            [ProfileController::class, 'index']
-        )->name('profile.index');
+        Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
 
+        Route::put('/profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
 
-        Route::put(
-            '/profile',
-            [ProfileController::class, 'updateProfile']
-        )->name('profile.update');
-
-
-        Route::put(
-            '/profile/password',
-            [ProfileController::class, 'updatePassword']
-        )->name('profile.password');
-
+        Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
     });

@@ -7,7 +7,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Masuk - KampusMart</title>
+    <title>Daftar - KampusMart</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -60,7 +60,6 @@
                        blur-3xl">
             </div>
 
-
             <div
                 class="pointer-events-none
                        absolute
@@ -71,7 +70,6 @@
                        bg-[#C8795A]/20
                        blur-3xl">
             </div>
-
 
             <div
                 class="pointer-events-none
@@ -103,7 +101,6 @@
                            items-center
                            gap-3">
 
-
                     <div
                         class="flex
                                size-11
@@ -121,7 +118,6 @@
 
                     </div>
 
-
                     <span
                         class="text-2xl
                                font-black
@@ -135,10 +131,9 @@
 
 
 
-                {{-- MAIN CONTENT --}}
+                {{-- CONTENT --}}
 
                 <div class="max-w-xl">
-
 
                     <span
                         class="inline-flex
@@ -154,7 +149,6 @@
                                font-medium
                                backdrop-blur">
 
-
                         <span
                             class="flex
                                    size-6
@@ -166,16 +160,15 @@
 
                             <i
                                 class="fa-solid
-                                       fa-bag-shopping
+                                       fa-user-plus
                                        text-[10px]">
                             </i>
 
                         </span>
 
-                        Marketplace Mahasiswa
+                        Daftar Sebagai Pembeli
 
                     </span>
-
 
 
                     <h1
@@ -186,7 +179,7 @@
                                tracking-tight
                                xl:text-5xl">
 
-                        Satu platform untuk
+                        Mulai belanja lebih
 
                         <span
                             class="block
@@ -197,13 +190,11 @@
                                    bg-clip-text
                                    text-transparent">
 
-                            kebutuhan jual beli
-                            di lingkungan kampus.
+                            mudah di KampusMart.
 
                         </span>
 
                     </h1>
-
 
 
                     <p
@@ -213,9 +204,9 @@
                                leading-7
                                text-[#F2E5DC]">
 
-                        Temukan berbagai produk, kelola toko,
-                        dan hubungkan pembeli dengan penjual
-                        secara lebih praktis melalui KampusMart.
+                        Buat akun pembeli untuk menyimpan keranjang,
+                        melakukan transaksi, dan melihat riwayat
+                        pembelian dari berbagai seller KampusMart.
 
                     </p>
 
@@ -247,9 +238,7 @@
                                        bg-[#E3B66D]/20
                                        text-[#F5D59F]">
 
-                                <i class="fa-solid
-                                           fa-bag-shopping">
-                                </i>
+                                <i class="fa-solid fa-cart-shopping"></i>
 
                             </div>
 
@@ -258,7 +247,7 @@
                                        text-xs
                                        font-semibold">
 
-                                Belanja Praktis
+                                Keranjang
 
                             </p>
 
@@ -283,9 +272,7 @@
                                        bg-[#9FB293]/20
                                        text-[#DCE9D5]">
 
-                                <i class="fa-solid
-                                           fa-shield-halved">
-                                </i>
+                                <i class="fa-solid fa-shield-halved"></i>
 
                             </div>
 
@@ -294,7 +281,7 @@
                                        text-xs
                                        font-semibold">
 
-                                Lebih Aman
+                                Aman
 
                             </p>
 
@@ -319,9 +306,7 @@
                                        bg-[#D99576]/20
                                        text-[#F5CDBA]">
 
-                                <i class="fa-solid
-                                           fa-store">
-                                </i>
+                                <i class="fa-solid fa-receipt"></i>
 
                             </div>
 
@@ -330,7 +315,7 @@
                                        text-xs
                                        font-semibold">
 
-                                Seller Pilihan
+                                Riwayat Order
 
                             </p>
 
@@ -342,13 +327,8 @@
 
 
 
-                {{-- COPYRIGHT --}}
-
-                <p class="text-sm
-                           text-[#E8D4C6]">
-
+                <p class="text-sm text-[#E8D4C6]">
                     © {{ date('Y') }} KampusMart
-
                 </p>
 
             </div>
@@ -375,8 +355,6 @@
                    lg:px-12">
 
 
-            {{-- BACKGROUND DECORATION --}}
-
             <div
                 class="pointer-events-none
                        absolute
@@ -387,7 +365,6 @@
                        bg-[#C89B55]/10
                        blur-3xl">
             </div>
-
 
             <div
                 class="pointer-events-none
@@ -409,19 +386,14 @@
                        max-w-md">
 
 
-                {{-- ================================================= --}}
                 {{-- MOBILE LOGO --}}
-                {{-- ================================================= --}}
 
-                <div class="mb-9
-                           lg:hidden">
-
+                <div class="mb-8 lg:hidden">
 
                     <a href="{{ route('home') }}"
                         class="inline-flex
                                items-center
                                gap-3">
-
 
                         <div
                             class="flex
@@ -442,7 +414,6 @@
 
                         </div>
 
-
                         <span
                             class="bg-gradient-to-r
                                    from-[#493124]
@@ -462,10 +433,6 @@
 
 
 
-                {{-- ================================================= --}}
-                {{-- CARD --}}
-                {{-- ================================================= --}}
-
                 <div
                     class="rounded-3xl
                            border
@@ -484,7 +451,7 @@
 
                     {{-- TITLE --}}
 
-                    <div class="mb-8">
+                    <div class="mb-7">
 
 
 
@@ -495,7 +462,7 @@
                                    font-bold
                                    text-[#A66D4B]">
 
-                            Selamat datang
+                            Buat akun baru
 
                         </p>
 
@@ -506,7 +473,7 @@
                                    tracking-tight
                                    text-slate-900">
 
-                            Masuk ke KampusMart
+                            Daftar ke KampusMart
 
                         </h2>
 
@@ -517,8 +484,8 @@
                                    leading-6
                                    text-slate-500">
 
-                            Masukkan email dan password
-                            untuk melanjutkan ke akunmu.
+                            Lengkapi data berikut untuk membuat
+                            akun pembeli.
 
                         </p>
 
@@ -526,16 +493,11 @@
 
 
 
-                    {{-- ================================================= --}}
                     {{-- ERROR --}}
-                    {{-- ================================================= --}}
 
                     @if ($errors->any())
                         <div
                             class="mb-6
-                                   flex
-                                   items-start
-                                   gap-3
                                    rounded-2xl
                                    border
                                    border-[#E9C9C5]
@@ -545,32 +507,25 @@
                                    text-sm
                                    text-[#9D504B]">
 
+                            <div class="flex items-start gap-3">
 
-                            <div
-                                class="flex
-                                       size-8
-                                       shrink-0
-                                       items-center
-                                       justify-center
-                                       rounded-lg
-                                       bg-[#F4D8D5]">
-
-                                <i class="fa-solid
-                                           fa-circle-exclamation">
+                                <i
+                                    class="fa-solid
+                                           fa-circle-exclamation
+                                           mt-0.5">
                                 </i>
 
-                            </div>
+                                <div>
 
+                                    <p class="font-semibold">
+                                        Data belum valid
+                                    </p>
 
-                            <div>
+                                    <p class="mt-1 text-xs">
+                                        {{ $errors->first() }}
+                                    </p>
 
-                                <p class="font-semibold">
-                                    Gagal masuk
-                                </p>
-
-                                <p class="mt-1 text-xs">
-                                    {{ $errors->first() }}
-                                </p>
+                                </div>
 
                             </div>
 
@@ -579,13 +534,69 @@
 
 
 
-                    {{-- ================================================= --}}
                     {{-- FORM --}}
-                    {{-- ================================================= --}}
 
-                    <form action="{{ route('login.process') }}" method="POST" class="space-y-5">
+                    <form action="{{ route('register.process') }}" method="POST" class="space-y-5">
 
                         @csrf
+
+
+
+                        {{-- NAME --}}
+
+                        <div>
+
+                            <label for="name"
+                                class="mb-2
+                                       block
+                                       text-sm
+                                       font-semibold
+                                       text-slate-700">
+
+                                Nama Lengkap
+
+                            </label>
+
+
+                            <div class="relative">
+
+                                <div
+                                    class="pointer-events-none
+                                           absolute
+                                           inset-y-0
+                                           left-0
+                                           flex
+                                           w-12
+                                           items-center
+                                           justify-center
+                                           text-[#A68A77]">
+
+                                    <i class="fa-regular fa-user"></i>
+
+                                </div>
+
+
+                                <input type="text" id="name" name="name" value="{{ old('name') }}"
+                                    placeholder="Masukkan nama lengkap" autocomplete="name" required autofocus
+                                    class="h-12
+                                           w-full
+                                           rounded-xl
+                                           border
+                                           border-[#E5D5C9]
+                                           bg-white
+                                           pl-12
+                                           pr-4
+                                           text-sm
+                                           outline-none
+                                           transition
+                                           placeholder:text-slate-400
+                                           focus:border-[#A97957]
+                                           focus:ring-4
+                                           focus:ring-[#F5E9DF]">
+
+                            </div>
+
+                        </div>
 
 
 
@@ -618,17 +629,13 @@
                                            justify-center
                                            text-[#A68A77]">
 
-                                    <i
-                                        class="fa-regular
-                                               fa-envelope
-                                               text-sm">
-                                    </i>
+                                    <i class="fa-regular fa-envelope"></i>
 
                                 </div>
 
 
                                 <input type="email" id="email" name="email" value="{{ old('email') }}"
-                                    placeholder="nama@email.com" autocomplete="email" required autofocus
+                                    placeholder="nama@email.com" autocomplete="email" required
                                     class="h-12
                                            w-full
                                            rounded-xl
@@ -650,7 +657,64 @@
                         </div>
 
 
+                        {{-- PHONE NUMBER --}}
 
+                        <div>
+
+                            <label for="phone"
+                                class="mb-2
+               block
+               text-sm
+               font-semibold
+               text-slate-700">
+
+                                Nomor HP
+
+                            </label>
+
+
+                            <div class="relative">
+
+                                <div
+                                    class="pointer-events-none
+                   absolute
+                   inset-y-0
+                   left-0
+                   flex
+                   w-12
+                   items-center
+                   justify-center
+                   text-[#A68A77]">
+
+                                    <i class="fa-solid fa-phone"></i>
+
+                                </div>
+
+
+                                <input type="tel" id="phone" name="phone" value="{{ old('phone') }}"
+                                    placeholder="Contoh: 081234567890" autocomplete="tel" inputmode="numeric" required
+                                    class="h-12
+                   w-full
+                   rounded-xl
+                   border
+                   border-[#E5D5C9]
+                   bg-white
+                   pl-12
+                   pr-4
+                   text-sm
+                   outline-none
+                   transition
+                   placeholder:text-slate-400
+                   focus:border-[#A97957]
+                   focus:ring-4
+                   focus:ring-[#F5E9DF]">
+
+                            </div>
+
+
+
+
+                        </div>
                         {{-- PASSWORD --}}
 
                         <div x-data="{
@@ -671,7 +735,6 @@
 
                             <div class="relative">
 
-
                                 <div
                                     class="pointer-events-none
                                            absolute
@@ -683,11 +746,7 @@
                                            justify-center
                                            text-[#A68A77]">
 
-                                    <i
-                                        class="fa-solid
-                                               fa-lock
-                                               text-sm">
-                                    </i>
+                                    <i class="fa-solid fa-lock"></i>
 
                                 </div>
 
@@ -697,8 +756,8 @@
                                         ?
                                         'text' :
                                         'password'"
-                                    id="password" name="password" placeholder="Masukkan password"
-                                    autocomplete="current-password" required
+                                    id="password" name="password" placeholder="Minimal 8 karakter"
+                                    autocomplete="new-password" required
                                     class="h-12
                                            w-full
                                            rounded-xl
@@ -747,45 +806,98 @@
 
 
 
-                        {{-- ================================================= --}}
-                        {{-- REMEMBER --}}
-                        {{-- ================================================= --}}
+                        {{-- PASSWORD CONFIRMATION --}}
 
-                        <div
-                            class="flex
-                                   items-center
-                                   justify-between
-                                   gap-4">
+                        <div x-data="{
+                            showConfirmation: false
+                        }">
 
-
-                            <label
-                                class="flex
-                                       cursor-pointer
-                                       items-center
-                                       gap-2
+                            <label for="password_confirmation"
+                                class="mb-2
+                                       block
                                        text-sm
-                                       text-slate-600">
+                                       font-semibold
+                                       text-slate-700">
 
-
-                                <input type="checkbox" name="remember" value="1"
-                                    class="size-4
-                                           rounded
-                                           border-[#D8C6B8]
-                                           text-[#6F4E37]
-                                           focus:ring-[#A97957]">
-
-
-                                Ingat saya
+                                Konfirmasi Password
 
                             </label>
+
+
+                            <div class="relative">
+
+                                <div
+                                    class="pointer-events-none
+                                           absolute
+                                           inset-y-0
+                                           left-0
+                                           flex
+                                           w-12
+                                           items-center
+                                           justify-center
+                                           text-[#A68A77]">
+
+                                    <i class="fa-solid fa-shield-halved"></i>
+
+                                </div>
+
+
+                                <input
+                                    :type="showConfirmation
+                                        ?
+                                        'text' :
+                                        'password'"
+                                    id="password_confirmation" name="password_confirmation"
+                                    placeholder="Ulangi password" autocomplete="new-password" required
+                                    class="h-12
+                                           w-full
+                                           rounded-xl
+                                           border
+                                           border-[#E5D5C9]
+                                           bg-white
+                                           pl-12
+                                           pr-12
+                                           text-sm
+                                           outline-none
+                                           transition
+                                           placeholder:text-slate-400
+                                           focus:border-[#A97957]
+                                           focus:ring-4
+                                           focus:ring-[#F5E9DF]">
+
+
+                                <button type="button"
+                                    @click="
+                                        showConfirmation =
+                                            !showConfirmation
+                                    "
+                                    class="absolute
+                                           inset-y-0
+                                           right-0
+                                           flex
+                                           w-12
+                                           items-center
+                                           justify-center
+                                           text-slate-400
+                                           transition
+                                           hover:text-[#6F4E37]">
+
+                                    <i class="fa-regular"
+                                        :class="showConfirmation
+                                            ?
+                                            'fa-eye-slash' :
+                                            'fa-eye'">
+                                    </i>
+
+                                </button>
+
+                            </div>
 
                         </div>
 
 
 
-                        {{-- ================================================= --}}
                         {{-- SUBMIT --}}
-                        {{-- ================================================= --}}
 
                         <button type="submit"
                             class="group
@@ -814,7 +926,7 @@
                                    focus:ring-4
                                    focus:ring-[#EAD9CD]">
 
-                            Masuk
+                            Buat Akun
 
                             <i
                                 class="fa-solid
@@ -829,7 +941,8 @@
                     </form>
 
 
-  {{-- LOGIN LINK --}}
+
+                    {{-- LOGIN LINK --}}
 
                     <div
                         class="mt-7
@@ -843,101 +956,73 @@
                                    text-sm
                                    text-slate-500">
 
-                            Belum memiliki akun?
+                            Sudah memiliki akun?
 
-                            <a href="{{ route('register') }}"
+                            <a href="{{ route('login') }}"
                                 class="ml-1
                                        font-bold
                                        text-[#6F4E37]
                                        transition
                                        hover:text-[#A66D4B]">
 
-                                Daftar
+                                Masuk
 
                             </a>
 
                         </p>
 
                     </div>
-                    {{-- ================================================= --}}
-                    {{-- BACK HOME --}}
-                    {{-- ================================================= --}}
-
-                    <div class="mt-6
-                               text-center">
-
-                        <a href="{{ route('home') }}"
-                            class="inline-flex
-                                   items-center
-                                   gap-2
-                                   text-sm
-                                   font-semibold
-                                   text-[#8B6245]
-                                   transition
-                                   hover:text-[#5B3B2B]">
-
-                            <i
-                                class="fa-solid
-                                       fa-arrow-left
-                                       text-xs">
-                            </i>
-
-                            Kembali ke halaman utama
-
-                        </a>
-
-                    </div>
 
 
 
-                    {{-- ================================================= --}}
-                    {{-- INFORMATION --}}
-                    {{-- ================================================= --}}
+                    {{-- SELLER INFO --}}
 
                     <div
-                        class="mt-8
-                               border-t
-                               border-[#E9DCD2]
-                               pt-6">
-
+                        class="mt-5
+                               flex
+                               gap-3
+                               rounded-2xl
+                               border
+                               border-[#D9E2D4]
+                               bg-gradient-to-br
+                               from-[#F1F5ED]
+                               to-[#E7EFE3]
+                               p-4">
 
                         <div
                             class="flex
-                                   gap-3
-                                   rounded-2xl
-                                   border
-                                   border-[#D9E2D4]
-                                   bg-gradient-to-br
-                                   from-[#F1F5ED]
-                                   to-[#E7EFE3]
-                                   p-4">
+                                   size-9
+                                   shrink-0
+                                   items-center
+                                   justify-center
+                                   rounded-xl
+                                   bg-[#7F9275]
+                                   text-white">
+
+                            <i class="fa-solid fa-store"></i>
+
+                        </div>
 
 
-                            <div
-                                class="flex
-                                       size-9
-                                       shrink-0
-                                       items-center
-                                       justify-center
-                                       rounded-xl
-                                       bg-[#7F9275]
-                                       text-white">
-
-                                <i
-                                    class="fa-solid
-                                           fa-circle-info
-                                           text-sm">
-                                </i>
-
-                            </div>
-
+                        <div>
 
                             <p
                                 class="text-xs
-                                       leading-5
-                                       text-slate-600">
+                                       font-semibold
+                                       text-slate-700">
 
-                                Akun penjual hanya dapat dibuat
+                                Ingin menjadi seller?
+
+                            </p>
+
+                            <p
+                                class="mt-1
+                                       text-xs
+                                       leading-5
+                                       text-slate-500">
+
+                                Akun seller tidak dapat didaftarkan
+                                melalui halaman ini. Akun seller dibuat
                                 oleh Super Admin KampusMart.
 
                             </p>

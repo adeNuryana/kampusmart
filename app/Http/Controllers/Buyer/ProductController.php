@@ -17,10 +17,7 @@ class ProductController extends Controller
         $sort = $request->string('sort')->value();
 
         $query = Product::query()
-            ->with([
-                'category',
-                'user.sellerProfile',
-            ])
+            ->with(['category', 'user.sellerProfile'])
 
             // Hanya produk aktif
             ->where('status', 'active')
@@ -30,11 +27,8 @@ class ProductController extends Controller
 
             // Pastikan seller masih aktif
             ->whereHas('user', function ($query) {
-                $query
-                    ->where('role', 'seller')
-                    ->where('status', 'active');
+                $query->where('role', 'seller')->where('status', 'active');
             });
-
 
         /*
         |--------------------------------------------------------------------------
@@ -43,15 +37,10 @@ class ProductController extends Controller
         */
 
         if ($search->isNotEmpty()) {
-
             $query->where(function ($query) use ($search) {
-
-                $query
-                    ->where('name', 'like', "%{$search}%")
-                    ->orWhere('description', 'like', "%{$search}%");
+                $query->where('name', 'like', "%{$search}%")->orWhere('description', 'like', "%{$search}%");
             });
         }
-
 
         /*
         |--------------------------------------------------------------------------
@@ -63,7 +52,6 @@ class ProductController extends Controller
             $query->where('category_id', $category);
         }
 
-
         /*
         |--------------------------------------------------------------------------
         | Sorting
@@ -71,7 +59,6 @@ class ProductController extends Controller
         */
 
         match ($sort) {
-
             'price_low' => $query->orderBy('price', 'asc'),
 
             'price_high' => $query->orderBy('price', 'desc'),
@@ -81,101 +68,56 @@ class ProductController extends Controller
             default => $query->latest(),
         };
 
-
         /*
         |--------------------------------------------------------------------------
         | Pagination
         |--------------------------------------------------------------------------
         */
 
-        $products = $query
-            ->paginate(12)
-            ->withQueryString();
+        $products = $query->paginate(12)->withQueryString();
 
+        $categories = Category::query()->orderBy('name')->get();
 
-        $categories = Category::query()
-            ->orderBy('name')
-            ->get();
-
-
-        return view('buyer.products.index', compact(
-            'products',
-            'categories'
-        ));
+        return view('buyer.products.index', compact('products', 'categories'));
     }
     public function show(Product $product): View
     {
+        $product->load(['category', 'user.sellerProfile']);
+
         /*
     |--------------------------------------------------------------------------
-    | Produk harus aktif
+    | Produk dari toko / seller yang sama
     |--------------------------------------------------------------------------
     */
 
-        abort_if($product->status !== 'active', 404);
+        $seller = $product->user;
+
+        $sellerProducts = collect();
+
+        if ($seller) {
+            $sellerProducts = Product::query()
+                ->with(['category', 'user.sellerProfile'])
+                ->whereBelongsTo($seller, 'user')
+                ->where('id', '!=', $product->id)
+                ->latest()
+                ->take(5)
+                ->get();
+        }
 
         /*
     |--------------------------------------------------------------------------
-    | Produk harus masih tersedia
-    |--------------------------------------------------------------------------
-    */
-
-        abort_if($product->stock <= 0, 404);
-
-
-        /*
-    |--------------------------------------------------------------------------
-    | Load Relasi
-    |--------------------------------------------------------------------------
-    */
-
-        $product->load([
-            'category',
-            'user.sellerProfile',
-        ]);
-
-
-        /*
-    |--------------------------------------------------------------------------
-    | Pastikan Seller Aktif
-    |--------------------------------------------------------------------------
-    */
-
-        abort_if(
-            !$product->user ||
-                $product->user->role !== 'seller' ||
-                $product->user->status !== 'active',
-            404
-        );
-
-
-        /*
-    |--------------------------------------------------------------------------
-    | Produk Terkait
+    | Produk serupa berdasarkan kategori
     |--------------------------------------------------------------------------
     */
 
         $relatedProducts = Product::query()
-            ->with([
-                'category',
-                'user.sellerProfile',
-            ])
-            ->where('status', 'active')
-            ->where('stock', '>', 0)
+            ->with(['category', 'user.sellerProfile'])
             ->where('category_id', $product->category_id)
             ->where('id', '!=', $product->id)
-            ->whereHas('user', function ($query) {
-                $query
-                    ->where('role', 'seller')
-                    ->where('status', 'active');
-            })
             ->latest()
-            ->take(4)
+            ->take(5)
             ->get();
 
-
-        return view('buyer.products.show', compact(
-            'product',
-            'relatedProducts'
-        ));
+        return view('buyer.products.show', compact('product', 'sellerProducts', 'relatedProducts'));
     }
 }
