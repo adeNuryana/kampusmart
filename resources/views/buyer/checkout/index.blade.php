@@ -1,166 +1,236 @@
-@extends('layouts.buyer')
+@extends('layouts.public')
 
 @section('title', 'Checkout - KampusMart')
 
 @section('content')
 
-<div class="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
+    @php
 
-    {{-- HEADER --}}
-    <div class="mb-7">
+        $storeName = $seller->sellerProfile?->store_name ?? ($seller->name ?? 'Penjual');
 
-        <a
-            href="{{ route('buyer.cart.index') }}"
-            class="inline-flex items-center gap-2
-                   text-sm font-medium text-slate-500
-                   transition hover:text-violet-600"
-        >
-            ← Kembali ke Keranjang
-        </a>
+        $storePhoto = $seller->sellerProfile?->photo;
 
-        <p class="mt-5 text-sm font-semibold text-violet-600">
-            Checkout
-        </p>
-
-        <h1
-            class="mt-1 text-2xl font-bold
-                   tracking-tight text-slate-900
-                   md:text-3xl"
-        >
-            Buat Pesanan
-        </h1>
-
-        <p class="mt-2 text-sm text-slate-500">
-            Pastikan data pembeli dan pesanan sudah benar.
-        </p>
-
-    </div>
+    @endphp
 
 
-    {{-- ERROR --}}
-    @if ($errors->any())
-
-        <div
-            class="mb-5 rounded-xl
-                   border border-red-200
-                   bg-red-50 px-4 py-3
-                   text-sm text-red-700"
-        >
-            <ul class="list-disc space-y-1 pl-5">
-
-                @foreach ($errors->all() as $error)
-
-                    <li>{{ $error }}</li>
-
-                @endforeach
-
-            </ul>
-        </div>
-
-    @endif
+    <div
+        class="min-h-screen
+               bg-gradient-to-br
+               from-[#FBF8F5]
+               via-[#FAF5F1]
+               to-[#F4EAE2]">
 
 
-    <form
-        action="{{ route('buyer.checkout.store') }}"
-        method="POST"
-    >
-
-        @csrf
-
-
-        {{-- SELLER ID --}}
-        <input
-            type="hidden"
-            name="seller_id"
-            value="{{ $seller->id }}"
-        >
+        <main
+            class="mx-auto
+                   max-w-7xl
+                   px-4
+                   py-6
+                   pb-28
+                   sm:px-5
+                   sm:py-8
+                   md:pb-10">
 
 
-        <div
-            class="grid gap-6
-                   lg:grid-cols-[1fr_360px]"
-        >
+            {{-- ===================================================== --}}
+            {{-- HEADER --}}
+            {{-- ===================================================== --}}
 
-            {{-- ==========================
-                LEFT
-            =========================== --}}
-            <div class="space-y-6">
+            <section
+                class="relative
+                       mb-5
+                       overflow-hidden
+                       rounded-3xl
+                       border
+                       border-[#E6D8CD]
+                       bg-gradient-to-br
+                       from-white
+                       via-[#FBF8F5]
+                       to-[#F4EAE2]
+                       p-5
+                       shadow-sm
+                       sm:p-6">
 
-                {{-- SELLER --}}
+
                 <div
-                    class="rounded-2xl
-                           border border-slate-200
-                           bg-white p-5 shadow-sm"
-                >
-
-                    <p
-                        class="mb-4 text-xs
-                               font-semibold uppercase
-                               tracking-wide
-                               text-slate-400"
-                    >
-                        Penjual
-                    </p>
+                    class="pointer-events-none
+                           absolute
+                           -right-20
+                           -top-20
+                           size-52
+                           rounded-full
+                           bg-[#C89B55]/10
+                           blur-3xl">
+                </div>
 
 
-                    <div class="flex items-center gap-4">
+                <div class="relative">
 
-                        @if ($seller->sellerProfile?->photo)
 
-                            <img
-                                src="{{ asset(
-                                    'storage/' .
-                                    $seller->sellerProfile->photo
-                                ) }}"
-                                alt="{{
-                                    $seller->sellerProfile?->store_name
-                                    ?? $seller->name
-                                }}"
-                                class="size-14 rounded-full
-                                       object-cover"
-                            >
+                    {{-- BACK --}}
 
-                        @else
+                    <a href="{{ route('buyer.cart.index') }}"
+                        class="inline-flex
+                               items-center
+                               gap-2
+                               text-xs
+                               font-semibold
+                               text-[#8B6245]
+                               transition
+                               hover:text-[#5B3B2B]
+                               sm:text-sm">
 
-                            <div
-                                class="flex size-14
-                                       items-center justify-center
-                                       rounded-full
-                                       bg-violet-100
-                                       text-lg font-bold
-                                       text-violet-700"
-                            >
-                                {{ strtoupper(
-                                    substr(
-                                        $seller->sellerProfile?->store_name
-                                        ?? $seller->name,
-                                        0,
-                                        1
-                                    )
-                                ) }}
-                            </div>
+                        <span
+                            class="flex
+                                   size-7
+                                   items-center
+                                   justify-center
+                                   rounded-lg
+                                   bg-[#F4EAE2]">
 
-                        @endif
+                            <i
+                                class="fa-solid
+                                       fa-arrow-left
+                                       text-[10px]">
+                            </i>
+
+                        </span>
+
+                        Kembali ke Keranjang
+
+                    </a>
+
+
+
+                    <div
+                        class="mt-5
+                               flex
+                               flex-col
+                               gap-5
+                               sm:flex-row
+                               sm:items-end
+                               sm:justify-between">
 
 
                         <div>
 
-                            <h2
-                                class="font-semibold
-                                       text-slate-900"
-                            >
-                                {{
-                                    $seller->sellerProfile?->store_name
-                                    ?? $seller->name
-                                }}
-                            </h2>
+                            <div
+                                class="inline-flex
+                                       items-center
+                                       gap-2
+                                       rounded-full
+                                       bg-[#F4EAE2]
+                                       px-3
+                                       py-1.5
+                                       text-xs
+                                       font-bold
+                                       text-[#6F4E37]">
+
+                                <i class="fa-solid fa-bag-shopping"></i>
+
+                                Checkout
+
+                            </div>
+
+
+                            <h1
+                                class="mt-3
+                                       text-2xl
+                                       font-black
+                                       tracking-tight
+                                       text-slate-900
+                                       sm:text-3xl">
+
+                                Buat Pesanan
+
+                            </h1>
+
 
                             <p
-                                class="mt-1 text-sm
-                                       text-slate-500"
-                            >
-                                {{ $seller->name }}
+                                class="mt-2
+                                       max-w-xl
+                                       text-sm
+                                       leading-6
+                                       text-slate-500">
+
+                                Pastikan produk, jumlah, dan data pembeli
+                                sudah benar sebelum membuat pesanan.
+
                             </p>
+
+                        </div>
+
+
+
+                        {{-- STEP --}}
+
+                        <div
+                            class="flex
+                                   shrink-0
+                                   items-center
+                                   gap-2
+                                   text-[10px]
+                                   font-semibold
+                                   sm:text-xs">
+
+
+                            <div
+                                class="flex
+                                       items-center
+                                       gap-2
+                                       text-[#65795E]">
+
+                                <span
+                                    class="flex
+                                           size-7
+                                           items-center
+                                           justify-center
+                                           rounded-full
+                                           bg-[#7F9275]
+                                           text-white">
+
+                                    <i
+                                        class="fa-solid
+                                               fa-check
+                                               text-[9px]">
+                                    </i>
+
+                                </span>
+
+                                Keranjang
+
+                            </div>
+
+
+                            <div
+                                class="h-px
+                                       w-6
+                                       bg-[#DCC9BB]">
+                            </div>
+
+
+                            <div
+                                class="flex
+                                       items-center
+                                       gap-2
+                                       text-[#6F4E37]">
+
+                                <span
+                                    class="flex
+                                           size-7
+                                           items-center
+                                           justify-center
+                                           rounded-full
+                                           bg-[#6F4E37]
+                                           text-white">
+
+                                    2
+
+                                </span>
+
+                                Checkout
+
+                            </div>
 
                         </div>
 
@@ -168,509 +238,1210 @@
 
                 </div>
 
+            </section>
 
-                {{-- PRODUCTS --}}
+
+
+            {{-- ===================================================== --}}
+            {{-- VALIDATION ERROR --}}
+            {{-- ===================================================== --}}
+
+            @if ($errors->any())
+
                 <div
-                    class="overflow-hidden
+                    class="mb-5
                            rounded-2xl
-                           border border-slate-200
-                           bg-white shadow-sm"
-                >
+                           border
+                           border-[#E9C9C5]
+                           bg-[#FAEDEC]
+                           px-4
+                           py-4
+                           text-sm
+                           text-[#A65954]">
+
 
                     <div
-                        class="border-b border-slate-100
-                               px-5 py-4"
-                    >
-                        <h2
-                            class="font-semibold
-                                   text-slate-900"
-                        >
-                            Produk Pesanan
-                        </h2>
+                        class="mb-2
+                               flex
+                               items-center
+                               gap-2
+                               font-semibold">
 
-                        <p
-                            class="mt-1 text-sm
-                                   text-slate-500"
-                        >
-                            {{ $cartItems->count() }}
-                            jenis produk dari toko ini.
-                        </p>
+                        <i class="fa-solid fa-circle-exclamation"></i>
+
+                        Data checkout belum lengkap
+
                     </div>
 
 
-                    <div class="divide-y divide-slate-100">
+                    <ul
+                        class="list-disc
+                               space-y-1
+                               pl-5
+                               text-xs">
 
-                        @foreach ($cartItems as $item)
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
 
-                            @php
-                                $product = $item->product;
+                    </ul>
 
-                                $itemSubtotal =
-                                    $product->price *
-                                    $item->quantity;
-                            @endphp
+                </div>
+
+            @endif
+
+
+
+            {{-- ===================================================== --}}
+            {{-- FORM --}}
+            {{-- ===================================================== --}}
+
+            <form action="{{ route('buyer.checkout.store') }}" method="POST">
+
+                @csrf
+
+
+                {{-- SELLER ID --}}
+
+                <input type="hidden" name="seller_id" value="{{ $seller->id }}">
+
+
+
+                <div
+                    class="grid
+                           gap-5
+                           lg:grid-cols-[minmax(0,1fr)_340px]">
+
+
+                    {{-- ================================================= --}}
+                    {{-- LEFT CONTENT --}}
+                    {{-- ================================================= --}}
+
+                    <div class="space-y-5">
+
+
+                        {{-- ================================================= --}}
+                        {{-- SELLER --}}
+                        {{-- ================================================= --}}
+
+                        <section
+                            class="relative
+                                   overflow-hidden
+                                   rounded-3xl
+                                   border
+                                   border-[#E5D8CE]
+                                   bg-white
+                                   p-5
+                                   shadow-sm">
 
 
                             <div
-                                class="flex gap-4
-                                       px-5 py-5"
-                            >
+                                class="pointer-events-none
+                                       absolute
+                                       -right-14
+                                       -top-14
+                                       size-36
+                                       rounded-full
+                                       bg-[#7F9275]/10
+                                       blur-3xl">
+                            </div>
 
-                                {{-- IMAGE --}}
-                                @if ($product->image)
 
-                                    <img
-                                        src="{{ asset(
-                                            'storage/' .
-                                            $product->image
-                                        ) }}"
-                                        alt="{{ $product->name }}"
-                                        class="size-20
-                                               shrink-0
-                                               rounded-xl
-                                               object-cover"
-                                    >
+                            <div class="relative">
 
-                                @else
+
+                                <div
+                                    class="mb-4
+                                           flex
+                                           items-center
+                                           gap-2">
 
                                     <div
-                                        class="flex size-20
+                                        class="flex
+                                               size-8
+                                               items-center
+                                               justify-center
+                                               rounded-lg
+                                               bg-[#F4EAE2]
+                                               text-xs
+                                               text-[#6F4E37]">
+
+                                        <i class="fa-solid fa-store"></i>
+
+                                    </div>
+
+
+                                    <p
+                                        class="text-xs
+                                               font-bold
+                                               uppercase
+                                               tracking-wider
+                                               text-[#9A806F]">
+
+                                        Penjual
+
+                                    </p>
+
+                                </div>
+
+
+
+                                <div
+                                    class="flex
+                                           items-center
+                                           gap-4">
+
+
+                                    {{-- STORE PHOTO --}}
+
+                                    @if ($storePhoto)
+                                        <img src="{{ asset('storage/' . $storePhoto) }}"
+                                            alt="{{ $storeName }}"
+                                            class="size-14
+                                                   shrink-0
+                                                   rounded-full
+                                                   border-2
+                                                   border-white
+                                                   object-cover
+                                                   shadow-md
+                                                   sm:size-16">
+                                    @else
+                                        <div
+                                            class="flex
+                                                   size-14
+                                                   shrink-0
+                                                   items-center
+                                                   justify-center
+                                                   rounded-full
+                                                   bg-gradient-to-br
+                                                   from-[#5B3B2B]
+                                                   via-[#6F4E37]
+                                                   to-[#8B6245]
+                                                   text-lg
+                                                   font-black
+                                                   text-white
+                                                   shadow-md
+                                                   sm:size-16">
+
+                                            {{ strtoupper(substr($storeName, 0, 1)) }}
+
+                                        </div>
+                                    @endif
+
+
+
+                                    {{-- SELLER INFO --}}
+
+                                    <div class="min-w-0">
+
+                                        <h2
+                                            class="truncate
+                                                   text-base
+                                                   font-bold
+                                                   text-slate-900
+                                                   sm:text-lg">
+
+                                            {{ $storeName }}
+
+                                        </h2>
+
+
+                                        <p
+                                            class="mt-1
+                                                   truncate
+                                                   text-xs
+                                                   text-slate-500
+                                                   sm:text-sm">
+
+                                            {{ $seller->name }}
+
+                                        </p>
+
+
+                                        <span
+                                            class="mt-2
+                                                   inline-flex
+                                                   items-center
+                                                   gap-1.5
+                                                   rounded-full
+                                                   bg-[#EEF3EA]
+                                                   px-2.5
+                                                   py-1
+                                                   text-[9px]
+                                                   font-semibold
+                                                   text-[#65795E]
+                                                   sm:text-[10px]">
+
+                                            <i class="fa-solid fa-circle-check"></i>
+
+                                            Seller KampusMart
+
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </section>
+
+
+
+                        {{-- ================================================= --}}
+                        {{-- PRODUCTS --}}
+                        {{-- ================================================= --}}
+
+                        <section
+                            class="overflow-hidden
+                                   rounded-3xl
+                                   border
+                                   border-[#E5D8CE]
+                                   bg-white
+                                   shadow-sm">
+
+
+                            {{-- HEADER --}}
+
+                            <div
+                                class="flex
+                                       items-center
+                                       justify-between
+                                       gap-4
+                                       border-b
+                                       border-[#EFE4DC]
+                                       bg-gradient-to-r
+                                       from-[#FBF8F5]
+                                       to-white
+                                       px-5
+                                       py-4">
+
+
+                                <div>
+
+                                    <h2 class="font-bold
+                                               text-slate-900">
+
+                                        Produk Pesanan
+
+                                    </h2>
+
+
+                                    <p
+                                        class="mt-1
+                                               text-xs
+                                               text-slate-500">
+
+                                        {{ $cartItems->count() }}
+                                        jenis produk dari toko ini.
+
+                                    </p>
+
+                                </div>
+
+
+                                <div
+                                    class="flex
+                                           size-10
+                                           shrink-0
+                                           items-center
+                                           justify-center
+                                           rounded-xl
+                                           bg-[#F4EAE2]
+                                           text-[#6F4E37]">
+
+                                    <i class="fa-solid fa-box"></i>
+
+                                </div>
+
+                            </div>
+
+
+
+                            {{-- PRODUCT LIST --}}
+
+                            <div class="divide-y
+                                       divide-[#F0E7E0]">
+
+
+                                @foreach ($cartItems as $item)
+                                    @php
+
+                                        $product = $item->product;
+
+                                        $itemSubtotal = $product->price * $item->quantity;
+
+                                    @endphp
+
+
+                                    <article
+                                        class="group
+                                               p-4
+                                               transition
+                                               hover:bg-[#FCF9F7]
+                                               sm:p-5">
+
+
+                                        <div
+                                            class="flex
+                                                   gap-3
+                                                   sm:gap-4">
+
+
+                                            {{-- IMAGE --}}
+
+                                            <a href="{{ route('buyer.products.show', $product) }}"
+                                                class="shrink-0">
+
+
+                                                @if ($product->image)
+                                                    <div
+                                                        class="size-20
+                                                               overflow-hidden
+                                                               rounded-2xl
+                                                               bg-[#F4EFEB]
+                                                               sm:size-24">
+
+                                                        <img src="{{ asset('storage/' . $product->image) }}"
+                                                            alt="{{ $product->name }}"
+                                                            class="size-full
+                                                                   object-cover
+                                                                   transition
+                                                                   duration-500
+                                                                   group-hover:scale-105">
+
+                                                    </div>
+                                                @else
+                                                    <div
+                                                        class="flex
+                                                               size-20
+                                                               items-center
+                                                               justify-center
+                                                               rounded-2xl
+                                                               bg-gradient-to-br
+                                                               from-[#F5EFEB]
+                                                               to-[#EEE4DC]
+                                                               text-[#C7B4A7]
+                                                               sm:size-24">
+
+                                                        <i
+                                                            class="fa-regular
+                                                                   fa-image
+                                                                   text-3xl">
+                                                        </i>
+
+                                                    </div>
+                                                @endif
+
+                                            </a>
+
+
+
+                                            {{-- INFO --}}
+
+                                            <div
+                                                class="min-w-0
+                                                       flex-1">
+
+
+                                                <a href="{{ route('buyer.products.show', $product) }}"
+                                                    class="line-clamp-2
+                                                           text-sm
+                                                           font-bold
+                                                           leading-5
+                                                           text-slate-800
+                                                           transition
+                                                           hover:text-[#6F4E37]
+                                                           sm:text-base">
+
+                                                    {{ $product->name }}
+
+                                                </a>
+
+
+                                                <span
+                                                    class="mt-1.5
+                                                           inline-flex
+                                                           rounded-md
+                                                           bg-[#FAF6F3]
+                                                           px-2
+                                                           py-1
+                                                           text-[9px]
+                                                           font-medium
+                                                           text-slate-500
+                                                           sm:text-[10px]">
+
+                                                    {{ $product->category?->name ?? 'Tanpa kategori' }}
+
+                                                </span>
+
+
+                                                <p
+                                                    class="mt-2
+                                                           text-xs
+                                                           text-slate-500
+                                                           sm:text-sm">
+
+                                                    <span
+                                                        class="font-semibold
+                                                               text-[#6F4E37]">
+
+                                                        {{ $item->quantity }}
+
+                                                    </span>
+
+                                                    ×
+
+                                                    Rp{{ number_format($product->price, 0, ',', '.') }}
+
+                                                </p>
+
+                                            </div>
+
+
+
+                                            {{-- SUBTOTAL --}}
+
+                                            <div
+                                                class="shrink-0
+                                                       text-right">
+
+                                                <p
+                                                    class="hidden
+                                                           text-[10px]
+                                                           text-slate-400
+                                                           sm:block">
+
+                                                    Subtotal
+
+                                                </p>
+
+
+                                                <p
+                                                    class="mt-1
+                                                           text-sm
+                                                           font-black
+                                                           text-[#5B3B2B]
+                                                           sm:text-base">
+
+                                                    Rp{{ number_format($itemSubtotal, 0, ',', '.') }}
+
+                                                </p>
+
+                                            </div>
+
+                                        </div>
+
+                                    </article>
+                                @endforeach
+
+                            </div>
+
+
+                            {{-- PRODUCT FOOTER --}}
+
+                            <div
+                                class="flex
+                                       items-center
+                                       justify-between
+                                       gap-4
+                                       border-t
+                                       border-[#EFE4DC]
+                                       bg-[#FCF9F7]
+                                       px-5
+                                       py-4">
+
+
+                                <span class="text-xs
+                                           text-slate-500">
+
+                                    Total item
+
+                                </span>
+
+
+                                <span
+                                    class="rounded-full
+                                           bg-[#F4EAE2]
+                                           px-3
+                                           py-1.5
+                                           text-xs
+                                           font-bold
+                                           text-[#6F4E37]">
+
+                                    {{ $cartItems->sum('quantity') }}
+                                    item
+
+                                </span>
+
+                            </div>
+
+                        </section>
+
+
+
+                        {{-- ================================================= --}}
+                        {{-- BUYER DATA --}}
+                        {{-- ================================================= --}}
+
+                        <section
+                            class="overflow-hidden
+                                   rounded-3xl
+                                   border
+                                   border-[#E5D8CE]
+                                   bg-white
+                                   shadow-sm">
+
+
+                            {{-- HEADER --}}
+
+                            <div
+                                class="border-b
+                                       border-[#EFE4DC]
+                                       bg-gradient-to-r
+                                       from-[#FBF8F5]
+                                       to-white
+                                       px-5
+                                       py-4">
+
+
+                                <div
+                                    class="flex
+                                           items-center
+                                           gap-3">
+
+
+                                    <div
+                                        class="flex
+                                               size-10
                                                shrink-0
                                                items-center
                                                justify-center
                                                rounded-xl
-                                               bg-slate-100"
-                                    >
+                                               bg-[#F4EAE2]
+                                               text-[#6F4E37]">
 
-                                        <svg
-                                            class="size-8
-                                                   text-slate-300"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-width="1.5"
-                                        >
-                                            <rect
-                                                x="3"
-                                                y="3"
-                                                width="18"
-                                                height="18"
-                                                rx="2"
-                                            />
-
-                                            <path
-                                                d="m21 15-5-5L5 21"
-                                            />
-                                        </svg>
+                                        <i class="fa-regular fa-user"></i>
 
                                     </div>
 
-                                @endif
+
+                                    <div>
+
+                                        <h2
+                                            class="font-bold
+                                                   text-slate-900">
+
+                                            Data Pembeli
+
+                                        </h2>
 
 
-                                {{-- INFO --}}
-                                <div class="min-w-0 flex-1">
+                                        <p
+                                            class="mt-1
+                                                   text-xs
+                                                   text-slate-500">
+
+                                            Data ini akan ikut dikirim
+                                            bersama informasi pesanan.
+
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+
+                            {{-- FORM BODY --}}
+
+                            <div
+                                class="grid
+                                       gap-5
+                                       p-5
+                                       sm:grid-cols-2">
+
+
+                                {{-- NAME --}}
+
+                                <div>
+
+                                    <label for="buyer_name"
+                                        class="mb-2
+                                               block
+                                               text-sm
+                                               font-semibold
+                                               text-slate-700">
+
+                                        Nama Pembeli
+
+                                    </label>
+
+
+                                    <div class="relative">
+
+                                        <div
+                                            class="pointer-events-none
+                                                   absolute
+                                                   inset-y-0
+                                                   left-0
+                                                   flex
+                                                   w-11
+                                                   items-center
+                                                   justify-center
+                                                   text-[#A68A77]">
+
+                                            <i
+                                                class="fa-regular
+                                                       fa-user
+                                                       text-sm">
+                                            </i>
+
+                                        </div>
+
+
+                                        <input type="text" name="buyer_name" id="buyer_name"
+                                            value="{{ old('buyer_name', auth()->user()->name) }}"
+                                            required
+                                            class="h-11
+                                                   w-full
+                                                   rounded-xl
+                                                   border
+                                                   border-[#E5D5C9]
+                                                   bg-white
+                                                   pl-11
+                                                   pr-4
+                                                   text-sm
+                                                   outline-none
+                                                   transition
+                                                   focus:border-[#A97957]
+                                                   focus:ring-4
+                                                   focus:ring-[#F5E9DF]">
+
+                                    </div>
+
+                                </div>
+
+
+
+                                {{-- PHONE --}}
+
+                                <div>
+
+                                    <label for="buyer_phone"
+                                        class="mb-2
+                                               block
+                                               text-sm
+                                               font-semibold
+                                               text-slate-700">
+
+                                        WhatsApp Pembeli
+
+                                    </label>
+
+
+                                    <div class="relative">
+
+                                        <div
+                                            class="pointer-events-none
+                                                   absolute
+                                                   inset-y-0
+                                                   left-0
+                                                   flex
+                                                   w-11
+                                                   items-center
+                                                   justify-center
+                                                   text-[#65795E]">
+
+                                            <i
+                                                class="fa-brands
+                                                       fa-whatsapp
+                                                       text-base">
+                                            </i>
+
+                                        </div>
+
+
+                                        <input type="tel" name="buyer_phone" id="buyer_phone"
+                                            value="{{ old('buyer_phone', auth()->user()->phone) }}"
+                                            placeholder="081234567890" inputmode="numeric" required
+                                            class="h-11
+                                                   w-full
+                                                   rounded-xl
+                                                   border
+                                                   border-[#E5D5C9]
+                                                   bg-white
+                                                   pl-11
+                                                   pr-4
+                                                   text-sm
+                                                   outline-none
+                                                   transition
+                                                   placeholder:text-slate-400
+                                                   focus:border-[#A97957]
+                                                   focus:ring-4
+                                                   focus:ring-[#F5E9DF]">
+
+                                    </div>
+
 
                                     <p
-                                        class="font-semibold
-                                               text-slate-900"
-                                    >
-                                        {{ $product->name }}
-                                    </p>
+                                        class="mt-1.5
+                                               text-[10px]
+                                               text-slate-400">
 
-                                    <p
-                                        class="mt-1 text-xs
-                                               text-slate-400"
-                                    >
-                                        {{
-                                            $product
-                                                ->category
-                                                ?->name
-                                            ?? 'Tanpa kategori'
-                                        }}
-                                    </p>
+                                        Pastikan nomor dapat dihubungi.
 
-                                    <p
-                                        class="mt-2 text-sm
-                                               text-slate-500"
-                                    >
-                                        {{ $item->quantity }}
-                                        ×
-                                        Rp {{ number_format(
-                                            $product->price,
-                                            0,
-                                            ',',
-                                            '.'
-                                        ) }}
                                     </p>
 
                                 </div>
 
 
-                                {{-- SUBTOTAL --}}
-                                <div class="text-right">
+
+                                {{-- NOTES --}}
+
+                                <div class="sm:col-span-2">
+
+                                    <label for="notes"
+                                        class="mb-2
+                                               block
+                                               text-sm
+                                               font-semibold
+                                               text-slate-700">
+
+                                        Catatan
+
+                                        <span
+                                            class="font-normal
+                                                   text-slate-400">
+
+                                            (opsional)
+
+                                        </span>
+
+                                    </label>
+
+
+                                    <textarea name="notes" id="notes" rows="4" maxlength="500"
+                                        placeholder="Contoh: Sambal dipisah, ambil pukul 12.00..."
+                                        class="w-full
+                                               resize-none
+                                               rounded-xl
+                                               border
+                                               border-[#E5D5C9]
+                                               bg-white
+                                               px-4
+                                               py-3
+                                               text-sm
+                                               leading-6
+                                               outline-none
+                                               transition
+                                               placeholder:text-slate-400
+                                               focus:border-[#A97957]
+                                               focus:ring-4
+                                               focus:ring-[#F5E9DF]">{{ old('notes') }}</textarea>
+
 
                                     <p
-                                        class="font-semibold
-                                               text-slate-900"
-                                    >
-                                        Rp {{ number_format(
-                                            $itemSubtotal,
-                                            0,
-                                            ',',
-                                            '.'
-                                        ) }}
+                                        class="mt-1.5
+                                               text-[10px]
+                                               text-slate-400">
+
+                                        Tambahkan informasi khusus
+                                        untuk penjual jika diperlukan.
+
                                     </p>
 
                                 </div>
 
                             </div>
 
-                        @endforeach
-
-                    </div>
-
-                </div>
-
-
-                {{-- BUYER DATA --}}
-                <div
-                    class="rounded-2xl
-                           border border-slate-200
-                           bg-white shadow-sm"
-                >
-
-                    <div
-                        class="border-b border-slate-100
-                               px-5 py-4"
-                    >
-
-                        <h2
-                            class="font-semibold
-                                   text-slate-900"
-                        >
-                            Data Pembeli
-                        </h2>
-
-                        <p
-                            class="mt-1 text-sm
-                                   text-slate-500"
-                        >
-                            Data ini akan ikut dikirim ke penjual.
-                        </p>
+                        </section>
 
                     </div>
 
 
-                    <div class="grid gap-5 p-5 sm:grid-cols-2">
 
-                        {{-- NAME --}}
-                        <div>
+                    {{-- ================================================= --}}
+                    {{-- ORDER SUMMARY --}}
+                    {{-- ================================================= --}}
 
-                            <label
-                                for="buyer_name"
-                                class="mb-2 block
-                                       text-sm font-medium
-                                       text-slate-700"
-                            >
-                                Nama Pembeli
-                            </label>
-
-                            <input
-                                type="text"
-                                name="buyer_name"
-                                id="buyer_name"
-                                value="{{ old(
-                                    'buyer_name',
-                                    auth()->user()->name
-                                ) }}"
-                                class="h-11 w-full
-                                       rounded-xl
-                                       border border-slate-200
-                                       px-4 text-sm
-                                       outline-none
-                                       focus:border-violet-400
-                                       focus:ring-4
-                                       focus:ring-violet-100"
-                            >
-
-                        </div>
-
-
-                        {{-- PHONE --}}
-                        <div>
-
-                            <label
-                                for="buyer_phone"
-                                class="mb-2 block
-                                       text-sm font-medium
-                                       text-slate-700"
-                            >
-                                WhatsApp Pembeli
-                            </label>
-
-                            <input
-                                type="text"
-                                name="buyer_phone"
-                                id="buyer_phone"
-                                value="{{ old(
-                                    'buyer_phone',
-                                    auth()->user()->phone
-                                ) }}"
-                                placeholder="081234567890"
-                                class="h-11 w-full
-                                       rounded-xl
-                                       border border-slate-200
-                                       px-4 text-sm
-                                       outline-none
-                                       focus:border-violet-400
-                                       focus:ring-4
-                                       focus:ring-violet-100"
-                            >
-
-                        </div>
-
-
-                        {{-- NOTES --}}
-                        <div class="sm:col-span-2">
-
-                            <label
-                                for="notes"
-                                class="mb-2 block
-                                       text-sm font-medium
-                                       text-slate-700"
-                            >
-                                Catatan
-                                <span class="font-normal text-slate-400">
-                                    (opsional)
-                                </span>
-                            </label>
-
-                            <textarea
-                                name="notes"
-                                id="notes"
-                                rows="4"
-                                placeholder="Contoh: Sambal dipisah, ambil pukul 12.00..."
-                                class="w-full rounded-xl
-                                       border border-slate-200
-                                       px-4 py-3 text-sm
-                                       outline-none
-                                       focus:border-violet-400
-                                       focus:ring-4
-                                       focus:ring-violet-100"
-                            >{{ old('notes') }}</textarea>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            {{-- ==========================
-                SUMMARY
-            =========================== --}}
-            <div>
-
-                <div
-                    class="sticky top-24
-                           rounded-2xl
-                           border border-slate-200
-                           bg-white p-5
-                           shadow-sm"
-                >
-
-                    <h2
-                        class="font-semibold
-                               text-slate-900"
-                    >
-                        Ringkasan Pesanan
-                    </h2>
-
-
-                    <div class="mt-5 space-y-4">
+                    <aside>
 
                         <div
-                            class="flex
-                                   justify-between
-                                   text-sm"
-                        >
-
-                            <span class="text-slate-500">
-                                Jumlah Produk
-                            </span>
-
-                            <span
-                                class="font-medium
-                                       text-slate-800"
-                            >
-                                {{ $cartItems->sum('quantity') }}
-                            </span>
-
-                        </div>
+                            class="sticky
+                                   top-24
+                                   overflow-hidden
+                                   rounded-3xl
+                                   border
+                                   border-[#E5D8CE]
+                                   bg-white
+                                   shadow-sm">
 
 
-                        <div
-                            class="flex
-                                   justify-between
-                                   text-sm"
-                        >
-
-                            <span class="text-slate-500">
-                                Subtotal
-                            </span>
-
-                            <span
-                                class="font-medium
-                                       text-slate-800"
-                            >
-                                Rp {{ number_format(
-                                    $subtotal,
-                                    0,
-                                    ',',
-                                    '.'
-                                ) }}
-                            </span>
-
-                        </div>
-
-
-                        <div
-                            class="border-t
-                                   border-slate-100 pt-4"
-                        >
+                            {{-- SUMMARY HEADER --}}
 
                             <div
-                                class="flex items-end
-                                       justify-between gap-4"
-                            >
+                                class="relative
+                                       overflow-hidden
+                                       bg-gradient-to-br
+                                       from-[#493124]
+                                       via-[#6F4E37]
+                                       to-[#8B6245]
+                                       p-5
+                                       text-white">
 
-                                <span
-                                    class="font-semibold
-                                           text-slate-700"
-                                >
-                                    Total
-                                </span>
 
-                                <span
-                                    class="text-2xl
+                                <div
+                                    class="pointer-events-none
+                                           absolute
+                                           -right-12
+                                           -top-12
+                                           size-32
+                                           rounded-full
+                                           bg-[#E3B66D]/15">
+                                </div>
+
+
+                                <div
+                                    class="relative
+                                           flex
+                                           items-center
+                                           gap-3">
+
+
+                                    <div
+                                        class="flex
+                                               size-10
+                                               shrink-0
+                                               items-center
+                                               justify-center
+                                               rounded-xl
+                                               bg-white/10
+                                               backdrop-blur">
+
+                                        <i class="fa-solid fa-receipt"></i>
+
+                                    </div>
+
+
+                                    <div>
+
+                                        <h2 class="font-bold">
+                                            Ringkasan Pesanan
+                                        </h2>
+
+                                        <p
+                                            class="mt-0.5
+                                                   text-[10px]
+                                                   text-[#E8D6CA]">
+
+                                            {{ $storeName }}
+
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+
+                            {{-- BODY --}}
+
+                            <div class="p-5">
+
+
+                                <div class="space-y-4
+                                           text-sm">
+
+
+                                    {{-- QUANTITY --}}
+
+                                    <div
+                                        class="flex
+                                               items-center
+                                               justify-between
+                                               gap-3">
+
+
+                                        <div
+                                            class="flex
+                                                   items-center
+                                                   gap-2
+                                                   text-slate-500">
+
+
+                                            <div
+                                                class="flex
+                                                       size-8
+                                                       items-center
+                                                       justify-center
+                                                       rounded-lg
+                                                       bg-[#F4EAE2]
+                                                       text-xs
+                                                       text-[#6F4E37]">
+
+                                                <i class="fa-solid fa-box"></i>
+
+                                            </div>
+
+                                            Jumlah Item
+
+                                        </div>
+
+
+                                        <span
+                                            class="font-bold
+                                                   text-slate-800">
+
+                                            {{ $cartItems->sum('quantity') }}
+
+                                        </span>
+
+                                    </div>
+
+
+
+                                    {{-- SUBTOTAL --}}
+
+                                    <div
+                                        class="flex
+                                               items-center
+                                               justify-between
+                                               gap-3">
+
+                                        <span class="text-slate-500">
+                                            Subtotal
+                                        </span>
+
+                                        <span
+                                            class="font-semibold
+                                                   text-slate-800">
+
+                                            Rp{{ number_format($subtotal, 0, ',', '.') }}
+
+                                        </span>
+
+                                    </div>
+
+
+
+                                    {{-- DIVIDER --}}
+
+                                    <div
+                                        class="border-t
+                                               border-dashed
+                                               border-[#DDCEC2]">
+                                    </div>
+
+
+
+                                    {{-- TOTAL --}}
+
+                                    <div
+                                        class="flex
+                                               items-end
+                                               justify-between
+                                               gap-3">
+
+
+                                        <div>
+
+                                            <p
+                                                class="text-sm
+                                                       font-semibold
+                                                       text-slate-700">
+
+                                                Total
+
+                                            </p>
+
+                                            <p
+                                                class="mt-1
+                                                       text-[10px]
+                                                       text-slate-400">
+
+                                                Total pesanan saat ini
+
+                                            </p>
+
+                                        </div>
+
+
+                                        <span
+                                            class="text-2xl
+                                                   font-black
+                                                   tracking-tight
+                                                   text-[#5B3B2B]">
+
+                                            Rp{{ number_format($subtotal, 0, ',', '.') }}
+
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+
+
+                                {{-- ========================================= --}}
+                                {{-- WHATSAPP INFO --}}
+                                {{-- ========================================= --}}
+
+                                <div
+                                    class="mt-5
+                                           rounded-2xl
+                                           border
+                                           border-[#D3DFCE]
+                                           bg-gradient-to-br
+                                           from-[#F1F5ED]
+                                           to-[#E7EFE3]
+                                           p-4">
+
+
+                                    <div
+                                        class="flex
+                                               items-start
+                                               gap-3">
+
+
+                                        <div
+                                            class="flex
+                                                   size-9
+                                                   shrink-0
+                                                   items-center
+                                                   justify-center
+                                                   rounded-xl
+                                                   bg-[#7F9275]
+                                                   text-white">
+
+                                            <i
+                                                class="fa-brands
+                                                       fa-whatsapp
+                                                       text-lg">
+                                            </i>
+
+                                        </div>
+
+
+                                        <div>
+
+                                            <p
+                                                class="text-xs
+                                                       font-bold
+                                                       text-[#65795E]">
+
+                                                Lanjut melalui WhatsApp
+
+                                            </p>
+
+
+                                            <p
+                                                class="mt-1
+                                                       text-xs
+                                                       leading-5
+                                                       text-slate-600">
+
+                                                Setelah pesanan berhasil
+                                                dibuat, WhatsApp penjual
+                                                akan terbuka dengan format
+                                                pesanan yang sudah disiapkan.
+
+                                            </p>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+
+                                {{-- ========================================= --}}
+                                {{-- SUBMIT --}}
+                                {{-- ========================================= --}}
+
+                                <button type="submit"
+                                    class="group
+                                           mt-5
+                                           flex
+                                           h-12
+                                           w-full
+                                           items-center
+                                           justify-center
+                                           gap-2
+                                           rounded-xl
+                                           bg-gradient-to-r
+                                           from-[#5B3B2B]
+                                           via-[#6F4E37]
+                                           to-[#8B6245]
+                                           px-5
+                                           text-sm
                                            font-bold
-                                           text-violet-600"
-                                >
-                                    Rp {{ number_format(
-                                        $subtotal,
-                                        0,
-                                        ',',
-                                        '.'
-                                    ) }}
-                                </span>
+                                           text-white
+                                           shadow-lg
+                                           shadow-[#6F4E37]/20
+                                           transition
+                                           duration-300
+                                           hover:-translate-y-0.5
+                                           hover:shadow-xl
+                                           focus:outline-none
+                                           focus:ring-4
+                                           focus:ring-[#EAD9CD]">
+
+                                    <i class="fa-solid fa-bag-shopping"></i>
+
+                                    Buat Pesanan
+
+                                    <i
+                                        class="fa-solid
+                                               fa-arrow-right
+                                               text-xs
+                                               transition
+                                               group-hover:translate-x-1">
+                                    </i>
+
+                                </button>
+
+
+
+                                {{-- SECURITY INFO --}}
+
+                                <div
+                                    class="mt-4
+                                           flex
+                                           items-center
+                                           justify-center
+                                           gap-2
+                                           text-[10px]
+                                           text-slate-400">
+
+                                    <i
+                                        class="fa-solid
+                                               fa-shield-halved
+                                               text-[#7F9275]">
+                                    </i>
+
+                                    Pesanan disimpan sebelum
+                                    WhatsApp dibuka.
+
+                                </div>
 
                             </div>
 
                         </div>
 
-                    </div>
-
-
-                    {{-- INFO WA --}}
-                    <div
-                        class="mt-5 rounded-xl
-                               border border-green-100
-                               bg-green-50 p-4"
-                    >
-
-                        <div class="flex gap-3">
-
-                            <div
-                                class="flex size-9
-                                       shrink-0
-                                       items-center
-                                       justify-center
-                                       rounded-lg
-                                       bg-green-100
-                                       text-green-700"
-                            >
-                                <svg
-                                    class="size-5"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="1.8"
-                                >
-                                    <path
-                                        d="M21 11.5a8.4 8.4 0 0 1-9 8.4
-                                           9.4 9.4 0 0 1-4-.9L3 20.5
-                                           l1.5-4a8.5 8.5 0 1 1
-                                           16.5-5Z"
-                                    />
-                                </svg>
-                            </div>
-
-
-                            <p
-                                class="text-xs leading-5
-                                       text-green-700"
-                            >
-                                Setelah pesanan dibuat,
-                                WhatsApp penjual akan langsung
-                                terbuka dengan format pesanan
-                                yang sudah disiapkan.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    {{-- SUBMIT --}}
-                    <button
-                        type="submit"
-                        class="mt-5 inline-flex
-                               h-12 w-full
-                               items-center
-                               justify-center
-                               gap-2 rounded-xl
-                               bg-violet-600
-                               text-sm font-semibold
-                               text-white
-                               transition
-                               hover:bg-violet-700"
-                    >
-
-                        Buat Pesanan
-
-                        <svg
-                            class="size-4"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                        >
-                            <path d="m9 18 6-6-6-6" />
-                        </svg>
-
-                    </button>
-
-
-                    <p
-                        class="mt-3 text-center
-                               text-xs leading-5
-                               text-slate-400"
-                    >
-                        Pesanan akan tersimpan sebelum
-                        WhatsApp dibuka.
-                    </p>
+                    </aside>
 
                 </div>
 
-            </div>
+            </form>
 
-        </div>
+        </main>
 
-    </form>
-
-</div>
+    </div>
 
 @endsection
