@@ -3,24 +3,26 @@
 use App\Http\Controllers\Admin\BuyerController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\SellerController;
 use App\Http\Controllers\Admin\SettingController as AdminSettingController;
+use App\Http\Controllers\Admin\WebsiteSettingController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Buyer\CartController;
-use App\Http\Controllers\Buyer\OrderController as BuyerOrderController;
 use App\Http\Controllers\Buyer\CheckoutController;
 use App\Http\Controllers\Buyer\DashboardController as BuyerDashboardController;
-use App\Http\Controllers\Buyer\ProductController as BuyerProductController;
-use App\Http\Controllers\Seller\ProductController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\OrderController as AdminOrderController;
-use App\Http\Controllers\Seller\OrderController as SellerOrderController;
-use App\Http\Controllers\Seller\DashboardController as SellerDashboardController;
-use App\Http\Controllers\Buyer\ProfileController;
-use App\Http\Controllers\Seller\SettingController as SellerSettingController;
-use App\Http\Controllers\Seller\SalesController;
 use App\Http\Controllers\Buyer\HomeController;
+use App\Http\Controllers\Buyer\OrderController as BuyerOrderController;
+use App\Http\Controllers\Buyer\ProductController as BuyerProductController;
+use App\Http\Controllers\Buyer\ProfileController;
+use App\Http\Controllers\Seller\DashboardController as SellerDashboardController;
+use App\Http\Controllers\Seller\OrderController as SellerOrderController;
+use App\Http\Controllers\Seller\ProductController;
+use App\Http\Controllers\Seller\SalesController;
+use App\Http\Controllers\Seller\SettingController as SellerSettingController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -107,12 +109,19 @@ Route::middleware(['auth', 'role:admin'])
         // product
         Route::get('/produk', [AdminProductController::class, 'index'])->name('products.index');
 
+        Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
+
+        Route::get('/reports/export/pdf', [ReportController::class, 'export'])->name('reports.export');
+
         // setting
         Route::get('/settings', [AdminSettingController::class, 'index'])->name('settings.index');
 
         Route::put('/settings/profil', [AdminSettingController::class, 'updateProfile'])->name('settings.profile');
 
         Route::put('/settings/password', [AdminSettingController::class, 'updatePassword'])->name('settings.password');
+        Route::get('/settings/website', [WebsiteSettingController::class, 'edit'])->name('settings.website');
+
+        Route::put('/settings/website', [WebsiteSettingController::class, 'update'])->name('settings.website.update');
     });
 
 /*
@@ -154,6 +163,7 @@ Route::middleware(['auth', 'role:seller'])
         Route::patch('/pesanan/{order}/status', [SellerOrderController::class, 'updateStatus'])->name('orders.status');
 
         Route::get('/penjualan', [SalesController::class, 'index'])->name('sales.index');
+        Route::get('export/pdf', [SalesController::class, 'exportPdf'])->name('export.pdf');
     });
 
 /*

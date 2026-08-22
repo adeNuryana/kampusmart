@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>
-        @yield('title', 'KampusMart')
+        @yield('title')- - {{ $siteSetting?->site_name ?? 'KampusMart' }}
     </title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])

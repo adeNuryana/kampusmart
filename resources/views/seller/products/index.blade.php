@@ -4,878 +4,976 @@
 
 @section('content')
 
-<div class="mx-auto max-w-[1400px]">
+    <div class="mx-auto max-w-[1400px]">
 
-    {{-- HEADER --}}
-    <div
-        class="mb-7 flex flex-col gap-4
-               sm:flex-row sm:items-center
-               sm:justify-between"
-    >
+        {{-- ===================================================== --}}
+        {{-- HEADER --}}
+        {{-- ===================================================== --}}
 
-        <div>
+        <section
+            class="mb-6 flex flex-col gap-4
+                   sm:flex-row sm:items-end
+                   sm:justify-between">
 
-            <h1
-                class="text-2xl font-bold
-                       tracking-tight text-slate-900
-                       lg:text-3xl"
-            >
-                Produk Saya
-            </h1>
+            <div>
 
-            <p class="mt-2 text-sm text-slate-500">
-                Kelola produk yang ditampilkan di KampusMart.
-            </p>
+                <div
+                    class="inline-flex items-center gap-2
+                           rounded-full bg-[#FBEAE2]
+                           px-3 py-1.5
+                           text-xs font-bold
+                           text-[#A95E43]">
 
-        </div>
+                    <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
 
+                        <path d="M6 7h12l1 14H5L6 7Z" />
+                        <path d="M9 7a3 3 0 0 1 6 0" />
 
-        <a
-            href="{{ route('seller.products.create') }}"
-            class="inline-flex h-11
-                   items-center justify-center
-                   gap-2 rounded-xl
-                   bg-violet-600 px-5
-                   text-sm font-semibold
-                   text-white transition
-                   hover:bg-violet-700"
-        >
+                    </svg>
 
-            <span class="text-xl leading-none">
-                +
-            </span>
+                    Manajemen Produk
 
-            Tambah Produk
-
-        </a>
-
-    </div>
+                </div>
 
 
-    {{-- SUCCESS --}}
-    @if (session('success'))
+                <h1
+                    class="mt-3 text-2xl
+                           font-black tracking-tight
+                           text-[#332B26]
+                           lg:text-3xl">
 
-        <div
-            class="mb-5 rounded-xl
-                   border border-green-200
-                   bg-green-50 px-4 py-3
-                   text-sm text-green-700"
-        >
-            {{ session('success') }}
-        </div>
+                    Produk Saya
 
-    @endif
+                </h1>
 
 
-    {{-- FILTER --}}
-    <div
-        class="mb-5 rounded-2xl
-               border border-slate-200
-               bg-white p-5 shadow-sm"
-    >
+                <p
+                    class="mt-2 max-w-2xl
+                           text-sm leading-6
+                           text-slate-500">
 
-        <form
-            action="{{ route('seller.products.index') }}"
-            method="GET"
-        >
+                    Kelola produk yang ditampilkan
+                    kepada pembeli di KampusMart.
 
+                </p>
+
+            </div>
+
+
+            <a href="{{ route('seller.products.create') }}"
+                class="inline-flex h-11
+                       items-center justify-center
+                       gap-2 rounded-xl
+                       bg-[#C8795A] px-5
+                       text-sm font-bold
+                       text-white shadow-sm
+                       transition
+                       hover:bg-[#B66F52]
+                       hover:shadow-md">
+
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+
+                    <path d="M12 5v14" />
+                    <path d="M5 12h14" />
+
+                </svg>
+
+                Tambah Produk
+
+            </a>
+
+        </section>
+
+
+
+        {{-- ===================================================== --}}
+        {{-- SUCCESS --}}
+        {{-- ===================================================== --}}
+
+        @if (session('success'))
             <div
-                class="grid gap-4
-                       md:grid-cols-2
-                       xl:grid-cols-4"
-            >
+                class="mb-5 flex items-start gap-3
+                       rounded-2xl
+                       border border-[#D3DFCE]
+                       bg-[#EEF3EA]
+                       px-4 py-3.5">
 
-                {{-- SEARCH --}}
+                <div
+                    class="flex size-8 shrink-0
+                           items-center justify-center
+                           rounded-lg bg-[#718268]
+                           text-white">
+
+                    <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+
+                        <path d="m5 12 4 4L19 6" />
+
+                    </svg>
+
+                </div>
+
+
                 <div>
 
-                    <label
-                        class="mb-2 block
-                               text-sm font-medium
-                               text-slate-700"
-                    >
-                        Cari Produk
-                    </label>
+                    <p class="text-sm font-bold
+                               text-[#65795E]">
+
+                        Berhasil
+
+                    </p>
+
+                    <p class="mt-0.5 text-xs
+                               text-[#65795E]">
+
+                        {{ session('success') }}
+
+                    </p>
+
+                </div>
+
+            </div>
+        @endif
 
 
-                    <div class="relative">
 
-                        <svg
-                            class="absolute left-4
-                                   top-1/2 size-5
-                                   -translate-y-1/2
-                                   text-slate-400"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                        >
-                            <circle
-                                cx="11"
-                                cy="11"
-                                r="7"
-                            />
+        {{-- ===================================================== --}}
+        {{-- FILTER --}}
+        {{-- ===================================================== --}}
 
-                            <path
-                                d="m20 20-3.5-3.5"
-                            />
+        <section
+            class="mb-5 overflow-hidden
+                   rounded-3xl
+                   border border-[#DFD2C7]
+                   bg-white shadow-sm">
+
+            <div class="border-b border-[#E7DBD1]
+                       bg-[#FAF7F2]
+                       px-5 py-4">
+
+                <div class="flex items-center gap-3">
+
+                    <div
+                        class="flex size-9
+                               items-center justify-center
+                               rounded-xl
+                               bg-[#FBEAE2]
+                               text-[#A95E43]">
+
+                        <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+
+                            <path d="M4 6h16" />
+                            <path d="M7 12h10" />
+                            <path d="M10 18h4" />
+
                         </svg>
 
+                    </div>
 
-                        <input
-                            type="text"
-                            name="search"
-                            value="{{ request('search') }}"
-                            placeholder="Nama produk..."
-                            class="h-11 w-full
-                                   rounded-xl border
-                                   border-slate-200
-                                   pl-11 pr-4
-                                   text-sm outline-none
-                                   focus:border-violet-400
-                                   focus:ring-4
-                                   focus:ring-violet-100"
-                        >
+
+                    <div>
+
+                        <p class="text-sm font-bold
+                                   text-[#332B26]">
+
+                            Filter Produk
+
+                        </p>
+
+                        <p class="mt-0.5 text-xs
+                                   text-slate-500">
+
+                            Cari berdasarkan nama, kategori, atau status.
+
+                        </p>
 
                     </div>
 
                 </div>
 
-
-                {{-- CATEGORY --}}
-                <div>
-
-                    <label
-                        class="mb-2 block
-                               text-sm font-medium
-                               text-slate-700"
-                    >
-                        Kategori
-                    </label>
+            </div>
 
 
-                    <select
-                        name="category"
-                        class="h-11 w-full
-                               rounded-xl border
-                               border-slate-200
-                               bg-white px-4
-                               text-sm outline-none
-                               focus:border-violet-400
-                               focus:ring-4
-                               focus:ring-violet-100"
-                    >
+            <form action="{{ route('seller.products.index') }}" method="GET" class="p-5">
 
-                        <option value="">
-                            Semua Kategori
-                        </option>
+                <div class="grid gap-4
+                           md:grid-cols-2
+                           xl:grid-cols-4">
 
 
-                        @foreach ($categories as $category)
+                    {{-- SEARCH --}}
+                    <div>
 
-                            <option
-                                value="{{ $category->id }}"
-                                @selected(
-                                    request('category')
-                                    == $category->id
-                                )
-                            >
-                                {{ $category->name }}
+                        <label for="search"
+                            class="mb-2 block
+                                   text-sm font-semibold
+                                   text-[#4D4038]">
+
+                            Cari Produk
+
+                        </label>
+
+
+                        <div class="relative">
+
+                            <svg class="absolute left-4 top-1/2
+                                       size-4 -translate-y-1/2
+                                       text-[#A28A7A]"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+
+                                <circle cx="11" cy="11" r="7" />
+                                <path d="m20 20-3.5-3.5" />
+
+                            </svg>
+
+
+                            <input type="text" id="search" name="search" value="{{ request('search') }}"
+                                placeholder="Nama produk..."
+                                class="h-11 w-full
+                                       rounded-xl border
+                                       border-[#DFD2C7]
+                                       bg-white pl-11 pr-4
+                                       text-sm text-[#4D4038]
+                                       outline-none transition
+                                       placeholder:text-[#B3A195]
+                                       focus:border-[#C8795A]
+                                       focus:ring-4
+                                       focus:ring-[#FBEAE2]">
+
+                        </div>
+
+                    </div>
+
+
+
+                    {{-- CATEGORY --}}
+                    <div>
+
+                        <label for="category"
+                            class="mb-2 block
+                                   text-sm font-semibold
+                                   text-[#4D4038]">
+
+                            Kategori
+
+                        </label>
+
+
+                        <select id="category" name="category"
+                            class="h-11 w-full
+                                   rounded-xl border
+                                   border-[#DFD2C7]
+                                   bg-white px-4
+                                   text-sm text-[#4D4038]
+                                   outline-none transition
+                                   focus:border-[#C8795A]
+                                   focus:ring-4
+                                   focus:ring-[#FBEAE2]">
+
+                            <option value="">
+                                Semua Kategori
                             </option>
 
-                        @endforeach
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}" @selected(request('category') == $category->id)>
 
-                    </select>
+                                    {{ $category->name }}
+
+                                </option>
+                            @endforeach
+
+                        </select>
+
+                    </div>
+
+
+
+                    {{-- STATUS --}}
+                    <div>
+
+                        <label for="status"
+                            class="mb-2 block
+                                   text-sm font-semibold
+                                   text-[#4D4038]">
+
+                            Status
+
+                        </label>
+
+
+                        <select id="status" name="status"
+                            class="h-11 w-full
+                                   rounded-xl border
+                                   border-[#DFD2C7]
+                                   bg-white px-4
+                                   text-sm text-[#4D4038]
+                                   outline-none transition
+                                   focus:border-[#C8795A]
+                                   focus:ring-4
+                                   focus:ring-[#FBEAE2]">
+
+                            <option value="">
+                                Semua Status
+                            </option>
+
+                            <option value="active" @selected(request('status') === 'active')>
+
+                                Aktif
+
+                            </option>
+
+                            <option value="inactive" @selected(request('status') === 'inactive')>
+
+                                Nonaktif
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    {{-- ACTION --}}
+                    <div class="flex items-end gap-2">
+
+                        <button type="submit"
+                            class="inline-flex h-11
+                                   flex-1 items-center
+                                   justify-center gap-2
+                                   rounded-xl
+                                   bg-[#6F4E37]
+                                   px-5 text-sm
+                                   font-bold text-white
+                                   transition
+                                   hover:bg-[#5B3B2B]">
+
+                            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+
+                                <path d="M4 6h16" />
+                                <path d="M7 12h10" />
+                                <path d="M10 18h4" />
+
+                            </svg>
+
+                            Terapkan
+
+                        </button>
+
+
+                        <a href="{{ route('seller.products.index') }}" title="Reset Filter"
+                            class="inline-flex size-11
+                                   shrink-0 items-center
+                                   justify-center
+                                   rounded-xl border
+                                   border-[#DFD2C7]
+                                   bg-white
+                                   text-[#8B7465]
+                                   transition
+                                   hover:bg-[#F5ECE6]
+                                   hover:text-[#493124]">
+
+                            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+
+                                <path d="M3 12a9 9 0 1 0 3-6.7" />
+                                <path d="M3 4v6h6" />
+
+                            </svg>
+
+                        </a>
+
+                    </div>
 
                 </div>
 
+            </form>
 
-                {{-- STATUS --}}
+        </section>
+
+
+
+        {{-- ===================================================== --}}
+        {{-- PRODUCT TABLE --}}
+        {{-- ===================================================== --}}
+
+        <section
+            class="overflow-hidden
+                   rounded-3xl border
+                   border-[#DFD2C7]
+                   bg-white shadow-sm">
+
+
+            {{-- CARD HEADER --}}
+            <div
+                class="flex flex-col gap-2
+                       border-b border-[#E7DBD1]
+                       bg-[#FAF7F2]
+                       px-5 py-4
+                       sm:flex-row
+                       sm:items-center
+                       sm:justify-between">
+
                 <div>
 
-                    <label
-                        class="mb-2 block
-                               text-sm font-medium
-                               text-slate-700"
-                    >
-                        Status
-                    </label>
+                    <h2 class="text-sm font-bold
+                               text-[#332B26]">
 
+                        Daftar Produk
 
-                    <select
-                        name="status"
-                        class="h-11 w-full
-                               rounded-xl border
-                               border-slate-200
-                               bg-white px-4
-                               text-sm outline-none
-                               focus:border-violet-400
-                               focus:ring-4
-                               focus:ring-violet-100"
-                    >
+                    </h2>
 
-                        <option value="">
-                            Semua Status
-                        </option>
+                    <p class="mt-0.5 text-xs
+                               text-slate-500">
 
-                        <option
-                            value="active"
-                            @selected(
-                                request('status')
-                                === 'active'
-                            )
-                        >
-                            Aktif
-                        </option>
+                        Semua produk yang kamu kelola.
 
-                        <option
-                            value="inactive"
-                            @selected(
-                                request('status')
-                                === 'inactive'
-                            )
-                        >
-                            Nonaktif
-                        </option>
-
-                    </select>
+                    </p>
 
                 </div>
 
 
-                {{-- BUTTON --}}
-                <div class="flex items-end gap-2">
+                <span
+                    class="inline-flex w-fit
+                           items-center rounded-full
+                           bg-[#FBEAE2]
+                           px-3 py-1.5
+                           text-xs font-bold
+                           text-[#A95E43]">
 
-                    <button
-                        type="submit"
-                        class="h-11 flex-1
-                               rounded-xl
-                               bg-slate-900
-                               px-5 text-sm
-                               font-semibold
-                               text-white transition
-                               hover:bg-slate-800"
-                    >
-                        Terapkan
-                    </button>
+                    {{ number_format($products->total()) }}
+                    produk
 
-
-                    <a
-                        href="{{ route('seller.products.index') }}"
-                        title="Reset"
-                        class="inline-flex size-11
-                               shrink-0 items-center
-                               justify-center rounded-xl
-                               border border-slate-200
-                               text-slate-500
-                               transition
-                               hover:bg-slate-50"
-                    >
-
-                        <svg
-                            class="size-5"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="1.8"
-                        >
-                            <path
-                                d="M3 12a9 9 0 1 0
-                                   3-6.7"
-                            />
-
-                            <path d="M3 4v6h6" />
-                        </svg>
-
-                    </a>
-
-                </div>
+                </span>
 
             </div>
 
-        </form>
-
-    </div>
 
 
-    {{-- TABLE --}}
-    <div
-        class="overflow-hidden
-               rounded-2xl border
-               border-slate-200
-               bg-white shadow-sm"
-    >
+            {{-- TABLE --}}
+            <div class="overflow-x-auto">
 
-        <div class="overflow-x-auto">
+                <table class="w-full min-w-[1000px]">
 
-            <table class="w-full min-w-[1000px]">
-
-                <thead class="bg-slate-50">
-
-                    <tr
-                        class="text-left text-xs
-                               font-semibold uppercase
-                               tracking-wide
-                               text-slate-500"
-                    >
-
-                        <th class="px-5 py-4">
-                            Produk
-                        </th>
-
-                        <th class="px-5 py-4">
-                            Kategori
-                        </th>
-
-                        <th class="px-5 py-4">
-                            Harga
-                        </th>
-
-                        <th class="px-5 py-4">
-                            Stok
-                        </th>
-
-                        <th class="px-5 py-4">
-                            Status
-                        </th>
-
-                        <th class="px-5 py-4">
-                            Dibuat
-                        </th>
-
-                        <th class="px-5 py-4 text-right">
-                            Aksi
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-
-                <tbody class="divide-y divide-slate-100">
-
-                    @forelse ($products as $product)
+                    <thead class="bg-[#F8F3ED]">
 
                         <tr
-                            class="text-sm transition
-                                   hover:bg-slate-50/70"
-                        >
+                            class="text-left text-xs
+                                   font-bold uppercase
+                                   tracking-wide
+                                   text-[#907A6C]">
 
-                            {{-- PRODUCT --}}
-                            <td class="px-5 py-4">
+                            <th class="px-5 py-4">
+                                Produk
+                            </th>
 
-                                <div
-                                    class="flex items-center
-                                           gap-3"
-                                >
+                            <th class="px-5 py-4">
+                                Kategori
+                            </th>
 
-                                    @if ($product->image)
+                            <th class="px-5 py-4">
+                                Harga
+                            </th>
 
-                                        <img
-                                            src="{{ asset(
-                                                'storage/' .
-                                                $product->image
-                                            ) }}"
-                                            alt="{{ $product->name }}"
-                                            class="size-12
-                                                   shrink-0
-                                                   rounded-xl
-                                                   object-cover"
-                                        >
+                            <th class="px-5 py-4">
+                                Stok
+                            </th>
 
+                            <th class="px-5 py-4">
+                                Status
+                            </th>
+
+                            <th class="px-5 py-4">
+                                Dibuat
+                            </th>
+
+                            <th class="px-5 py-4 text-right">
+                                Aksi
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody class="divide-y divide-[#EEE5DE]">
+
+                        @forelse ($products as $product)
+                            <tr class="text-sm transition
+                                       hover:bg-[#FBF7F3]">
+
+
+                                {{-- PRODUCT --}}
+                                <td class="px-5 py-4">
+
+                                    <div class="flex items-center
+                                               gap-3">
+
+                                        @if ($product->image)
+                                            <img src="{{ asset('storage/' . $product->image) }}"
+                                                alt="{{ $product->name }}"
+                                                class="size-14
+                                                       shrink-0
+                                                       rounded-xl
+                                                       border
+                                                       border-[#E7DBD1]
+                                                       object-cover">
+                                        @else
+                                            <div
+                                                class="flex size-14
+                                                       shrink-0
+                                                       items-center
+                                                       justify-center
+                                                       rounded-xl
+                                                       bg-[#FAF7F2]
+                                                       text-[#A28A7A]">
+
+                                                <svg class="size-6" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="1.6">
+
+                                                    <rect x="3" y="3" width="18" height="18" rx="2" />
+
+                                                    <circle cx="8.5" cy="8.5" r="1.5" />
+
+                                                    <path d="m21 15-5-5L5 21" />
+
+                                                </svg>
+
+                                            </div>
+                                        @endif
+
+
+                                        <div class="min-w-0">
+
+                                            <p
+                                                class="max-w-[250px]
+                                                       truncate
+                                                       font-bold
+                                                       text-[#332B26]">
+
+                                                {{ $product->name }}
+
+                                            </p>
+
+                                            <p
+                                                class="mt-1 text-xs
+                                                       text-slate-400">
+
+                                                ID #{{ $product->id }}
+
+                                            </p>
+
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+
+
+                                {{-- CATEGORY --}}
+                                <td class="px-5 py-4">
+
+                                    <span
+                                        class="inline-flex
+                                               rounded-lg
+                                               bg-[#F4EAE2]
+                                               px-3 py-1.5
+                                               text-xs font-semibold
+                                               text-[#6F4E37]">
+
+                                        {{ $product->category?->name ?? '-' }}
+
+                                    </span>
+
+                                </td>
+
+
+
+                                {{-- PRICE --}}
+                                <td class="px-5 py-4">
+
+                                    <span
+                                        class="whitespace-nowrap
+                                               font-bold
+                                               text-[#332B26]">
+
+                                        Rp{{ number_format($product->price, 0, ',', '.') }}
+
+                                    </span>
+
+                                </td>
+
+
+
+                                {{-- STOCK --}}
+                                <td class="px-5 py-4">
+
+                                    @if ($product->stock <= 0)
+                                        <span
+                                            class="inline-flex
+                                                   items-center gap-2
+                                                   rounded-full
+                                                   border
+                                                   border-[#ECD2CF]
+                                                   bg-[#FAEDEC]
+                                                   px-3 py-1.5
+                                                   text-xs font-bold
+                                                   text-[#A65954]">
+
+                                            <span
+                                                class="size-1.5
+                                                       rounded-full
+                                                       bg-[#A65954]">
+                                            </span>
+
+                                            Habis
+
+                                        </span>
+                                    @elseif ($product->stock <= 5)
+                                        <span
+                                            class="inline-flex
+                                                   items-center gap-2
+                                                   rounded-full
+                                                   border
+                                                   border-[#E8D8B9]
+                                                   bg-[#FAF2DF]
+                                                   px-3 py-1.5
+                                                   text-xs font-bold
+                                                   text-[#A87A37]">
+
+                                            <svg class="size-3" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2">
+
+                                                <path d="M12 8v5" />
+                                                <path d="M12 17h.01" />
+
+                                            </svg>
+
+                                            {{ $product->stock }}
+                                            tersisa
+
+                                        </span>
                                     @else
+                                        <span
+                                            class="font-semibold
+                                                   text-[#4D4038]">
 
-                                        <div
-                                            class="flex size-12
-                                                   shrink-0
-                                                   items-center
+                                            {{ $product->stock }}
+
+                                        </span>
+                                    @endif
+
+                                </td>
+
+
+
+                                {{-- STATUS --}}
+                                <td class="px-5 py-4">
+
+                                    @if ($product->status === 'active')
+                                        <span
+                                            class="inline-flex
+                                                   items-center gap-2
+                                                   rounded-full
+                                                   border
+                                                   border-[#D3DFCE]
+                                                   bg-[#EEF3EA]
+                                                   px-3 py-1.5
+                                                   text-xs font-bold
+                                                   text-[#65795E]">
+
+                                            <span
+                                                class="size-1.5
+                                                       rounded-full
+                                                       bg-[#718268]">
+                                            </span>
+
+                                            Aktif
+
+                                        </span>
+                                    @else
+                                        <span
+                                            class="inline-flex
+                                                   items-center gap-2
+                                                   rounded-full
+                                                   border
+                                                   border-[#ECD2CF]
+                                                   bg-[#FAEDEC]
+                                                   px-3 py-1.5
+                                                   text-xs font-bold
+                                                   text-[#A65954]">
+
+                                            <span
+                                                class="size-1.5
+                                                       rounded-full
+                                                       bg-[#A65954]">
+                                            </span>
+
+                                            Nonaktif
+
+                                        </span>
+                                    @endif
+
+                                </td>
+
+
+
+                                {{-- DATE --}}
+                                <td class="px-5 py-4">
+
+                                    <p class="font-medium
+                                               text-[#6F6259]">
+
+                                        {{ $product->created_at->timezone('Asia/Jakarta')->locale('id')->translatedFormat('d M Y') }}
+
+                                    </p>
+
+                                    <p class="mt-1 text-xs
+                                               text-slate-400">
+
+                                        {{ $product->created_at->timezone('Asia/Jakarta')->format('H:i') }}
+                                        WIB
+
+                                    </p>
+
+                                </td>
+
+
+
+                                {{-- ACTION --}}
+                                <td class="px-5 py-4">
+
+                                    <div
+                                        class="flex items-center
+                                               justify-end gap-1">
+
+
+                                        {{-- EDIT --}}
+                                        <a href="{{ route('seller.products.edit', $product) }}"
+                                            title="Edit Produk"
+                                            class="inline-flex
+                                                   size-9 items-center
                                                    justify-center
                                                    rounded-xl
-                                                   bg-slate-100"
-                                        >
+                                                   text-[#A95E43]
+                                                   transition
+                                                   hover:bg-[#FBEAE2]">
 
-                                            <svg
-                                                class="size-6
-                                                       text-slate-300"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                stroke-width="1.5"
-                                            >
-                                                <rect
-                                                    x="3"
-                                                    y="3"
-                                                    width="18"
-                                                    height="18"
-                                                    rx="2"
-                                                />
+                                            <svg class="size-4.5" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="1.8">
 
-                                                <path
-                                                    d="m21 15-5-5L5 21"
-                                                />
+                                                <path d="M12 20h9" />
+
+                                                <path d="M16.5 3.5
+                                                           a2.1 2.1 0 0 1 3 3
+                                                           L8 18l-4 1 1-4Z" />
+
+                                            </svg>
+
+                                        </a>
+
+
+
+                                        {{-- STATUS --}}
+                                        <form
+                                            action="{{ route('seller.products.status', $product) }}"
+                                            method="POST">
+
+                                            @csrf
+                                            @method('PATCH')
+
+
+                                            <input type="hidden" name="status"
+                                                value="{{ $product->status === 'active' ? 'inactive' : 'active' }}">
+
+
+                                            <button type="submit"
+                                                title="{{ $product->status === 'active' ? 'Nonaktifkan Produk' : 'Aktifkan Produk' }}"
+                                                onclick="return confirm(
+                                                    '{{ $product->status === 'active' ? 'Nonaktifkan produk ini?' : 'Aktifkan produk ini?' }}'
+                                                )"
+                                                class="inline-flex
+                                                       size-9 items-center
+                                                       justify-center
+                                                       rounded-xl
+                                                       transition
+                                                       {{ $product->status === 'active' ? 'text-[#A87A37] hover:bg-[#FAF2DF]' : 'text-[#65795E] hover:bg-[#EEF3EA]' }}">
+
+                                                @if ($product->status === 'active')
+                                                    <svg class="size-4.5" viewBox="0 0 24 24" fill="none"
+                                                        stroke="currentColor" stroke-width="1.8">
+
+                                                        <circle cx="12" cy="12" r="9" />
+
+                                                        <path d="m8 8 8 8" />
+
+                                                    </svg>
+                                                @else
+                                                    <svg class="size-4.5" viewBox="0 0 24 24" fill="none"
+                                                        stroke="currentColor" stroke-width="2">
+
+                                                        <path d="m5 12 4 4 10-10" />
+
+                                                    </svg>
+                                                @endif
+
+                                            </button>
+
+                                        </form>
+
+
+
+                                        {{-- DELETE --}}
+                                        <form
+                                            action="{{ route('seller.products.destroy', $product) }}"
+                                            method="POST">
+
+                                            @csrf
+                                            @method('DELETE')
+
+
+                                            <button type="submit"
+                                                onclick="return confirm(
+                                                    'Yakin ingin menghapus produk {{ $product->name }}?'
+                                                )"
+                                                title="Hapus Produk"
+                                                class="inline-flex
+                                                       size-9 items-center
+                                                       justify-center
+                                                       rounded-xl
+                                                       text-[#A65954]
+                                                       transition
+                                                       hover:bg-[#FAEDEC]">
+
+                                                <svg class="size-4.5" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="1.8">
+
+                                                    <path d="M3 6h18" />
+                                                    <path d="M8 6V4h8v2" />
+                                                    <path d="M19 6 18 21H6L5 6" />
+                                                    <path d="M10 11v5" />
+                                                    <path d="M14 11v5" />
+
+                                                </svg>
+
+                                            </button>
+
+                                        </form>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+
+                        @empty
+
+                            <tr>
+
+                                <td colspan="7" class="px-6 py-16">
+
+                                    <div class="text-center">
+
+                                        <div
+                                            class="mx-auto flex
+                                                   size-16
+                                                   items-center
+                                                   justify-center
+                                                   rounded-2xl
+                                                   bg-[#FBEAE2]
+                                                   text-[#A95E43]">
+
+                                            <svg class="size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="1.7">
+
+                                                <path d="M6 7h12l1 14H5L6 7Z" />
+
+                                                <path d="M9 7a3 3 0 0 1 6 0" />
+
                                             </svg>
 
                                         </div>
 
-                                    @endif
 
+                                        <h3
+                                            class="mt-4
+                                                   font-bold
+                                                   text-[#4D4038]">
 
-                                    <div class="min-w-0">
+                                            Belum ada produk
+
+                                        </h3>
+
 
                                         <p
-                                            class="max-w-[250px]
-                                                   truncate
-                                                   font-semibold
-                                                   text-slate-800"
-                                        >
-                                            {{ $product->name }}
+                                            class="mt-2 text-sm
+                                                   text-slate-500">
+
+                                            Tambahkan produk pertama
+                                            untuk mulai berjualan di KampusMart.
+
                                         </p>
 
-                                        <p
-                                            class="mt-1
-                                                   text-xs
-                                                   text-slate-400"
-                                        >
-                                            ID #{{ $product->id }}
-                                        </p>
+
+                                        <a href="{{ route('seller.products.create') }}"
+                                            class="mt-5
+                                                   inline-flex h-10
+                                                   items-center
+                                                   justify-center
+                                                   gap-2
+                                                   rounded-xl
+                                                   bg-[#C8795A]
+                                                   px-5
+                                                   text-sm font-bold
+                                                   text-white
+                                                   transition
+                                                   hover:bg-[#B66F52]">
+
+                                            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2">
+
+                                                <path d="M12 5v14" />
+                                                <path d="M5 12h14" />
+
+                                            </svg>
+
+                                            Tambah Produk
+
+                                        </a>
 
                                     </div>
 
-                                </div>
+                                </td>
 
-                            </td>
+                            </tr>
+                        @endforelse
 
+                    </tbody>
 
-                            {{-- CATEGORY --}}
-                            <td class="px-5 py-4 text-slate-600">
+                </table>
 
-                                {{ $product->category?->name
-                                    ?? '-' }}
-
-                            </td>
-
-
-                            {{-- PRICE --}}
-                            <td class="px-5 py-4">
-
-                                <span
-                                    class="font-semibold
-                                           text-slate-900"
-                                >
-                                    Rp {{ number_format(
-                                        $product->price,
-                                        0,
-                                        ',',
-                                        '.'
-                                    ) }}
-                                </span>
-
-                            </td>
-
-
-                            {{-- STOCK --}}
-                            <td class="px-5 py-4">
-
-                                @if ($product->stock === 0)
-
-                                    <span
-                                        class="inline-flex
-                                               rounded-lg
-                                               bg-red-50
-                                               px-2.5 py-1
-                                               text-xs
-                                               font-semibold
-                                               text-red-600"
-                                    >
-                                        Habis
-                                    </span>
-
-                                @elseif ($product->stock <= 5)
-
-                                    <span
-                                        class="inline-flex
-                                               rounded-lg
-                                               bg-amber-50
-                                               px-2.5 py-1
-                                               text-xs
-                                               font-semibold
-                                               text-amber-700"
-                                    >
-                                        {{ $product->stock }}
-                                    </span>
-
-                                @else
-
-                                    <span
-                                        class="font-medium
-                                               text-slate-700"
-                                    >
-                                        {{ $product->stock }}
-                                    </span>
-
-                                @endif
-
-                            </td>
-
-
-                            {{-- STATUS --}}
-                            <td class="px-5 py-4">
-
-                                @if ($product->status === 'active')
-
-                                    <span
-                                        class="inline-flex
-                                               rounded-full
-                                               bg-green-50
-                                               px-3 py-1.5
-                                               text-xs
-                                               font-semibold
-                                               text-green-700"
-                                    >
-                                        Aktif
-                                    </span>
-
-                                @else
-
-                                    <span
-                                        class="inline-flex
-                                               rounded-full
-                                               bg-slate-100
-                                               px-3 py-1.5
-                                               text-xs
-                                               font-semibold
-                                               text-slate-600"
-                                    >
-                                        Nonaktif
-                                    </span>
-
-                                @endif
-
-                            </td>
-
-
-                            {{-- DATE --}}
-                            <td class="px-5 py-4 text-slate-500">
-
-                                {{ $product->created_at
-                                    ->format('d M Y') }}
-
-                            </td>
-
-
-                            {{-- ACTION --}}
-                            <td class="px-5 py-4">
-
-                                <div
-                                    class="flex
-                                           items-center
-                                           justify-end
-                                           gap-1"
-                                >
-
-                                    {{-- EDIT --}}
-                                    <a
-                                        href="{{ route(
-                                            'seller.products.edit',
-                                            $product
-                                        ) }}"
-                                        title="Edit Produk"
-                                        class="inline-flex
-                                               size-9
-                                               items-center
-                                               justify-center
-                                               rounded-lg
-                                               text-slate-500
-                                               transition
-                                               hover:bg-violet-50
-                                               hover:text-violet-600"
-                                    >
-
-                                        <svg
-                                            class="size-5"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-width="1.8"
-                                        >
-                                            <path
-                                                d="M12 20h9"
-                                            />
-
-                                            <path
-                                                d="M16.5 3.5
-                                                   a2.1 2.1 0 0 1
-                                                   3 3L8 18
-                                                   l-4 1 1-4Z"
-                                            />
-                                        </svg>
-
-                                    </a>
-
-
-                                    {{-- STATUS --}}
-                                    <form
-                                        action="{{ route(
-                                            'seller.products.status',
-                                            $product
-                                        ) }}"
-                                        method="POST"
-                                    >
-
-                                        @csrf
-                                        @method('PATCH')
-
-
-                                        <input
-                                            type="hidden"
-                                            name="status"
-                                            value="{{
-                                                $product->status
-                                                === 'active'
-                                                    ? 'inactive'
-                                                    : 'active'
-                                            }}"
-                                        >
-
-
-                                        <button
-                                            type="submit"
-                                            title="{{
-                                                $product->status
-                                                === 'active'
-                                                    ? 'Nonaktifkan'
-                                                    : 'Aktifkan'
-                                            }}"
-                                            class="inline-flex
-                                                   size-9
-                                                   items-center
-                                                   justify-center
-                                                   rounded-lg
-                                                   text-slate-500
-                                                   transition
-                                                   hover:bg-amber-50
-                                                   hover:text-amber-600"
-                                        >
-
-                                            @if ($product->status === 'active')
-
-                                                <svg
-                                                    class="size-5"
-                                                    viewBox="0 0 24 24"
-                                                    fill="none"
-                                                    stroke="currentColor"
-                                                    stroke-width="1.8"
-                                                >
-                                                    <circle
-                                                        cx="12"
-                                                        cy="12"
-                                                        r="9"
-                                                    />
-
-                                                    <path
-                                                        d="m8 8 8 8"
-                                                    />
-                                                </svg>
-
-                                            @else
-
-                                                <svg
-                                                    class="size-5"
-                                                    viewBox="0 0 24 24"
-                                                    fill="none"
-                                                    stroke="currentColor"
-                                                    stroke-width="1.8"
-                                                >
-                                                    <path
-                                                        d="m5 12 4 4
-                                                           10-10"
-                                                    />
-                                                </svg>
-
-                                            @endif
-
-                                        </button>
-
-                                    </form>
-
-
-                                    {{-- DELETE --}}
-                                    <form
-                                        action="{{ route(
-                                            'seller.products.destroy',
-                                            $product
-                                        ) }}"
-                                        method="POST"
-                                    >
-
-                                        @csrf
-                                        @method('DELETE')
-
-
-                                        <button
-                                            type="submit"
-                                            onclick="return confirm(
-                                                'Hapus produk ini?'
-                                            )"
-                                            title="Hapus Produk"
-                                            class="inline-flex
-                                                   size-9
-                                                   items-center
-                                                   justify-center
-                                                   rounded-lg
-                                                   text-slate-500
-                                                   transition
-                                                   hover:bg-red-50
-                                                   hover:text-red-600"
-                                        >
-
-                                            <svg
-                                                class="size-5"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                stroke-width="1.8"
-                                            >
-                                                <path
-                                                    d="M3 6h18"
-                                                />
-
-                                                <path
-                                                    d="M8 6V4h8v2"
-                                                />
-
-                                                <path
-                                                    d="M19 6
-                                                       18 21H6
-                                                       L5 6"
-                                                />
-
-                                                <path
-                                                    d="M10 11v5"
-                                                />
-
-                                                <path
-                                                    d="M14 11v5"
-                                                />
-                                            </svg>
-
-                                        </button>
-
-                                    </form>
-
-                                </div>
-
-                            </td>
-
-                        </tr>
-
-
-                    @empty
-
-                        <tr>
-
-                            <td
-                                colspan="7"
-                                class="px-6 py-16
-                                       text-center"
-                            >
-
-                                <div
-                                    class="mx-auto
-                                           flex size-16
-                                           items-center
-                                           justify-center
-                                           rounded-2xl
-                                           bg-slate-100"
-                                >
-
-                                    <svg
-                                        class="size-8
-                                               text-slate-400"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        stroke-width="1.5"
-                                    >
-                                        <path
-                                            d="M6 7h12l1 14H5L6 7Z"
-                                        />
-
-                                        <path
-                                            d="M9 7
-                                               a3 3 0 0 1
-                                               6 0"
-                                        />
-                                    </svg>
-
-                                </div>
-
-
-                                <h3
-                                    class="mt-4
-                                           font-semibold
-                                           text-slate-800"
-                                >
-                                    Belum ada produk
-                                </h3>
-
-
-                                <p
-                                    class="mt-1
-                                           text-sm
-                                           text-slate-500"
-                                >
-                                    Tambahkan produk pertama untuk mulai berjualan.
-                                </p>
-
-
-                                <a
-                                    href="{{ route(
-                                        'seller.products.create'
-                                    ) }}"
-                                    class="mt-5
-                                           inline-flex
-                                           h-10
-                                           items-center
-                                           justify-center
-                                           rounded-xl
-                                           bg-violet-600
-                                           px-4
-                                           text-sm
-                                           font-semibold
-                                           text-white
-                                           hover:bg-violet-700"
-                                >
-                                    Tambah Produk
-                                </a>
-
-                            </td>
-
-                        </tr>
-
-                    @endforelse
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-
-        {{-- PAGINATION --}}
-        @if ($products->hasPages())
-
-            <div
-                class="border-t
-                       border-slate-200
-                       px-5 py-4"
-            >
-                {{ $products->links() }}
             </div>
 
-        @endif
+
+
+            {{-- ================================================= --}}
+            {{-- PAGINATION --}}
+            {{-- ================================================= --}}
+
+            @if ($products->hasPages())
+                <div
+                    class="border-t
+                           border-[#E7DBD1]
+                           bg-[#FAF7F2]
+                           px-5 py-4">
+
+                    {{ $products->links() }}
+
+                </div>
+            @endif
+
+        </section>
 
     </div>
-
-</div>
 
 @endsection

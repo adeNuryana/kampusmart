@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>
-        @yield('title', 'MarketKu')
+        @yield('title') - {{ $siteSetting?->site_name ?? 'KampusMart' }}
     </title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -80,27 +80,28 @@
                            gap-2">
 
 
-                    <div
-                        class="flex
-                               size-10
-                               items-center
-                               justify-center
-                               rounded-xl
-                               bg-gradient-to-br
-                               from-[#493124]
-                               via-[#6F4E37]
-                               to-[#9A6948]
-                               text-lg
-                               font-black
-                               text-white
-                               shadow-lg
-                               shadow-[#6F4E37]/20
-                               sm:size-11
-                               sm:text-xl">
+                    @if ($siteSetting?->logo)
+                        <img src="{{ asset('storage/' . $siteSetting->logo) }}" alt="{{ $siteSetting->site_name }}"
+                            class="size-10
+               shrink-0
+               rounded-xl
+               object-contain">
+                    @else
+                        <div
+                            class="flex size-10
+               shrink-0
+               items-center justify-center
+               rounded-2xl
+               bg-gradient-to-br
+               from-[#C8795A]
+               to-[#6F4E37]
+               font-black
+               text-white">
 
-                        M
+                            {{ strtoupper(substr($siteSetting?->site_name ?? 'KampusMart', 0, 1)) }}
 
-                    </div>
+                        </div>
+                    @endif
 
 
                     <span
@@ -115,7 +116,7 @@
                                text-transparent
                                sm:block">
 
-                        MarketKu
+                        {{ $siteSetting?->site_name ?? 'KampusMart' }}
 
                     </span>
 
@@ -880,32 +881,38 @@
                            gap-2">
 
 
-                    <div
-                        class="flex
-                               size-10
-                               items-center
-                               justify-center
-                               rounded-xl
-                               bg-gradient-to-br
-                               from-[#493124]
-                               via-[#6F4E37]
-                               to-[#8B6245]
-                               font-black
-                               text-white
-                               shadow-md
-                               shadow-[#6F4E37]/15">
+                    @if ($siteSetting?->logo)
+                        <img src="{{ asset('storage/' . $siteSetting->logo) }}"
+                            alt="{{ $siteSetting->site_name }}"
+                            class="size-10
+               shrink-0
+               rounded-xl
+               object-contain">
+                    @else
+                        <div
+                            class="flex size-10
+               shrink-0
+               items-center justify-center
+               rounded-2xl
+               bg-gradient-to-br
+               from-[#C8795A]
+               to-[#6F4E37]
+               font-black
+               text-white">
 
-                        M
+                            {{ strtoupper(substr($siteSetting?->site_name ?? 'KampusMart', 0, 1)) }}
 
-                    </div>
+                        </div>
+                    @endif
 
 
                     <h3
                         class="text-xl
                                font-black
                                text-[#5B3B2B]">
-
-                        MarketKu
+                        <p>
+                            {{ $siteSetting?->site_name ?? 'KampusMart' }}
+                        </p>
 
                     </h3>
 

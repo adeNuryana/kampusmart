@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>
-        @yield('title', 'Admin') - KampusMart
+        @yield('title', 'Admin')  - {{ $siteSetting?->site_name ?? 'KampusMart' }}
     </title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -112,15 +112,29 @@
                                    text-white
                                    shadow-sm">
 
-                            <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="1.8">
+                            @if ($siteSetting?->logo)
+                                <img src="{{ asset('storage/' . $siteSetting->logo) }}"
+                                    alt="{{ $siteSetting->site_name }}"
+                                    class="size-10
+               shrink-0
+               rounded-xl
+               object-contain">
+                            @else
+                                <div
+                                    class="flex size-10
+               shrink-0
+               items-center justify-center
+               rounded-2xl
+               bg-gradient-to-br
+               from-[#C8795A]
+               to-[#6F4E37]
+               font-black
+               text-white">
 
-                                <path d="M4 10v10h16V10" />
-                                <path d="M3 10l2-6h14l2 6" />
-                                <path d="M8 20v-6h8v6" />
+                                    {{ strtoupper(substr($siteSetting?->site_name ?? 'KampusMart', 0, 1)) }}
 
-                            </svg>
-
+                                </div>
+                            @endif
                         </div>
 
 
@@ -133,7 +147,7 @@
                                        tracking-tight
                                        text-[#493124]">
 
-                                KampusMart
+                                {{ $siteSetting?->site_name ?? 'KampusMart' }}
 
                             </h1>
 
@@ -439,21 +453,20 @@
                 {{-- LAPORAN --}}
                 {{-- ================================================= --}}
 
-                <a href="#"
+                <a href="{{ route('admin.reports.index') }}"
                     class="group
-                           flex
-                           items-center
-                           gap-3
-                           rounded-xl
-                           px-3.5
-                           py-3
-                           text-sm
-                           font-semibold
-                           text-[#6F6259]
-                           transition
-                           hover:bg-[#F3EAE3]
-                           hover:text-[#493124]">
-
+           flex
+           items-center
+           gap-3
+           rounded-xl
+           px-3.5
+           py-3
+           text-sm
+           font-semibold
+           transition
+           {{ request()->routeIs('admin.reports.*')
+               ? 'bg-[#FAF2DF] text-[#A87A37]'
+               : 'text-[#6F6259] hover:bg-[#F3EAE3] hover:text-[#493124]' }}">
 
                     <svg class="size-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         stroke-width="1.8">
@@ -500,7 +513,7 @@
 
                 {{-- SETTINGS --}}
 
-                <a href="{{ route('admin.settings.index') }}"
+                <a href="{{ route('admin.settings.website') }}"
                     class="flex
                            items-center
                            gap-3
@@ -1012,7 +1025,7 @@
 
                                     </div>
 
-                                    Pengaturan
+                                    Profile
 
                                 </a>
 

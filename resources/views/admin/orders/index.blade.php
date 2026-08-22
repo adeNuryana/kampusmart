@@ -6,157 +6,457 @@
 
     <div class="mx-auto max-w-[1400px]">
 
+        {{-- ===================================================== --}}
         {{-- HEADER --}}
-        <div class="mb-7">
+        {{-- ===================================================== --}}
 
-            <h1 class="text-2xl font-bold
-                   tracking-tight text-slate-900
-                   lg:text-3xl">
-                Kelola Pesanan
-            </h1>
+        <section class="mb-6">
 
-            <p class="mt-2 text-sm text-slate-500">
-                Pantau seluruh transaksi antara pembeli dan penjual di KampusMart.
-            </p>
+            <div
+                class="inline-flex items-center gap-2
+                       rounded-full bg-[#FAF2DF]
+                       px-3 py-1.5
+                       text-xs font-bold
+                       text-[#A87A37]">
 
-        </div>
+                <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
 
+                    <path d="M6 3h12v18H6z" />
+                    <path d="M9 8h6" />
+                    <path d="M9 12h6" />
+                    <path d="M9 16h4" />
 
-        {{-- STATISTIC --}}
-        <div class="mb-6 grid gap-4
-               sm:grid-cols-2
-               xl:grid-cols-4">
+                </svg>
 
-            {{-- TOTAL --}}
-            <div class="rounded-2xl border
-                   border-slate-200
-                   bg-white p-5 shadow-sm">
-
-                <p class="text-sm font-medium text-slate-500">
-                    Total Pesanan
-                </p>
-
-                <p class="mt-2 text-3xl font-bold text-slate-900">
-                    {{ number_format($totalOrders) }}
-                </p>
+                Monitoring Transaksi
 
             </div>
+
+
+            <h1
+                class="mt-3 text-2xl
+                       font-black tracking-tight
+                       text-[#332B26]
+                       lg:text-3xl">
+
+                Kelola Pesanan
+
+            </h1>
+
+
+            <p class="mt-2 max-w-2xl
+                       text-sm leading-6
+                       text-slate-500">
+
+                Pantau seluruh transaksi antara pembeli
+                dan penjual di KampusMart.
+
+            </p>
+
+        </section>
+
+
+
+        {{-- ===================================================== --}}
+        {{-- STATISTICS --}}
+        {{-- ===================================================== --}}
+
+        <div class="mb-6 grid gap-4
+                   sm:grid-cols-2
+                   xl:grid-cols-4">
+
+
+            {{-- TOTAL --}}
+
+            <section
+                class="relative overflow-hidden
+                       rounded-3xl border
+                       border-[#DFD2C7]
+                       bg-white p-5
+                       shadow-sm">
+
+                <div class="absolute inset-x-0 top-0
+                           h-1 bg-[#6F4E37]">
+                </div>
+
+
+                <div class="flex items-start
+                           justify-between gap-4">
+
+                    <div>
+
+                        <p
+                            class="text-xs font-bold
+                                   uppercase tracking-wide
+                                   text-[#998274]">
+
+                            Total Pesanan
+
+                        </p>
+
+                        <p
+                            class="mt-5 text-3xl
+                                   font-black
+                                   text-[#332B26]">
+
+                            {{ number_format($totalOrders) }}
+
+                        </p>
+
+                        <p class="mt-2 text-xs
+                                   text-slate-400">
+
+                            Seluruh transaksi
+
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        class="flex size-11
+                               items-center justify-center
+                               rounded-xl
+                               bg-[#6F4E37]
+                               text-white">
+
+                        <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+
+                            <path d="M6 3h12v18H6z" />
+                            <path d="M9 8h6" />
+                            <path d="M9 12h6" />
+                            <path d="M9 16h4" />
+
+                        </svg>
+
+                    </div>
+
+                </div>
+
+            </section>
+
 
 
             {{-- PENDING --}}
-            <div class="rounded-2xl border
-                   border-slate-200
-                   bg-white p-5 shadow-sm">
 
-                <p class="text-sm font-medium text-slate-500">
-                    Menunggu
-                </p>
+            <section
+                class="relative overflow-hidden
+                       rounded-3xl border
+                       border-[#E8D8B9]
+                       bg-white p-5
+                       shadow-sm">
 
-                <p class="mt-2 text-3xl font-bold text-amber-600">
-                    {{ number_format($pendingOrders) }}
-                </p>
-
-            </div>
+                <div class="absolute inset-x-0 top-0
+                           h-1 bg-[#C89B55]">
+                </div>
 
 
-            {{-- PROCESS --}}
-            <div class="rounded-2xl border
-                   border-slate-200
-                   bg-white p-5 shadow-sm">
+                <div class="flex items-start
+                           justify-between gap-4">
 
-                <p class="text-sm font-medium text-slate-500">
-                    Sedang Diproses
-                </p>
+                    <div>
 
-                <p class="mt-2 text-3xl font-bold text-violet-600">
-                    {{ number_format($processingOrders) }}
-                </p>
+                        <p
+                            class="text-xs font-bold
+                                   uppercase tracking-wide
+                                   text-[#A87A37]">
 
-            </div>
+                            Menunggu
+
+                        </p>
+
+                        <p
+                            class="mt-5 text-3xl
+                                   font-black
+                                   text-[#A87A37]">
+
+                            {{ number_format($pendingOrders) }}
+
+                        </p>
+
+                        <p class="mt-2 text-xs
+                                   text-slate-400">
+
+                            Belum dikonfirmasi
+
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        class="flex size-11
+                               items-center justify-center
+                               rounded-xl
+                               bg-[#C89B55]
+                               text-white">
+
+                        <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+
+                            <circle cx="12" cy="12" r="9" />
+                            <path d="M12 7v5l3 2" />
+
+                        </svg>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            {{-- PROCESSING --}}
+
+            <section
+                class="relative overflow-hidden
+                       rounded-3xl border
+                       border-[#EBCFC2]
+                       bg-white p-5
+                       shadow-sm">
+
+                <div class="absolute inset-x-0 top-0
+                           h-1 bg-[#C8795A]">
+                </div>
+
+
+                <div class="flex items-start
+                           justify-between gap-4">
+
+                    <div>
+
+                        <p
+                            class="text-xs font-bold
+                                   uppercase tracking-wide
+                                   text-[#A95E43]">
+
+                            Sedang Diproses
+
+                        </p>
+
+                        <p
+                            class="mt-5 text-3xl
+                                   font-black
+                                   text-[#A95E43]">
+
+                            {{ number_format($processingOrders) }}
+
+                        </p>
+
+                        <p class="mt-2 text-xs
+                                   text-slate-400">
+
+                            Ditangani seller
+
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        class="flex size-11
+                               items-center justify-center
+                               rounded-xl
+                               bg-[#C8795A]
+                               text-white">
+
+                        <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+
+                            <path d="M4 12a8 8 0 0 1 13.6-5.7" />
+                            <path d="M18 3v4h-4" />
+                            <path d="M20 12a8 8 0 0 1-13.6 5.7" />
+                            <path d="M6 21v-4h4" />
+
+                        </svg>
+
+                    </div>
+
+                </div>
+
+            </section>
+
 
 
             {{-- COMPLETED --}}
-            <div class="rounded-2xl border
-                   border-slate-200
-                   bg-white p-5 shadow-sm">
 
-                <p class="text-sm font-medium text-slate-500">
-                    Selesai
-                </p>
+            <section
+                class="relative overflow-hidden
+                       rounded-3xl border
+                       border-[#D3DFCE]
+                       bg-white p-5
+                       shadow-sm">
 
-                <p class="mt-2 text-3xl font-bold text-green-600">
-                    {{ number_format($completedOrders) }}
-                </p>
+                <div class="absolute inset-x-0 top-0
+                           h-1 bg-[#718268]">
+                </div>
 
-            </div>
+
+                <div class="flex items-start
+                           justify-between gap-4">
+
+                    <div>
+
+                        <p
+                            class="text-xs font-bold
+                                   uppercase tracking-wide
+                                   text-[#65795E]">
+
+                            Selesai
+
+                        </p>
+
+                        <p
+                            class="mt-5 text-3xl
+                                   font-black
+                                   text-[#65795E]">
+
+                            {{ number_format($completedOrders) }}
+
+                        </p>
+
+                        <p class="mt-2 text-xs
+                                   text-slate-400">
+
+                            Transaksi selesai
+
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        class="flex size-11
+                               items-center justify-center
+                               rounded-xl
+                               bg-[#718268]
+                               text-white">
+
+                        <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+
+                            <path d="m5 12 4 4L19 6" />
+
+                        </svg>
+
+                    </div>
+
+                </div>
+
+            </section>
 
         </div>
 
 
-        {{-- CARD --}}
-        <div class="overflow-hidden rounded-2xl
-               border border-slate-200
-               bg-white shadow-sm">
 
+        {{-- ===================================================== --}}
+        {{-- ORDER TABLE --}}
+        {{-- ===================================================== --}}
+
+        <section
+            class="overflow-hidden
+                   rounded-3xl
+                   border border-[#DFD2C7]
+                   bg-white shadow-sm">
+
+
+            {{-- ================================================= --}}
             {{-- FILTER --}}
-            <div class="border-b border-slate-200
-                   p-5">
+            {{-- ================================================= --}}
 
-                {{-- STATUS --}}
+            <div class="border-b border-[#E7DBD1]
+                       bg-[#FAF7F2]
+                       p-5">
+
+
+                {{-- STATUS FILTER --}}
+
                 <div class="flex flex-wrap gap-2">
 
                     <a href="{{ route('admin.orders.index') }}"
                         class="rounded-xl px-4 py-2
-                           text-sm font-medium
-                           {{ !request('status') ? 'bg-violet-100 text-violet-700' : 'text-slate-600 hover:bg-slate-50' }}">
+                               text-sm font-semibold
+                               transition
+                               {{ !request('status') ? 'bg-[#6F4E37] text-white shadow-sm' : 'bg-white text-[#7C695C] hover:bg-[#F1E6DE]' }}">
+
                         Semua
+
                     </a>
 
 
                     <a href="{{ route('admin.orders.index', ['status' => 'pending']) }}"
                         class="rounded-xl px-4 py-2
-                           text-sm font-medium
-                           {{ request('status') === 'pending' ? 'bg-amber-100 text-amber-700' : 'text-slate-600 hover:bg-slate-50' }}">
+                               text-sm font-semibold
+                               transition
+                               {{ request('status') === 'pending'
+                                   ? 'bg-[#C89B55] text-white shadow-sm'
+                                   : 'bg-white text-[#7C695C] hover:bg-[#FAF2DF] hover:text-[#A87A37]' }}">
+
                         Menunggu
+
                     </a>
 
 
                     <a href="{{ route('admin.orders.index', ['status' => 'confirmed']) }}"
                         class="rounded-xl px-4 py-2
-                           text-sm font-medium
-                           {{ request('status') === 'confirmed' ? 'bg-blue-100 text-blue-700' : 'text-slate-600 hover:bg-slate-50' }}">
+                               text-sm font-semibold
+                               transition
+                               {{ request('status') === 'confirmed'
+                                   ? 'bg-[#8B6245] text-white shadow-sm'
+                                   : 'bg-white text-[#7C695C] hover:bg-[#F1E6DE] hover:text-[#6F4E37]' }}">
+
                         Dikonfirmasi
+
                     </a>
 
 
                     <a href="{{ route('admin.orders.index', ['status' => 'processing']) }}"
                         class="rounded-xl px-4 py-2
-                           text-sm font-medium
-                           {{ request('status') === 'processing' ? 'bg-violet-100 text-violet-700' : 'text-slate-600 hover:bg-slate-50' }}">
+                               text-sm font-semibold
+                               transition
+                               {{ request('status') === 'processing'
+                                   ? 'bg-[#C8795A] text-white shadow-sm'
+                                   : 'bg-white text-[#7C695C] hover:bg-[#FBEAE2] hover:text-[#A95E43]' }}">
+
                         Diproses
+
                     </a>
 
 
                     <a href="{{ route('admin.orders.index', ['status' => 'completed']) }}"
                         class="rounded-xl px-4 py-2
-                           text-sm font-medium
-                           {{ request('status') === 'completed' ? 'bg-green-100 text-green-700' : 'text-slate-600 hover:bg-slate-50' }}">
+                               text-sm font-semibold
+                               transition
+                               {{ request('status') === 'completed'
+                                   ? 'bg-[#718268] text-white shadow-sm'
+                                   : 'bg-white text-[#7C695C] hover:bg-[#EEF3EA] hover:text-[#65795E]' }}">
+
                         Selesai
+
                     </a>
 
 
                     <a href="{{ route('admin.orders.index', ['status' => 'cancelled']) }}"
                         class="rounded-xl px-4 py-2
-                           text-sm font-medium
-                           {{ request('status') === 'cancelled' ? 'bg-red-100 text-red-700' : 'text-slate-600 hover:bg-slate-50' }}">
+                               text-sm font-semibold
+                               transition
+                               {{ request('status') === 'cancelled'
+                                   ? 'bg-[#A65954] text-white shadow-sm'
+                                   : 'bg-white text-[#7C695C] hover:bg-[#FAEDEC] hover:text-[#A65954]' }}">
+
                         Dibatalkan
+
                     </a>
 
                 </div>
 
 
+
                 {{-- SEARCH --}}
-                <form action="{{ route('admin.orders.index') }}" method="GET" class="mt-4 flex max-w-xl gap-3">
+
+                <form action="{{ route('admin.orders.index') }}" method="GET"
+                    class="mt-4
+                           flex max-w-2xl
+                           flex-col gap-2
+                           sm:flex-row">
 
                     @if (request('status'))
                         <input type="hidden" name="status" value="{{ request('status') }}">
@@ -166,35 +466,50 @@
                     <div class="relative flex-1">
 
                         <svg class="absolute left-4 top-1/2
-                               size-5 -translate-y-1/2
-                               text-slate-400"
+                                   size-4 -translate-y-1/2
+                                   text-[#A28A7A]"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+
                             <circle cx="11" cy="11" r="7" />
                             <path d="m20 20-3.5-3.5" />
+
                         </svg>
 
 
                         <input type="text" name="search" value="{{ request('search') }}"
                             placeholder="Cari nomor pesanan, pembeli, atau seller..."
                             class="h-11 w-full
-                               rounded-xl border
-                               border-slate-200
-                               pl-11 pr-4 text-sm
-                               outline-none
-                               focus:border-violet-400
-                               focus:ring-4
-                               focus:ring-violet-100">
+                                   rounded-xl border
+                                   border-[#DFD2C7]
+                                   bg-white pl-11 pr-4
+                                   text-sm text-[#4D4038]
+                                   outline-none
+                                   placeholder:text-[#B3A195]
+                                   focus:border-[#A97957]
+                                   focus:ring-4
+                                   focus:ring-[#F1E6DE]">
 
                     </div>
 
 
                     <button type="submit"
-                        class="h-11 rounded-xl
-                           bg-slate-900 px-5
-                           text-sm font-semibold
-                           text-white
-                           hover:bg-slate-800">
+                        class="inline-flex h-11
+                               items-center justify-center
+                               gap-2 rounded-xl
+                               bg-[#6F4E37] px-5
+                               text-sm font-bold
+                               text-white transition
+                               hover:bg-[#5B3B2B]">
+
+                        <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+
+                            <circle cx="11" cy="11" r="7" />
+                            <path d="m20 20-3.5-3.5" />
+
+                        </svg>
+
                         Cari
+
                     </button>
 
                 </form>
@@ -202,155 +517,222 @@
             </div>
 
 
+
+            {{-- ================================================= --}}
             {{-- TABLE --}}
+            {{-- ================================================= --}}
+
             <div class="overflow-x-auto">
 
                 <table class="w-full min-w-[1150px]">
 
-                    <thead class="bg-slate-50">
+                    <thead class="bg-[#F8F3ED]">
 
                         <tr
                             class="text-left text-xs
-                               font-semibold uppercase
-                               tracking-wide text-slate-500">
+                                   font-bold uppercase
+                                   tracking-wide
+                                   text-[#907A6C]">
 
-                            <th class="px-5 py-4">
-                                Pesanan
-                            </th>
-
-                            <th class="px-5 py-4">
-                                Pembeli
-                            </th>
-
-                            <th class="px-5 py-4">
-                                Penjual
-                            </th>
-
-                            <th class="px-5 py-4">
-                                Barang
-                            </th>
-
-                            <th class="px-5 py-4">
-                                Total
-                            </th>
-
-                            <th class="px-5 py-4">
-                                Status
-                            </th>
-
-                            <th class="px-5 py-4">
-                                Tanggal
-                            </th>
-
-                            <th class="px-5 py-4 text-right">
-                                Aksi
-                            </th>
+                            <th class="px-5 py-4">Pesanan</th>
+                            <th class="px-5 py-4">Pembeli</th>
+                            <th class="px-5 py-4">Penjual</th>
+                            <th class="px-5 py-4">Barang</th>
+                            <th class="px-5 py-4">Total</th>
+                            <th class="px-5 py-4">Status</th>
+                            <th class="px-5 py-4">Tanggal</th>
+                            <th class="px-5 py-4 text-right">Aksi</th>
 
                         </tr>
 
                     </thead>
 
 
-                    <tbody class="divide-y divide-slate-100">
+                    <tbody class="divide-y divide-[#EEE5DE]">
 
                         @forelse ($orders as $order)
+                            @php
+                                $statusClass = match ($order->status) {
+                                    'pending' => 'border-[#E8D8B9] bg-[#FAF2DF] text-[#A87A37]',
+
+                                    'confirmed' => 'border-[#DFD2C7] bg-[#F1E6DE] text-[#6F4E37]',
+
+                                    'processing' => 'border-[#EBCFC2] bg-[#FBEAE2] text-[#A95E43]',
+
+                                    'completed', 'sold' => 'border-[#D3DFCE] bg-[#EEF3EA] text-[#65795E]',
+
+                                    'cancelled' => 'border-[#ECD2CF] bg-[#FAEDEC] text-[#A65954]',
+
+                                    default => 'border-slate-200 bg-slate-100 text-slate-600',
+                                };
+
+                                $statusDot = match ($order->status) {
+                                    'pending' => 'bg-[#C89B55]',
+                                    'confirmed' => 'bg-[#8B6245]',
+                                    'processing' => 'bg-[#C8795A]',
+                                    'completed', 'sold' => 'bg-[#718268]',
+                                    'cancelled' => 'bg-[#A65954]',
+                                    default => 'bg-slate-400',
+                                };
+
+                                $statusLabel = match ($order->status) {
+                                    'pending' => 'Menunggu',
+                                    'confirmed' => 'Dikonfirmasi',
+                                    'processing' => 'Diproses',
+                                    'completed' => 'Selesai',
+                                    'sold' => 'Sudah Terjual',
+                                    'cancelled' => 'Dibatalkan',
+                                    default => ucfirst($order->status),
+                                };
+                            @endphp
+
+
                             <tr class="text-sm transition
-                                   hover:bg-slate-50/70">
+                                       hover:bg-[#FBF7F3]">
+
 
                                 {{-- ORDER --}}
+
                                 <td class="px-5 py-4">
 
-                                    <p class="font-semibold text-slate-900">
+                                    <p class="font-bold
+                                               text-[#332B26]">
+
                                         {{ $order->order_number }}
+
                                     </p>
 
-                                    <p class="mt-1 text-xs text-slate-400">
+                                    <p class="mt-1 text-xs
+                                               text-slate-400">
+
                                         ID #{{ $order->id }}
+
                                     </p>
 
                                 </td>
+
 
 
                                 {{-- BUYER --}}
+
                                 <td class="px-5 py-4">
 
-                                    <p class="font-medium text-slate-800">
+                                    <p class="font-semibold
+                                               text-[#4D4038]">
+
                                         {{ $order->buyer_name }}
+
                                     </p>
 
-                                    <p class="mt-1 text-xs text-slate-400">
+                                    <p class="mt-1 text-xs
+                                               text-slate-400">
+
                                         {{ $order->buyer_phone ?? '-' }}
+
                                     </p>
 
                                 </td>
 
 
+
                                 {{-- SELLER --}}
+
                                 <td class="px-5 py-4">
 
-                                    <p class="font-medium text-slate-800">
+                                    <p class="font-semibold
+                                               text-[#4D4038]">
 
                                         {{ $order->seller?->sellerProfile?->store_name ?? ($order->seller?->name ?? '-') }}
 
                                     </p>
 
-                                    <p class="mt-1 text-xs text-slate-400">
+                                    <p class="mt-1 text-xs
+                                               text-slate-400">
+
                                         {{ $order->seller?->name ?? '-' }}
+
                                     </p>
 
                                 </td>
 
 
-                                {{-- ITEMS --}}
-                                <td class="px-5 py-4 text-slate-600">
 
-                                    {{ $order->items->sum('quantity') }}
-                                    barang
+                                {{-- ITEM --}}
+
+                                <td class="px-5 py-4">
+
+                                    <span
+                                        class="inline-flex items-center gap-2
+                                               rounded-lg bg-[#FAF7F2]
+                                               px-2.5 py-1.5
+                                               text-xs font-semibold
+                                               text-[#6F6259]">
+
+                                        <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="1.8">
+
+                                            <path d="M6 7h12l1 14H5L6 7Z" />
+                                            <path d="M9 7a3 3 0 0 1 6 0" />
+
+                                        </svg>
+
+                                        {{ $order->items->sum('quantity') }}
+                                        barang
+
+                                    </span>
 
                                 </td>
+
 
 
                                 {{-- TOTAL --}}
+
                                 <td class="px-5 py-4">
 
-                                    <span class="font-semibold text-slate-900">
+                                    <span class="font-bold
+                                               text-[#332B26]">
 
-                                        Rp
-                                        {{ number_format($order->subtotal, 0, ',', '.') }}
+                                        Rp{{ number_format($order->subtotal, 0, ',', '.') }}
 
                                     </span>
 
                                 </td>
+
 
 
                                 {{-- STATUS --}}
+
                                 <td class="px-5 py-4">
 
-                                    @php
-                                        $statusClass = match ($order->status) {
-                                            'processing' => 'bg-amber-100 text-amber-700',
-                                            'sold' => 'bg-green-100 text-green-700',
-                                            default => 'bg-gray-100 text-gray-700',
-                                        };
+                                    <span
+                                        class="inline-flex
+                                               items-center gap-2
+                                               rounded-full
+                                               border px-3 py-1.5
+                                               text-xs font-bold
+                                               {{ $statusClass }}">
 
-                                        $statusLabel = match ($order->status) {
-                                            'processing' => 'Lagi Diproses',
-                                            'sold' => 'Sudah Terjual',
-                                            default => 'Tidak Diketahui',
-                                        };
-                                    @endphp
+                                        <span
+                                            class="size-1.5
+                                                   rounded-full
+                                                   {{ $statusDot }}">
+                                        </span>
 
-                                    <span class="rounded-full px-3 py-1 text-xs font-semibold {{ $statusClass }}">
                                         {{ $statusLabel }}
+
                                     </span>
 
                                 </td>
 
 
-                                {{-- DATE --}}
-                                <td class="px-5 py-4 text-slate-600">
 
-                                    {{ $order->created_at->format('d M Y') }}
+                                {{-- DATE --}}
+
+                                <td class="px-5 py-4">
+
+                                    <p class="font-medium text-slate-600">
+                                        {{ $order->created_at->format('d M Y') }}
+                                    </p>
 
                                     <p class="mt-1 text-xs text-slate-400">
                                         {{ $order->created_at->format('H:i') }}
@@ -359,29 +741,32 @@
                                 </td>
 
 
+
                                 {{-- ACTION --}}
+
                                 <td class="px-5 py-4">
 
                                     <div class="flex justify-end">
 
-                                        <a href="{{ route('admin.orders.show', $order) }}"
-                                            title="Lihat Detail"
-                                            class="inline-flex size-9
-                                               items-center
-                                               justify-center
-                                               rounded-lg
-                                               text-slate-500
-                                               transition
-                                               hover:bg-violet-50
-                                               hover:text-violet-600">
+                                        <a href="{{ route('admin.orders.show', $order) }}" title="Lihat Detail"
+                                            class="inline-flex
+                                                   size-9 items-center
+                                                   justify-center
+                                                   rounded-xl
+                                                   text-[#8B7465]
+                                                   transition
+                                                   hover:bg-[#F1E6DE]
+                                                   hover:text-[#6F4E37]">
 
-                                            <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                stroke-width="1.8">
+                                            <svg class="size-4.5" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="1.8">
+
                                                 <path d="M2 12s3.5-6 10-6
-                                                       10 6 10 6-3.5 6-10 6
-                                                       S2 12 2 12Z" />
+                                                               10 6 10 6-3.5 6-10 6
+                                                               S2 12 2 12Z" />
 
                                                 <circle cx="12" cy="12" r="3" />
+
                                             </svg>
 
                                         </a>
@@ -392,20 +777,50 @@
 
                             </tr>
 
-
                         @empty
 
                             <tr>
 
-                                <td colspan="8" class="px-6 py-16 text-center">
+                                <td colspan="8" class="px-6 py-16">
 
-                                    <p class="font-semibold text-slate-700">
-                                        Belum ada pesanan
-                                    </p>
+                                    <div class="text-center">
 
-                                    <p class="mt-2 text-sm text-slate-500">
-                                        Transaksi buyer dan seller akan muncul di sini.
-                                    </p>
+                                        <div
+                                            class="mx-auto flex size-16
+                                                   items-center justify-center
+                                                   rounded-2xl
+                                                   bg-[#F1E6DE]
+                                                   text-[#6F4E37]">
+
+                                            <svg class="size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="1.7">
+
+                                                <path d="M6 3h12v18H6z" />
+                                                <path d="M9 8h6" />
+                                                <path d="M9 12h6" />
+
+                                            </svg>
+
+                                        </div>
+
+                                        <p
+                                            class="mt-4 font-bold
+                                                   text-[#4D4038]">
+
+                                            Belum ada pesanan
+
+                                        </p>
+
+                                        <p
+                                            class="mt-2 text-sm
+                                                   text-slate-500">
+
+                                            Transaksi buyer dan seller
+                                            akan muncul di sini.
+
+                                        </p>
+
+                                    </div>
 
                                 </td>
 
@@ -419,15 +834,21 @@
             </div>
 
 
+
             {{-- PAGINATION --}}
+
             @if ($orders->hasPages())
-                <div class="border-t border-slate-200
-                       px-5 py-4">
+                <div
+                    class="border-t border-[#E7DBD1]
+                           bg-[#FAF7F2]
+                           px-5 py-4">
+
                     {{ $orders->links() }}
+
                 </div>
             @endif
 
-        </div>
+        </section>
 
     </div>
 

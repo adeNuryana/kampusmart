@@ -1,96 +1,343 @@
 @extends('layouts.admin')
 
 @section('title', 'Produk')
+
 @section('content')
 
-    <div class="space-y-6">
+    <div class="mx-auto max-w-[1400px] space-y-6">
 
-        {{-- Header --}}
-        <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        {{-- ===================================================== --}}
+        {{-- HEADER --}}
+        {{-- ===================================================== --}}
 
-            <div>
-                <p class="text-sm font-medium text-indigo-600">
-                    Manajemen Produk
-                </p>
+        <section>
 
-                <h1 class="mt-1 text-2xl font-bold tracking-tight text-slate-900">
-                    Produk
-                </h1>
+            <div
+                class="inline-flex
+                       items-center
+                       gap-2
+                       rounded-full
+                       bg-[#EEF3EA]
+                       px-3
+                       py-1.5
+                       text-xs
+                       font-bold
+                       text-[#65795E]">
 
-                <p class="mt-1 text-sm text-slate-500">
-                    Kelola seluruh produk yang terdaftar dari seller.
-                </p>
-            </div>
+                <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
 
-        </div>
+                    <path d="M6 7h12l1 14H5L6 7Z" />
+                    <path d="M9 7a3 3 0 0 1 6 0" />
 
+                </svg>
 
-        {{-- Statistik --}}
-        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-
-            <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-
-                <p class="text-sm font-medium text-slate-500">
-                    Total Produk
-                </p>
-
-                <p class="mt-2 text-3xl font-bold text-slate-900">
-                    {{ $products->total() }}
-                </p>
+                Manajemen Produk
 
             </div>
 
-        </div>
+
+            <h1
+                class="mt-3
+                       text-2xl
+                       font-black
+                       tracking-tight
+                       text-[#332B26]
+                       lg:text-3xl">
+
+                Produk
+
+            </h1>
 
 
-        {{-- Filter --}}
-        <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <p
+                class="mt-2
+                       max-w-2xl
+                       text-sm
+                       leading-6
+                       text-slate-500">
 
-            <form action="{{ route('admin.products.index') }}" method="GET">
+                Pantau dan kelola seluruh produk
+                yang terdaftar dari seller KampusMart.
 
-                <div class="grid gap-4 lg:grid-cols-12">
+            </p>
 
-                    {{-- Search --}}
+        </section>
+
+
+
+        {{-- ===================================================== --}}
+        {{-- STATISTIC --}}
+        {{-- ===================================================== --}}
+
+        <section class="grid gap-4
+                   sm:grid-cols-2
+                   lg:grid-cols-4">
+
+
+            {{-- TOTAL PRODUCT --}}
+
+            <div
+                class="relative
+                       overflow-hidden
+                       rounded-3xl
+                       border
+                       border-[#DFD2C7]
+                       bg-white
+                       p-5
+                       shadow-sm">
+
+                <div
+                    class="absolute
+                           inset-x-0
+                           top-0
+                           h-1
+                           bg-[#6F4E37]">
+                </div>
+
+
+                <div
+                    class="flex
+                           items-start
+                           justify-between
+                           gap-4">
+
+
+                    <div>
+
+                        <p
+                            class="text-xs
+                                   font-bold
+                                   uppercase
+                                   tracking-wide
+                                   text-[#998274]">
+
+                            Total Produk
+
+                        </p>
+
+
+                        <p
+                            class="mt-5
+                                   text-3xl
+                                   font-black
+                                   text-[#332B26]">
+
+                            {{ number_format($products->total()) }}
+
+                        </p>
+
+
+                        <p
+                            class="mt-2
+                                   text-xs
+                                   text-slate-400">
+
+                            Produk terdaftar
+
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        class="flex
+                               size-11
+                               shrink-0
+                               items-center
+                               justify-center
+                               rounded-xl
+                               bg-[#6F4E37]
+                               text-white">
+
+                        <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+
+                            <path d="M6 7h12l1 14H5L6 7Z" />
+                            <path d="M9 7a3 3 0 0 1 6 0" />
+
+                        </svg>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        {{-- ===================================================== --}}
+        {{-- FILTER --}}
+        {{-- ===================================================== --}}
+
+        <section
+            class="overflow-hidden
+                   rounded-3xl
+                   border
+                   border-[#DFD2C7]
+                   bg-white
+                   shadow-sm">
+
+
+            {{-- FILTER HEADER --}}
+
+            <div
+                class="border-b
+                       border-[#E7DBD1]
+                       bg-[#FAF7F2]
+                       px-5
+                       py-4">
+
+                <div class="flex
+                           items-center
+                           gap-3">
+
+                    <div
+                        class="flex
+                               size-9
+                               items-center
+                               justify-center
+                               rounded-xl
+                               bg-[#F1E6DE]
+                               text-[#6F4E37]">
+
+                        <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+
+                            <path d="M4 6h16" />
+                            <path d="M7 12h10" />
+                            <path d="M10 18h4" />
+
+                        </svg>
+
+                    </div>
+
+
+                    <div>
+
+                        <p
+                            class="text-sm
+                                   font-bold
+                                   text-[#332B26]">
+
+                            Filter Produk
+
+                        </p>
+
+                        <p
+                            class="mt-0.5
+                                   text-xs
+                                   text-slate-500">
+
+                            Cari produk berdasarkan nama,
+                            kategori, atau status.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            {{-- FILTER FORM --}}
+
+            <form action="{{ route('admin.products.index') }}" method="GET" class="p-5">
+
+                <div class="grid
+                           gap-4
+                           lg:grid-cols-12">
+
+
+                    {{-- SEARCH --}}
+
                     <div class="lg:col-span-5">
 
-                        <label for="search" class="mb-2 block text-sm font-medium text-slate-700">
+                        <label for="search"
+                            class="mb-2
+                                   block
+                                   text-sm
+                                   font-semibold
+                                   text-[#4D4038]">
+
                             Cari Produk
+
                         </label>
+
 
                         <div class="relative">
 
-                            <svg class="absolute left-4 top-1/2 size-5 -translate-y-1/2 text-slate-400" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="1.8">
-                                <circle cx="11" cy="11" r="7"></circle>
-                                <path d="m20 20-3.5-3.5"></path>
+                            <svg class="absolute
+                                       left-4
+                                       top-1/2
+                                       size-4
+                                       -translate-y-1/2
+                                       text-[#A28A7A]"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+
+                                <circle cx="11" cy="11" r="7" />
+                                <path d="m20 20-3.5-3.5" />
+
                             </svg>
+
 
                             <input type="text" name="search" id="search" value="{{ request('search') }}"
                                 placeholder="Cari nama produk..."
-                                class="w-full rounded-xl border border-slate-200
-                                   py-3 pl-11 pr-4 text-sm
-                                   outline-none transition
-                                   focus:border-indigo-500
-                                   focus:ring-4 focus:ring-indigo-500/10">
+                                class="h-11
+                                       w-full
+                                       rounded-xl
+                                       border
+                                       border-[#DFD2C7]
+                                       bg-white
+                                       pl-11
+                                       pr-4
+                                       text-sm
+                                       text-[#4D4038]
+                                       outline-none
+                                       transition
+                                       placeholder:text-[#B3A195]
+                                       focus:border-[#A97957]
+                                       focus:ring-4
+                                       focus:ring-[#F1E6DE]">
 
                         </div>
 
                     </div>
 
 
-                    {{-- Kategori --}}
+
+                    {{-- CATEGORY --}}
+
                     <div class="lg:col-span-3">
 
-                        <label for="category" class="mb-2 block text-sm font-medium text-slate-700">
+                        <label for="category"
+                            class="mb-2
+                                   block
+                                   text-sm
+                                   font-semibold
+                                   text-[#4D4038]">
+
                             Kategori
+
                         </label>
 
+
                         <select name="category" id="category"
-                            class="w-full rounded-xl border border-slate-200
-                               bg-white px-4 py-3 text-sm
-                               outline-none transition
-                               focus:border-indigo-500
-                               focus:ring-4 focus:ring-indigo-500/10">
+                            class="h-11
+                                   w-full
+                                   rounded-xl
+                                   border
+                                   border-[#DFD2C7]
+                                   bg-white
+                                   px-4
+                                   text-sm
+                                   text-[#4D4038]
+                                   outline-none
+                                   transition
+                                   focus:border-[#A97957]
+                                   focus:ring-4
+                                   focus:ring-[#F1E6DE]">
 
                             <option value="">
                                 Semua Kategori
@@ -98,7 +345,9 @@
 
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}" @selected(request('category') == $category->id)>
+
                                     {{ $category->name }}
+
                                 </option>
                             @endforeach
 
@@ -107,30 +356,53 @@
                     </div>
 
 
-                    {{-- Status --}}
+
+                    {{-- STATUS --}}
+
                     <div class="lg:col-span-2">
 
-                        <label for="status" class="mb-2 block text-sm font-medium text-slate-700">
+                        <label for="status"
+                            class="mb-2
+                                   block
+                                   text-sm
+                                   font-semibold
+                                   text-[#4D4038]">
+
                             Status
+
                         </label>
 
+
                         <select name="status" id="status"
-                            class="w-full rounded-xl border border-slate-200
-                               bg-white px-4 py-3 text-sm
-                               outline-none transition
-                               focus:border-indigo-500
-                               focus:ring-4 focus:ring-indigo-500/10">
+                            class="h-11
+                                   w-full
+                                   rounded-xl
+                                   border
+                                   border-[#DFD2C7]
+                                   bg-white
+                                   px-4
+                                   text-sm
+                                   text-[#4D4038]
+                                   outline-none
+                                   transition
+                                   focus:border-[#A97957]
+                                   focus:ring-4
+                                   focus:ring-[#F1E6DE]">
 
                             <option value="">
                                 Semua
                             </option>
 
                             <option value="active" @selected(request('status') === 'active')>
+
                                 Aktif
+
                             </option>
 
                             <option value="inactive" @selected(request('status') === 'inactive')>
+
                                 Nonaktif
+
                             </option>
 
                         </select>
@@ -138,22 +410,68 @@
                     </div>
 
 
-                    {{-- Button --}}
-                    <div class="flex items-end gap-2 lg:col-span-2">
+
+                    {{-- ACTION --}}
+
+                    <div
+                        class="flex
+                               items-end
+                               gap-2
+                               lg:col-span-2">
 
                         <button type="submit"
-                            class="flex-1 rounded-xl bg-slate-900
-                               px-4 py-3 text-sm font-semibold
-                               text-white transition hover:bg-slate-800">
+                            class="inline-flex
+                                   h-11
+                                   flex-1
+                                   items-center
+                                   justify-center
+                                   gap-2
+                                   rounded-xl
+                                   bg-[#6F4E37]
+                                   px-4
+                                   text-sm
+                                   font-bold
+                                   text-white
+                                   transition
+                                   hover:bg-[#5B3B2B]">
+
+                            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+
+                                <path d="M4 6h16" />
+                                <path d="M7 12h10" />
+                                <path d="M10 18h4" />
+
+                            </svg>
+
                             Filter
+
                         </button>
 
-                        <a href="{{ route('admin.products.index') }}"
-                            class="rounded-xl border border-slate-200
-                               px-4 py-3 text-sm font-medium
-                               text-slate-600 transition
-                               hover:bg-slate-50">
-                            Reset
+
+                        <a href="{{ route('admin.products.index') }}" title="Reset Filter"
+                            class="inline-flex
+                                   size-11
+                                   shrink-0
+                                   items-center
+                                   justify-center
+                                   rounded-xl
+                                   border
+                                   border-[#DFD2C7]
+                                   bg-white
+                                   text-[#8B7465]
+                                   transition
+                                   hover:bg-[#F3EAE3]
+                                   hover:text-[#493124]">
+
+                            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+
+                                <path d="M4 4v6h6" />
+
+                                <path d="M5.5 15a7.5 7.5 0 1 0
+                                           .5-7.5L4 10" />
+
+                            </svg>
+
                         </a>
 
                     </div>
@@ -162,45 +480,122 @@
 
             </form>
 
-        </div>
+        </section>
 
 
-        {{-- Table --}}
-        <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+
+        {{-- ===================================================== --}}
+        {{-- PRODUCT TABLE --}}
+        {{-- ===================================================== --}}
+
+        <section
+            class="overflow-hidden
+                   rounded-3xl
+                   border
+                   border-[#DFD2C7]
+                   bg-white
+                   shadow-sm">
+
+
+            {{-- TABLE HEADER INFO --}}
+
+            <div
+                class="flex
+                       flex-col
+                       gap-2
+                       border-b
+                       border-[#E7DBD1]
+                       bg-[#FAF7F2]
+                       px-5
+                       py-4
+                       sm:flex-row
+                       sm:items-center
+                       sm:justify-between">
+
+                <div>
+
+                    <h2
+                        class="text-sm
+                               font-bold
+                               text-[#332B26]">
+
+                        Daftar Produk
+
+                    </h2>
+
+                    <p class="mt-0.5
+                               text-xs
+                               text-slate-500">
+
+                        Produk seller yang tersedia di KampusMart.
+
+                    </p>
+
+                </div>
+
+
+                <span
+                    class="inline-flex
+                           w-fit
+                           items-center
+                           rounded-full
+                           bg-[#F1E6DE]
+                           px-3
+                           py-1.5
+                           text-xs
+                           font-bold
+                           text-[#6F4E37]">
+
+                    {{ number_format($products->total()) }}
+                    produk
+
+                </span>
+
+            </div>
+
+
+
+            {{-- TABLE --}}
 
             <div class="overflow-x-auto">
 
-                <table class="w-full">
+                <table class="w-full min-w-[1050px]">
 
-                    <thead class="border-b border-slate-200 bg-slate-50">
+                    <thead class="bg-[#F8F3ED]">
 
-                        <tr>
+                        <tr
+                            class="text-left
+                                   text-xs
+                                   font-bold
+                                   uppercase
+                                   tracking-wide
+                                   text-[#907A6C]">
 
-                            <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">
+                            <th class="px-5 py-4">
                                 Produk
                             </th>
 
-                            <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">
+                            <th class="px-5 py-4">
                                 Seller
                             </th>
 
-                            <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">
+                            <th class="px-5 py-4">
                                 Kategori
                             </th>
 
-                            <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">
+                            <th class="px-5 py-4">
                                 Harga
                             </th>
 
-                            <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">
+                            <th class="px-5 py-4">
                                 Stok
                             </th>
 
-                            <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">
+                            <th class="px-5 py-4">
                                 Status
                             </th>
 
-                            <th class="px-6 py-4 text-right text-xs font-semibold uppercase tracking-wider text-slate-500">
+                            <th class="px-5 py-4 text-right">
                                 Aksi
                             </th>
 
@@ -209,40 +604,79 @@
                     </thead>
 
 
-                    <tbody class="divide-y divide-slate-100">
+                    <tbody class="divide-y
+                               divide-[#EEE5DE]">
 
                         @forelse ($products as $product)
-                            <tr class="transition hover:bg-slate-50">
+                            <tr
+                                class="text-sm
+                                       transition
+                                       hover:bg-[#FBF7F3]">
 
-                                {{-- Produk --}}
-                                <td class="px-6 py-4">
 
-                                    <div class="flex items-center gap-4">
+                                {{-- PRODUCT --}}
+
+                                <td class="px-5 py-4">
+
+                                    <div
+                                        class="flex
+                                               items-center
+                                               gap-3">
 
                                         @if ($product->image)
-                                            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"
-                                                class="size-14 rounded-xl border border-slate-200 object-cover">
+                                            <img src="{{ asset('storage/' . $product->image) }}"
+                                                alt="{{ $product->name }}"
+                                                class="size-14
+                                                       shrink-0
+                                                       rounded-xl
+                                                       border
+                                                       border-[#E7DBD1]
+                                                       object-cover">
                                         @else
-                                            <div class="flex size-14 items-center justify-center rounded-xl bg-slate-100">
+                                            <div
+                                                class="flex
+                                                       size-14
+                                                       shrink-0
+                                                       items-center
+                                                       justify-center
+                                                       rounded-xl
+                                                       bg-[#FAF7F2]
+                                                       text-[#A28A7A]">
 
-                                                <svg class="size-6 text-slate-400" viewBox="0 0 24 24" fill="none"
+                                                <svg class="size-6" viewBox="0 0 24 24" fill="none"
                                                     stroke="currentColor" stroke-width="1.7">
-                                                    <rect x="3" y="3" width="18" height="18" rx="2"></rect>
-                                                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                                                    <path d="m21 15-5-5L5 21"></path>
+
+                                                    <rect x="3" y="3" width="18" height="18" rx="2" />
+
+                                                    <circle cx="8.5" cy="8.5" r="1.5" />
+
+                                                    <path d="m21 15-5-5L5 21" />
+
                                                 </svg>
 
                                             </div>
                                         @endif
 
-                                        <div>
 
-                                            <p class="font-semibold text-slate-900">
+                                        <div class="min-w-0">
+
+                                            <p
+                                                class="max-w-[250px]
+                                                       truncate
+                                                       font-bold
+                                                       text-[#332B26]">
+
                                                 {{ $product->name }}
+
                                             </p>
 
-                                            <p class="mt-1 text-xs text-slate-400">
+                                            <p
+                                                class="mt-1
+                                                       text-xs
+                                                       text-slate-400">
+
                                                 ID #{{ $product->id }}
+
                                             </p>
 
                                         </div>
@@ -252,92 +686,191 @@
                                 </td>
 
 
-                                {{-- Seller --}}
-                                <td class="px-6 py-4">
+
+                                {{-- SELLER --}}
+
+                                <td class="px-5 py-4">
 
                                     <div>
 
-                                        <p class="text-sm font-medium text-slate-800">
+                                        <p
+                                            class="font-semibold
+                                                   text-[#4D4038]">
+
                                             {{ $product->user?->sellerProfile?->store_name ?? '-' }}
+
                                         </p>
 
-                                        @if ($product->user?->email)
-                                            <p class="mt-1 text-xs text-slate-400">
-                                               {{ $product->user?->name ?? '-' }}
-                                            </p>
-                                        @endif
+
+                                        <div
+                                            class="mt-1
+                                                   inline-flex
+                                                   items-center
+                                                   gap-1.5
+                                                   text-xs
+                                                   text-slate-400">
+
+                                            <span
+                                                class="size-1.5
+                                                       rounded-full
+                                                       bg-[#C8795A]">
+                                            </span>
+
+                                            {{ $product->user?->name ?? '-' }}
+
+                                        </div>
 
                                     </div>
 
                                 </td>
 
 
-                                {{-- Kategori --}}
-                                <td class="px-6 py-4">
+
+                                {{-- CATEGORY --}}
+
+                                <td class="px-5 py-4">
 
                                     <span
-                                        class="inline-flex rounded-lg bg-slate-100 px-3 py-1.5 text-xs font-medium text-slate-600">
+                                        class="inline-flex
+                                               rounded-lg
+                                               bg-[#F1E6DE]
+                                               px-3
+                                               py-1.5
+                                               text-xs
+                                               font-semibold
+                                               text-[#6F4E37]">
 
-                                        {{ $product->category->name ?? '-' }}
-
-                                    </span>
-
-                                </td>
-
-
-                                {{-- Harga --}}
-                                <td class="whitespace-nowrap px-6 py-4">
-
-                                    <span class="font-semibold text-slate-900">
-
-                                        Rp {{ number_format($product->price, 0, ',', '.') }}
+                                        {{ $product->category?->name ?? '-' }}
 
                                     </span>
 
                                 </td>
 
 
-                                {{-- Stok --}}
-                                <td class="px-6 py-4">
+
+                                {{-- PRICE --}}
+
+                                <td
+                                    class="whitespace-nowrap
+                                           px-5
+                                           py-4">
+
+                                    <span class="font-bold
+                                               text-[#332B26]">
+
+                                        Rp{{ number_format($product->price, 0, ',', '.') }}
+
+                                    </span>
+
+                                </td>
+
+
+
+                                {{-- STOCK --}}
+
+                                <td class="px-5 py-4">
 
                                     @if ($product->stock <= 0)
-                                        <span class="text-sm font-semibold text-red-600">
+                                        <span
+                                            class="inline-flex
+                                                   items-center
+                                                   gap-2
+                                                   rounded-full
+                                                   bg-[#FAEDEC]
+                                                   px-3
+                                                   py-1.5
+                                                   text-xs
+                                                   font-bold
+                                                   text-[#A65954]">
+
+                                            <span
+                                                class="size-1.5
+                                                       rounded-full
+                                                       bg-[#A65954]">
+                                            </span>
+
                                             Habis
+
                                         </span>
                                     @elseif ($product->stock <= 5)
-                                        <span class="text-sm font-semibold text-amber-600">
+                                        <span
+                                            class="inline-flex
+                                                   items-center
+                                                   gap-2
+                                                   rounded-full
+                                                   bg-[#FAF2DF]
+                                                   px-3
+                                                   py-1.5
+                                                   text-xs
+                                                   font-bold
+                                                   text-[#A87A37]">
+
                                             {{ $product->stock }}
+                                            tersisa
+
                                         </span>
                                     @else
-                                        <span class="text-sm font-medium text-slate-700">
+                                        <span
+                                            class="font-semibold
+                                                   text-[#4D4038]">
+
                                             {{ $product->stock }}
+
                                         </span>
                                     @endif
 
                                 </td>
 
 
-                                {{-- Status --}}
-                                <td class="px-6 py-4">
+
+                                {{-- STATUS --}}
+
+                                <td class="px-5 py-4">
 
                                     @if ($product->status === 'active')
                                         <span
-                                            class="inline-flex items-center gap-2 rounded-full
-                                                 bg-emerald-50 px-3 py-1.5
-                                                 text-xs font-semibold text-emerald-700">
+                                            class="inline-flex
+                                                   items-center
+                                                   gap-2
+                                                   rounded-full
+                                                   border
+                                                   border-[#D3DFCE]
+                                                   bg-[#EEF3EA]
+                                                   px-3
+                                                   py-1.5
+                                                   text-xs
+                                                   font-bold
+                                                   text-[#65795E]">
 
-                                            <span class="size-1.5 rounded-full bg-emerald-500"></span>
+                                            <span
+                                                class="size-1.5
+                                                       rounded-full
+                                                       bg-[#718268]">
+                                            </span>
 
                                             Aktif
 
                                         </span>
                                     @else
                                         <span
-                                            class="inline-flex items-center gap-2 rounded-full
-                                                 bg-slate-100 px-3 py-1.5
-                                                 text-xs font-semibold text-slate-600">
+                                            class="inline-flex
+                                                   items-center
+                                                   gap-2
+                                                   rounded-full
+                                                   border
+                                                   border-[#ECD2CF]
+                                                   bg-[#FAEDEC]
+                                                   px-3
+                                                   py-1.5
+                                                   text-xs
+                                                   font-bold
+                                                   text-[#A65954]">
 
-                                            <span class="size-1.5 rounded-full bg-slate-400"></span>
+                                            <span
+                                                class="size-1.5
+                                                       rounded-full
+                                                       bg-[#A65954]">
+                                            </span>
 
                                             Nonaktif
 
@@ -347,49 +880,95 @@
                                 </td>
 
 
-                                {{-- Aksi --}}
-                                <td class="px-6 py-4 text-right">
 
-                                    <button type="button"
-                                        class="rounded-lg p-2 text-slate-400
-                                           transition hover:bg-slate-100
-                                           hover:text-slate-700">
+                                {{-- ACTION --}}
 
-                                        <svg class="size-5" viewBox="0 0 24 24" fill="currentColor">
-                                            <circle cx="5" cy="12" r="1.5" />
-                                            <circle cx="12" cy="12" r="1.5" />
-                                            <circle cx="19" cy="12" r="1.5" />
-                                        </svg>
+                                <td class="px-5 py-4">
 
-                                    </button>
+                                    <div class="flex
+                                               justify-end">
+
+                                        <button type="button" title="Aksi Produk"
+                                            class="inline-flex
+                                                   size-9
+                                                   items-center
+                                                   justify-center
+                                                   rounded-xl
+                                                   text-[#8B7465]
+                                                   transition
+                                                   hover:bg-[#F1E6DE]
+                                                   hover:text-[#6F4E37]">
+
+                                            <svg class="size-5" viewBox="0 0 24 24" fill="currentColor">
+
+                                                <circle cx="5" cy="12" r="1.5" />
+
+                                                <circle cx="12" cy="12" r="1.5" />
+
+                                                <circle cx="19" cy="12" r="1.5" />
+
+                                            </svg>
+
+                                        </button>
+
+                                    </div>
 
                                 </td>
 
                             </tr>
 
+
                         @empty
 
                             <tr>
 
-                                <td colspan="7" class="px-6 py-16 text-center">
+                                <td colspan="7" class="px-6 py-16">
 
-                                    <div class="mx-auto flex size-16 items-center justify-center rounded-2xl bg-slate-100">
+                                    <div class="text-center">
 
-                                        <svg class="size-8 text-slate-400" viewBox="0 0 24 24" fill="none"
-                                            stroke="currentColor" stroke-width="1.5">
-                                            <path d="M6 7h12l1 14H5L6 7Z" />
-                                            <path d="M9 7a3 3 0 0 1 6 0" />
-                                        </svg>
+                                        <div
+                                            class="mx-auto
+                                                   flex
+                                                   size-16
+                                                   items-center
+                                                   justify-center
+                                                   rounded-2xl
+                                                   bg-[#EEF3EA]
+                                                   text-[#65795E]">
+
+                                            <svg class="size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="1.7">
+
+                                                <path d="M6 7h12l1 14H5L6 7Z" />
+
+                                                <path d="M9 7a3 3 0 0 1 6 0" />
+
+                                            </svg>
+
+                                        </div>
+
+
+                                        <h3
+                                            class="mt-4
+                                                   font-bold
+                                                   text-[#4D4038]">
+
+                                            Belum ada produk
+
+                                        </h3>
+
+
+                                        <p
+                                            class="mt-2
+                                                   text-sm
+                                                   text-slate-500">
+
+                                            Produk yang dibuat oleh seller
+                                            akan muncul di halaman ini.
+
+                                        </p>
 
                                     </div>
-
-                                    <h3 class="mt-4 font-semibold text-slate-900">
-                                        Belum ada produk
-                                    </h3>
-
-                                    <p class="mt-1 text-sm text-slate-500">
-                                        Produk dari seller akan muncul di halaman ini.
-                                    </p>
 
                                 </td>
 
@@ -403,15 +982,25 @@
             </div>
 
 
+
+            {{-- ================================================= --}}
+            {{-- PAGINATION --}}
+            {{-- ================================================= --}}
+
             @if ($products->hasPages())
-                <div class="border-t border-slate-200 px-6 py-4">
+                <div
+                    class="border-t
+                           border-[#E7DBD1]
+                           bg-[#FAF7F2]
+                           px-5
+                           py-4">
 
                     {{ $products->links() }}
 
                 </div>
             @endif
 
-        </div>
+        </section>
 
     </div>
 

@@ -66,20 +66,28 @@
 
                 <a href="{{ route('home') }}" class="flex shrink-0 items-center gap-2">
 
-                    <div
-                        class="flex size-10 items-center justify-center
-                               rounded-xl
-                               bg-gradient-to-br
-                               from-[#493124]
-                               via-[#6F4E37]
-                               to-[#9A6948]
-                               text-lg font-black text-white
-                               shadow-lg shadow-[#6F4E37]/20
-                               sm:size-11 sm:text-xl">
+                    @if ($siteSetting?->logo)
+                        <img src="{{ asset('storage/' . $siteSetting->logo) }}" alt="{{ $siteSetting->site_name }}"
+                            class="size-10
+               shrink-0
+               rounded-xl
+               object-contain">
+                    @else
+                        <div
+                            class="flex size-10
+               shrink-0
+               items-center justify-center
+               rounded-2xl
+               bg-gradient-to-br
+               from-[#C8795A]
+               to-[#6F4E37]
+               font-black
+               text-white">
 
-                        M
+                            {{ strtoupper(substr($siteSetting?->site_name ?? 'KampusMart', 0, 1)) }}
 
-                    </div>
+                        </div>
+                    @endif
 
                     <span
                         class="hidden
@@ -92,7 +100,9 @@
                                text-transparent
                                sm:block">
 
-                        MarketKu
+                        <p>
+                            {{ $siteSetting?->site_name ?? 'KampusMart' }}
+                        </p>
 
                     </span>
 
@@ -1834,7 +1844,6 @@
                                         $sellerLocation =
                                             $product->user?->sellerProfile?->city ??
                                             ($product->user?->sellerProfile?->address ?? null);
-
                                     @endphp
 
 
@@ -2105,7 +2114,9 @@
                     <h3 class="text-xl font-black
                                text-[#5B3B2B]">
 
-                        MarketKu
+                        <p>
+                            {{ $siteSetting?->site_name ?? 'KampusMart' }}
+                        </p>
 
                     </h3>
 

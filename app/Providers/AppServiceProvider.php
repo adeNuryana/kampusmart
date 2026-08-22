@@ -4,7 +4,7 @@ namespace App\Providers;
 use App\Models\CartItem;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
-
+use App\Models\SiteSetting;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -22,13 +22,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        View::composer('*', function ($view) {
+            $siteSetting = SiteSetting::query()->first();
+
+            $view->with('siteSetting', $siteSetting);
+        });
+
         View::composer('layouts.public', function ($view) {
             $cartCount = 0;
 
             if (Auth::check() && Auth::user()?->role === 'buyer') {
-                $cartCount = CartItem::query()
-                    ->where('user_id', Auth::id())
-                    ->sum('quantity');
+                $cartCount = CartItem::query()->where('user_id', Auth::id())->sum('quantity');
             }
 
             $view->with('cartCount', $cartCount);
