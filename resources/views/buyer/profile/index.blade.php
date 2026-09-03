@@ -79,7 +79,7 @@
                                py-1.5
                                text-xs
                                font-bold
-                               text-[#6F4E37]">
+                               text-[#4371d1]">
 
                         <i class="fa-regular fa-user"></i>
 
@@ -149,7 +149,7 @@
                                    -top-16
                                    size-44
                                    rounded-full
-                                   bg-[#6F4E37]/10
+                                   bg-[#4371d1]/10
                                    blur-3xl">
                         </div>
 
@@ -167,15 +167,15 @@
                                        justify-center
                                        rounded-full
                                        bg-gradient-to-br
-                                       from-[#493124]
-                                       via-[#6F4E37]
+                                       from-[#0a1d45]
+                                       via-[#4371d1]
                                        to-[#9A6948]
                                        text-3xl
                                        font-black
                                        uppercase
                                        text-white
                                        shadow-xl
-                                       shadow-[#6F4E37]/20
+                                       shadow-[#4371d1]/20
                                        ring-4
                                        ring-[#F4EAE2]">
 
@@ -221,7 +221,7 @@
                                            py-1.5
                                            text-xs
                                            font-bold
-                                           text-[#6F4E37]">
+                                           text-[#4371d1]">
 
                                     <i class="fa-solid fa-user"></i>
 
@@ -515,7 +515,7 @@
                                            justify-center
                                            rounded-xl
                                            bg-[#F4EAE2]
-                                           text-[#6F4E37]">
+                                           text-[#4371d1]">
 
                                     <i class="fa-regular fa-address-card"></i>
 
@@ -839,15 +839,15 @@
                                                gap-2
                                                rounded-xl
                                                bg-gradient-to-r
-                                               from-[#5B3B2B]
-                                               via-[#6F4E37]
-                                               to-[#8B6245]
+                                               from-[#0a1d45]
+                                               via-[#4371d1]
+                                               to-[#4371d1]
                                                px-5
                                                text-sm
                                                font-bold
                                                text-white
                                                shadow-lg
-                                               shadow-[#6F4E37]/15
+                                               shadow-[#4371d1]/15
                                                transition
                                                duration-300
                                                hover:-translate-y-0.5
@@ -1067,7 +1067,7 @@
                                                        justify-center
                                                        text-slate-400
                                                        transition
-                                                       hover:text-[#6F4E37]">
+                                                       hover:text-[#4371d1]">
 
                                                 <i class="fa-regular"
                                                     :class="showCurrent
@@ -1159,7 +1159,7 @@
                                                            justify-center
                                                            text-slate-400
                                                            transition
-                                                           hover:text-[#6F4E37]">
+                                                           hover:text-[#4371d1]">
 
                                                     <i class="fa-regular"
                                                         :class="showNew
@@ -1245,7 +1245,7 @@
                                                            justify-center
                                                            text-slate-400
                                                            transition
-                                                           hover:text-[#6F4E37]">
+                                                           hover:text-[#4371d1]">
 
                                                     <i class="fa-regular"
                                                         :class="showConfirmation
@@ -1325,15 +1325,15 @@
                                                gap-2
                                                rounded-xl
                                                bg-gradient-to-r
-                                               from-[#493124]
-                                               via-[#5B3B2B]
-                                               to-[#6F4E37]
+                                               from-[#0a1d45]
+                                               via-[#0a1d45]
+                                               to-[#4371d1]
                                                px-5
                                                text-sm
                                                font-bold
                                                text-white
                                                shadow-lg
-                                               shadow-[#6F4E37]/15
+                                               shadow-[#4371d1]/15
                                                transition
                                                duration-300
                                                hover:-translate-y-0.5

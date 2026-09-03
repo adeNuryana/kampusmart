@@ -31,7 +31,7 @@
                            py-1.5
                            text-xs
                            font-bold
-                           text-[#6F4E37]">
+                           text-[#4371d1]">
 
                     <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
 
@@ -79,14 +79,14 @@
                        justify-center
                        gap-2
                        rounded-xl
-                       bg-[#6F4E37]
+                       bg-[#4371d1]
                        px-5
                        text-sm
                        font-bold
                        text-white
                        shadow-sm
                        transition
-                       hover:bg-[#5B3B2B]
+                       hover:bg-[#0a1d45]
                        hover:shadow-md">
 
                 <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -202,8 +202,8 @@
                                font-semibold
                                transition
                                {{ !request('status')
-                                   ? 'bg-[#6F4E37] text-white shadow-sm'
-                                   : 'bg-white text-[#7C695C] hover:bg-[#F1E6DE] hover:text-[#6F4E37]' }}">
+                                   ? 'bg-[#4371d1] text-white shadow-sm'
+                                   : 'bg-white text-[#7C695C] hover:bg-[#F1E6DE] hover:text-[#4371d1]' }}">
 
                         Semua
 
@@ -365,7 +365,7 @@
                                                    items-center
                                                    justify-center
                                                    rounded-xl
-                                                   bg-[#6F4E37]
+                                                   bg-[#4371d1]
                                                    text-sm
                                                    font-black
                                                    uppercase
@@ -511,7 +511,7 @@
                                                    text-[#8B7465]
                                                    transition
                                                    hover:bg-[#F1E6DE]
-                                                   hover:text-[#6F4E37]">
+                                                   hover:text-[#4371d1]">
 
                                             <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                 stroke-width="1.8">
@@ -626,7 +626,7 @@
                                                    justify-center
                                                    rounded-2xl
                                                    bg-[#F1E6DE]
-                                                   text-[#6F4E37]">
+                                                   text-[#4371d1]">
 
                                             <svg class="size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                 stroke-width="1.7">

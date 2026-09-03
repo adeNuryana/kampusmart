@@ -12,7 +12,7 @@
             <a href="{{ route('admin.sellers.index') }}"
                 class="inline-flex items-center gap-2
                        text-sm font-semibold text-[#8B7465]
-                       transition hover:text-[#6F4E37]">
+                       transition hover:text-[#4371d1]">
 
                 <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="m15 18-6-6 6-6" />
@@ -272,7 +272,7 @@
 
                         <div
                             class="flex size-10 items-center justify-center
-                                   rounded-xl bg-[#6F4E37] text-white">
+                                   rounded-xl bg-[#4371d1] text-white">
 
                             <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="1.8">

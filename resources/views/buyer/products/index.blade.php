@@ -79,7 +79,7 @@
                                py-1.5
                                text-xs
                                font-bold
-                               text-[#6F4E37]">
+                               text-[#4371d1]">
 
                         <i class="fa-solid fa-store"></i>
 
@@ -162,7 +162,7 @@
                                    justify-center
                                    rounded-xl
                                    bg-[#F4EAE2]
-                                   text-[#6F4E37]">
+                                   text-[#4371d1]">
 
                             <i class="fa-solid fa-sliders"></i>
 
@@ -433,9 +433,9 @@
                                        gap-2
                                        rounded-xl
                                        bg-gradient-to-r
-                                       from-[#5B3B2B]
-                                       via-[#6F4E37]
-                                       to-[#8B6245]
+                                       from-[#0a1d45]
+                                       via-[#4371d1]
+                                       to-[#4371d1]
                                        px-4
                                        text-sm
                                        font-bold
@@ -467,11 +467,11 @@
                                        border
                                        border-[#E5D5C9]
                                        bg-white
-                                       text-[#8B6245]
+                                       text-[#4371d1]
                                        transition
                                        hover:border-[#D6BBA8]
                                        hover:bg-[#FBF4EF]
-                                       hover:text-[#5B3B2B]">
+                                       hover:text-[#0a1d45]">
 
                                 <i class="fa-solid
                                            fa-rotate-left">
@@ -520,7 +520,7 @@
                                rounded-lg
                                bg-[#F4EAE2]
                                text-xs
-                               text-[#6F4E37]">
+                               text-[#4371d1]">
 
                         <i class="fa-solid fa-boxes-stacked"></i>
 
@@ -532,7 +532,7 @@
                         Menampilkan
 
                         <span class="font-bold
-                                   text-[#6F4E37]">
+                                   text-[#4371d1]">
 
                             {{ $products->total() }}
 
@@ -617,9 +617,9 @@
 
                         $themes = [
                             [
-                                'bar' => 'from-[#6F4E37] via-[#8B6245] to-[#C89B55]',
+                                'bar' => 'from-[#4371d1] via-[#4371d1] to-[#C89B55]',
 
-                                'category' => 'bg-[#F4EAE2] text-[#6F4E37]',
+                                'category' => 'bg-[#F4EAE2] text-[#4371d1]',
                             ],
 
                             [
@@ -661,7 +661,7 @@
                                hover:-translate-y-1.5
                                hover:border-[#DCC9BB]
                                hover:shadow-xl
-                               hover:shadow-[#6F4E37]/10">
+                               hover:shadow-[#4371d1]/10">
 
 
                         {{-- TOP ACCENT --}}
@@ -817,7 +817,7 @@
                                            leading-5
                                            text-slate-800
                                            transition
-                                           group-hover:text-[#6F4E37]
+                                           group-hover:text-[#4371d1]
                                            sm:min-h-12
                                            sm:text-sm
                                            sm:leading-6">
@@ -835,8 +835,8 @@
                             <p
                                 class="mt-2
                                        bg-gradient-to-r
-                                       from-[#5B3B2B]
-                                       to-[#A66D4B]
+                                       from-[#0a1d45]
+                                       to-[#4371d1]
                                        bg-clip-text
                                        text-sm
                                        font-black
@@ -945,7 +945,7 @@
                                                to-[#E6D3C5]
                                                text-[10px]
                                                font-black
-                                               text-[#6F4E37]
+                                               text-[#4371d1]
                                                sm:size-9
                                                sm:text-xs">
 
@@ -992,7 +992,7 @@
                                            text-[#C7B4A7]
                                            transition
                                            group-hover:translate-x-0.5
-                                           group-hover:text-[#6F4E37]">
+                                           group-hover:text-[#4371d1]">
                                 </i>
 
                             </div>
@@ -1048,7 +1048,7 @@
                                        from-[#F4EAE2]
                                        to-[#E9D8CB]
                                        text-3xl
-                                       text-[#6F4E37]
+                                       text-[#4371d1]
                                        shadow-sm">
 
                                 <i class="fa-solid
@@ -1093,15 +1093,15 @@
                                        gap-2
                                        rounded-xl
                                        bg-gradient-to-r
-                                       from-[#5B3B2B]
-                                       via-[#6F4E37]
-                                       to-[#8B6245]
+                                       from-[#0a1d45]
+                                       via-[#4371d1]
+                                       to-[#4371d1]
                                        px-5
                                        text-sm
                                        font-bold
                                        text-white
                                        shadow-lg
-                                       shadow-[#6F4E37]/20
+                                       shadow-[#4371d1]/20
                                        transition
                                        hover:-translate-y-0.5
                                        hover:shadow-xl">

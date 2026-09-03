@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use App\Services\ActivityLogger;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -22,26 +23,17 @@ class CheckoutController extends Controller
     |--------------------------------------------------------------------------
     */
 
-    public function index(
-        Request $request,
-        User $seller
-    ): View {
-
+    public function index(Request $request, User $seller): View
+    {
         /*
         |--------------------------------------------------------------------------
         | Pastikan Seller Valid
         |--------------------------------------------------------------------------
         */
 
-        abort_if(
-            $seller->role !== 'seller' ||
-                $seller->status !== 'active',
-            404
-        );
-
+        abort_if($seller->role !== 'seller' || $seller->status !== 'active', 404);
 
         $buyer = $request->user();
-
 
         /*
         |--------------------------------------------------------------------------
@@ -50,29 +42,16 @@ class CheckoutController extends Controller
         */
 
         $cartItems = CartItem::query()
-            ->with([
-                'product.category',
-                'product.user.sellerProfile',
-            ])
+            ->with(['product.category', 'product.user.sellerProfile'])
             ->where('user_id', $buyer->id)
-            ->whereHas(
-                'product',
-                function ($query) use ($seller) {
-
-                    $query->where(
-                        'seller_id',
-                        $seller->id
-                    );
-                }
-            )
+            ->whereHas('product', function ($query) use ($seller) {
+                $query->where('seller_id', $seller->id);
+            })
             ->get();
 
-
         if ($cartItems->isEmpty()) {
-
             abort(404);
         }
-
 
         /*
         |--------------------------------------------------------------------------
@@ -82,37 +61,22 @@ class CheckoutController extends Controller
 
         $seller->load('sellerProfile');
 
-
         /*
         |--------------------------------------------------------------------------
         | Subtotal
         |--------------------------------------------------------------------------
         */
 
-        $subtotal = $cartItems->sum(
-            function ($item) {
-
-                if (!$item->product) {
-                    return 0;
-                }
-
-                return
-                    $item->product->price *
-                    $item->quantity;
+        $subtotal = $cartItems->sum(function ($item) {
+            if (!$item->product) {
+                return 0;
             }
-        );
 
+            return $item->product->price * $item->quantity;
+        });
 
-        return view(
-            'buyer.checkout.index',
-            compact(
-                'cartItems',
-                'subtotal',
-                'seller'
-            )
-        );
+        return view('buyer.checkout.index', compact('cartItems', 'subtotal', 'seller'));
     }
-
 
     /*
     |--------------------------------------------------------------------------
@@ -129,34 +93,16 @@ class CheckoutController extends Controller
         */
 
         $validated = $request->validate([
-            'seller_id' => [
-                'required',
-                'integer',
-                'exists:users,id',
-            ],
+            'seller_id' => ['required', 'integer', 'exists:users,id'],
 
-            'buyer_name' => [
-                'required',
-                'string',
-                'max:255',
-            ],
+            'buyer_name' => ['required', 'string', 'max:255'],
 
-            'buyer_phone' => [
-                'required',
-                'string',
-                'max:20',
-            ],
+            'buyer_phone' => ['required', 'string', 'max:20'],
 
-            'notes' => [
-                'nullable',
-                'string',
-                'max:1000',
-            ],
+            'notes' => ['nullable', 'string', 'max:1000'],
         ]);
 
-
         $buyer = $request->user();
-
 
         /*
         |--------------------------------------------------------------------------
@@ -164,33 +110,11 @@ class CheckoutController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        $seller = User::query()
-            ->with('sellerProfile')
-            ->where(
-                'id',
-                $validated['seller_id']
-            )
-            ->where(
-                'role',
-                'seller'
-            )
-            ->where(
-                'status',
-                'active'
-            )
-            ->first();
-
+        $seller = User::query()->with('sellerProfile')->where('id', $validated['seller_id'])->where('role', 'seller')->where('status', 'active')->first();
 
         if (!$seller) {
-
-            return redirect()
-                ->route('buyer.cart.index')
-                ->with(
-                    'error',
-                    'Penjual sudah tidak tersedia.'
-                );
+            return redirect()->route('buyer.cart.index')->with('error', 'Penjual sudah tidak tersedia.');
         }
-
 
         /*
         |--------------------------------------------------------------------------
@@ -203,22 +127,11 @@ class CheckoutController extends Controller
 
         $cartItems = CartItem::query()
             ->with('product')
-            ->where(
-                'user_id',
-                $buyer->id
-            )
-            ->whereHas(
-                'product',
-                function ($query) use ($seller) {
-
-                    $query->where(
-                        'seller_id',
-                        $seller->id
-                    );
-                }
-            )
+            ->where('user_id', $buyer->id)
+            ->whereHas('product', function ($query) use ($seller) {
+                $query->where('seller_id', $seller->id);
+            })
             ->get();
-
 
         /*
         |--------------------------------------------------------------------------
@@ -227,15 +140,8 @@ class CheckoutController extends Controller
         */
 
         if ($cartItems->isEmpty()) {
-
-            return redirect()
-                ->route('buyer.cart.index')
-                ->with(
-                    'error',
-                    'Produk dari penjual tersebut tidak ditemukan di keranjang.'
-                );
+            return redirect()->route('buyer.cart.index')->with('error', 'Produk dari penjual tersebut tidak ditemukan di keranjang.');
         }
-
 
         /*
         |--------------------------------------------------------------------------
@@ -243,258 +149,174 @@ class CheckoutController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        $order = DB::transaction(
-            function () use (
-                $buyer,
-                $seller,
-                $cartItems,
-                $validated
-            ) {
-
-                /*
+        $order = DB::transaction(function () use ($buyer, $seller, $cartItems, $validated) {
+            /*
                 |--------------------------------------------------------------------------
                 | Create Order
                 |--------------------------------------------------------------------------
                 */
 
-                $order = Order::create([
-                    'order_number' =>
-                    $this->generateOrderNumber(),
+            $order = Order::create([
+                'order_number' => $this->generateOrderNumber(),
 
-                    'buyer_id' =>
-                    $buyer->id,
+                'buyer_id' => $buyer->id,
 
-                    'seller_id' =>
-                    $seller->id,
+                'seller_id' => $seller->id,
 
-                    'buyer_name' =>
-                    $validated['buyer_name'],
+                'buyer_name' => $validated['buyer_name'],
 
-                    'buyer_phone' =>
-                    $validated['buyer_phone'],
+                'buyer_phone' => $validated['buyer_phone'],
 
-                    'subtotal' =>
-                    0,
+                'subtotal' => 0,
 
-                    'status' =>
-                    'processing',
+                'status' => 'processing',
 
-                    'notes' =>
-                    $validated['notes'] ?? null,
-                ]);
+                'notes' => $validated['notes'] ?? null,
+            ]);
 
-                ActivityLogger::log(
-                    'order_created',
-                    'membuat pesanan #' . $order->id,
-                    $order,
-                    [
-                        'total' => $order->total_amount,
-                        'seller_id' => $order->seller_id,
-                    ]
-                );
+            ActivityLogger::log('order_created', 'membuat pesanan #' . $order->id, $order, [
+                'total' => $order->total_amount,
+                'seller_id' => $order->seller_id,
+            ]);
 
-                $total = 0;
+            $total = 0;
 
-
-                /*
+            /*
                 |--------------------------------------------------------------------------
                 | Loop Cart Seller
                 |--------------------------------------------------------------------------
                 */
 
-                foreach ($cartItems as $cartItem) {
-
-                    /*
+            foreach ($cartItems as $cartItem) {
+                /*
                     |--------------------------------------------------------------------------
                     | Lock Produk
                     |--------------------------------------------------------------------------
                     */
 
-                    $product = Product::query()
-                        ->lockForUpdate()
-                        ->find(
-                            $cartItem->product_id
-                        );
+                $product = Product::query()->lockForUpdate()->find($cartItem->product_id);
 
+                if (!$product) {
+                    throw ValidationException::withMessages([
+                        'cart' => 'Salah satu produk sudah tidak tersedia.',
+                    ]);
+                }
 
-                    if (!$product) {
-
-                        throw ValidationException::withMessages([
-                            'cart' =>
-                            'Salah satu produk sudah tidak tersedia.',
-                        ]);
-                    }
-
-
-                    /*
+                /*
                     |--------------------------------------------------------------------------
                     | Pastikan Seller Produk Sesuai
                     |--------------------------------------------------------------------------
                     */
 
-                    if (
-                        (int) $product->seller_id
-                        !==
-                        (int) $seller->id
-                    ) {
+                if ((int) $product->seller_id !== (int) $seller->id) {
+                    throw ValidationException::withMessages([
+                        'cart' => 'Produk tidak sesuai dengan penjual.',
+                    ]);
+                }
 
-                        throw ValidationException::withMessages([
-                            'cart' =>
-                            'Produk tidak sesuai dengan penjual.',
-                        ]);
-                    }
-
-
-                    /*
+                /*
                     |--------------------------------------------------------------------------
                     | Produk Harus Aktif
                     |--------------------------------------------------------------------------
                     */
 
-                    if (
-                        $product->status !== 'active'
-                    ) {
+                if ($product->status !== 'active') {
+                    throw ValidationException::withMessages([
+                        'cart' => "Produk {$product->name} sudah tidak aktif.",
+                    ]);
+                }
 
-                        throw ValidationException::withMessages([
-                            'cart' =>
-                            "Produk {$product->name} sudah tidak aktif.",
-                        ]);
-                    }
-
-
-                    /*
+                /*
                     |--------------------------------------------------------------------------
                     | Cek Stock
                     |--------------------------------------------------------------------------
                     */
 
-                    if (
-                        $product->stock <
-                        $cartItem->quantity
-                    ) {
+                if ($product->stock < $cartItem->quantity) {
+                    throw ValidationException::withMessages([
+                        'cart' => "Stok {$product->name} tidak mencukupi.",
+                    ]);
+                }
 
-                        throw ValidationException::withMessages([
-                            'cart' =>
-                            "Stok {$product->name} tidak mencukupi.",
-                        ]);
-                    }
-
-
-                    /*
+                /*
                     |--------------------------------------------------------------------------
                     | Hitung Subtotal
                     |--------------------------------------------------------------------------
                     */
 
-                    $itemSubtotal =
-                        $product->price *
-                        $cartItem->quantity;
+                $itemSubtotal = $product->price * $cartItem->quantity;
 
-
-                    /*
+                /*
                     |--------------------------------------------------------------------------
                     | Simpan Snapshot Order Item
                     |--------------------------------------------------------------------------
                     */
 
-                    $order
-                        ->items()
-                        ->create([
-                            'product_id' =>
-                            $product->id,
+                $order->items()->create([
+                    'product_id' => $product->id,
 
-                            'product_name' =>
-                            $product->name,
+                    'product_name' => $product->name,
 
-                            'price' =>
-                            $product->price,
+                    'price' => $product->price,
 
-                            'quantity' =>
-                            $cartItem->quantity,
+                    'quantity' => $cartItem->quantity,
 
-                            'subtotal' =>
-                            $itemSubtotal,
-                        ]);
+                    'subtotal' => $itemSubtotal,
+                ]);
 
-
-                    /*
+                /*
                     |--------------------------------------------------------------------------
                     | Kurangi Stock
                     |--------------------------------------------------------------------------
                     */
 
-                    $product->decrement(
-                        'stock',
-                        $cartItem->quantity
-                    );
+                $product->decrement('stock', $cartItem->quantity);
 
-
-                    /*
+                /*
                     |--------------------------------------------------------------------------
                     | Tambahkan Total
                     |--------------------------------------------------------------------------
                     */
 
-                    $total += $itemSubtotal;
-                }
+                $total += $itemSubtotal;
+            }
 
-
-                /*
+            /*
                 |--------------------------------------------------------------------------
                 | Update Total Order
                 |--------------------------------------------------------------------------
                 */
 
-                $order->update([
-                    'subtotal' => $total,
-                ]);
+            $order->update([
+                'subtotal' => $total,
+            ]);
 
-
-                /*
+            /*
                 |--------------------------------------------------------------------------
                 | Hapus HANYA Cart Seller Ini
                 |--------------------------------------------------------------------------
                 */
 
-                CartItem::query()
-                    ->where(
-                        'user_id',
-                        $buyer->id
-                    )
-                    ->whereIn(
-                        'id',
-                        $cartItems->pluck('id')
-                    )
-                    ->delete();
+            CartItem::query()->where('user_id', $buyer->id)->whereIn('id', $cartItems->pluck('id'))->delete();
 
-
-                /*
+            /*
                 |--------------------------------------------------------------------------
                 | Return Satu Order
                 |--------------------------------------------------------------------------
                 */
 
-                return $order;
-            }
-        );
+            return $order;
+        });
 
-        ActivityLogger::log(
-            'order_sold',
-            'menandai pesanan #' . $order->id . ' sebagai sudah terjual',
-            $order
-        );
+        ActivityLogger::log('order_sold', 'menandai pesanan #' . $order->id . ' sebagai sudah terjual', $order);
         /*
         |--------------------------------------------------------------------------
         | Redirect Langsung Ke WhatsApp Seller
         |--------------------------------------------------------------------------
         */
 
-        return redirect()->route(
-            'buyer.orders.whatsapp',
-            $order
-        );
+        return redirect()->route('buyer.orders.whatsapp', $order);
     }
-
 
     /*
     |--------------------------------------------------------------------------
@@ -504,12 +326,74 @@ class CheckoutController extends Controller
 
     private function generateOrderNumber(): string
     {
-        return
-            'KM-' .
-            now()->format('Ymd') .
-            '-' .
-            Str::upper(
-                Str::random(8)
-            );
+        return 'KM-' . now()->format('Ymd') . '-' . Str::upper(Str::random(8));
+    }
+
+    public function buyNow(Request $request, Product $product): RedirectResponse
+    {
+        $validated = $request->validate([
+            'quantity' => ['required', 'integer', 'min:1'],
+        ]);
+
+        /*
+    |--------------------------------------------------------------------------
+    | CEK STOCK
+    |--------------------------------------------------------------------------
+    */
+
+        if ($product->stock < $validated['quantity']) {
+            return back()->withErrors([
+                'quantity' => 'Jumlah pembelian melebihi stok yang tersedia.',
+            ]);
+        }
+
+        /*
+    |--------------------------------------------------------------------------
+    | SIMPAN DIRECT BUY KE SESSION
+    |--------------------------------------------------------------------------
+    */
+
+        session([
+            'buy_now' => [
+                'product_id' => $product->id,
+                'quantity' => $validated['quantity'],
+            ],
+        ]);
+
+        /*
+    |--------------------------------------------------------------------------
+    | MASUK CHECKOUT
+    |--------------------------------------------------------------------------
+    */
+
+        return redirect()->route('buyer.checkout.direct');
+    }
+    public function direct(Request $request)
+    {
+        $buyNow = $request->session()->get('buy_now');
+
+        if (!$buyNow) {
+            return redirect()->route('home');
+        }
+
+        $product = Product::query()
+            ->with(['category', 'user.sellerProfile'])
+            ->findOrFail($buyNow['product_id']);
+
+        $quantity = (int) $buyNow['quantity'];
+
+        if ($quantity < 1 || $quantity > $product->stock) {
+            $request->session()->forget('buy_now');
+
+            return redirect()
+                ->route('buyer.products.show', $product)
+                ->withErrors([
+                    'quantity' => 'Jumlah produk tidak valid.',
+                ]);
+        }
+
+        $subtotal = $product->price * $quantity;
+
+        return view('buyer.checkout.direct', compact('product', 'quantity', 'subtotal'));
     }
 }

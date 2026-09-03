@@ -76,7 +76,7 @@
                        shadow-sm">
 
                 <div class="absolute inset-x-0 top-0
-                           h-1 bg-[#6F4E37]">
+                           h-1 bg-[#4371d1]">
                 </div>
 
 
@@ -117,7 +117,7 @@
                         class="flex size-11
                                items-center justify-center
                                rounded-xl
-                               bg-[#6F4E37]
+                               bg-[#4371d1]
                                text-white">
 
                         <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -375,7 +375,7 @@
                         class="rounded-xl px-4 py-2
                                text-sm font-semibold
                                transition
-                               {{ !request('status') ? 'bg-[#6F4E37] text-white shadow-sm' : 'bg-white text-[#7C695C] hover:bg-[#F1E6DE]' }}">
+                               {{ !request('status') ? 'bg-[#4371d1] text-white shadow-sm' : 'bg-white text-[#7C695C] hover:bg-[#F1E6DE]' }}">
 
                         Semua
 
@@ -400,8 +400,8 @@
                                text-sm font-semibold
                                transition
                                {{ request('status') === 'confirmed'
-                                   ? 'bg-[#8B6245] text-white shadow-sm'
-                                   : 'bg-white text-[#7C695C] hover:bg-[#F1E6DE] hover:text-[#6F4E37]' }}">
+                                   ? 'bg-[#4371d1] text-white shadow-sm'
+                                   : 'bg-white text-[#7C695C] hover:bg-[#F1E6DE] hover:text-[#4371d1]' }}">
 
                         Dikonfirmasi
 
@@ -496,10 +496,10 @@
                         class="inline-flex h-11
                                items-center justify-center
                                gap-2 rounded-xl
-                               bg-[#6F4E37] px-5
+                               bg-[#4371d1] px-5
                                text-sm font-bold
                                text-white transition
-                               hover:bg-[#5B3B2B]">
+                               hover:bg-[#0a1d45]">
 
                         <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 
@@ -555,7 +555,7 @@
                                 $statusClass = match ($order->status) {
                                     'pending' => 'border-[#E8D8B9] bg-[#FAF2DF] text-[#A87A37]',
 
-                                    'confirmed' => 'border-[#DFD2C7] bg-[#F1E6DE] text-[#6F4E37]',
+                                    'confirmed' => 'border-[#DFD2C7] bg-[#F1E6DE] text-[#4371d1]',
 
                                     'processing' => 'border-[#EBCFC2] bg-[#FBEAE2] text-[#A95E43]',
 
@@ -568,7 +568,7 @@
 
                                 $statusDot = match ($order->status) {
                                     'pending' => 'bg-[#C89B55]',
-                                    'confirmed' => 'bg-[#8B6245]',
+                                    'confirmed' => 'bg-[#4371d1]',
                                     'processing' => 'bg-[#C8795A]',
                                     'completed', 'sold' => 'bg-[#718268]',
                                     'cancelled' => 'bg-[#A65954]',
@@ -756,7 +756,7 @@
                                                    text-[#8B7465]
                                                    transition
                                                    hover:bg-[#F1E6DE]
-                                                   hover:text-[#6F4E37]">
+                                                   hover:text-[#4371d1]">
 
                                             <svg class="size-4.5" viewBox="0 0 24 24" fill="none"
                                                 stroke="currentColor" stroke-width="1.8">
@@ -790,7 +790,7 @@
                                                    items-center justify-center
                                                    rounded-2xl
                                                    bg-[#F1E6DE]
-                                                   text-[#6F4E37]">
+                                                   text-[#4371d1]">
 
                                             <svg class="size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                 stroke-width="1.7">

@@ -106,8 +106,8 @@
                                    justify-center
                                    rounded-2xl
                                    bg-gradient-to-br
-                                   from-[#493124]
-                                   via-[#6F4E37]
+                                   from-[#0a1d45]
+                                   via-[#4371d1]
                                    to-[#9A6948]
                                    text-white
                                    shadow-sm">
@@ -127,7 +127,7 @@
                rounded-2xl
                bg-gradient-to-br
                from-[#C8795A]
-               to-[#6F4E37]
+               to-[#4371d1]
                font-black
                text-white">
 
@@ -145,7 +145,7 @@
                                        text-xl
                                        font-black
                                        tracking-tight
-                                       text-[#493124]">
+                                       text-[#0a1d45]">
 
                                 {{ $siteSetting?->site_name ?? 'KampusMart' }}
 
@@ -243,8 +243,8 @@
                            font-semibold
                            transition
                            {{ request()->routeIs('admin.dashboard')
-                               ? 'bg-[#6F4E37] text-white shadow-sm'
-                               : 'text-[#6F6259] hover:bg-[#F3EAE3] hover:text-[#493124]' }}">
+                               ? 'bg-[#4371d1] text-white shadow-sm'
+                               : 'text-[#6F6259] hover:bg-[#F3EAE3] hover:text-[#0a1d45]' }}">
 
 
                     <svg class="size-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -284,8 +284,8 @@
                            font-semibold
                            transition
                            {{ request()->routeIs('admin.buyers.*')
-                               ? 'bg-[#F1E6DE] text-[#6F4E37]'
-                               : 'text-[#6F6259] hover:bg-[#F3EAE3] hover:text-[#493124]' }}">
+                               ? 'bg-[#F1E6DE] text-[#4371d1]'
+                               : 'text-[#6F6259] hover:bg-[#F3EAE3] hover:text-[#0a1d45]' }}">
 
 
                     <svg class="size-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -320,7 +320,7 @@
                            transition
                            {{ request()->routeIs('admin.sellers.*')
                                ? 'bg-[#FBEAE2] text-[#A95E43]'
-                               : 'text-[#6F6259] hover:bg-[#F3EAE3] hover:text-[#493124]' }}">
+                               : 'text-[#6F6259] hover:bg-[#F3EAE3] hover:text-[#0a1d45]' }}">
 
 
                     <svg class="size-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -355,7 +355,7 @@
                            transition
                            {{ request()->routeIs('admin.orders.*')
                                ? 'bg-[#FAF2DF] text-[#A87A37]'
-                               : 'text-[#6F6259] hover:bg-[#F3EAE3] hover:text-[#493124]' }}">
+                               : 'text-[#6F6259] hover:bg-[#F3EAE3] hover:text-[#0a1d45]' }}">
 
 
                     <svg class="size-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -392,7 +392,7 @@
                            transition
                            {{ request()->routeIs('admin.products.*')
                                ? 'bg-[#EEF3EA] text-[#65795E]'
-                               : 'text-[#6F6259] hover:bg-[#F3EAE3] hover:text-[#493124]' }}">
+                               : 'text-[#6F6259] hover:bg-[#F3EAE3] hover:text-[#0a1d45]' }}">
 
 
                     <svg class="size-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -426,8 +426,8 @@
                            font-semibold
                            transition
                            {{ request()->routeIs('admin.categories.*')
-                               ? 'bg-[#F4EAE2] text-[#6F4E37]'
-                               : 'text-[#6F6259] hover:bg-[#F3EAE3] hover:text-[#493124]' }}">
+                               ? 'bg-[#F4EAE2] text-[#4371d1]'
+                               : 'text-[#6F6259] hover:bg-[#F3EAE3] hover:text-[#0a1d45]' }}">
 
 
                     <svg class="size-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -466,7 +466,7 @@
            transition
            {{ request()->routeIs('admin.reports.*')
                ? 'bg-[#FAF2DF] text-[#A87A37]'
-               : 'text-[#6F6259] hover:bg-[#F3EAE3] hover:text-[#493124]' }}">
+               : 'text-[#6F6259] hover:bg-[#F3EAE3] hover:text-[#0a1d45]' }}">
 
                     <svg class="size-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         stroke-width="1.8">
@@ -524,8 +524,8 @@
                            font-semibold
                            transition
                            {{ request()->routeIs('admin.settings.*')
-                               ? 'bg-[#F1E6DE] text-[#6F4E37]'
-                               : 'text-[#6F6259] hover:bg-[#F3EAE3] hover:text-[#493124]' }}">
+                               ? 'bg-[#F1E6DE] text-[#4371d1]'
+                               : 'text-[#6F6259] hover:bg-[#F3EAE3] hover:text-[#0a1d45]' }}">
 
 
                     <svg class="size-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -657,7 +657,7 @@
                            border
                            border-[#DFD2C7]
                            bg-white
-                           text-[#6F4E37]
+                           text-[#4371d1]
                            transition
                            hover:bg-[#F3EAE3]
                            lg:hidden">
@@ -838,8 +838,8 @@
                                        justify-center
                                        rounded-full
                                        bg-gradient-to-br
-                                       from-[#493124]
-                                       via-[#6F4E37]
+                                       from-[#0a1d45]
+                                       via-[#4371d1]
                                        to-[#9A6948]
                                        text-sm
                                        font-black
@@ -918,7 +918,7 @@
                                    border-[#DFD2C7]
                                    bg-white
                                    shadow-2xl
-                                   shadow-[#493124]/10">
+                                   shadow-[#0a1d45]/10">
 
 
                             {{-- USER HEADER --}}
@@ -943,7 +943,7 @@
                                                items-center
                                                justify-center
                                                rounded-full
-                                               bg-[#6F4E37]
+                                               bg-[#4371d1]
                                                text-sm
                                                font-black
                                                uppercase
@@ -1002,7 +1002,7 @@
                                            text-[#5F5148]
                                            transition
                                            hover:bg-[#F3EAE3]
-                                           hover:text-[#493124]">
+                                           hover:text-[#0a1d45]">
 
 
                                     <div
@@ -1012,7 +1012,7 @@
                                                justify-center
                                                rounded-xl
                                                bg-[#F1E6DE]
-                                               text-[#6F4E37]">
+                                               text-[#4371d1]">
 
                                         <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                             stroke-width="1.8">

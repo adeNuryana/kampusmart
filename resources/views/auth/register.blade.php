@@ -38,9 +38,9 @@
                    hidden
                    overflow-hidden
                    bg-gradient-to-br
-                   from-[#38251C]
-                   via-[#6F4E37]
-                   to-[#A66D4B]
+                   from-[#0a1d45]
+                   via-[#4371d1]
+                   to-[#4371d1]
                    p-12
                    text-white
                    lg:flex
@@ -110,7 +110,7 @@
                                bg-white
                                text-lg
                                font-black
-                               text-[#6F4E37]
+                               text-[#4371d1]
                                shadow-lg
                                shadow-black/10">
 
@@ -156,7 +156,7 @@
                                    justify-center
                                    rounded-full
                                    bg-[#E3B66D]
-                                   text-[#493124]">
+                                   text-[#0a1d45]">
 
                             <i
                                 class="fa-solid
@@ -402,13 +402,13 @@
                                    justify-center
                                    rounded-xl
                                    bg-gradient-to-br
-                                   from-[#493124]
-                                   via-[#6F4E37]
+                                   from-[#0a1d45]
+                                   via-[#4371d1]
                                    to-[#9A6948]
                                    font-black
                                    text-white
                                    shadow-lg
-                                   shadow-[#6F4E37]/20">
+                                   shadow-[#4371d1]/20">
 
                             K
 
@@ -416,8 +416,8 @@
 
                         <span
                             class="bg-gradient-to-r
-                                   from-[#493124]
-                                   to-[#8B6245]
+                                   from-[#0a1d45]
+                                   to-[#4371d1]
                                    bg-clip-text
                                    text-xl
                                    font-black
@@ -440,7 +440,7 @@
                            bg-white/90
                            p-5
                            shadow-xl
-                           shadow-[#6F4E37]/5
+                           shadow-[#4371d1]/5
                            backdrop-blur
                            sm:p-7
                            lg:border-0
@@ -460,7 +460,7 @@
                             class="mb-2
                                    text-sm
                                    font-bold
-                                   text-[#A66D4B]">
+                                   text-[#4371d1]">
 
                             Buat akun baru
 
@@ -789,7 +789,7 @@
                                            justify-center
                                            text-slate-400
                                            transition
-                                           hover:text-[#6F4E37]">
+                                           hover:text-[#4371d1]">
 
                                     <i class="fa-regular"
                                         :class="showPassword
@@ -880,7 +880,7 @@
                                            justify-center
                                            text-slate-400
                                            transition
-                                           hover:text-[#6F4E37]">
+                                           hover:text-[#4371d1]">
 
                                     <i class="fa-regular"
                                         :class="showConfirmation
@@ -909,15 +909,15 @@
                                    gap-2
                                    rounded-xl
                                    bg-gradient-to-r
-                                   from-[#5B3B2B]
-                                   via-[#6F4E37]
-                                   to-[#8B6245]
+                                   from-[#0a1d45]
+                                   via-[#4371d1]
+                                   to-[#4371d1]
                                    px-5
                                    text-sm
                                    font-bold
                                    text-white
                                    shadow-lg
-                                   shadow-[#6F4E37]/20
+                                   shadow-[#4371d1]/20
                                    transition
                                    duration-300
                                    hover:-translate-y-0.5
@@ -961,9 +961,9 @@
                             <a href="{{ route('login') }}"
                                 class="ml-1
                                        font-bold
-                                       text-[#6F4E37]
+                                       text-[#4371d1]
                                        transition
-                                       hover:text-[#A66D4B]">
+                                       hover:text-[#4371d1]">
 
                                 Masuk
 

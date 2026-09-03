@@ -46,7 +46,7 @@ if (canvas) {
 
                     data: values,
 
-                    borderColor: '#6F4E37',
+                    borderColor: '#4371d1',
 
                     backgroundColor: gradient,
 
@@ -62,12 +62,12 @@ if (canvas) {
 
                     pointBackgroundColor: '#FFFFFF',
 
-                    pointBorderColor: '#6F4E37',
+                    pointBorderColor: '#4371d1',
 
                     pointBorderWidth: 2,
 
                     pointHoverBackgroundColor:
-                        '#6F4E37',
+                        '#4371d1',
 
                     pointHoverBorderColor:
                         '#FFFFFF',

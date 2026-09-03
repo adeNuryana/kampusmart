@@ -162,7 +162,7 @@
                                items-center justify-center
                                rounded-xl
                                bg-[#F4EAE2]
-                               text-[#6F4E37]">
+                               text-[#4371d1]">
 
                         <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
 
@@ -270,11 +270,11 @@
                                w-full items-center
                                justify-center gap-2
                                rounded-xl
-                               bg-[#6F4E37]
+                               bg-[#4371d1]
                                px-5 text-sm
                                font-bold text-white
                                transition
-                               hover:bg-[#5B3B2B]">
+                               hover:bg-[#0a1d45]">
 
                         <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
 
@@ -306,7 +306,7 @@
                                text-[#6F6259]
                                transition
                                hover:bg-[#F5ECE6]
-                               hover:text-[#493124]">
+                               hover:text-[#0a1d45]">
 
                         <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
 
@@ -419,7 +419,7 @@
                        shadow-sm">
 
                 <div class="absolute inset-x-0 top-0
-                           h-1 bg-[#6F4E37]">
+                           h-1 bg-[#4371d1]">
                 </div>
 
 
@@ -431,7 +431,7 @@
                         <p
                             class="text-xs font-bold
                                    uppercase tracking-wide
-                                   text-[#6F4E37]">
+                                   text-[#4371d1]">
 
                             Transaksi Selesai
 
@@ -464,7 +464,7 @@
                                shrink-0 items-center
                                justify-center
                                rounded-xl
-                               bg-[#6F4E37]
+                               bg-[#4371d1]
                                text-white">
 
                         <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -633,7 +633,7 @@
                         @php
                             $rankClass = match ($index) {
                                 0 => 'bg-[#C89B55] text-white',
-                                1 => 'bg-[#F1E6DE] text-[#6F4E37]',
+                                1 => 'bg-[#F1E6DE] text-[#4371d1]',
                                 2 => 'bg-[#FBEAE2] text-[#A95E43]',
                                 default => 'bg-[#FAF7F2] text-[#8B7465]',
                             };
@@ -930,7 +930,7 @@
                                                    bg-[#F4EAE2]
                                                    px-2.5 py-1.5
                                                    text-xs font-bold
-                                                   text-[#6F4E37]">
+                                                   text-[#4371d1]">
 
                                             {{ $sale->items->sum('quantity') }}
                                             barang

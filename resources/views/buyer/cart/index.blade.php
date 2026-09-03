@@ -78,7 +78,7 @@
                                    py-1.5
                                    text-xs
                                    font-bold
-                                   text-[#6F4E37]">
+                                   text-[#4371d1]">
 
                             <i class="fa-solid fa-cart-shopping"></i>
 
@@ -139,7 +139,7 @@
                                 <p
                                     class="text-xl
                                            font-black
-                                           text-[#6F4E37]">
+                                           text-[#4371d1]">
 
                                     {{ $cartItems->sum('quantity') }}
 
@@ -288,7 +288,7 @@
                                    from-[#F4EAE2]
                                    to-[#E9D8CB]
                                    text-3xl
-                                   text-[#6F4E37]
+                                   text-[#4371d1]
                                    shadow-sm">
 
                             <i class="fa-solid fa-cart-shopping"></i>
@@ -330,15 +330,15 @@
                                    gap-2
                                    rounded-xl
                                    bg-gradient-to-r
-                                   from-[#5B3B2B]
-                                   via-[#6F4E37]
-                                   to-[#8B6245]
+                                   from-[#0a1d45]
+                                   via-[#4371d1]
+                                   to-[#4371d1]
                                    px-5
                                    text-sm
                                    font-bold
                                    text-white
                                    shadow-lg
-                                   shadow-[#6F4E37]/20
+                                   shadow-[#4371d1]/20
                                    transition
                                    duration-300
                                    hover:-translate-y-0.5
@@ -446,9 +446,9 @@
                                                        justify-center
                                                        rounded-full
                                                        bg-gradient-to-br
-                                                       from-[#5B3B2B]
-                                                       via-[#6F4E37]
-                                                       to-[#8B6245]
+                                                       from-[#0a1d45]
+                                                       via-[#4371d1]
+                                                       to-[#4371d1]
                                                        font-black
                                                        text-white
                                                        shadow-sm">
@@ -515,7 +515,7 @@
                                                py-1.5
                                                text-[10px]
                                                font-bold
-                                               text-[#6F4E37]
+                                               text-[#4371d1]
                                                sm:text-xs">
 
                                         {{ $items->count() }}
@@ -671,7 +671,7 @@
                                                                leading-5
                                                                text-slate-800
                                                                transition
-                                                               hover:text-[#6F4E37]
+                                                               hover:text-[#4371d1]
                                                                sm:text-base">
 
                                                         {{ $product->name }}
@@ -727,7 +727,7 @@
                                                         class="mt-2
                                                                text-sm
                                                                font-black
-                                                               text-[#6F4E37]
+                                                               text-[#4371d1]
                                                                sm:text-base">
 
                                                         Rp{{ number_format($product->price, 0, ',', '.') }}
@@ -798,7 +798,7 @@
                        size-10
                        items-center
                        justify-center
-                       text-[#6F4E37]
+                       text-[#4371d1]
                        transition
                        hover:bg-[#F4EAE2]
                        disabled:cursor-not-allowed
@@ -829,7 +829,7 @@
                        text-center
                        text-sm
                        font-bold
-                       text-[#5B3B2B]
+                       text-[#0a1d45]
                        outline-none
                        focus:ring-0">
 
@@ -844,7 +844,7 @@
                        size-10
                        items-center
                        justify-center
-                       text-[#6F4E37]
+                       text-[#4371d1]
                        transition
                        hover:bg-[#F4EAE2]
                        disabled:cursor-not-allowed
@@ -890,7 +890,7 @@
                                                                 <p class="mt-1
                text-sm
                font-black
-               text-[#5B3B2B]
+               text-[#0a1d45]
                sm:text-base"
                                                                     x-text="
             formatPrice(
@@ -949,7 +949,7 @@
            text-center
            text-sm
            font-bold
-           text-[#5B3B2B]
+           text-[#0a1d45]
            outline-none
            focus:ring-0">
                                                     </form>
@@ -991,7 +991,7 @@
                                                         <p class="mt-1
                text-sm
                font-black
-               text-[#5B3B2B]
+               text-[#0a1d45]
                sm:text-base"
                                                             x-text="
             formatPrice(
@@ -1097,7 +1097,7 @@
                                             class="mt-1
                                                    text-xl
                                                    font-black
-                                                   text-[#5B3B2B]">
+                                                   text-[#0a1d45]">
 
                                             Rp{{ number_format($sellerSubtotal, 0, ',', '.') }}
 
@@ -1118,15 +1118,15 @@
                                                gap-2
                                                rounded-xl
                                                bg-gradient-to-r
-                                               from-[#5B3B2B]
-                                               via-[#6F4E37]
-                                               to-[#8B6245]
+                                               from-[#0a1d45]
+                                               via-[#4371d1]
+                                               to-[#4371d1]
                                                px-5
                                                text-sm
                                                font-bold
                                                text-white
                                                shadow-lg
-                                               shadow-[#6F4E37]/15
+                                               shadow-[#4371d1]/15
                                                transition
                                                duration-300
                                                hover:-translate-y-0.5
@@ -1179,9 +1179,9 @@
                                        border-b
                                        border-[#EFE4DC]
                                        bg-gradient-to-br
-                                       from-[#5B3B2B]
-                                       via-[#6F4E37]
-                                       to-[#8B6245]
+                                       from-[#0a1d45]
+                                       via-[#4371d1]
+                                       to-[#4371d1]
                                        p-5
                                        text-white">
 
@@ -1278,7 +1278,7 @@
                                                        rounded-lg
                                                        bg-[#F4EAE2]
                                                        text-xs
-                                                       text-[#6F4E37]">
+                                                       text-[#4371d1]">
 
                                                 <i class="fa-solid fa-store"></i>
 
@@ -1394,7 +1394,7 @@
                                         <span
                                             class="text-xl
                                                    font-black
-                                                   text-[#5B3B2B]">
+                                                   text-[#0a1d45]">
 
                                             Rp{{ number_format($subtotal, 0, ',', '.') }}
 
@@ -1480,7 +1480,7 @@
                                            py-2.5
                                            text-xs
                                            font-bold
-                                           text-[#6F4E37]
+                                           text-[#4371d1]
                                            transition
                                            hover:bg-[#FBF4EF]">
 

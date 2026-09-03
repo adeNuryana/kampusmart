@@ -16,7 +16,7 @@
                 class="inline-flex items-center gap-2
                        rounded-full bg-[#F4EAE2]
                        px-3 py-1.5
-                       text-xs font-bold text-[#6F4E37]">
+                       text-xs font-bold text-[#4371d1]">
 
                 <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
 
@@ -78,7 +78,7 @@
                     <div
                         class="h-1.5
                                bg-gradient-to-r
-                               from-[#6F4E37]
+                               from-[#4371d1]
                                via-[#9A6B4C]
                                to-[#C89B55]">
                     </div>
@@ -93,7 +93,7 @@
                                 class="flex size-20
                                        items-center justify-center
                                        rounded-3xl
-                                       bg-[#6F4E37]
+                                       bg-[#4371d1]
                                        text-2xl font-black
                                        uppercase text-white
                                        shadow-sm">
@@ -129,7 +129,7 @@
                                        bg-[#F4EAE2]
                                        px-3 py-1.5
                                        text-xs font-bold
-                                       text-[#6F4E37]">
+                                       text-[#4371d1]">
 
                                 <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="1.8">
@@ -292,7 +292,7 @@
                                        shrink-0
                                        items-center justify-center
                                        rounded-xl
-                                       bg-[#6F4E37]
+                                       bg-[#4371d1]
                                        text-white">
 
                                 <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -583,12 +583,12 @@
                                 class="inline-flex h-11
                                        items-center justify-center
                                        gap-2 rounded-xl
-                                       bg-[#6F4E37]
+                                       bg-[#4371d1]
                                        px-5
                                        text-sm font-bold
                                        text-white
                                        shadow-sm transition
-                                       hover:bg-[#5B3B2B]
+                                       hover:bg-[#0a1d45]
                                        hover:shadow-md">
 
                                 <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -776,7 +776,7 @@
                                                text-[#9C8677]
                                                transition
                                                hover:bg-[#F1E6DE]
-                                               hover:text-[#6F4E37]">
+                                               hover:text-[#4371d1]">
 
                                         <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                             stroke-width="1.8">
@@ -851,7 +851,7 @@
                                                    text-[#9C8677]
                                                    transition
                                                    hover:bg-[#F1E6DE]
-                                                   hover:text-[#6F4E37]">
+                                                   hover:text-[#4371d1]">
 
                                             <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                 stroke-width="1.8">
@@ -932,7 +932,7 @@
                                                    text-[#9C8677]
                                                    transition
                                                    hover:bg-[#F1E6DE]
-                                                   hover:text-[#6F4E37]">
+                                                   hover:text-[#4371d1]">
 
                                             <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                 stroke-width="1.8">

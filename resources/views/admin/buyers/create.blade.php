@@ -20,7 +20,7 @@
                        font-semibold
                        text-[#8B7465]
                        transition
-                       hover:text-[#6F4E37]">
+                       hover:text-[#4371d1]">
 
                 <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 
@@ -45,7 +45,7 @@
                            py-1.5
                            text-xs
                            font-bold
-                           text-[#6F4E37]">
+                           text-[#4371d1]">
 
                     <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
 
@@ -138,7 +138,7 @@
                                    items-center
                                    justify-center
                                    rounded-xl
-                                   bg-[#6F4E37]
+                                   bg-[#4371d1]
                                    text-white">
 
                             <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -720,7 +720,7 @@
                                        text-[#9C8677]
                                        transition
                                        hover:bg-[#F1E6DE]
-                                       hover:text-[#6F4E37]">
+                                       hover:text-[#4371d1]">
 
 
                                 {{-- EYE --}}
@@ -842,7 +842,7 @@
                                        text-[#9C8677]
                                        transition
                                        hover:bg-[#F1E6DE]
-                                       hover:text-[#6F4E37]">
+                                       hover:text-[#4371d1]">
 
 
                                 <svg x-show="!showConfirmation" class="size-4" viewBox="0 0 24 24" fill="none"
@@ -915,7 +915,7 @@
                            text-[#6F6259]
                            transition
                            hover:bg-[#F3EAE3]
-                           hover:text-[#493124]">
+                           hover:text-[#0a1d45]">
 
                     Batal
 
@@ -930,14 +930,14 @@
                            justify-center
                            gap-2
                            rounded-xl
-                           bg-[#6F4E37]
+                           bg-[#4371d1]
                            px-5
                            text-sm
                            font-bold
                            text-white
                            shadow-sm
                            transition
-                           hover:bg-[#5B3B2B]
+                           hover:bg-[#0a1d45]
                            hover:shadow-md">
 
 

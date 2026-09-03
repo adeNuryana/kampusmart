@@ -50,7 +50,7 @@
                border-[#E7D9CF]
                bg-white/90
                shadow-sm
-               shadow-[#6F4E37]/5
+               shadow-[#4371d1]/5
                backdrop-blur-xl">
 
 
@@ -94,7 +94,7 @@
                rounded-2xl
                bg-gradient-to-br
                from-[#C8795A]
-               to-[#6F4E37]
+               to-[#4371d1]
                font-black
                text-white">
 
@@ -107,8 +107,8 @@
                     <span
                         class="hidden
                                bg-gradient-to-r
-                               from-[#493124]
-                               to-[#8B6245]
+                               from-[#0a1d45]
+                               to-[#4371d1]
                                bg-clip-text
                                text-xl
                                font-black
@@ -197,13 +197,13 @@
                                items-center
                                justify-center
                                bg-gradient-to-r
-                               from-[#5B3B2B]
-                               via-[#6F4E37]
-                               to-[#8B6245]
+                               from-[#0a1d45]
+                               via-[#4371d1]
+                               to-[#4371d1]
                                text-white
                                transition
-                               hover:from-[#493124]
-                               hover:to-[#6F4E37]
+                               hover:from-[#0a1d45]
+                               hover:to-[#4371d1]
                                md:w-14">
 
                         <i class="fa-solid
@@ -234,7 +234,7 @@
                border
                border-[#EEE2D9]
                bg-white
-               text-[#6F4E37]
+               text-[#4371d1]
                shadow-sm
                transition
                duration-300
@@ -292,7 +292,7 @@
                                border
                                border-[#EEE2D9]
                                bg-white
-                               text-[#6F4E37]
+                               text-[#4371d1]
                                shadow-sm
                                transition
                                duration-300
@@ -335,7 +335,7 @@
                    py-2
                    text-sm
                    font-semibold
-                   text-[#6F4E37]
+                   text-[#4371d1]
                    shadow-sm
                    transition
                    duration-300
@@ -354,16 +354,16 @@
                                 class="ml-2
                        rounded-xl
                        bg-gradient-to-r
-                       from-[#5B3B2B]
-                       via-[#6F4E37]
-                       to-[#8B6245]
+                       from-[#0a1d45]
+                       via-[#4371d1]
+                       to-[#4371d1]
                        px-4
                        py-2
                        text-sm
                        font-semibold
                        text-white
                        shadow-sm
-                       shadow-[#6F4E37]/15
+                       shadow-[#4371d1]/15
                        transition
                        duration-300
                        hover:-translate-y-0.5
@@ -423,7 +423,7 @@
                                    text-[10px]
                                    text-[#A38B7B]">
 
-                                            Buyer
+                                            buyer
 
                                         </p>
 
@@ -445,7 +445,7 @@
                                text-sm
                                font-black
                                uppercase
-                               text-[#6F4E37]
+                               text-[#4371d1]
                                ring-2
                                ring-white
                                shadow-sm">
@@ -529,7 +529,7 @@
                            border-[#E6D8CD]
                            bg-white
                            shadow-2xl
-                           shadow-[#6F4E37]/10">
+                           shadow-[#4371d1]/10">
 
 
                                     {{-- USER HEADER --}}
@@ -557,9 +557,9 @@
                                        justify-center
                                        rounded-full
                                        bg-gradient-to-br
-                                       from-[#5B3B2B]
-                                       via-[#6F4E37]
-                                       to-[#8B6245]
+                                       from-[#0a1d45]
+                                       via-[#4371d1]
+                                       to-[#4371d1]
                                        text-sm
                                        font-black
                                        uppercase
@@ -630,9 +630,9 @@
                                        justify-center
                                        rounded-xl
                                        bg-[#F4EAE2]
-                                       text-[#6F4E37]
+                                       text-[#4371d1]
                                        transition
-                                       group-hover:bg-[#6F4E37]
+                                       group-hover:bg-[#4371d1]
                                        group-hover:text-white">
 
                                                 <i class="fa-regular
@@ -816,8 +816,8 @@
                            items-center
                            justify-center
                            bg-gradient-to-r
-                           from-[#5B3B2B]
-                           to-[#8B6245]
+                           from-[#0a1d45]
+                           to-[#4371d1]
                            text-white">
 
                     <i class="fa-solid
@@ -896,7 +896,7 @@
                rounded-2xl
                bg-gradient-to-br
                from-[#C8795A]
-               to-[#6F4E37]
+               to-[#4371d1]
                font-black
                text-white">
 
@@ -909,7 +909,7 @@
                     <h3
                         class="text-xl
                                font-black
-                               text-[#5B3B2B]">
+                               text-[#0a1d45]">
                         <p>
                             {{ $siteSetting?->site_name ?? 'KampusMart' }}
                         </p>
@@ -958,21 +958,21 @@
                            text-slate-500">
 
                     <a href="#" class="transition
-                               hover:text-[#6F4E37]">
+                               hover:text-[#4371d1]">
 
                         Tentang MarketKu
 
                     </a>
 
                     <a href="#" class="transition
-                               hover:text-[#6F4E37]">
+                               hover:text-[#4371d1]">
 
                         Kebijakan Privasi
 
                     </a>
 
                     <a href="#" class="transition
-                               hover:text-[#6F4E37]">
+                               hover:text-[#4371d1]">
 
                         Syarat & Ketentuan
 
@@ -1007,21 +1007,21 @@
                            text-slate-500">
 
                     <a href="#" class="transition
-                               hover:text-[#8B6245]">
+                               hover:text-[#4371d1]">
 
                         Pusat Bantuan
 
                     </a>
 
                     <a href="#" class="transition
-                               hover:text-[#8B6245]">
+                               hover:text-[#4371d1]">
 
                         Cara Belanja
 
                     </a>
 
                     <a href="#" class="transition
-                               hover:text-[#8B6245]">
+                               hover:text-[#4371d1]">
 
                         Pembayaran
 
@@ -1166,7 +1166,7 @@
                        justify-center
                        gap-1
                        py-3
-                       text-[#6F4E37]
+                       text-[#4371d1]
                        transition
                        active:scale-95">
 

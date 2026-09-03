@@ -14,7 +14,7 @@
                        rounded-full bg-[#F4EAE2]
                        px-3 py-1.5
                        text-xs font-bold
-                       text-[#6F4E37]">
+                       text-[#4371d1]">
 
                 Branding Website
 
@@ -121,7 +121,7 @@
                                    text-[#4D4038]
                                    outline-none
                                    transition
-                                   focus:border-[#6F4E37]
+                                   focus:border-[#4371d1]
                                    focus:ring-4
                                    focus:ring-[#F4EAE2]">
 
@@ -194,7 +194,7 @@
                                         <span id="logoPlaceholder"
                                             class="text-2xl
                                                    font-black
-                                                   text-[#6F4E37]">
+                                                   text-[#4371d1]">
 
                                             {{ strtoupper(substr($setting->site_name, 0, 1)) }}
 
@@ -260,12 +260,12 @@
                         class="inline-flex h-11
                                items-center justify-center
                                gap-2 rounded-xl
-                               bg-[#6F4E37]
+                               bg-[#4371d1]
                                px-5
                                text-sm font-bold
                                text-white
                                transition
-                               hover:bg-[#5B3B2B]">
+                               hover:bg-[#0a1d45]">
 
                         Simpan Branding
 

@@ -103,7 +103,7 @@
                rounded-2xl
                bg-gradient-to-br
                from-[#C8795A]
-               to-[#6F4E37]
+               to-[#4371d1]
                font-black
                text-white">
 
@@ -298,7 +298,7 @@
                                    transition
                                    {{ request()->routeIs('seller.dashboard')
                                        ? 'bg-[#FBEAE2] text-[#A95E43]'
-                                       : 'text-[#6F6259] hover:bg-[#F5ECE6] hover:text-[#493124]' }}">
+                                       : 'text-[#6F6259] hover:bg-[#F5ECE6] hover:text-[#0a1d45]' }}">
 
                             <svg class="size-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="1.8">
@@ -338,7 +338,7 @@
                                    transition
                                    {{ request()->routeIs('seller.products.*')
                                        ? 'bg-[#FBEAE2] text-[#A95E43]'
-                                       : 'text-[#6F6259] hover:bg-[#F5ECE6] hover:text-[#493124]' }}">
+                                       : 'text-[#6F6259] hover:bg-[#F5ECE6] hover:text-[#0a1d45]' }}">
 
                             <svg class="size-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="1.8">
@@ -373,7 +373,7 @@
                                    transition
                                    {{ request()->routeIs('seller.categories.*')
                                        ? 'bg-[#FBEAE2] text-[#A95E43]'
-                                       : 'text-[#6F6259] hover:bg-[#F5ECE6] hover:text-[#493124]' }}">
+                                       : 'text-[#6F6259] hover:bg-[#F5ECE6] hover:text-[#0a1d45]' }}">
 
                             <svg class="size-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="1.8">
@@ -413,7 +413,7 @@
                                    transition
                                    {{ request()->routeIs('seller.orders.*')
                                        ? 'bg-[#FBEAE2] text-[#A95E43]'
-                                       : 'text-[#6F6259] hover:bg-[#F5ECE6] hover:text-[#493124]' }}">
+                                       : 'text-[#6F6259] hover:bg-[#F5ECE6] hover:text-[#0a1d45]' }}">
 
                             <svg class="size-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="1.8">
@@ -450,7 +450,7 @@
                                    transition
                                    {{ request()->routeIs('seller.sales.*')
                                        ? 'bg-[#FBEAE2] text-[#A95E43]'
-                                       : 'text-[#6F6259] hover:bg-[#F5ECE6] hover:text-[#493124]' }}">
+                                       : 'text-[#6F6259] hover:bg-[#F5ECE6] hover:text-[#0a1d45]' }}">
 
                             <svg class="size-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="1.8">
@@ -518,7 +518,7 @@
                                    transition
                                    {{ request()->routeIs('seller.settings.*')
                                        ? 'bg-[#FBEAE2] text-[#A95E43]'
-                                       : 'text-[#6F6259] hover:bg-[#F5ECE6] hover:text-[#493124]' }}">
+                                       : 'text-[#6F6259] hover:bg-[#F5ECE6] hover:text-[#0a1d45]' }}">
 
                             <svg class="size-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="1.8">
@@ -902,7 +902,7 @@
                                                text-[#5F5148]
                                                transition
                                                hover:bg-[#F5ECE6]
-                                               hover:text-[#493124]">
+                                               hover:text-[#0a1d45]">
 
                                         <div
                                             class="flex size-8
@@ -910,7 +910,7 @@
                                                    justify-center
                                                    rounded-lg
                                                    bg-[#F4EAE2]
-                                                   text-[#6F4E37]">
+                                                   text-[#4371d1]">
 
                                             <svg class="size-4" viewBox="0 0 24 24" fill="none"
                                                 stroke="currentColor" stroke-width="1.8">

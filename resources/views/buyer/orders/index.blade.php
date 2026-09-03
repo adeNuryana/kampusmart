@@ -81,7 +81,7 @@
                                py-1.5
                                text-xs
                                font-bold
-                               text-[#6F4E37]">
+                               text-[#4371d1]">
 
                         <i class="fa-solid fa-receipt"></i>
 
@@ -192,7 +192,7 @@
                         $statusClass = match ($order->status) {
                             'pending' => 'bg-[#FAF2DF] text-[#A87A37] border-[#ECD7AF]',
 
-                            'confirmed' => 'bg-[#F4EAE2] text-[#6F4E37] border-[#E4D0C0]',
+                            'confirmed' => 'bg-[#F4EAE2] text-[#4371d1] border-[#E4D0C0]',
 
                             'processing' => 'bg-[#FBEAE2] text-[#A95E43] border-[#F1D4C2]',
 
@@ -303,9 +303,9 @@
                                            justify-center
                                            rounded-xl
                                            bg-gradient-to-br
-                                           from-[#5B3B2B]
-                                           via-[#6F4E37]
-                                           to-[#8B6245]
+                                           from-[#0a1d45]
+                                           via-[#4371d1]
+                                           to-[#4371d1]
                                            text-white
                                            shadow-sm">
 
@@ -426,7 +426,7 @@
                                                        to-[#E6D3C5]
                                                        text-sm
                                                        font-black
-                                                       text-[#6F4E37]">
+                                                       text-[#4371d1]">
 
                                                 {{ strtoupper(substr($storeName, 0, 1)) }}
 
@@ -497,7 +497,7 @@
                                                            rounded-lg
                                                            bg-[#F4EAE2]
                                                            text-xs
-                                                           text-[#6F4E37]">
+                                                           text-[#4371d1]">
 
                                                     <i
                                                         class="fa-solid
@@ -526,7 +526,7 @@
                                                        py-1
                                                        text-[10px]
                                                        font-bold
-                                                       text-[#6F4E37]
+                                                       text-[#4371d1]
                                                        shadow-sm">
 
                                                 {{ $totalItems }}
@@ -566,7 +566,7 @@
                                                         class="shrink-0
                                                                text-xs
                                                                font-semibold
-                                                               text-[#8B6245]">
+                                                               text-[#4371d1]">
 
                                                         × {{ $item->quantity }}
 
@@ -643,7 +643,7 @@
                                                    text-xl
                                                    font-black
                                                    tracking-tight
-                                                   text-[#5B3B2B]">
+                                                   text-[#0a1d45]">
 
                                             Rp{{ number_format($order->subtotal, 0, ',', '.') }}
 
@@ -734,7 +734,7 @@
                                                py-2.5
                                                text-xs
                                                font-bold
-                                               text-[#6F4E37]
+                                               text-[#4371d1]
                                                transition
                                                hover:bg-[#FBF4EF]">
 
@@ -805,7 +805,7 @@
                                        from-[#F4EAE2]
                                        to-[#E9D8CB]
                                        text-3xl
-                                       text-[#6F4E37]
+                                       text-[#4371d1]
                                        shadow-sm">
 
                                 <i class="fa-solid fa-receipt"></i>
@@ -848,15 +848,15 @@
                                        gap-2
                                        rounded-xl
                                        bg-gradient-to-r
-                                       from-[#5B3B2B]
-                                       via-[#6F4E37]
-                                       to-[#8B6245]
+                                       from-[#0a1d45]
+                                       via-[#4371d1]
+                                       to-[#4371d1]
                                        px-5
                                        text-sm
                                        font-bold
                                        text-white
                                        shadow-lg
-                                       shadow-[#6F4E37]/20
+                                       shadow-[#4371d1]/20
                                        transition
                                        duration-300
                                        hover:-translate-y-0.5

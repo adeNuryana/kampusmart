@@ -199,7 +199,6 @@ Route::middleware(['auth', 'role:buyer'])
         Route::get('/checkout/{seller}', [CheckoutController::class, 'index'])->name('checkout.index');
 
         Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
-
         /*
                                 |--------------------------------------------------------------------------
                                 | Pesanan
@@ -210,8 +209,7 @@ Route::middleware(['auth', 'role:buyer'])
 
         Route::get('/pesanan/{order}/whatsapp', [BuyerOrderController::class, 'whatsapp'])->name('orders.whatsapp');
         Route::get('/produk', [BuyerProductController::class, 'index'])->name('products.index');
-
-        /*
+        Route::post('/produk/{product}/beli-sekarang', [BuyerOrderController::class, 'storeDirect'])->name('products.buy-now'); /*
                                         |--------------------------------------------------------------------------
                                         | Profile Buyer
                                         |--------------------------------------------------------------------------

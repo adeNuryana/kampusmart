@@ -51,7 +51,7 @@
         .brand {
             margin: 0;
 
-            color: #6F4E37;
+            color: #4371d1;
 
             font-size: 21px;
 
@@ -182,7 +182,7 @@
 
 
         .coffee {
-            color: #6F4E37;
+            color: #4371d1;
         }
 
 
@@ -211,7 +211,7 @@
 
             background: #F4EAE2;
 
-            color: #6F4E37;
+            color: #4371d1;
 
             font-size: 8px;
 

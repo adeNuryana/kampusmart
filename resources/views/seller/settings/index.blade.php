@@ -89,7 +89,7 @@
                                bg-gradient-to-r
                                from-[#C8795A]
                                via-[#A95E43]
-                               to-[#6F4E37]">
+                               to-[#4371d1]">
                     </div>
 
 

@@ -134,7 +134,7 @@
                        bg-white p-5 shadow-sm">
 
                 <div class="absolute inset-x-0 top-0
-                           h-1 bg-[#6F4E37]">
+                           h-1 bg-[#4371d1]">
                 </div>
 
 
@@ -184,7 +184,7 @@
                                shrink-0 items-center
                                justify-center
                                rounded-xl
-                               bg-[#6F4E37]
+                               bg-[#4371d1]
                                text-white">
 
                         <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -677,7 +677,7 @@
                                     $statusClass = match ($order->status) {
                                         'pending' => 'border-[#E8D8B9] bg-[#FAF2DF] text-[#A87A37]',
 
-                                        'confirmed' => 'border-[#DFD2C7] bg-[#F1E6DE] text-[#6F4E37]',
+                                        'confirmed' => 'border-[#DFD2C7] bg-[#F1E6DE] text-[#4371d1]',
 
                                         'processing' => 'border-[#EBCFC2] bg-[#FBEAE2] text-[#A95E43]',
 
@@ -690,7 +690,7 @@
 
                                     $statusDot = match ($order->status) {
                                         'pending' => 'bg-[#C89B55]',
-                                        'confirmed' => 'bg-[#8B6245]',
+                                        'confirmed' => 'bg-[#4371d1]',
                                         'processing' => 'bg-[#C8795A]',
                                         'completed', 'sold' => 'bg-[#718268]',
                                         'cancelled' => 'bg-[#A65954]',
@@ -857,7 +857,7 @@
                                                        justify-center
                                                        rounded-2xl
                                                        bg-[#F4EAE2]
-                                                       text-[#6F4E37]">
+                                                       text-[#4371d1]">
 
                                                 <svg class="size-6" viewBox="0 0 24 24" fill="none"
                                                     stroke="currentColor" stroke-width="1.6">
@@ -1157,7 +1157,7 @@
                        bg-gradient-to-r
                        from-[#A95E43]
                        via-[#B96F51]
-                       to-[#6F4E37]
+                       to-[#4371d1]
                        p-6 text-white
                        shadow-sm
                        sm:p-7">

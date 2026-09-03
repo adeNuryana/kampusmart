@@ -34,7 +34,7 @@
                 $statusClass = match ($order->status) {
                     'pending' => 'border-[#E8D8B9] bg-[#FAF2DF] text-[#A87A37]',
 
-                    'confirmed' => 'border-[#DFD2C7] bg-[#F1E6DE] text-[#6F4E37]',
+                    'confirmed' => 'border-[#DFD2C7] bg-[#F1E6DE] text-[#4371d1]',
 
                     'processing' => 'border-[#EBCFC2] bg-[#FBEAE2] text-[#A95E43]',
 
@@ -47,7 +47,7 @@
 
                 $statusDot = match ($order->status) {
                     'pending' => 'bg-[#C89B55]',
-                    'confirmed' => 'bg-[#8B6245]',
+                    'confirmed' => 'bg-[#4371d1]',
                     'processing' => 'bg-[#C8795A]',
                     'completed', 'sold' => 'bg-[#718268]',
                     'cancelled' => 'bg-[#A65954]',
@@ -250,7 +250,7 @@
                                        items-center justify-center
                                        rounded-xl
                                        bg-[#F4EAE2]
-                                       text-[#6F4E37]">
+                                       text-[#4371d1]">
 
                                 <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="1.8">
@@ -430,7 +430,7 @@
                                        bg-[#F4EAE2]
                                        px-3 py-1.5
                                        text-xs font-bold
-                                       text-[#6F4E37]">
+                                       text-[#4371d1]">
 
                                 {{ $order->items->sum('quantity') }}
                                 barang
@@ -618,7 +618,7 @@
                                 class="mt-2 text-2xl
                                        font-black
                                        tracking-tight
-                                       text-[#6F4E37]">
+                                       text-[#4371d1]">
 
                                 Rp{{ number_format($order->subtotal, 0, ',', '.') }}
 
@@ -760,12 +760,12 @@
                                                w-full items-center
                                                justify-center gap-2
                                                rounded-xl
-                                               bg-[#6F4E37]
+                                               bg-[#4371d1]
                                                px-4
                                                text-sm font-bold
                                                text-white
                                                transition
-                                               hover:bg-[#5B3B2B]">
+                                               hover:bg-[#0a1d45]">
 
                                         <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                             stroke-width="2">

@@ -17,7 +17,7 @@
                        text-sm font-semibold
                        text-[#8B7465]
                        transition
-                       hover:text-[#6F4E37]">
+                       hover:text-[#4371d1]">
 
                 <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 
@@ -37,7 +37,7 @@
                            rounded-full bg-[#F4EAE2]
                            px-3 py-1.5
                            text-xs font-bold
-                           text-[#6F4E37]">
+                           text-[#4371d1]">
 
                     <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
 
@@ -83,7 +83,7 @@
         {{-- FORM --}}
         {{-- ===================================================== --}}
 
-        <form action="{{ route('admin.categories.store') }}" method="POST" class="space-y-6">
+        <form action="{{ route('admin.categories.store') }}" enctype="multipart/form-data" method="POST" class="space-y-6">
 
             @csrf
 
@@ -107,7 +107,7 @@
                             class="flex size-10 shrink-0
                                    items-center justify-center
                                    rounded-xl
-                                   bg-[#6F4E37]
+                                   bg-[#4371d1]
                                    text-white">
 
                             <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -218,46 +218,197 @@
                         </label>
 
 
-                        <select id="icon" name="icon"
-                            class="h-11 w-full
-                                   rounded-xl border
-                                   border-[#DFD2C7]
-                                   bg-white px-4
-                                   text-sm text-[#4D4038]
-                                   outline-none transition
-                                   focus:border-[#A97957]
-                                   focus:ring-4
-                                   focus:ring-[#F1E6DE]">
+                        <div x-data="{
+                            icon: '{{ old('icon', 'food') }}'
+                        }">
 
-                            <option value="">
-                                Pilih Icon
-                            </option>
+                            <label for="icon"
+                                class="mb-2 block
+               text-sm font-semibold
+               text-[#4D4038]">
+                                Icon Kategori
 
-                            <option value="food" @selected(old('icon') === 'food')>
-                                🍴 Makanan
-                            </option>
+                                <span class="text-[#A65954]">
+                                    *
+                                </span>
+                            </label>
 
-                            <option value="drink" @selected(old('icon') === 'drink')>
-                                ☕ Minuman
-                            </option>
 
-                            <option value="book" @selected(old('icon') === 'book')>
-                                📚 Buku
-                            </option>
+                            <select name="icon" id="icon" x-model="icon"
+                                class="h-11 w-full
+               rounded-xl border
+               border-[#DFD2C7]
+               bg-white px-4
+               text-sm text-[#4D4038]
+               outline-none transition
+               focus:border-[#6F4E37]
+               focus:ring-4
+               focus:ring-[#F4EAE2]">
 
-                            <option value="electronic" @selected(old('icon') === 'electronic')>
-                                💻 Elektronik
-                            </option>
+                                <option value="food">
+                                    Makanan
+                                </option>
 
-                            <option value="fashion" @selected(old('icon') === 'fashion')>
-                                👕 Fashion
-                            </option>
+                                <option value="drink">
+                                    Minuman
+                                </option>
 
-                            <option value="service" @selected(old('icon') === 'service')>
-                                🛠 Jasa
-                            </option>
+                                <option value="electronics">
+                                    Elektronik
+                                </option>
 
-                        </select>
+                                <option value="fashion">
+                                    Fashion
+                                </option>
+
+                                <option value="book">
+                                    Buku & Pendidikan
+                                </option>
+
+                                <option value="accessories">
+                                    Aksesoris
+                                </option>
+
+                                <option value="health">
+                                    Kesehatan
+                                </option>
+
+                                <option value="sport">
+                                    Olahraga
+                                </option>
+
+                                <option value="beauty">
+                                    Kecantikan
+                                </option>
+
+                                <option value="home">
+                                    Rumah & Kebutuhan
+                                </option>
+
+                                <option value="service">
+                                    Jasa
+                                </option>
+
+                                <option value="other">
+                                    Lainnya
+                                </option>
+
+                                <option value="custom">
+                                    Upload Icon Sendiri
+                                </option>
+
+                            </select>
+
+
+                            @error('icon')
+                                <p class="mt-2 text-xs
+                   font-medium
+                   text-[#A65954]">
+                                    {{ $message }}
+                                </p>
+                            @enderror
+
+
+
+                            {{-- CUSTOM ICON --}}
+                            <div x-cloak x-show="icon === 'custom'" x-transition
+                                class="mt-4 rounded-2xl
+               border border-[#E7DBD1]
+               bg-[#FAF7F2]
+               p-4">
+
+                                <label for="icon_image"
+                                    class="mb-2 block
+                   text-sm font-semibold
+                   text-[#4D4038]">
+                                    Upload Icon
+                                </label>
+
+
+                                <div
+                                    class="flex flex-col gap-4
+                   sm:flex-row
+                   sm:items-center">
+
+                                    {{-- PREVIEW --}}
+                                    <div
+                                        class="flex size-20
+                       shrink-0
+                       items-center
+                       justify-center
+                       overflow-hidden
+                       rounded-2xl
+                       border border-[#DFD2C7]
+                       bg-white">
+
+                                        <img id="categoryIconPreview" src="" alt="Preview Icon"
+                                            class="hidden h-full
+                           w-full object-cover">
+
+
+                                        <div id="categoryIconPlaceholder" class="text-[#A28A7A]">
+
+                                            <svg class="size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="1.6">
+                                                <rect x="3" y="3" width="18" height="18" rx="2" />
+
+                                                <circle cx="8.5" cy="8.5" r="1.5" />
+
+                                                <path d="m21 15-5-5L5 21" />
+                                            </svg>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    {{-- INPUT --}}
+                                    <div class="flex-1">
+
+                                        <input type="file" name="icon_image" id="icon_image"
+                                            accept="image/jpeg,image/png,image/webp"
+                                            class="block w-full
+                           rounded-xl border
+                           border-[#DFD2C7]
+                           bg-white px-3 py-2
+                           text-sm text-[#6F6259]
+                           file:mr-3
+                           file:rounded-lg
+                           file:border-0
+                           file:bg-[#F4EAE2]
+                           file:px-3
+                           file:py-1.5
+                           file:text-xs
+                           file:font-bold
+                           file:text-[#6F4E37]">
+
+
+                                        <p
+                                            class="mt-2 text-xs
+                           leading-5
+                           text-slate-400">
+                                            Gunakan gambar persegi.
+                                            PNG atau WebP transparan lebih disarankan.
+                                            Maksimal 1 MB.
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+
+                                @error('icon_image')
+                                    <p
+                                        class="mt-2 text-xs
+                       font-medium
+                       text-[#A65954]">
+                                        {{ $message }}
+                                    </p>
+                                @enderror
+
+                            </div>
+
+                        </div>
 
 
                         <p class="mt-2 text-xs
@@ -392,7 +543,7 @@
                            text-[#6F6259]
                            transition
                            hover:bg-[#F3EAE3]
-                           hover:text-[#493124]">
+                           hover:text-[#0a1d45]">
 
                     Batal
 
@@ -403,11 +554,11 @@
                     class="inline-flex h-11
                            items-center justify-center
                            gap-2 rounded-xl
-                           bg-[#6F4E37]
+                           bg-[#4371d1]
                            px-6 text-sm
                            font-bold text-white
                            shadow-sm transition
-                           hover:bg-[#5B3B2B]
+                           hover:bg-[#0a1d45]
                            hover:shadow-md">
 
                     <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

@@ -80,14 +80,14 @@
            justify-center
            gap-2
            rounded-xl
-           bg-[#6F4E37]
+           bg-[#4371d1]
            px-5
            text-sm
            font-bold
            text-white
            shadow-sm
            transition
-           hover:bg-[#5B3B2B]">
+           hover:bg-[#0a1d45]">
 
                 <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
 
@@ -168,8 +168,8 @@
                                        font-semibold
                                        text-[#7C695C]
                                        transition
-                                       peer-checked:border-[#6F4E37]
-                                       peer-checked:bg-[#6F4E37]
+                                       peer-checked:border-[#4371d1]
+                                       peer-checked:bg-[#4371d1]
                                        peer-checked:text-white">
 
                                 Bulanan
@@ -195,8 +195,8 @@
                                        font-semibold
                                        text-[#7C695C]
                                        transition
-                                       peer-checked:border-[#6F4E37]
-                                       peer-checked:bg-[#6F4E37]
+                                       peer-checked:border-[#4371d1]
+                                       peer-checked:bg-[#4371d1]
                                        peer-checked:text-white">
 
                                 Tahunan
@@ -222,8 +222,8 @@
                                        font-semibold
                                        text-[#7C695C]
                                        transition
-                                       peer-checked:border-[#6F4E37]
-                                       peer-checked:bg-[#6F4E37]
+                                       peer-checked:border-[#4371d1]
+                                       peer-checked:bg-[#4371d1]
                                        peer-checked:text-white">
 
                                 Rentang Tanggal
@@ -377,13 +377,13 @@
                                    justify-center
                                    gap-2
                                    rounded-xl
-                                   bg-[#6F4E37]
+                                   bg-[#4371d1]
                                    px-5
                                    text-sm
                                    font-bold
                                    text-white
                                    transition
-                                   hover:bg-[#5B3B2B]">
+                                   hover:bg-[#0a1d45]">
 
                             <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 
@@ -493,7 +493,7 @@
                                items-center
                                justify-center
                                rounded-xl
-                               bg-[#6F4E37]
+                               bg-[#4371d1]
                                text-white">
 
                         <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -705,7 +705,7 @@
 
                 <p class="mt-2 text-xl
                            font-black
-                           text-[#6F4E37]">
+                           text-[#4371d1]">
 
                     {{ number_format($totalBuyers) }}
 
@@ -847,7 +847,7 @@
                             <p
                                 class="whitespace-nowrap
                                        text-sm font-bold
-                                       text-[#6F4E37]">
+                                       text-[#4371d1]">
 
                                 Rp{{ number_format($seller['transaction_value'], 0, ',', '.') }}
 
@@ -954,7 +954,7 @@
                                 class="whitespace-nowrap
                                        text-sm
                                        font-bold
-                                       text-[#6F4E37]">
+                                       text-[#4371d1]">
 
                                 Rp{{ number_format($product['transaction_value'], 0, ',', '.') }}
 

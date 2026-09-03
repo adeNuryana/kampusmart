@@ -19,7 +19,7 @@
                     class="inline-flex items-center gap-2
                            rounded-full bg-[#F4EAE2]
                            px-3 py-1.5
-                           text-xs font-bold text-[#6F4E37]">
+                           text-xs font-bold text-[#4371d1]">
 
                     <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
 
@@ -63,10 +63,10 @@
                 class="inline-flex h-11
                        items-center justify-center
                        gap-2 rounded-xl
-                       bg-[#6F4E37] px-5
+                       bg-[#4371d1] px-5
                        text-sm font-bold text-white
                        shadow-sm transition
-                       hover:bg-[#5B3B2B]
+                       hover:bg-[#0a1d45]
                        hover:shadow-md">
 
                 <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -217,10 +217,10 @@
                         class="inline-flex h-11
                                items-center justify-center
                                gap-2 rounded-xl
-                               bg-[#6F4E37] px-5
+                               bg-[#4371d1] px-5
                                text-sm font-bold
                                text-white transition
-                               hover:bg-[#5B3B2B]">
+                               hover:bg-[#0a1d45]">
 
                         <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 
@@ -243,7 +243,7 @@
                                    bg-white text-[#8B7465]
                                    transition
                                    hover:bg-[#F3EAE3]
-                                   hover:text-[#493124]">
+                                   hover:text-[#0a1d45]">
 
                             <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
 
@@ -343,7 +343,7 @@
                                             @break
 
                                             @default
-                                                <svg class="size-5 text-[#6F4E37]" viewBox="0 0 24 24" fill="none"
+                                                <svg class="size-5 text-[#4371d1]" viewBox="0 0 24 24" fill="none"
                                                     stroke="currentColor" stroke-width="1.8">
 
                                                     <rect x="4" y="4" width="6" height="6" rx="1" />
@@ -576,7 +576,7 @@
                                                    items-center justify-center
                                                    rounded-2xl
                                                    bg-[#F4EAE2]
-                                                   text-[#6F4E37]">
+                                                   text-[#4371d1]">
 
                                                 <svg class="size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                     stroke-width="1.7">
@@ -615,10 +615,10 @@
                                                    h-10 items-center
                                                    justify-center gap-2
                                                    rounded-xl
-                                                   bg-[#6F4E37]
+                                                   bg-[#4371d1]
                                                    px-5 text-sm
                                                    font-bold text-white
-                                                   hover:bg-[#5B3B2B]">
+                                                   hover:bg-[#0a1d45]">
 
                                                 <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                     stroke-width="2">

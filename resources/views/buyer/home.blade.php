@@ -52,7 +52,7 @@
         class="sticky top-0 z-50
                border-b border-[#E9DCD2]
                bg-white/90
-               shadow-sm shadow-[#6F4E37]/5
+               shadow-sm shadow-[#4371d1]/5
                backdrop-blur-xl">
 
         <div class="mx-auto max-w-7xl px-4 sm:px-5">
@@ -80,7 +80,7 @@
                rounded-2xl
                bg-gradient-to-br
                from-[#C8795A]
-               to-[#6F4E37]
+               to-[#4371d1]
                font-black
                text-white">
 
@@ -92,8 +92,8 @@
                     <span
                         class="hidden
                                bg-gradient-to-r
-                               from-[#493124]
-                               to-[#8B6245]
+                               from-[#0a1d45]
+                               to-[#4371d1]
                                bg-clip-text
                                text-xl font-black
                                tracking-tight
@@ -161,12 +161,12 @@
                         class="flex w-12 shrink-0
                                items-center justify-center
                                bg-gradient-to-r
-                               from-[#5B3B2B]
-                               to-[#8B6245]
+                               from-[#0a1d45]
+                               to-[#4371d1]
                                text-white
                                transition
-                               hover:from-[#493124]
-                               hover:to-[#6F4E37]
+                               hover:from-[#0a1d45]
+                               hover:to-[#4371d1]
                                md:w-14">
 
                         <i class="fa-solid fa-arrow-right"></i>
@@ -188,7 +188,7 @@
                                    rounded-xl
                                    border border-[#EEE2D9]
                                    bg-white
-                                   text-[#6F4E37]
+                                   text-[#4371d1]
                                    shadow-sm
                                    transition
                                    hover:border-[#DCC4B2]
@@ -206,7 +206,7 @@
                                rounded-xl
                                border border-[#EEE2D9]
                                bg-white
-                               text-[#6F4E37]
+                               text-[#4371d1]
                                shadow-sm
                                transition
                                hover:bg-[#FBF4EF]
@@ -232,7 +232,7 @@
                                    bg-white
                                    px-4 py-2
                                    text-sm font-semibold
-                                   text-[#6F4E37]
+                                   text-[#4371d1]
                                    transition
                                    hover:bg-[#FBF4EF]">
 
@@ -244,8 +244,8 @@
                             <a href="{{ route('register') }}"
                                 class="rounded-xl
                                        bg-gradient-to-r
-                                       from-[#5B3B2B]
-                                       to-[#8B6245]
+                                       from-[#0a1d45]
+                                       to-[#4371d1]
                                        px-4 py-2
                                        text-sm font-semibold
                                        text-white
@@ -272,7 +272,7 @@
                                            items-center justify-center
                                            rounded-full
                                            bg-[#F4EAE2]
-                                           text-[#6F4E37]">
+                                           text-[#4371d1]">
 
                                     <i class="fa-regular fa-user"></i>
 
@@ -284,12 +284,12 @@
                                         class="max-w-32 truncate
                                                text-sm font-semibold">
 
-                                        {{ auth()->user()->name }}
+                                        Dashboard
 
                                     </p>
 
                                     <p class="text-[10px] text-slate-400">
-                                        Buyer
+                                        {{ auth()->user()->name }}
                                     </p>
 
                                 </div>
@@ -339,8 +339,8 @@
                     class="flex w-12
                            items-center justify-center
                            bg-gradient-to-r
-                           from-[#5B3B2B]
-                           to-[#8B6245]
+                           from-[#0a1d45]
+                           to-[#4371d1]
                            text-white">
 
                     <i class="fa-solid fa-arrow-right"></i>
@@ -381,13 +381,13 @@
                 class="relative overflow-hidden
                        rounded-3xl
                        bg-gradient-to-br
-                       from-[#38251C]
-                       via-[#6F4E37]
-                       to-[#A66D4B]
+                       from-[#0a1d45]
+                       via-[#4371d1]
+                       to-[#4371d1]
                        px-5 py-9
                        text-white
                        shadow-xl
-                       shadow-[#493124]/15
+                       shadow-[#0a1d45]/15
                        sm:px-8 sm:py-11
                        md:px-10 md:py-14">
 
@@ -436,7 +436,7 @@
                                    items-center justify-center
                                    rounded-full
                                    bg-[#E3B66D]
-                                   text-[#493124]">
+                                   text-[#0a1d45]">
 
                             <i class="fa-solid fa-bolt text-[10px]"></i>
 
@@ -494,7 +494,7 @@
                                    bg-[#FFFDFB]
                                    px-5 py-3
                                    text-sm font-bold
-                                   text-[#5B3B2B]
+                                   text-[#0a1d45]
                                    shadow-xl
                                    shadow-black/10
                                    transition
@@ -840,8 +840,8 @@
                 [
                     'box' => 'bg-[#F4EAE2] text-[#7A5138]',
                     'active' => 'border-[#BA8C6A] bg-[#F7EEE8]',
-                    'pill' => 'bg-[#6F4E37] text-white',
-                    'hover' => 'group-hover:bg-[#6F4E37] group-hover:text-white',
+                    'pill' => 'bg-[#4371d1] text-white',
+                    'hover' => 'group-hover:bg-[#4371d1] group-hover:text-white',
                 ],
 
                 [
@@ -923,7 +923,7 @@
                        to-[#F6EDE6]
                        p-4
                        shadow-sm
-                       shadow-[#6F4E37]/5
+                       shadow-[#4371d1]/5
                        sm:mt-6 sm:p-6">
 
 
@@ -954,11 +954,11 @@
                                        items-center justify-center
                                        rounded-xl
                                        bg-gradient-to-br
-                                       from-[#6F4E37]
-                                       to-[#A66D4B]
+                                       from-[#4371d1]
+                                       to-[#4371d1]
                                        text-white
                                        shadow-lg
-                                       shadow-[#6F4E37]/20">
+                                       shadow-[#4371d1]/20">
 
                                 <i class="fa-solid fa-layer-group"></i>
 
@@ -993,9 +993,9 @@
                             <a href="{{ route('buyer.products.index') }}"
                                 class="shrink-0
                                        text-xs font-semibold
-                                       text-[#8B6245]
+                                       text-[#4371d1]
                                        transition
-                                       hover:text-[#5B3B2B]
+                                       hover:text-[#0a1d45]
                                        sm:text-sm">
 
                                 Lihat Semua
@@ -1034,7 +1034,7 @@
                                        text-xs font-semibold
                                        transition duration-300"
                                 :class="selectedCategory === null ?
-                                    'bg-[#6F4E37] text-white shadow-md' :
+                                    'bg-[#4371d1] text-white shadow-md' :
                                     'border border-[#E7DAD0] bg-white text-slate-600 hover:bg-[#FBF6F2]'">
 
                                 Semua
@@ -1222,7 +1222,7 @@
                        to-[#F6EFE9]
                        p-4
                        shadow-sm
-                       shadow-[#6F4E37]/5
+                       shadow-[#4371d1]/5
                        sm:mt-6 sm:p-6">
 
 
@@ -1288,7 +1288,7 @@
 
                                             Ditemukan
 
-                                            <strong class="text-[#6F4E37]" x-text="total">
+                                            <strong class="text-[#4371d1]" x-text="total">
 
                                                 {{ $initialTotal }}
 
@@ -1322,9 +1322,9 @@
                                        shrink-0
                                        items-center
                                        text-sm font-semibold
-                                       text-[#8B6245]
+                                       text-[#4371d1]
                                        transition
-                                       hover:text-[#5B3B2B]
+                                       hover:text-[#0a1d45]
                                        sm:inline-flex">
 
                                 Lihat Semua
@@ -1404,8 +1404,8 @@
 
                                 $productColors = [
                                     [
-                                        'bar' => 'from-[#6F4E37] via-[#9A6948] to-[#C89B55]',
-                                        'badge' => 'bg-[#F4EAE2] text-[#6F4E37]',
+                                        'bar' => 'from-[#4371d1] via-[#9A6948] to-[#C89B55]',
+                                        'badge' => 'bg-[#F4EAE2] text-[#4371d1]',
                                     ],
 
                                     [
@@ -1472,7 +1472,7 @@
                                                hover:-translate-y-1.5
                                                hover:border-[#E5D5C9]
                                                hover:shadow-xl
-                                               hover:shadow-[#6F4E37]/10">
+                                               hover:shadow-[#4371d1]/10">
 
 
                                         <div
@@ -1551,7 +1551,7 @@
                                                        leading-5
                                                        text-slate-700
                                                        transition
-                                                       group-hover:text-[#6F4E37]
+                                                       group-hover:text-[#4371d1]
                                                        sm:text-sm">
 
                                                 {{ $product->name }}
@@ -1562,8 +1562,8 @@
                                             <p
                                                 class="mt-2
                                                        bg-gradient-to-r
-                                                       from-[#5B3B2B]
-                                                       to-[#A66D4B]
+                                                       from-[#0a1d45]
+                                                       to-[#4371d1]
                                                        bg-clip-text
                                                        text-sm
                                                        font-black
@@ -1639,7 +1639,7 @@
                                            items-center justify-center
                                            rounded-2xl
                                            bg-[#F4EAE2]
-                                           text-[#8B6245]">
+                                           text-[#4371d1]">
 
                                     <i class="fa-solid fa-box-open text-2xl"></i>
 
@@ -1726,12 +1726,12 @@
                                            items-center justify-center
                                            rounded-xl
                                            bg-gradient-to-br
-                                           from-[#8B6245]
-                                           via-[#A66D4B]
+                                           from-[#4371d1]
+                                           via-[#4371d1]
                                            to-[#B97972]
                                            text-white
                                            shadow-lg
-                                           shadow-[#6F4E37]/20">
+                                           shadow-[#4371d1]/20">
 
                                     <i class="fa-solid fa-wand-magic-sparkles"></i>
 
@@ -1768,7 +1768,7 @@
                                            text-xs font-semibold
                                            text-[#9A6244]
                                            transition
-                                           hover:text-[#6F4E37]
+                                           hover:text-[#4371d1]
                                            sm:text-sm">
 
                                     Lihat Semua
@@ -1809,9 +1809,9 @@
 
                                         $recommendThemes = [
                                             [
-                                                'bar' => 'from-[#6F4E37] to-[#A66D4B]',
-                                                'badge' => 'bg-[#F4EAE2] text-[#6F4E37]',
-                                                'heart' => 'text-[#8B6245]',
+                                                'bar' => 'from-[#4371d1] to-[#4371d1]',
+                                                'badge' => 'bg-[#F4EAE2] text-[#4371d1]',
+                                                'heart' => 'text-[#4371d1]',
                                             ],
 
                                             [
@@ -1932,7 +1932,7 @@
                                                        leading-5
                                                        text-slate-700
                                                        transition
-                                                       group-hover:text-[#6F4E37]
+                                                       group-hover:text-[#4371d1]
                                                        sm:text-sm">
 
                                                 {{ $product->name }}
@@ -1943,8 +1943,8 @@
                                             <p
                                                 class="mt-2
                                                        bg-gradient-to-r
-                                                       from-[#5B3B2B]
-                                                       to-[#A66D4B]
+                                                       from-[#0a1d45]
+                                                       to-[#4371d1]
                                                        bg-clip-text
                                                        text-sm
                                                        font-black
@@ -2103,8 +2103,8 @@
                                items-center justify-center
                                rounded-xl
                                bg-gradient-to-br
-                               from-[#493124]
-                               to-[#8B6245]
+                               from-[#0a1d45]
+                               to-[#4371d1]
                                font-black text-white">
 
                         M
@@ -2112,7 +2112,7 @@
                     </div>
 
                     <h3 class="text-xl font-black
-                               text-[#5B3B2B]">
+                               text-[#0a1d45]">
 
                         <p>
                             {{ $siteSetting?->site_name ?? 'KampusMart' }}
@@ -2149,19 +2149,19 @@
                            flex-col gap-3
                            text-sm text-slate-500">
 
-                    <a href="#" class="transition hover:text-[#6F4E37]">
+                    <a href="#" class="transition hover:text-[#4371d1]">
 
                         Tentang MarketKu
 
                     </a>
 
-                    <a href="#" class="transition hover:text-[#6F4E37]">
+                    <a href="#" class="transition hover:text-[#4371d1]">
 
                         Kebijakan Privasi
 
                     </a>
 
-                    <a href="#" class="transition hover:text-[#6F4E37]">
+                    <a href="#" class="transition hover:text-[#4371d1]">
 
                         Syarat & Ketentuan
 
@@ -2186,25 +2186,25 @@
                            flex-col gap-3
                            text-sm text-slate-500">
 
-                    <a href="#" class="transition hover:text-[#8B6245]">
+                    <a href="#" class="transition hover:text-[#4371d1]">
 
                         Pusat Bantuan
 
                     </a>
 
-                    <a href="#" class="transition hover:text-[#8B6245]">
+                    <a href="#" class="transition hover:text-[#4371d1]">
 
                         Cara Belanja
 
                     </a>
 
-                    <a href="#" class="transition hover:text-[#8B6245]">
+                    <a href="#" class="transition hover:text-[#4371d1]">
 
                         Pembayaran
 
                     </a>
 
-                    <a href="#" class="transition hover:text-[#8B6245]">
+                    <a href="#" class="transition hover:text-[#4371d1]">
 
                         Pengiriman
 
@@ -2307,7 +2307,7 @@
                 class="flex flex-col
                        items-center justify-center
                        gap-1 py-3
-                       text-[#6F4E37]">
+                       text-[#4371d1]">
 
                 <i class="fa-solid fa-house text-lg"></i>
 

@@ -341,11 +341,11 @@
                                    flex-1 items-center
                                    justify-center gap-2
                                    rounded-xl
-                                   bg-[#6F4E37]
+                                   bg-[#4371d1]
                                    px-5 text-sm
                                    font-bold text-white
                                    transition
-                                   hover:bg-[#5B3B2B]">
+                                   hover:bg-[#0a1d45]">
 
                             <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 
@@ -370,7 +370,7 @@
                                    text-[#8B7465]
                                    transition
                                    hover:bg-[#F5ECE6]
-                                   hover:text-[#493124]">
+                                   hover:text-[#0a1d45]">
 
                             <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
 
@@ -578,7 +578,7 @@
                                                bg-[#F4EAE2]
                                                px-3 py-1.5
                                                text-xs font-semibold
-                                               text-[#6F4E37]">
+                                               text-[#4371d1]">
 
                                         {{ $product->category?->name ?? '-' }}
 

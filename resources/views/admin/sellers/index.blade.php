@@ -115,8 +115,8 @@
                         class="rounded-xl px-4 py-2
                                text-sm font-semibold transition
                                {{ !request('status')
-                                   ? 'bg-[#6F4E37] text-white shadow-sm'
-                                   : 'bg-white text-[#7C695C] hover:bg-[#F1E6DE] hover:text-[#6F4E37]' }}">
+                                   ? 'bg-[#4371d1] text-white shadow-sm'
+                                   : 'bg-white text-[#7C695C] hover:bg-[#F1E6DE] hover:text-[#4371d1]' }}">
                         Semua
                     </a>
 
@@ -310,7 +310,7 @@
                                                    items-center justify-center
                                                    rounded-xl text-[#8B7465]
                                                    transition hover:bg-[#F1E6DE]
-                                                   hover:text-[#6F4E37]">
+                                                   hover:text-[#4371d1]">
 
                                             <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                 stroke-width="1.8">

@@ -91,7 +91,7 @@
                            inset-x-0
                            top-0
                            h-1
-                           bg-[#6F4E37]">
+                           bg-[#4371d1]">
                 </div>
 
 
@@ -146,7 +146,7 @@
                                items-center
                                justify-center
                                rounded-xl
-                               bg-[#6F4E37]
+                               bg-[#4371d1]
                                text-white">
 
                         <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -199,7 +199,7 @@
                                justify-center
                                rounded-xl
                                bg-[#F1E6DE]
-                               text-[#6F4E37]">
+                               text-[#4371d1]">
 
                         <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
 
@@ -427,13 +427,13 @@
                                    justify-center
                                    gap-2
                                    rounded-xl
-                                   bg-[#6F4E37]
+                                   bg-[#4371d1]
                                    px-4
                                    text-sm
                                    font-bold
                                    text-white
                                    transition
-                                   hover:bg-[#5B3B2B]">
+                                   hover:bg-[#0a1d45]">
 
                             <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 
@@ -461,7 +461,7 @@
                                    text-[#8B7465]
                                    transition
                                    hover:bg-[#F3EAE3]
-                                   hover:text-[#493124]">
+                                   hover:text-[#0a1d45]">
 
                             <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
 
@@ -544,7 +544,7 @@
                            py-1.5
                            text-xs
                            font-bold
-                           text-[#6F4E37]">
+                           text-[#4371d1]">
 
                     {{ number_format($products->total()) }}
                     produk
@@ -738,7 +738,7 @@
                                                py-1.5
                                                text-xs
                                                font-semibold
-                                               text-[#6F4E37]">
+                                               text-[#4371d1]">
 
                                         {{ $product->category?->name ?? '-' }}
 
@@ -897,7 +897,7 @@
                                                    text-[#8B7465]
                                                    transition
                                                    hover:bg-[#F1E6DE]
-                                                   hover:text-[#6F4E37]">
+                                                   hover:text-[#4371d1]">
 
                                             <svg class="size-5" viewBox="0 0 24 24" fill="currentColor">
 

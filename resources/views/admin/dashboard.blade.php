@@ -8,12 +8,12 @@
         $bars = [38, 55, 31, 68, 58, 82];
 
         $barColors = [
-            'from-[#6F4E37] to-[#8B6245]',
+            'from-[#4371d1] to-[#4371d1]',
             'from-[#C8795A] to-[#A95E43]',
             'from-[#7F9275] to-[#65795E]',
             'from-[#C89B55] to-[#A87A37]',
             'from-[#B97972] to-[#9B5F59]',
-            'from-[#5B3B2B] to-[#8B6245]',
+            'from-[#0a1d45] to-[#4371d1]',
         ];
     @endphp
 
@@ -95,7 +95,7 @@
            items-center
            gap-2
            rounded-full
-           bg-[#6F4E37]
+           bg-[#4371d1]
            px-3.5
            py-1.5
            text-xs
@@ -186,7 +186,7 @@
                                 class="mt-1
                                        text-lg
                                        font-black
-                                       text-[#5B3B2B]">
+                                       text-[#0a1d45]">
 
                                 {{ number_format($totalBuyers + $totalSellers) }}
 
@@ -270,7 +270,7 @@
                                h-1
                                w-full
                                bg-gradient-to-r
-                               from-[#6F4E37]
+                               from-[#4371d1]
                                via-[#9B7356]
                                to-[#C89B55]">
                     </div>
@@ -325,7 +325,7 @@
                             class="flex size-12 shrink-0
            items-center justify-center
            rounded-2xl
-           bg-[#6F4E37]
+           bg-[#4371d1]
            text-white
            shadow-sm">
 
@@ -715,7 +715,7 @@
                        items-center
                        justify-center
                        rounded-xl
-                       bg-[#6F4E37]
+                       bg-[#4371d1]
                        text-white">
 
                                 <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -811,7 +811,7 @@
                                transition"
                                         :class="period === 'month'
                                             ?
-                                            'bg-[#6F4E37] text-white shadow-sm' :
+                                            'bg-[#4371d1] text-white shadow-sm' :
                                             'text-[#8B7465] hover:bg-[#F5EDE7]'">
 
                                         1 Bulan
@@ -839,7 +839,7 @@
                                transition"
                                         :class="period === 'year'
                                             ?
-                                            'bg-[#6F4E37] text-white shadow-sm' :
+                                            'bg-[#4371d1] text-white shadow-sm' :
                                             'text-[#8B7465] hover:bg-[#F5EDE7]'">
 
                                         1 Tahun
@@ -878,7 +878,7 @@
                                p-0
                                text-xs
                                font-semibold
-                               text-[#5B3B2B]
+                               text-[#0a1d45]
                                outline-none
                                focus:ring-0">
 
@@ -904,10 +904,10 @@
                            px-3
                            text-xs
                            font-semibold
-                           text-[#5B3B2B]
+                           text-[#0a1d45]
                            outline-none
                            transition
-                           focus:border-[#8B6245]
+                           focus:border-[#4371d1]
                            focus:ring-4
                            focus:ring-[#F1E6DE]">
 
@@ -981,13 +981,13 @@
                        py-1.5
                        text-xs
                        font-semibold
-                       text-[#6F4E37]">
+                       text-[#4371d1]">
 
 
                                 <span
                                     class="size-2
                            rounded-full
-                           bg-[#6F4E37]">
+                           bg-[#4371d1]">
                                 </span>
 
 
@@ -1432,7 +1432,7 @@
                                py-1.5
                                text-xs
                                font-bold
-                               text-[#6F4E37]">
+                               text-[#4371d1]">
 
                         <span
                             class="size-2
@@ -1542,7 +1542,7 @@
 
                                         'buyer' => 'bg-[#EEF3EA] text-[#65795E]',
 
-                                        'admin', 'superadmin' => 'bg-[#F4EAE2] text-[#6F4E37]',
+                                        'admin', 'superadmin' => 'bg-[#F4EAE2] text-[#4371d1]',
 
                                         default => 'bg-slate-100 text-slate-600',
                                     };
@@ -1554,7 +1554,7 @@
                                     */
 
                                     $activityClass = match ($activity->action) {
-                                        'order_created' => 'bg-[#F4EAE2] text-[#6F4E37]',
+                                        'order_created' => 'bg-[#F4EAE2] text-[#4371d1]',
 
                                         'order_sold' => 'bg-[#EEF3EA] text-[#65795E]',
 
@@ -1566,11 +1566,11 @@
 
                                         'seller_profile_updated',
                                         'buyer_profile_updated'
-                                            => 'bg-[#F5EAE4] text-[#8B6245]',
+                                            => 'bg-[#F5EAE4] text-[#4371d1]',
 
                                         'seller_created' => 'bg-[#FBEAE2] text-[#A95E43]',
 
-                                        'seller_updated' => 'bg-[#F4EAE2] text-[#6F4E37]',
+                                        'seller_updated' => 'bg-[#F4EAE2] text-[#4371d1]',
 
                                         'seller_deleted' => 'bg-[#FAEDEC] text-[#A65954]',
 

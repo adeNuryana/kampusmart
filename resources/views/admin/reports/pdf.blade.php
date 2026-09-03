@@ -49,7 +49,7 @@
 
             margin-bottom: 18px;
 
-            border-bottom: 2px solid #6F4E37;
+            border-bottom: 2px solid #4371d1;
         }
 
 
@@ -58,7 +58,7 @@
 
             font-weight: bold;
 
-            color: #6F4E37;
+            color: #4371d1;
 
             margin: 0;
         }
@@ -84,7 +84,7 @@
 
             background: #F4EAE2;
 
-            color: #6F4E37;
+            color: #4371d1;
 
             font-weight: bold;
         }
@@ -164,7 +164,7 @@
 
 
         .coffee {
-            color: #6F4E37;
+            color: #4371d1;
         }
 
 
@@ -210,7 +210,7 @@
 
             background: #F4EAE2;
 
-            color: #6F4E37;
+            color: #4371d1;
 
             font-size: 8px;
 
@@ -273,7 +273,7 @@
 
         .status-confirmed {
             background: #F1E6DE;
-            color: #6F4E37;
+            color: #4371d1;
         }
 
 

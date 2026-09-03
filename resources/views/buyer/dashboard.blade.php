@@ -46,9 +46,9 @@
 
         $productThemes = [
             [
-                'bar' => 'from-[#6F4E37] via-[#8B6245] to-[#C89B55]',
+                'bar' => 'from-[#4371d1] via-[#4371d1] to-[#C89B55]',
 
-                'badge' => 'bg-[#F4EAE2] text-[#6F4E37]',
+                'badge' => 'bg-[#F4EAE2] text-[#4371d1]',
             ],
 
             [
@@ -108,13 +108,13 @@
                        overflow-hidden
                        rounded-3xl
                        bg-gradient-to-br
-                       from-[#38251C]
-                       via-[#6F4E37]
-                       to-[#A66D4B]
+                       from-[#0a1d45]
+                       via-[#4371d1]
+                       to-[#4371d1]
                        p-5
                        text-white
                        shadow-xl
-                       shadow-[#6F4E37]/15
+                       shadow-[#4371d1]/15
                        sm:p-7
                        md:p-8">
 
@@ -199,7 +199,7 @@
                                        justify-center
                                        rounded-full
                                        bg-[#E3B66D]
-                                       text-[#493124]">
+                                       text-[#0a1d45]">
 
                                 <i
                                     class="fa-solid
@@ -279,7 +279,7 @@
                                        py-2.5
                                        text-sm
                                        font-bold
-                                       text-[#5B3B2B]
+                                       text-[#0a1d45]
                                        shadow-lg
                                        shadow-black/10
                                        transition
@@ -462,9 +462,9 @@
                                        justify-center
                                        rounded-xl
                                        bg-[#F4EAE2]
-                                       text-[#6F4E37]
+                                       text-[#4371d1]
                                        transition
-                                       group-hover:bg-[#6F4E37]
+                                       group-hover:bg-[#4371d1]
                                        group-hover:text-white">
 
                                 <i class="fa-solid
@@ -481,7 +481,7 @@
                                        py-1
                                        text-xs
                                        font-bold
-                                       text-[#6F4E37]
+                                       text-[#4371d1]
                                        shadow-sm">
 
                                 {{ $cartCount }}
@@ -725,7 +725,7 @@
                         class="mt-1
                                text-lg
                                font-black
-                               text-[#6F4E37]">
+                               text-[#4371d1]">
 
                         Rp{{ number_format($totalTransaction, 0, ',', '.') }}
 
@@ -838,9 +838,9 @@
                             class="shrink-0
                                    text-xs
                                    font-semibold
-                                   text-[#8B6245]
+                                   text-[#4371d1]
                                    transition
-                                   hover:text-[#5B3B2B]
+                                   hover:text-[#0a1d45]
                                    sm:text-sm">
 
                             Lihat Semua
@@ -876,7 +876,7 @@
 
                                     'processing', 'diproses' => 'bg-[#FBEAE2] text-[#A95E43]',
 
-                                    'shipped', 'dikirim' => 'bg-[#F4EAE2] text-[#6F4E37]',
+                                    'shipped', 'dikirim' => 'bg-[#F4EAE2] text-[#4371d1]',
 
                                     'completed', 'selesai' => 'bg-[#EEF3EA] text-[#65795E]',
 
@@ -917,7 +917,7 @@
                                                justify-center
                                                rounded-xl
                                                bg-[#F4EAE2]
-                                               text-[#6F4E37]">
+                                               text-[#4371d1]">
 
                                         <i
                                             class="fa-solid
@@ -976,7 +976,7 @@
                                         <p
                                             class="text-sm
                                                    font-bold
-                                                   text-[#6F4E37]">
+                                                   text-[#4371d1]">
 
                                             Rp{{ number_format($orderTotal, 0, ',', '.') }}
 
@@ -1021,7 +1021,7 @@
                                    bg-gradient-to-br
                                    from-[#F4EAE2]
                                    to-[#EAD9CD]
-                                   text-[#8B6245]">
+                                   text-[#4371d1]">
 
                             <i
                                 class="fa-solid
@@ -1063,14 +1063,14 @@
                                    items-center
                                    gap-2
                                    rounded-xl
-                                   bg-[#6F4E37]
+                                   bg-[#4371d1]
                                    px-4
                                    py-2.5
                                    text-xs
                                    font-bold
                                    text-white
                                    transition
-                                   hover:bg-[#5B3B2B]">
+                                   hover:bg-[#0a1d45]">
 
                             Mulai Belanja
 
@@ -1086,642 +1086,6 @@
 
             </section>
 
-
-
-            {{-- ===================================================== --}}
-            {{-- RECOMMENDATION --}}
-            {{-- ===================================================== --}}
-
-            @if ($recommendedProducts->isNotEmpty())
-
-                <section
-                    class="relative
-                           mt-5
-                           overflow-hidden
-                           rounded-3xl
-                           border
-                           border-[#E8D6D1]
-                           bg-gradient-to-br
-                           from-white
-                           via-[#FBF3F1]
-                           to-[#F6ECE8]
-                           p-4
-                           shadow-sm
-                           sm:p-6">
-
-
-                    <div
-                        class="pointer-events-none
-                               absolute
-                               -bottom-20
-                               -left-20
-                               size-52
-                               rounded-full
-                               bg-[#B97972]/10
-                               blur-3xl">
-                    </div>
-
-
-
-                    {{-- HEADER --}}
-
-                    <div
-                        class="relative
-                               mb-5
-                               flex
-                               items-end
-                               justify-between
-                               gap-4">
-
-
-                        <div
-                            class="flex
-                                   items-center
-                                   gap-3">
-
-
-                            <div
-                                class="flex
-                                       size-10
-                                       shrink-0
-                                       items-center
-                                       justify-center
-                                       rounded-xl
-                                       bg-gradient-to-br
-                                       from-[#8B6245]
-                                       via-[#A66D4B]
-                                       to-[#B97972]
-                                       text-white
-                                       shadow-lg
-                                       shadow-[#6F4E37]/20">
-
-                                <i class="fa-solid
-                                           fa-wand-magic-sparkles">
-                                </i>
-
-                            </div>
-
-
-                            <div>
-
-                                <h2
-                                    class="text-xl
-                                           font-bold
-                                           text-slate-900
-                                           sm:text-2xl">
-
-                                    Rekomendasi Untuk Kamu
-
-                                </h2>
-
-
-                                <p
-                                    class="mt-1
-                                           hidden
-                                           text-sm
-                                           text-slate-500
-                                           sm:block">
-
-                                    Produk yang mungkin kamu suka
-
-                                </p>
-
-                            </div>
-
-                        </div>
-
-
-                        <a href="{{ route('home') }}#produk"
-                            class="shrink-0
-                                   text-xs
-                                   font-semibold
-                                   text-[#8B6245]
-                                   transition
-                                   hover:text-[#5B3B2B]
-                                   sm:text-sm">
-
-                            Lihat Semua
-
-                            <i
-                                class="fa-solid
-                                       fa-chevron-right
-                                       ml-1">
-                            </i>
-
-                        </a>
-
-                    </div>
-
-
-
-                    {{-- PRODUCTS --}}
-
-                    <div
-                        class="relative
-                               grid
-                               grid-cols-2
-                               gap-3
-                               sm:grid-cols-3
-                               sm:gap-4
-                               lg:grid-cols-5">
-
-
-                        @foreach ($recommendedProducts as $index => $product)
-                            @php
-
-                                $productImage = $product->image ?? ($product->photo ?? ($product->thumbnail ?? null));
-
-                                if ($productImage) {
-                                    $imageUrl = \Illuminate\Support\Str::startsWith($productImage, [
-                                        'http://',
-                                        'https://',
-                                    ])
-                                        ? $productImage
-                                        : asset('storage/' . $productImage);
-                                } else {
-                                    $imageUrl = null;
-                                }
-
-                                $theme = $productThemes[$index % count($productThemes)];
-
-                            @endphp
-
-
-                            <a href="{{ route('buyer.products.show', $product) }}"
-                                class="group
-                                       overflow-hidden
-                                       rounded-2xl
-                                       border
-                                       border-white
-                                       bg-white/95
-                                       shadow-sm
-                                       transition
-                                       duration-300
-                                       hover:-translate-y-1.5
-                                       hover:border-[#E3D3C7]
-                                       hover:shadow-xl
-                                       hover:shadow-[#6F4E37]/10">
-
-
-                                <div
-                                    class="h-1
-                                           bg-gradient-to-r
-                                           {{ $theme['bar'] }}">
-                                </div>
-
-
-
-                                {{-- IMAGE --}}
-
-                                <div
-                                    class="relative
-                                           aspect-square
-                                           overflow-hidden
-                                           bg-[#F4EFEB]">
-
-
-                                    @if ($imageUrl)
-                                        <img src="{{ $imageUrl }}" alt="{{ $product->name }}" loading="lazy"
-                                            class="size-full
-                                                   object-cover
-                                                   transition
-                                                   duration-500
-                                                   group-hover:scale-105">
-                                    @else
-                                        <div
-                                            class="flex
-                                                   size-full
-                                                   items-center
-                                                   justify-center
-                                                   bg-gradient-to-br
-                                                   from-[#F5EFEB]
-                                                   to-[#EEE4DC]">
-
-                                            <i
-                                                class="fa-regular
-                                                       fa-image
-                                                       text-4xl
-                                                       text-[#C7B4A7]">
-                                            </i>
-
-                                        </div>
-                                    @endif
-
-
-                                    @if ($product->category)
-                                        <span
-                                            class="absolute
-                                                   bottom-2
-                                                   left-2
-                                                   max-w-[85%]
-                                                   truncate
-                                                   rounded-lg
-                                                   px-2
-                                                   py-1
-                                                   text-[9px]
-                                                   font-semibold
-                                                   shadow-sm
-                                                   {{ $theme['badge'] }}">
-
-                                            {{ $product->category->name }}
-
-                                        </span>
-                                    @endif
-
-                                </div>
-
-
-
-                                {{-- CONTENT --}}
-
-                                <div class="p-3 sm:p-4">
-
-                                    <h3
-                                        class="line-clamp-2
-                                               min-h-10
-                                               text-xs
-                                               font-semibold
-                                               leading-5
-                                               text-slate-700
-                                               transition
-                                               group-hover:text-[#6F4E37]
-                                               sm:text-sm">
-
-                                        {{ $product->name }}
-
-                                    </h3>
-
-
-                                    <p
-                                        class="mt-2
-                                               bg-gradient-to-r
-                                               from-[#5B3B2B]
-                                               to-[#A66D4B]
-                                               bg-clip-text
-                                               text-sm
-                                               font-black
-                                               text-transparent
-                                               sm:text-lg">
-
-                                        Rp{{ number_format($product->price ?? 0, 0, ',', '.') }}
-
-                                    </p>
-
-
-                                    <div
-                                        class="mt-3
-                                               flex
-                                               items-center
-                                               justify-between
-                                               gap-2">
-
-                                        <span
-                                            class="rounded-md
-                                                   bg-[#FAF6F3]
-                                                   px-2
-                                                   py-1
-                                                   text-[9px]
-                                                   text-slate-500
-                                                   sm:text-[10px]">
-
-                                            Stok
-                                            {{ $product->stock ?? 0 }}
-
-                                        </span>
-
-
-                                        @if ($product->user)
-                                            <span
-                                                class="max-w-20
-                                                       truncate
-                                                       text-[9px]
-                                                       text-slate-400
-                                                       sm:text-[10px]">
-
-                                                <i
-                                                    class="fa-solid
-                                                           fa-store
-                                                           mr-1
-                                                           text-[#A97957]">
-                                                </i>
-
-                                                {{ $product->user->name }}
-
-                                            </span>
-                                        @endif
-
-                                    </div>
-
-                                </div>
-
-                            </a>
-                        @endforeach
-
-                    </div>
-
-                </section>
-
-            @endif
-
-
-
-            {{-- ===================================================== --}}
-            {{-- LATEST PRODUCTS --}}
-            {{-- ===================================================== --}}
-
-            @if ($latestProducts->isNotEmpty())
-
-                <section
-                    class="relative
-                           mt-5
-                           overflow-hidden
-                           rounded-3xl
-                           border
-                           border-[#E5D8CE]
-                           bg-gradient-to-br
-                           from-white
-                           via-[#FCF8F5]
-                           to-[#F5EEE8]
-                           p-4
-                           shadow-sm
-                           sm:p-6">
-
-
-                    {{-- HEADER --}}
-
-                    <div
-                        class="mb-5
-                               flex
-                               items-end
-                               justify-between
-                               gap-4">
-
-
-                        <div
-                            class="flex
-                                   items-center
-                                   gap-3">
-
-
-                            <div
-                                class="flex
-                                       size-10
-                                       shrink-0
-                                       items-center
-                                       justify-center
-                                       rounded-xl
-                                       bg-gradient-to-br
-                                       from-[#C89B55]
-                                       via-[#C8795A]
-                                       to-[#9A6244]
-                                       text-white
-                                       shadow-lg
-                                       shadow-[#C8795A]/20">
-
-                                <i class="fa-solid fa-bolt"></i>
-
-                            </div>
-
-
-                            <div>
-
-                                <h2
-                                    class="text-xl
-                                           font-bold
-                                           text-slate-900
-                                           sm:text-2xl">
-
-                                    Produk Terbaru
-
-                                </h2>
-
-
-                                <p
-                                    class="mt-1
-                                           hidden
-                                           text-sm
-                                           text-slate-500
-                                           sm:block">
-
-                                    Produk terbaru di KampusMart
-
-                                </p>
-
-                            </div>
-
-                        </div>
-
-
-                        <a href="{{ route('home') }}#produk"
-                            class="shrink-0
-                                   text-xs
-                                   font-semibold
-                                   text-[#8B6245]
-                                   transition
-                                   hover:text-[#5B3B2B]
-                                   sm:text-sm">
-
-                            Lihat Semua
-
-                            <i
-                                class="fa-solid
-                                       fa-chevron-right
-                                       ml-1">
-                            </i>
-
-                        </a>
-
-                    </div>
-
-
-
-                    <div
-                        class="grid
-                               grid-cols-2
-                               gap-3
-                               sm:grid-cols-3
-                               sm:gap-4
-                               lg:grid-cols-5">
-
-
-                        @foreach ($latestProducts as $index => $product)
-                            @php
-
-                                $productImage = $product->image ?? ($product->photo ?? ($product->thumbnail ?? null));
-
-                                if ($productImage) {
-                                    $imageUrl = \Illuminate\Support\Str::startsWith($productImage, [
-                                        'http://',
-                                        'https://',
-                                    ])
-                                        ? $productImage
-                                        : asset('storage/' . $productImage);
-                                } else {
-                                    $imageUrl = null;
-                                }
-
-                                $theme = $productThemes[$index % count($productThemes)];
-
-                            @endphp
-
-
-                            <a href="{{ route('buyer.products.show', $product) }}"
-                                class="group
-                                       overflow-hidden
-                                       rounded-2xl
-                                       border
-                                       border-white
-                                       bg-white
-                                       shadow-sm
-                                       transition
-                                       duration-300
-                                       hover:-translate-y-1.5
-                                       hover:border-[#E3D3C7]
-                                       hover:shadow-xl
-                                       hover:shadow-[#6F4E37]/10">
-
-
-                                <div
-                                    class="h-1
-                                           bg-gradient-to-r
-                                           {{ $theme['bar'] }}">
-                                </div>
-
-
-                                <div
-                                    class="relative
-                                           aspect-square
-                                           overflow-hidden
-                                           bg-[#F4EFEB]">
-
-
-                                    @if ($imageUrl)
-                                        <img src="{{ $imageUrl }}" alt="{{ $product->name }}" loading="lazy"
-                                            class="size-full
-                                                   object-cover
-                                                   transition
-                                                   duration-500
-                                                   group-hover:scale-105">
-                                    @else
-                                        <div
-                                            class="flex
-                                                   size-full
-                                                   items-center
-                                                   justify-center
-                                                   bg-gradient-to-br
-                                                   from-[#F5EFEB]
-                                                   to-[#EEE4DC]">
-
-                                            <i
-                                                class="fa-regular
-                                                       fa-image
-                                                       text-4xl
-                                                       text-[#C7B4A7]">
-                                            </i>
-
-                                        </div>
-                                    @endif
-
-
-                                    @if ($product->category)
-                                        <span
-                                            class="absolute
-                                                   bottom-2
-                                                   left-2
-                                                   max-w-[85%]
-                                                   truncate
-                                                   rounded-lg
-                                                   px-2
-                                                   py-1
-                                                   text-[9px]
-                                                   font-semibold
-                                                   {{ $theme['badge'] }}">
-
-                                            {{ $product->category->name }}
-
-                                        </span>
-                                    @endif
-
-                                </div>
-
-
-                                <div class="p-3 sm:p-4">
-
-                                    <h3
-                                        class="line-clamp-2
-                                               min-h-10
-                                               text-xs
-                                               font-semibold
-                                               leading-5
-                                               text-slate-700
-                                               transition
-                                               group-hover:text-[#6F4E37]
-                                               sm:text-sm">
-
-                                        {{ $product->name }}
-
-                                    </h3>
-
-
-                                    <p
-                                        class="mt-2
-                                               bg-gradient-to-r
-                                               from-[#5B3B2B]
-                                               to-[#A66D4B]
-                                               bg-clip-text
-                                               text-sm
-                                               font-black
-                                               text-transparent
-                                               sm:text-lg">
-
-                                        Rp{{ number_format($product->price ?? 0, 0, ',', '.') }}
-
-                                    </p>
-
-
-                                    <div
-                                        class="mt-3
-                                               flex
-                                               items-center
-                                               justify-between
-                                               gap-2">
-
-                                        <span
-                                            class="rounded-md
-                                                   bg-[#FAF6F3]
-                                                   px-2
-                                                   py-1
-                                                   text-[9px]
-                                                   text-slate-500">
-
-                                            Stok
-                                            {{ $product->stock ?? 0 }}
-
-                                        </span>
-
-
-                                        <span
-                                            class="max-w-20
-                                                   truncate
-                                                   text-[9px]
-                                                   text-slate-400">
-
-                                            {{ $product->user?->name }}
-
-                                        </span>
-
-                                    </div>
-
-                                </div>
-
-                            </a>
-                        @endforeach
-
-                    </div>
-
-                </section>
-
-            @endif
 
 
 
@@ -1793,9 +1157,9 @@
                                    justify-center
                                    rounded-xl
                                    bg-[#F4EAE2]
-                                   text-[#6F4E37]
+                                   text-[#4371d1]
                                    transition
-                                   group-hover:bg-[#6F4E37]
+                                   group-hover:bg-[#4371d1]
                                    group-hover:text-white">
 
                             <i class="fa-solid
