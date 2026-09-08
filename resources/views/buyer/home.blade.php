@@ -3,15 +3,16 @@
 
 <head>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>MarketKu</title>
+    <title>{{ $siteSetting?->site_name ?? 'KampusMart' }}</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    {{-- Font Awesome --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
 
     <style>
         [x-cloak] {
@@ -36,12 +37,82 @@
 
 <body
     class="min-h-screen
-           bg-gradient-to-br
-           from-[#FBF8F5]
-           via-[#F9F3EE]
-           to-[#F4EAE2]
+           bg-[#F6F8FC]
            text-slate-800
-           antialiased">
+           antialiased"
+>
+
+    @php
+        $search = $search ?? '';
+        $selectedCategory = $selectedCategory ?? null;
+        $isFiltering = $isFiltering ?? false;
+
+        $categories = $categories ?? collect();
+        $latestProducts = $latestProducts ?? collect();
+        $recommendedProducts = $recommendedProducts ?? collect();
+        $products = $products ?? collect();
+
+        $initialProducts = $isFiltering ? $products : $latestProducts;
+
+        $activeCategory = $selectedCategory
+            ? $categories->firstWhere('id', $selectedCategory)
+            : null;
+
+        if ($search !== '') {
+            $initialTitle = 'Hasil Pencarian';
+        } elseif ($activeCategory) {
+            $initialTitle = 'Produk ' . $activeCategory->name;
+        } else {
+            $initialTitle = 'Produk Terbaru';
+        }
+
+        $initialTotal = $isFiltering
+            ? ($products?->total() ?? $products->count())
+            : $latestProducts->count();
+
+        $categoryThemes = [
+            [
+                'icon' => 'fa-bag-shopping',
+                'box' => 'from-blue-50 to-indigo-50 text-[#315ebc]',
+                'active' => 'border-blue-200 bg-blue-50',
+            ],
+            [
+                'icon' => 'fa-mobile-screen-button',
+                'box' => 'from-violet-50 to-fuchsia-50 text-violet-600',
+                'active' => 'border-violet-200 bg-violet-50',
+            ],
+            [
+                'icon' => 'fa-laptop',
+                'box' => 'from-cyan-50 to-sky-50 text-cyan-600',
+                'active' => 'border-cyan-200 bg-cyan-50',
+            ],
+            [
+                'icon' => 'fa-shirt',
+                'box' => 'from-rose-50 to-pink-50 text-rose-600',
+                'active' => 'border-rose-200 bg-rose-50',
+            ],
+            [
+                'icon' => 'fa-house',
+                'box' => 'from-amber-50 to-orange-50 text-amber-600',
+                'active' => 'border-amber-200 bg-amber-50',
+            ],
+            [
+                'icon' => 'fa-utensils',
+                'box' => 'from-emerald-50 to-green-50 text-emerald-600',
+                'active' => 'border-emerald-200 bg-emerald-50',
+            ],
+            [
+                'icon' => 'fa-headphones',
+                'box' => 'from-slate-100 to-slate-50 text-slate-600',
+                'active' => 'border-slate-300 bg-slate-100',
+            ],
+            [
+                'icon' => 'fa-gamepad',
+                'box' => 'from-purple-50 to-indigo-50 text-purple-600',
+                'active' => 'border-purple-200 bg-purple-50',
+            ],
+        ];
+    @endphp
 
 
     {{-- ========================================================= --}}
@@ -49,302 +120,365 @@
     {{-- ========================================================= --}}
 
     <header
-        class="sticky top-0 z-50
-               border-b border-[#E9DCD2]
-               bg-white/90
-               shadow-sm shadow-[#4371d1]/5
-               backdrop-blur-xl">
+        class="sticky
+               top-0
+               z-50
+               border-b
+               border-slate-200/70
+               bg-white/85
+               shadow-sm
+               shadow-slate-950/5
+               backdrop-blur-xl"
+    >
 
         <div class="mx-auto max-w-7xl px-4 sm:px-5">
 
-            <div class="flex items-center
-                       gap-3 py-3
-                       md:gap-5 md:py-4">
+            <div
+                class="flex
+                       items-center
+                       gap-3
+                       py-3
+                       md:gap-5"
+            >
 
-
-                {{-- LOGO --}}
-
-                <a href="{{ route('home') }}" class="flex shrink-0 items-center gap-2">
+                {{-- BRAND --}}
+                <a
+                    href="{{ route('home') }}"
+                    class="flex
+                           shrink-0
+                           items-center
+                           gap-2.5"
+                >
 
                     @if ($siteSetting?->logo)
-                        <img src="{{ asset('storage/' . $siteSetting->logo) }}" alt="{{ $siteSetting->site_name }}"
+                        <img
+                            src="{{ asset('storage/' . $siteSetting->logo) }}"
+                            alt="{{ $siteSetting?->site_name ?? 'KampusMart' }}"
                             class="size-10
-               shrink-0
-               rounded-xl
-               object-contain">
+                                   rounded-2xl
+                                   object-contain
+                                   shadow-sm"
+                        >
                     @else
                         <div
-                            class="flex size-10
-               shrink-0
-               items-center justify-center
-               rounded-2xl
-               bg-gradient-to-br
-               from-[#C8795A]
-               to-[#4371d1]
-               font-black
-               text-white">
-
+                            class="flex
+                                   size-10
+                                   items-center
+                                   justify-center
+                                   rounded-2xl
+                                   bg-gradient-to-br
+                                   from-[#0a1d45]
+                                   to-[#4371d1]
+                                   text-sm
+                                   font-black
+                                   text-white
+                                   shadow-lg
+                                   shadow-blue-600/20"
+                        >
                             {{ strtoupper(substr($siteSetting?->site_name ?? 'KampusMart', 0, 1)) }}
-
                         </div>
                     @endif
 
-                    <span
-                        class="hidden
-                               bg-gradient-to-r
-                               from-[#0a1d45]
-                               to-[#4371d1]
-                               bg-clip-text
-                               text-xl font-black
-                               tracking-tight
-                               text-transparent
-                               sm:block">
+                    <div class="hidden sm:block">
 
-                        <p>
+                        <p
+                            class="text-lg
+                                   font-black
+                                   tracking-tight
+                                   text-[#0a1d45]"
+                        >
                             {{ $siteSetting?->site_name ?? 'KampusMart' }}
                         </p>
 
-                    </span>
+                        <p
+                            class="-mt-0.5
+                                   text-[9px]
+                                   font-semibold
+                                   uppercase
+                                   tracking-[0.18em]
+                                   text-slate-400"
+                        >
+                            Campus Marketplace
+                        </p>
+
+                    </div>
 
                 </a>
 
 
-
                 {{-- SEARCH DESKTOP --}}
-
-                <form action="{{ route('home') }}" method="GET"
-                    class="hidden min-w-0 flex-1
-                           overflow-hidden rounded-2xl
-                           border border-[#E5D5C9]
-                           bg-white
-                           shadow-sm
+                <form
+                    action="{{ route('home') }}"
+                    method="GET"
+                    class="hidden
+                           min-w-0
+                           flex-1
+                           overflow-hidden
+                           rounded-2xl
+                           border
+                           border-slate-200
+                           bg-slate-50
                            transition
-                           focus-within:border-[#A97957]
+                           focus-within:border-blue-300
+                           focus-within:bg-white
                            focus-within:ring-4
-                           focus-within:ring-[#F5E9DF]
-                           sm:flex">
+                           focus-within:ring-blue-100
+                           sm:flex"
+                >
 
-                    <input type="hidden" name="category" value="{{ $selectedCategory ?? '' }}"
-                        class="js-category-input">
+                    <input
+                        type="hidden"
+                        name="category"
+                        value="{{ $selectedCategory ?? '' }}"
+                        class="js-category-input"
+                    >
 
                     <div
-                        class="flex w-11 shrink-0
-                               items-center justify-center
-                               text-[#9A806F]">
-
-                        <i class="fa-solid fa-magnifying-glass"></i>
-
+                        class="flex
+                               w-11
+                               shrink-0
+                               items-center
+                               justify-center
+                               text-slate-400"
+                    >
+                        <i class="fa-solid fa-magnifying-glass text-sm"></i>
                     </div>
 
-                    <input type="search" name="search" value="{{ $search }}"
-                        placeholder="Cari produk, kategori, atau toko..." autocomplete="off"
-                        class="min-w-0 flex-1
+                    <input
+                        type="search"
+                        name="search"
+                        value="{{ $search }}"
+                        placeholder="Cari produk, kategori, atau toko..."
+                        autocomplete="off"
+                        class="min-w-0
+                               flex-1
                                bg-transparent
-                               py-2.5 pr-4
+                               py-2.5
+                               pr-4
                                text-sm
-                               outline-none">
+                               outline-none
+                               placeholder:text-slate-400"
+                    >
 
                     @if ($search !== '')
-                        <a href="{{ route('home') }}"
-                            class="flex w-10 items-center
+                        <a
+                            href="{{ route('home') }}"
+                            class="flex
+                                   w-10
+                                   items-center
                                    justify-center
                                    text-slate-400
                                    transition
-                                   hover:text-[#B97972]">
-
+                                   hover:text-rose-500"
+                        >
                             <i class="fa-solid fa-xmark"></i>
-
                         </a>
                     @endif
 
-                    <button type="submit"
-                        class="flex w-12 shrink-0
-                               items-center justify-center
-                               bg-gradient-to-r
-                               from-[#0a1d45]
-                               to-[#4371d1]
+                    <button
+                        type="submit"
+                        class="flex
+                               w-12
+                               shrink-0
+                               items-center
+                               justify-center
+                               bg-[#315ebc]
                                text-white
                                transition
-                               hover:from-[#0a1d45]
-                               hover:to-[#4371d1]
-                               md:w-14">
-
-                        <i class="fa-solid fa-arrow-right"></i>
-
+                               hover:bg-[#244d9f]"
+                    >
+                        <i class="fa-solid fa-magnifying-glass text-sm"></i>
                     </button>
 
                 </form>
 
 
+                {{-- RIGHT ACTION --}}
+                <div
+                    class="ml-auto
+                           flex
+                           items-center
+                           gap-2"
+                >
 
-                {{-- CART --}}
+                    @auth
 
-                @auth
-
-                    @if (auth()->user()->role === 'buyer' && Route::has('buyer.cart.index'))
-                        <a href="{{ route('buyer.cart.index') }}"
-                            class="relative flex size-10
-                                   shrink-0 items-center justify-center
-                                   rounded-xl
-                                   border border-[#EEE2D9]
-                                   bg-white
-                                   text-[#4371d1]
-                                   shadow-sm
-                                   transition
-                                   hover:border-[#DCC4B2]
-                                   hover:bg-[#FBF4EF]
-                                   sm:size-11">
-
-                            <i class="fa-solid fa-cart-shopping text-lg"></i>
-
-                        </a>
-                    @endif
-                @else
-                    <a href="{{ route('login') }}"
-                        class="relative flex size-10
-                               shrink-0 items-center justify-center
-                               rounded-xl
-                               border border-[#EEE2D9]
-                               bg-white
-                               text-[#4371d1]
-                               shadow-sm
-                               transition
-                               hover:bg-[#FBF4EF]
-                               sm:size-11">
-
-                        <i class="fa-solid fa-cart-shopping text-lg"></i>
-
-                    </a>
-
-                @endauth
-
-
-
-                {{-- ACCOUNT --}}
-
-                <div class="hidden items-center gap-2 lg:flex">
-
-                    @guest
-
-                        <a href="{{ route('login') }}"
-                            class="rounded-xl
-                                   border border-[#E5D5C9]
-                                   bg-white
-                                   px-4 py-2
-                                   text-sm font-semibold
-                                   text-[#4371d1]
-                                   transition
-                                   hover:bg-[#FBF4EF]">
-
-                            Masuk
-
-                        </a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}"
-                                class="rounded-xl
-                                       bg-gradient-to-r
-                                       from-[#0a1d45]
-                                       to-[#4371d1]
-                                       px-4 py-2
-                                       text-sm font-semibold
-                                       text-white
-                                       shadow-sm
+                        @if (auth()->user()->role === 'buyer' && Route::has('buyer.cart.index'))
+                            <a
+                                href="{{ route('buyer.cart.index') }}"
+                                class="relative
+                                       flex
+                                       size-10
+                                       items-center
+                                       justify-center
+                                       rounded-xl
+                                       border
+                                       border-slate-200
+                                       bg-white
+                                       text-[#315ebc]
                                        transition
-                                       hover:-translate-y-0.5
-                                       hover:shadow-md">
-
-                                Daftar
-
+                                       hover:border-blue-200
+                                       hover:bg-blue-50
+                                       sm:size-11"
+                            >
+                                <i class="fa-solid fa-cart-shopping"></i>
                             </a>
                         @endif
-                    @else
+
                         @if (auth()->user()->role === 'buyer')
-                            <a href="{{ route('buyer.dashboard') }}"
-                                class="flex items-center gap-2
+                            <a
+                                href="{{ route('buyer.dashboard') }}"
+                                class="hidden
+                                       items-center
+                                       gap-2.5
                                        rounded-xl
-                                       px-3 py-2
+                                       border
+                                       border-slate-200
+                                       bg-white
+                                       px-2.5
+                                       py-1.5
                                        transition
-                                       hover:bg-[#FBF4EF]">
-
+                                       hover:border-blue-200
+                                       hover:bg-blue-50
+                                       lg:flex"
+                            >
                                 <div
-                                    class="flex size-9
-                                           items-center justify-center
-                                           rounded-full
-                                           bg-[#F4EAE2]
-                                           text-[#4371d1]">
-
-                                    <i class="fa-regular fa-user"></i>
-
+                                    class="flex
+                                           size-8
+                                           items-center
+                                           justify-center
+                                           rounded-lg
+                                           bg-blue-50
+                                           text-[#315ebc]"
+                                >
+                                    <i class="fa-regular fa-user text-xs"></i>
                                 </div>
 
-                                <div>
+                                <div class="max-w-32">
 
                                     <p
-                                        class="max-w-32 truncate
-                                               text-sm font-semibold">
-
-                                        Dashboard
-
-                                    </p>
-
-                                    <p class="text-[10px] text-slate-400">
+                                        class="truncate
+                                               text-xs
+                                               font-bold
+                                               text-slate-700"
+                                    >
                                         {{ auth()->user()->name }}
                                     </p>
 
-                                </div>
+                                    <p class="text-[9px] text-slate-400">
+                                        Dashboard Buyer
+                                    </p>
 
+                                </div>
                             </a>
                         @endif
 
-                    @endguest
+                    @else
+
+                        <a
+                            href="{{ route('login') }}"
+                            class="hidden
+                                   rounded-xl
+                                   px-4
+                                   py-2.5
+                                   text-sm
+                                   font-semibold
+                                   text-slate-600
+                                   transition
+                                   hover:bg-slate-100
+                                   sm:inline-flex"
+                        >
+                            Masuk
+                        </a>
+
+                        @if (Route::has('register'))
+                            <a
+                                href="{{ route('register') }}"
+                                class="inline-flex
+                                       items-center
+                                       rounded-xl
+                                       bg-[#315ebc]
+                                       px-4
+                                       py-2.5
+                                       text-sm
+                                       font-bold
+                                       text-white
+                                       shadow-lg
+                                       shadow-blue-600/15
+                                       transition
+                                       hover:-translate-y-0.5
+                                       hover:bg-[#244d9f]"
+                            >
+                                Daftar
+                            </a>
+                        @endif
+
+                    @endauth
 
                 </div>
 
             </div>
 
 
-
             {{-- SEARCH MOBILE --}}
-
-            <form action="{{ route('home') }}" method="GET"
-                class="mb-3 flex
-                       overflow-hidden rounded-2xl
-                       border border-[#E5D5C9]
-                       bg-white
-                       shadow-sm
-                       focus-within:border-[#A97957]
+            <form
+                action="{{ route('home') }}"
+                method="GET"
+                class="mb-3
+                       flex
+                       overflow-hidden
+                       rounded-2xl
+                       border
+                       border-slate-200
+                       bg-slate-50
+                       focus-within:border-blue-300
+                       focus-within:bg-white
                        focus-within:ring-4
-                       focus-within:ring-[#F5E9DF]
-                       sm:hidden">
+                       focus-within:ring-blue-100
+                       sm:hidden"
+            >
 
-                <input type="hidden" name="category" value="{{ $selectedCategory ?? '' }}" class="js-category-input">
+                <input
+                    type="hidden"
+                    name="category"
+                    value="{{ $selectedCategory ?? '' }}"
+                    class="js-category-input"
+                >
 
                 <div
-                    class="flex w-10 items-center
+                    class="flex
+                           w-10
+                           items-center
                            justify-center
-                           text-[#9A806F]">
-
+                           text-slate-400"
+                >
                     <i class="fa-solid fa-magnifying-glass text-sm"></i>
-
                 </div>
 
-                <input type="search" name="search" value="{{ $search }}" placeholder="Cari produk..."
-                    class="min-w-0 flex-1
+                <input
+                    type="search"
+                    name="search"
+                    value="{{ $search }}"
+                    placeholder="Cari produk..."
+                    class="min-w-0
+                           flex-1
                            bg-transparent
-                           py-2.5 pr-3
-                           text-sm outline-none">
+                           py-2.5
+                           pr-3
+                           text-sm
+                           outline-none"
+                >
 
-                <button type="submit"
-                    class="flex w-12
-                           items-center justify-center
-                           bg-gradient-to-r
-                           from-[#0a1d45]
-                           to-[#4371d1]
-                           text-white">
-
+                <button
+                    type="submit"
+                    class="flex
+                           w-12
+                           items-center
+                           justify-center
+                           bg-[#315ebc]
+                           text-white"
+                >
                     <i class="fa-solid fa-arrow-right"></i>
-
                 </button>
 
             </form>
@@ -354,178 +488,266 @@
     </header>
 
 
-
     {{-- ========================================================= --}}
     {{-- MAIN --}}
     {{-- ========================================================= --}}
 
     <main
-        class="mx-auto max-w-7xl
-               px-4 py-4 pb-28
-               sm:px-5 sm:py-5
-               md:pb-8">
-
+        class="mx-auto
+               max-w-7xl
+               px-4
+               py-5
+               pb-28
+               sm:px-5
+               sm:py-6
+               md:pb-10"
+    >
 
         {{-- ===================================================== --}}
-        {{-- HERO --}}
+        {{-- HERO BENTO --}}
         {{-- ===================================================== --}}
 
-        <section class="grid gap-3
-                   lg:grid-cols-[2fr_1fr]
-                   lg:gap-4">
+        <section
+            class="grid
+                   gap-4
+                   lg:grid-cols-[minmax(0,1.65fr)_minmax(310px,.75fr)]"
+        >
 
-
-            {{-- HERO UTAMA --}}
-
+            {{-- HERO MAIN --}}
             <div
-                class="relative overflow-hidden
-                       rounded-3xl
+                class="relative
+                       overflow-hidden
+                       rounded-[30px]
                        bg-gradient-to-br
-                       from-[#0a1d45]
-                       via-[#4371d1]
-                       to-[#4371d1]
-                       px-5 py-9
+                       from-[#071633]
+                       via-[#173b82]
+                       to-[#315ebc]
+                       px-5
+                       py-8
                        text-white
-                       shadow-xl
-                       shadow-[#0a1d45]/15
-                       sm:px-8 sm:py-11
-                       md:px-10 md:py-14">
-
-
-                {{-- DECORATION --}}
-
-                <div
-                    class="pointer-events-none
-                           absolute -left-20 -top-24
-                           size-64 rounded-full
-                           bg-amber-300/20
-                           blur-3xl">
-                </div>
+                       shadow-2xl
+                       shadow-blue-950/15
+                       sm:px-8
+                       sm:py-10
+                       md:px-10
+                       md:py-12"
+            >
 
                 <div
                     class="pointer-events-none
-                           absolute -bottom-24 right-10
-                           size-64 rounded-full
-                           bg-rose-300/20
-                           blur-3xl">
-                </div>
+                           absolute
+                           -left-20
+                           -top-24
+                           size-72
+                           rounded-full
+                           bg-blue-400/20
+                           blur-3xl"
+                ></div>
 
                 <div
                     class="pointer-events-none
-                           absolute right-0 top-0
-                           size-48 rounded-full
-                           bg-orange-300/15
-                           blur-3xl">
-                </div>
+                           absolute
+                           -bottom-28
+                           right-0
+                           size-72
+                           rounded-full
+                           bg-violet-400/20
+                           blur-3xl"
+                ></div>
 
+                <div
+                    class="pointer-events-none
+                           absolute
+                           right-10
+                           top-10
+                           hidden
+                           size-48
+                           rotate-12
+                           rounded-[40px]
+                           border
+                           border-white/10
+                           bg-white/5
+                           backdrop-blur
+                           md:block"
+                ></div>
 
-                <div class="relative z-10 max-w-xl">
+                <div class="relative z-10 max-w-2xl">
 
-                    <span
-                        class="inline-flex items-center gap-2
+                    <div
+                        class="inline-flex
+                               items-center
+                               gap-2
                                rounded-full
-                               border border-white/15
+                               border
+                               border-white/15
                                bg-white/10
-                               px-3 py-1.5
-                               text-xs font-medium
-                               backdrop-blur
-                               sm:px-4 sm:py-2 sm:text-sm">
-
+                               px-3
+                               py-1.5
+                               text-xs
+                               font-semibold
+                               text-blue-50
+                               backdrop-blur"
+                    >
                         <span
-                            class="flex size-6
-                                   items-center justify-center
+                            class="flex
+                                   size-6
+                                   items-center
+                                   justify-center
                                    rounded-full
-                                   bg-[#E3B66D]
-                                   text-[#0a1d45]">
-
-                            <i class="fa-solid fa-bolt text-[10px]"></i>
-
+                                   bg-white
+                                   text-[#315ebc]"
+                        >
+                            <i class="fa-solid fa-bolt text-[9px]"></i>
                         </span>
 
-                        Marketplace untuk kebutuhanmu
-
-                    </span>
-
+                        Marketplace kampus yang praktis
+                    </div>
 
                     <h1
                         class="mt-5
-                               text-3xl font-black
-                               leading-[1.12]
+                               text-3xl
+                               font-black
+                               leading-[1.08]
                                tracking-tight
                                sm:text-4xl
-                               md:text-5xl">
-
-                        Temukan Produk
-
+                               md:text-5xl"
+                    >
+                        Belanja kebutuhanmu
                         <span
-                            class="block
+                            class="mt-1
+                                   block
                                    bg-gradient-to-r
-                                   from-amber-200
+                                   from-blue-100
                                    via-white
-                                   to-orange-200
+                                   to-violet-200
                                    bg-clip-text
-                                   text-transparent">
-
-                            yang Kamu Butuhkan.
-
+                                   text-transparent"
+                        >
+                            lebih cepat dan simpel.
                         </span>
-
                     </h1>
 
-
                     <p
-                        class="mt-4 max-w-lg
-                               text-sm leading-6
-                               text-[#F2E7DF]
-                               sm:text-base sm:leading-7">
-
-                        Jelajahi berbagai produk dari seller terpercaya
-                        dalam satu marketplace yang praktis,
-                        nyaman, dan mudah digunakan.
-
+                        class="mt-4
+                               max-w-xl
+                               text-sm
+                               leading-6
+                               text-blue-100/90
+                               sm:text-base
+                               sm:leading-7"
+                    >
+                        Temukan produk dari seller kampus, cek detail produk,
+                        simpan ke keranjang, dan lanjut transaksi lewat WhatsApp.
                     </p>
 
+                    <div
+                        class="mt-7
+                               flex
+                               flex-wrap
+                               gap-3"
+                    >
 
-                    <div class="mt-7 flex flex-wrap gap-3">
-
-                        <a href="#produk"
-                            class="inline-flex items-center gap-2
+                        <a
+                            href="#produk"
+                            class="inline-flex
+                                   items-center
+                                   gap-2
                                    rounded-xl
-                                   bg-[#FFFDFB]
-                                   px-5 py-3
-                                   text-sm font-bold
+                                   bg-white
+                                   px-5
+                                   py-3
+                                   text-sm
+                                   font-bold
                                    text-[#0a1d45]
                                    shadow-xl
                                    shadow-black/10
                                    transition
-                                   hover:-translate-y-1
-                                   hover:bg-[#F8EEE7]
-                                   hover:shadow-2xl">
-
-                            Belanja Sekarang
-
-                            <i class="fa-solid fa-arrow-right"></i>
-
+                                   hover:-translate-y-0.5
+                                   hover:shadow-2xl"
+                        >
+                            Jelajahi Produk
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
                         </a>
 
-
-                        <a href="#kategori"
-                            class="inline-flex items-center gap-2
+                        <a
+                            href="#kategori"
+                            class="inline-flex
+                                   items-center
+                                   gap-2
                                    rounded-xl
-                                   border border-white/20
+                                   border
+                                   border-white/15
                                    bg-white/10
-                                   px-5 py-3
-                                   text-sm font-semibold
+                                   px-5
+                                   py-3
+                                   text-sm
+                                   font-semibold
                                    text-white
                                    backdrop-blur
                                    transition
-                                   hover:bg-white/20">
-
+                                   hover:bg-white/15"
+                        >
                             Lihat Kategori
-
-                            <i class="fa-solid fa-border-all"></i>
-
+                            <i class="fa-solid fa-grid-2 text-xs"></i>
                         </a>
+
+                    </div>
+
+                    <div
+                        class="mt-8
+                               grid
+                               max-w-xl
+                               grid-cols-3
+                               gap-3"
+                    >
+
+                        <div
+                            class="rounded-2xl
+                                   border
+                                   border-white/10
+                                   bg-white/10
+                                   p-3
+                                   backdrop-blur"
+                        >
+                            <p class="text-lg font-black sm:text-xl">
+                                {{ $categories->count() }}
+                            </p>
+                            <p class="mt-0.5 text-[10px] text-blue-100">
+                                kategori
+                            </p>
+                        </div>
+
+                        <div
+                            class="rounded-2xl
+                                   border
+                                   border-white/10
+                                   bg-white/10
+                                   p-3
+                                   backdrop-blur"
+                        >
+                            <p class="text-lg font-black sm:text-xl">
+                                {{ $latestProducts->count() }}
+                            </p>
+                            <p class="mt-0.5 text-[10px] text-blue-100">
+                                produk terbaru
+                            </p>
+                        </div>
+
+                        <div
+                            class="rounded-2xl
+                                   border
+                                   border-white/10
+                                   bg-white/10
+                                   p-3
+                                   backdrop-blur"
+                        >
+                            <p class="text-lg font-black sm:text-xl">
+                                24/7
+                            </p>
+                            <p class="mt-0.5 text-[10px] text-blue-100">
+                                akses marketplace
+                            </p>
+                        </div>
 
                     </div>
 
@@ -534,171 +756,163 @@
             </div>
 
 
-
-            {{-- SIDE CARDS --}}
-
-            <div class="grid grid-cols-2 gap-3
-                       lg:grid-cols-1 lg:gap-4">
-
-
-                {{-- TERRACOTTA --}}
+            {{-- HERO SIDE --}}
+            <div
+                class="grid
+                       grid-cols-2
+                       gap-4
+                       lg:grid-cols-1"
+            >
 
                 <div
-                    class="group relative overflow-hidden
-                           rounded-3xl
-                           border border-[#F0D2C0]
-                           bg-gradient-to-br
-                           from-[#FFF4EC]
-                           via-[#FCE9DD]
-                           to-[#F4D8C8]
-                           p-4
+                    class="relative
+                           overflow-hidden
+                           rounded-[28px]
+                           border
+                           border-slate-200
+                           bg-white
+                           p-5
                            shadow-sm
                            transition
-                           hover:-translate-y-1
-                           hover:shadow-lg
-                           sm:p-6">
-
+                           hover:-translate-y-0.5
+                           hover:shadow-lg"
+                >
                     <div
-                        class="absolute -right-10 -top-10
-                               size-32 rounded-full
-                               bg-[#C8795A]/10">
-                    </div>
+                        class="absolute
+                               -right-10
+                               -top-10
+                               size-32
+                               rounded-full
+                               bg-blue-100
+                               blur-2xl"
+                    ></div>
 
                     <div class="relative">
 
                         <div
-                            class="flex size-10
-                                   items-center justify-center
-                                   rounded-xl
-                                   bg-gradient-to-br
-                                   from-[#C8795A]
-                                   to-[#A95E43]
-                                   text-white
-                                   shadow-lg
-                                   shadow-[#C8795A]/20
-                                   sm:size-12">
-
-                            <i class="fa-solid fa-truck-fast"></i>
-
+                            class="flex
+                                   size-11
+                                   items-center
+                                   justify-center
+                                   rounded-2xl
+                                   bg-blue-50
+                                   text-[#315ebc]"
+                        >
+                            <i class="fa-solid fa-store"></i>
                         </div>
 
                         <p
                             class="mt-4
-                                   text-[10px] font-bold
-                                   uppercase tracking-wider
-                                   text-[#B46547]
-                                   sm:text-xs">
-
-                            Pengiriman
-
+                                   text-[10px]
+                                   font-bold
+                                   uppercase
+                                   tracking-[0.18em]
+                                   text-blue-500"
+                        >
+                            Seller Kampus
                         </p>
 
                         <h3
                             class="mt-1
-                                   text-base font-bold
+                                   text-base
+                                   font-black
                                    leading-snug
                                    text-slate-900
-                                   sm:text-xl">
-
-                            Belanja Lebih
-                            <br>
-                            Praktis
-
+                                   sm:text-xl"
+                        >
+                            Produk dari seller terdaftar.
                         </h3>
 
                         <p
-                            class="mt-2 hidden
-                                   text-xs leading-5
+                            class="mt-2
+                                   hidden
+                                   text-xs
+                                   leading-5
                                    text-slate-500
-                                   sm:block">
-
-                            Pilih produk dari berbagai seller.
-
+                                   sm:block"
+                        >
+                            Jelajahi produk dari seller di lingkungan KampusMart.
                         </p>
 
                     </div>
-
                 </div>
 
 
-
-                {{-- SAGE --}}
-
                 <div
-                    class="group relative overflow-hidden
-                           rounded-3xl
-                           border border-[#D5E0D0]
+                    class="relative
+                           overflow-hidden
+                           rounded-[28px]
+                           border
+                           border-slate-200
                            bg-gradient-to-br
-                           from-[#F1F5ED]
-                           via-[#E8EFE3]
-                           to-[#DDE8D7]
-                           p-4
+                           from-[#0a1d45]
+                           to-[#173b82]
+                           p-5
+                           text-white
                            shadow-sm
                            transition
-                           hover:-translate-y-1
-                           hover:shadow-lg
-                           sm:p-6">
+                           hover:-translate-y-0.5
+                           hover:shadow-lg"
+                >
 
                     <div
-                        class="absolute -bottom-10 -right-10
-                               size-32 rounded-full
-                               bg-[#7F9275]/10">
-                    </div>
+                        class="absolute
+                               -bottom-12
+                               -right-12
+                               size-36
+                               rounded-full
+                               bg-violet-400/20
+                               blur-2xl"
+                    ></div>
 
                     <div class="relative">
 
                         <div
-                            class="flex size-10
-                                   items-center justify-center
-                                   rounded-xl
-                                   bg-gradient-to-br
-                                   from-[#7F9275]
-                                   to-[#647A5D]
+                            class="flex
+                                   size-11
+                                   items-center
+                                   justify-center
+                                   rounded-2xl
+                                   bg-white/10
                                    text-white
-                                   shadow-lg
-                                   shadow-[#7F9275]/20
-                                   sm:size-12">
-
-                            <i class="fa-solid fa-shield-halved"></i>
-
+                                   backdrop-blur"
+                        >
+                            <i class="fa-brands fa-whatsapp"></i>
                         </div>
 
                         <p
                             class="mt-4
-                                   text-[10px] font-bold
-                                   uppercase tracking-wider
-                                   text-[#647A5D]
-                                   sm:text-xs">
-
-                            Terpercaya
-
+                                   text-[10px]
+                                   font-bold
+                                   uppercase
+                                   tracking-[0.18em]
+                                   text-blue-200"
+                        >
+                            Transaksi Praktis
                         </p>
 
                         <h3
                             class="mt-1
-                                   text-base font-bold
+                                   text-base
+                                   font-black
                                    leading-snug
-                                   text-slate-900
-                                   sm:text-xl">
-
-                            Belanja Aman
-                            <br>
-                            dan Nyaman
-
+                                   sm:text-xl"
+                        >
+                            Konfirmasi langsung via WhatsApp.
                         </h3>
 
                         <p
-                            class="mt-2 hidden
-                                   text-xs leading-5
-                                   text-slate-500
-                                   sm:block">
-
-                            Temukan produk dari seller terdaftar.
-
+                            class="mt-2
+                                   hidden
+                                   text-xs
+                                   leading-5
+                                   text-blue-100/80
+                                   sm:block"
+                        >
+                            Sistem mencatat pesanan, komunikasi lanjut ke seller.
                         </p>
 
                     </div>
-
                 </div>
 
             </div>
@@ -706,497 +920,720 @@
         </section>
 
 
-
         {{-- ===================================================== --}}
-        {{-- BENEFIT --}}
+        {{-- BENEFITS --}}
         {{-- ===================================================== --}}
 
-        @php
+        <section
+            class="mt-4
+                   grid
+                   grid-cols-2
+                   gap-3
+                   lg:grid-cols-4"
+        >
 
-            $benefits = [
-                [
-                    'icon' => 'fa-truck-fast',
-                    'title' => 'Pengiriman Mudah',
-                    'description' => 'Belanja dari seller pilihan',
-                    'card' => 'from-[#FFF4EC] to-[#FBE7D9] border-[#F1D4C2]',
-                    'iconBox' => 'from-[#C8795A] to-[#AB6045]',
-                ],
-
-                [
-                    'icon' => 'fa-shield-halved',
-                    'title' => 'Transaksi Aman',
-                    'description' => 'Proses pembelian terlindungi',
-                    'card' => 'from-[#F1F5ED] to-[#E3ECDD] border-[#D6E1D0]',
-                    'iconBox' => 'from-[#7F9275] to-[#65795E]',
-                ],
-
-                [
-                    'icon' => 'fa-wallet',
-                    'title' => 'Belanja Praktis',
-                    'description' => 'Proses transaksi lebih mudah',
-                    'card' => 'from-[#FAF3E4] to-[#F4E4C5] border-[#ECD7AF]',
-                    'iconBox' => 'from-[#C89B55] to-[#AC7D38]',
-                ],
-
-                [
-                    'icon' => 'fa-star',
-                    'title' => 'Seller Pilihan',
-                    'description' => 'Temukan seller terpercaya',
-                    'card' => 'from-[#FAEEEC] to-[#F2DEDB] border-[#E8CAC6]',
-                    'iconBox' => 'from-[#B97972] to-[#9B5F59]',
-                ],
-            ];
-
-        @endphp
-
-
-        <section class="mt-4 grid
-                   grid-cols-2 gap-3
-                   md:grid-cols-4">
+            @php
+                $benefits = [
+                    [
+                        'icon' => 'fa-bolt',
+                        'title' => 'Cepat & Praktis',
+                        'description' => 'Temukan kebutuhan lebih cepat.',
+                    ],
+                    [
+                        'icon' => 'fa-store',
+                        'title' => 'Seller Terdaftar',
+                        'description' => 'Produk dari seller KampusMart.',
+                    ],
+                    [
+                        'icon' => 'fa-comments',
+                        'title' => 'Langsung Terhubung',
+                        'description' => 'Lanjut transaksi via WhatsApp.',
+                    ],
+                    [
+                        'icon' => 'fa-mobile-screen',
+                        'title' => 'Responsif',
+                        'description' => 'Nyaman di desktop dan mobile.',
+                    ],
+                ];
+            @endphp
 
             @foreach ($benefits as $benefit)
+
                 <div
-                    class="group rounded-2xl
+                    class="rounded-2xl
                            border
-                           bg-gradient-to-br
-                           p-3
-                           shadow-sm
-                           transition duration-300
-                           hover:-translate-y-1
-                           hover:shadow-lg
-                           sm:p-4
-                           {{ $benefit['card'] }}">
-
+                           border-slate-200
+                           bg-white
+                           p-4
+                           shadow-sm"
+                >
                     <div
-                        class="flex size-10
-                               items-center justify-center
+                        class="flex
+                               size-10
+                               items-center
+                               justify-center
                                rounded-xl
-                               bg-gradient-to-br
-                               text-white
-                               shadow-lg
-                               transition duration-300
-                               group-hover:scale-110
-                               sm:size-12
-                               {{ $benefit['iconBox'] }}">
-
+                               bg-slate-100
+                               text-[#315ebc]"
+                    >
                         <i class="fa-solid {{ $benefit['icon'] }}"></i>
-
                     </div>
 
                     <p
                         class="mt-3
-                               text-xs font-bold
-                               text-slate-800
-                               sm:text-sm">
-
+                               text-sm
+                               font-bold
+                               text-slate-800"
+                    >
                         {{ $benefit['title'] }}
-
                     </p>
 
                     <p
-                        class="mt-1 hidden
-                               text-xs leading-5
+                        class="mt-1
+                               hidden
+                               text-xs
+                               leading-5
                                text-slate-500
-                               sm:block">
-
+                               sm:block"
+                    >
                         {{ $benefit['description'] }}
-
                     </p>
-
                 </div>
+
             @endforeach
 
         </section>
 
 
+        {{-- ===================================================== --}}
+        {{-- CATEGORY + FILTER --}}
+        {{-- ===================================================== --}}
 
-        {{-- ========================================================= --}}
-        {{-- INITIAL DATA --}}
-        {{-- ========================================================= --}}
+        <div
+            x-data="categoryFilter({
+                selectedCategory: @js($selectedCategory ? (int) $selectedCategory : null),
+                initialTitle: @js($initialTitle),
+                initialTotal: {{ $initialTotal }},
+                filterUrl: @js(route('products.filter'))
+            })"
+        >
 
-        @php
-
-            $initialProducts = $isFiltering ? $products : $latestProducts;
-
-            $activeCategory = $selectedCategory ? $categories->firstWhere('id', $selectedCategory) : null;
-
-            if ($search !== '') {
-                $initialTitle = 'Hasil Pencarian';
-            } elseif ($activeCategory) {
-                $initialTitle = 'Produk ' . $activeCategory->name;
-            } else {
-                $initialTitle = 'Produk Terbaru';
-            }
-
-            $initialTotal = $isFiltering ? $products->total() : $latestProducts->count();
-
-            /*
-            |--------------------------------------------------------------------------
-            | CATEGORY COLOR PALETTE
-            |--------------------------------------------------------------------------
-            */
-
-            $categoryThemes = [
-                [
-                    'box' => 'bg-[#F4EAE2] text-[#7A5138]',
-                    'active' => 'border-[#BA8C6A] bg-[#F7EEE8]',
-                    'pill' => 'bg-[#4371d1] text-white',
-                    'hover' => 'group-hover:bg-[#4371d1] group-hover:text-white',
-                ],
-
-                [
-                    'box' => 'bg-[#F5E7DD] text-[#B66F4D]',
-                    'active' => 'border-[#D39578] bg-[#FAECE3]',
-                    'pill' => 'bg-[#B66F4D] text-white',
-                    'hover' => 'group-hover:bg-[#B66F4D] group-hover:text-white',
-                ],
-
-                [
-                    'box' => 'bg-[#EEF3EA] text-[#708566]',
-                    'active' => 'border-[#9BAC91] bg-[#F1F5EE]',
-                    'pill' => 'bg-[#788B6F] text-white',
-                    'hover' => 'group-hover:bg-[#788B6F] group-hover:text-white',
-                ],
-
-                [
-                    'box' => 'bg-[#FAF2DF] text-[#B48944]',
-                    'active' => 'border-[#D2AC69] bg-[#FBF5E8]',
-                    'pill' => 'bg-[#C0934B] text-white',
-                    'hover' => 'group-hover:bg-[#C0934B] group-hover:text-white',
-                ],
-
-                [
-                    'box' => 'bg-[#F7EAEA] text-[#AC716D]',
-                    'active' => 'border-[#C99591] bg-[#FAEFEF]',
-                    'pill' => 'bg-[#B97972] text-white',
-                    'hover' => 'group-hover:bg-[#B97972] group-hover:text-white',
-                ],
-
-                [
-                    'box' => 'bg-[#EFE9E4] text-[#765E50]',
-                    'active' => 'border-[#9C8373] bg-[#F4EFEB]',
-                    'pill' => 'bg-[#80695A] text-white',
-                    'hover' => 'group-hover:bg-[#80695A] group-hover:text-white',
-                ],
-            ];
-
-            $categoryIcons = [
-                'fa-bag-shopping',
-                'fa-mobile-screen-button',
-                'fa-laptop',
-                'fa-shirt',
-                'fa-house',
-                'fa-utensils',
-                'fa-headphones',
-                'fa-gamepad',
-            ];
-
-        @endphp
-
-
-
-        <div x-data="categoryFilter({
-
-            selectedCategory: @js($selectedCategory ? (int) $selectedCategory : null),
-
-            initialTitle: @js($initialTitle),
-
-            initialTotal: {{ $initialTotal }},
-
-            filterUrl: @js(route('products.filter'))
-
-        })">
-
-
-            {{-- ===================================================== --}}
-            {{-- CATEGORY --}}
-            {{-- ===================================================== --}}
-
-            <section id="kategori"
-                class="relative mt-5
-                       overflow-hidden
-                       rounded-3xl
-                       border border-[#E8D9CD]
-                       bg-gradient-to-br
-                       from-white
-                       via-[#FBF5F0]
-                       to-[#F6EDE6]
+            <section
+                id="kategori"
+                class="mt-6
+                       rounded-[28px]
+                       border
+                       border-slate-200
+                       bg-white
                        p-4
                        shadow-sm
-                       shadow-[#4371d1]/5
-                       sm:mt-6 sm:p-6">
-
+                       sm:p-6"
+            >
 
                 <div
-                    class="pointer-events-none
-                           absolute -right-20 -top-20
-                           size-52 rounded-full
-                           bg-[#C89B55]/10
-                           blur-3xl">
-                </div>
+                    class="flex
+                           flex-col
+                           gap-4
+                           sm:flex-row
+                           sm:items-end
+                           sm:justify-between"
+                >
 
+                    <div>
 
-                <div class="relative z-10">
+                        <span
+                            class="inline-flex
+                                   items-center
+                                   gap-2
+                                   rounded-full
+                                   bg-blue-50
+                                   px-3
+                                   py-1
+                                   text-[10px]
+                                   font-bold
+                                   uppercase
+                                   tracking-[0.16em]
+                                   text-[#315ebc]"
+                        >
+                            <i class="fa-solid fa-layer-group"></i>
+                            Kategori
+                        </span>
 
+                        <h2
+                            class="mt-3
+                                   text-xl
+                                   font-black
+                                   tracking-tight
+                                   text-slate-900
+                                   sm:text-2xl"
+                        >
+                            Temukan berdasarkan kategori
+                        </h2>
 
-                    {{-- HEADER --}}
-
-                    <div
-                        class="mb-5 flex
-                               items-end justify-between
-                               gap-4">
-
-                        <div class="flex items-center gap-3">
-
-                            <div
-                                class="flex size-10
-                                       shrink-0
-                                       items-center justify-center
-                                       rounded-xl
-                                       bg-gradient-to-br
-                                       from-[#4371d1]
-                                       to-[#4371d1]
-                                       text-white
-                                       shadow-lg
-                                       shadow-[#4371d1]/20">
-
-                                <i class="fa-solid fa-layer-group"></i>
-
-                            </div>
-
-                            <div>
-
-                                <h2
-                                    class="text-lg font-bold
-                                           text-slate-900
-                                           sm:text-xl">
-
-                                    Kategori Pilihan
-
-                                </h2>
-
-                                <p
-                                    class="mt-1 hidden
-                                           text-sm text-slate-500
-                                           sm:block">
-
-                                    Temukan produk berdasarkan kebutuhanmu
-
-                                </p>
-
-                            </div>
-
-                        </div>
-
-
-                        @if (Route::has('buyer.products.index'))
-                            <a href="{{ route('buyer.products.index') }}"
-                                class="shrink-0
-                                       text-xs font-semibold
-                                       text-[#4371d1]
-                                       transition
-                                       hover:text-[#0a1d45]
-                                       sm:text-sm">
-
-                                Lihat Semua
-
-                                <i class="fa-solid fa-chevron-right ml-1"></i>
-
-                            </a>
-                        @endif
+                        <p
+                            class="mt-1
+                                   text-sm
+                                   text-slate-500"
+                        >
+                            Pilih kategori yang sesuai dengan kebutuhanmu.
+                        </p>
 
                     </div>
 
+                    @if (Route::has('buyer.products.index'))
+                        <a
+                            href="{{ route('buyer.products.index') }}"
+                            class="inline-flex
+                                   items-center
+                                   gap-2
+                                   text-xs
+                                   font-bold
+                                   text-[#315ebc]
+                                   hover:text-[#0a1d45]"
+                        >
+                            Lihat Semua
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    @endif
+
+                </div>
 
 
-                    @if ($categories->isNotEmpty())
+                @if ($categories->isNotEmpty())
 
+                    {{-- PILLS --}}
+                    <div
+                        class="hide-scrollbar
+                               mt-5
+                               flex
+                               items-center
+                               gap-2
+                               overflow-x-auto
+                               pb-1"
+                    >
 
-                        {{-- CATEGORY PILLS --}}
+                        <button
+                            type="button"
+                            @click="loadCategory(null, 'Produk Terbaru')"
+                            class="shrink-0
+                                   rounded-full
+                                   border
+                                   px-4
+                                   py-2
+                                   text-xs
+                                   font-bold
+                                   transition"
+                            :class="selectedCategory === null
+                                ? 'border-[#315ebc] bg-[#315ebc] text-white'
+                                : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'"
+                        >
+                            Semua
+                        </button>
 
-                        <div
-                            class="hide-scrollbar
-                                   mb-5 flex
-                                   items-center gap-2
-                                   overflow-x-auto
-                                   pb-1">
+                        @foreach ($categories as $category)
 
-                            <button type="button"
+                            <button
+                                type="button"
                                 @click="
                                     loadCategory(
-                                        null,
-                                        'Produk Terbaru'
+                                        {{ $category->id }},
+                                        @js('Produk ' . $category->name)
                                     )
                                 "
                                 class="shrink-0
                                        rounded-full
-                                       px-4 py-2
-                                       text-xs font-semibold
-                                       transition duration-300"
-                                :class="selectedCategory === null ?
-                                    'bg-[#4371d1] text-white shadow-md' :
-                                    'border border-[#E7DAD0] bg-white text-slate-600 hover:bg-[#FBF6F2]'">
+                                       border
+                                       px-4
+                                       py-2
+                                       text-xs
+                                       font-bold
+                                       transition"
+                                :class="selectedCategory === {{ $category->id }}
+                                    ? 'border-[#315ebc] bg-[#315ebc] text-white'
+                                    : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'"
+                            >
+                                {{ $category->name }}
+                            </button>
 
-                                Semua
+                        @endforeach
+
+                    </div>
+
+
+                    {{-- CATEGORY CARDS --}}
+                    <div
+                        class="mt-5
+                               grid
+                               grid-cols-4
+                               gap-2
+                               sm:grid-cols-4
+                               sm:gap-3
+                               lg:grid-cols-8"
+                    >
+
+                        @foreach ($categories as $index => $category)
+
+                            @php
+                                $theme = $categoryThemes[$index % count($categoryThemes)];
+                            @endphp
+
+                            <button
+                                type="button"
+                                @click="
+                                    loadCategory(
+                                        {{ $category->id }},
+                                        @js('Produk ' . $category->name)
+                                    )
+                                "
+                                class="group
+                                       min-w-0
+                                       rounded-2xl
+                                       border
+                                       p-2.5
+                                       text-center
+                                       transition
+                                       duration-300
+                                       hover:-translate-y-1
+                                       hover:shadow-lg
+                                       sm:p-3"
+                                :class="selectedCategory === {{ $category->id }}
+                                    ? @js($theme['active'] . ' shadow-sm')
+                                    : 'border-slate-200 bg-white hover:border-blue-200'"
+                            >
+
+                                <div
+                                    class="mx-auto
+                                           flex
+                                           size-11
+                                           items-center
+                                           justify-center
+                                           rounded-2xl
+                                           bg-gradient-to-br
+                                           transition
+                                           group-hover:scale-105
+                                           sm:size-13
+                                           {{ $theme['box'] }}"
+                                >
+                                    <i class="fa-solid {{ $theme['icon'] }} text-lg"></i>
+                                </div>
+
+                                <p
+                                    class="mt-2
+                                           truncate
+                                           text-[11px]
+                                           font-bold
+                                           text-slate-700
+                                           sm:text-xs"
+                                >
+                                    {{ $category->name }}
+                                </p>
+
+                                <p class="mt-0.5 text-[9px] text-slate-400">
+                                    {{ $category->products_count }} produk
+                                </p>
 
                             </button>
 
+                        @endforeach
+
+                    </div>
+
+                @else
+
+                    <div
+                        class="mt-5
+                               rounded-2xl
+                               border
+                               border-dashed
+                               border-slate-300
+                               bg-slate-50
+                               py-10
+                               text-center"
+                    >
+                        <i class="fa-solid fa-box-open text-3xl text-slate-300"></i>
+
+                        <p class="mt-3 text-sm font-bold text-slate-600">
+                            Belum ada kategori
+                        </p>
+                    </div>
+
+                @endif
+
+            </section>
 
 
-                            @foreach ($categories as $index => $category)
-                                @php
+            {{-- ===================================================== --}}
+            {{-- PRODUCTS --}}
+            {{-- ===================================================== --}}
 
-                                    $theme = $categoryThemes[$index % count($categoryThemes)];
+            <section
+                id="produk"
+                x-ref="productSection"
+                class="mt-6
+                       rounded-[28px]
+                       border
+                       border-slate-200
+                       bg-white
+                       p-4
+                       shadow-sm
+                       sm:p-6"
+            >
 
-                                @endphp
+                <div
+                    class="flex
+                           items-end
+                           justify-between
+                           gap-4"
+                >
 
-                                <button type="button"
-                                    @click="
-                                        loadCategory(
-                                            {{ $category->id }},
-                                            @js('Produk ' . $category->name)
-                                        )
-                                    "
-                                    class="shrink-0
-                                           rounded-full
-                                           border border-transparent
-                                           px-4 py-2
-                                           text-xs font-semibold
-                                           transition duration-300"
-                                    :class="selectedCategory ===
-                                        {{ $category->id }}
+                    <div>
 
-                                        ?
-                                        @js($theme['pill'] . ' shadow-md')
+                        <span
+                            class="inline-flex
+                                   items-center
+                                   gap-2
+                                   rounded-full
+                                   bg-violet-50
+                                   px-3
+                                   py-1
+                                   text-[10px]
+                                   font-bold
+                                   uppercase
+                                   tracking-[0.16em]
+                                   text-violet-600"
+                        >
+                            <i class="fa-solid fa-bolt"></i>
+                            Produk
+                        </span>
 
-                                        :
-                                        'bg-white text-slate-600 hover:border-[#E7DAD0] hover:bg-[#FBF6F2]'">
+                        <h2
+                            class="mt-3
+                                   text-xl
+                                   font-black
+                                   tracking-tight
+                                   text-slate-900
+                                   sm:text-2xl"
+                            x-text="title"
+                        >
+                            {{ $initialTitle }}
+                        </h2>
 
-                                    {{ $category->name }}
+                        <p class="mt-1 text-sm text-slate-500">
 
-                                </button>
-                            @endforeach
+                            <template x-if="!loading">
+                                <span>
+                                    Ditemukan
+                                    <strong class="text-[#315ebc]" x-text="total">
+                                        {{ $initialTotal }}
+                                    </strong>
+                                    produk
+                                </span>
+                            </template>
 
+                            <template x-if="loading">
+                                <span>Memuat produk...</span>
+                            </template>
+
+                        </p>
+
+                    </div>
+
+                    @if (Route::has('buyer.products.index'))
+                        <a
+                            href="{{ route('buyer.products.index') }}"
+                            class="hidden
+                                   items-center
+                                   gap-2
+                                   text-xs
+                                   font-bold
+                                   text-[#315ebc]
+                                   hover:text-[#0a1d45]
+                                   sm:inline-flex"
+                        >
+                            Lihat Semua
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    @endif
+
+                </div>
+
+
+                {{-- SKELETON --}}
+                <div
+                    x-show="loading"
+                    x-cloak
+                    class="mt-5
+                           grid
+                           grid-cols-2
+                           gap-3
+                           sm:grid-cols-3
+                           sm:gap-4
+                           lg:grid-cols-5"
+                >
+
+                    @for ($i = 0; $i < 5; $i++)
+
+                        <div
+                            class="overflow-hidden
+                                   rounded-2xl
+                                   border
+                                   border-slate-200
+                                   bg-white"
+                        >
+                            <div class="aspect-square animate-pulse bg-slate-100"></div>
+
+                            <div class="p-4">
+                                <div class="h-3 animate-pulse rounded-full bg-slate-100"></div>
+                                <div class="mt-2 h-3 w-3/4 animate-pulse rounded-full bg-slate-100"></div>
+                                <div class="mt-5 h-4 w-1/2 animate-pulse rounded-full bg-slate-100"></div>
+                            </div>
                         </div>
 
+                    @endfor
+
+                </div>
 
 
-                        {{-- CATEGORY CARDS --}}
+                {{-- GRID --}}
+                <div
+                    x-ref="productGrid"
+                    x-show="!loading"
+                    class="mt-5"
+                >
+
+                    @if ($initialProducts->isNotEmpty())
 
                         <div
                             class="grid
-                                   grid-cols-4 gap-2
-                                   sm:grid-cols-4
-                                   sm:gap-3
-                                   lg:grid-cols-8">
+                                   grid-cols-2
+                                   gap-3
+                                   sm:grid-cols-3
+                                   sm:gap-4
+                                   lg:grid-cols-5"
+                        >
 
-                            @foreach ($categories as $index => $category)
+                            @foreach ($initialProducts as $product)
+
                                 @php
+                                    $productImage =
+                                        $product->image
+                                        ?? ($product->photo
+                                        ?? ($product->thumbnail ?? null));
 
-                                    $theme = $categoryThemes[$index % count($categoryThemes)];
-
-                                    $icon = $categoryIcons[$index % count($categoryIcons)];
-
+                                    if ($productImage) {
+                                        $imageUrl = \Illuminate\Support\Str::startsWith(
+                                            $productImage,
+                                            ['http://', 'https://']
+                                        )
+                                            ? $productImage
+                                            : asset('storage/' . $productImage);
+                                    } else {
+                                        $imageUrl = null;
+                                    }
                                 @endphp
 
-
-                                <button type="button"
-                                    @click="
-                                        loadCategory(
-                                            {{ $category->id }},
-                                            @js('Produk ' . $category->name)
-                                        )
-                                    "
+                                <a
+                                    href="{{ route('buyer.products.show', $product) }}"
                                     class="group
-                                           flex min-w-0
-                                           flex-col items-center
+                                           overflow-hidden
                                            rounded-2xl
                                            border
-                                           p-2.5 text-center
-                                           transition duration-300
+                                           border-slate-200
+                                           bg-white
+                                           transition
+                                           duration-300
                                            hover:-translate-y-1
-                                           hover:shadow-lg
-                                           sm:p-4"
-                                    :class="selectedCategory ===
-                                        {{ $category->id }}
+                                           hover:border-blue-200
+                                           hover:shadow-xl
+                                           hover:shadow-blue-950/5"
+                                >
 
-                                        ?
-                                        @js($theme['active'] . ' shadow-md')
-
-                                        :
-                                        'border-white bg-white/80 hover:border-[#EEE2D9]'">
-
-
+                                    {{-- IMAGE --}}
                                     <div
-                                        class="flex size-11
-                                               items-center justify-center
-                                               rounded-xl
-                                               transition duration-300
-                                               group-hover:scale-105
-                                               sm:size-14
-                                               sm:rounded-2xl
+                                        class="relative
+                                               aspect-square
+                                               overflow-hidden
+                                               bg-slate-100"
+                                    >
 
-                                               {{ $theme['box'] }}
-                                               {{ $theme['hover'] }}">
+                                        @if ($imageUrl)
+                                            <img
+                                                src="{{ $imageUrl }}"
+                                                alt="{{ $product->name }}"
+                                                loading="lazy"
+                                                class="size-full
+                                                       object-cover
+                                                       transition
+                                                       duration-500
+                                                       group-hover:scale-105"
+                                            >
+                                        @else
+                                            <div
+                                                class="flex
+                                                       size-full
+                                                       items-center
+                                                       justify-center
+                                                       text-slate-300"
+                                            >
+                                                <i class="fa-regular fa-image text-4xl"></i>
+                                            </div>
+                                        @endif
 
-                                        <i
-                                            class="fa-solid
-                                                   {{ $icon }}
-                                                   text-lg
-                                                   sm:text-2xl">
-                                        </i>
+
+                                        @if ($product->category)
+                                            <span
+                                                class="absolute
+                                                       left-2
+                                                       top-2
+                                                       max-w-[85%]
+                                                       truncate
+                                                       rounded-full
+                                                       bg-white/90
+                                                       px-2.5
+                                                       py-1
+                                                       text-[9px]
+                                                       font-bold
+                                                       text-[#315ebc]
+                                                       shadow-sm
+                                                       backdrop-blur"
+                                            >
+                                                {{ $product->category->name }}
+                                            </span>
+                                        @endif
+
+
+                                        @if (($product->stock ?? 0) > 0)
+                                            <span
+                                                class="absolute
+                                                       bottom-2
+                                                       right-2
+                                                       rounded-full
+                                                       bg-emerald-500/90
+                                                       px-2
+                                                       py-1
+                                                       text-[9px]
+                                                       font-bold
+                                                       text-white
+                                                       shadow-sm"
+                                            >
+                                                Tersedia
+                                            </span>
+                                        @endif
 
                                     </div>
 
 
-                                    <span
-                                        class="mt-2
-                                               w-full truncate
-                                               text-[11px]
-                                               font-semibold
-                                               text-slate-700
-                                               sm:mt-3
-                                               sm:text-sm">
+                                    {{-- BODY --}}
+                                    <div class="p-3 sm:p-4">
 
-                                        {{ $category->name }}
+                                        <h3
+                                            class="line-clamp-2
+                                                   min-h-10
+                                                   text-xs
+                                                   font-bold
+                                                   leading-5
+                                                   text-slate-700
+                                                   transition
+                                                   group-hover:text-[#315ebc]
+                                                   sm:text-sm"
+                                        >
+                                            {{ $product->name }}
+                                        </h3>
 
-                                    </span>
+                                        <p
+                                            class="mt-2
+                                                   text-base
+                                                   font-black
+                                                   tracking-tight
+                                                   text-[#0a1d45]
+                                                   sm:text-lg"
+                                        >
+                                            Rp{{ number_format($product->price ?? 0, 0, ',', '.') }}
+                                        </p>
 
+                                        <div
+                                            class="mt-3
+                                                   flex
+                                                   items-center
+                                                   justify-between
+                                                   gap-2
+                                                   border-t
+                                                   border-slate-100
+                                                   pt-3"
+                                        >
 
-                                    <span
-                                        class="mt-1
-                                               text-[9px]
-                                               text-slate-400
-                                               sm:text-[10px]">
+                                            <span
+                                                class="text-[10px]
+                                                       font-medium
+                                                       text-slate-400"
+                                            >
+                                                Stok {{ $product->stock ?? 0 }}
+                                            </span>
 
-                                        {{ $category->products_count }}
-                                        produk
+                                            @if ($product->user)
+                                                <span
+                                                    class="max-w-24
+                                                           truncate
+                                                           text-[10px]
+                                                           font-medium
+                                                           text-slate-500"
+                                                >
+                                                    <i class="fa-solid fa-store mr-1 text-[#315ebc]"></i>
+                                                    {{ $product->user->name }}
+                                                </span>
+                                            @endif
 
-                                    </span>
+                                        </div>
 
-                                </button>
+                                    </div>
+
+                                </a>
+
                             @endforeach
 
                         </div>
+
                     @else
+
                         <div
-                            class="rounded-2xl
-                                   border border-dashed
-                                   border-[#DDD0C7]
-                                   bg-white/60
-                                   py-10
-                                   text-center">
+                            class="rounded-[24px]
+                                   border
+                                   border-dashed
+                                   border-slate-300
+                                   bg-slate-50
+                                   px-5
+                                   py-14
+                                   text-center"
+                        >
+                            <div
+                                class="mx-auto
+                                       flex
+                                       size-16
+                                       items-center
+                                       justify-center
+                                       rounded-2xl
+                                       bg-white
+                                       text-slate-300
+                                       shadow-sm"
+                            >
+                                <i class="fa-solid fa-box-open text-2xl"></i>
+                            </div>
 
-                            <i
-                                class="fa-solid fa-box-open
-                                       text-3xl
-                                       text-[#B69A86]">
-                            </i>
+                            <h3
+                                class="mt-4
+                                       font-black
+                                       text-slate-700"
+                            >
+                                Produk tidak ditemukan
+                            </h3>
 
-                            <p class="mt-3 text-sm font-semibold">
-                                Belum ada kategori
+                            <p
+                                class="mt-1
+                                       text-sm
+                                       text-slate-500"
+                            >
+                                Coba kategori atau kata pencarian lain.
                             </p>
-
                         </div>
 
                     @endif
@@ -1206,869 +1643,280 @@
             </section>
 
 
-
-            {{-- ===================================================== --}}
-            {{-- DYNAMIC PRODUCTS --}}
-            {{-- ===================================================== --}}
-
-            <section id="produk" x-ref="productSection"
-                class="relative mt-5
-                       overflow-hidden
-                       rounded-3xl
-                       border border-[#E6D9CE]
-                       bg-gradient-to-br
-                       from-white
-                       via-[#FCF8F5]
-                       to-[#F6EFE9]
-                       p-4
-                       shadow-sm
-                       shadow-[#4371d1]/5
-                       sm:mt-6 sm:p-6">
-
-
-                <div
-                    class="pointer-events-none
-                           absolute -left-20 -top-24
-                           size-52 rounded-full
-                           bg-[#C8795A]/10
-                           blur-3xl">
-                </div>
-
-
-                <div class="relative z-10">
-
-
-                    {{-- HEADER --}}
-
-                    <div
-                        class="mb-5 flex
-                               items-end
-                               justify-between
-                               gap-4">
-
-                        <div class="flex items-center gap-3">
-
-                            <div
-                                class="flex size-10
-                                       shrink-0
-                                       items-center justify-center
-                                       rounded-xl
-                                       bg-gradient-to-br
-                                       from-[#C89B55]
-                                       via-[#C8795A]
-                                       to-[#9A6244]
-                                       text-white
-                                       shadow-lg
-                                       shadow-[#C8795A]/20">
-
-                                <i class="fa-solid fa-bolt"></i>
-
-                            </div>
-
-                            <div>
-
-                                <h2 class="text-xl font-bold
-                                           text-slate-900
-                                           sm:text-2xl"
-                                    x-text="title">
-
-                                    {{ $initialTitle }}
-
-                                </h2>
-
-
-                                <p
-                                    class="mt-1
-                                           text-xs text-slate-500
-                                           sm:text-sm">
-
-                                    <template x-if="!loading">
-
-                                        <span>
-
-                                            Ditemukan
-
-                                            <strong class="text-[#4371d1]" x-text="total">
-
-                                                {{ $initialTotal }}
-
-                                            </strong>
-
-                                            produk
-
-                                        </span>
-
-                                    </template>
-
-
-                                    <template x-if="loading">
-
-                                        <span>
-                                            Memuat produk...
-                                        </span>
-
-                                    </template>
-
-                                </p>
-
-                            </div>
-
-                        </div>
-
-
-                        @if (Route::has('buyer.products.index'))
-                            <a href="{{ route('buyer.products.index') }}"
-                                class="hidden
-                                       shrink-0
-                                       items-center
-                                       text-sm font-semibold
-                                       text-[#4371d1]
-                                       transition
-                                       hover:text-[#0a1d45]
-                                       sm:inline-flex">
-
-                                Lihat Semua
-
-                                <i class="fa-solid fa-chevron-right ml-1"></i>
-
-                            </a>
-                        @endif
-
-                    </div>
-
-
-
-                    {{-- LOADING --}}
-
-                    <div x-show="loading" x-cloak
-                        class="grid
-                               grid-cols-2 gap-3
-                               sm:grid-cols-3 sm:gap-4
-                               lg:grid-cols-5">
-
-                        @for ($i = 0; $i < 5; $i++)
-                            <div
-                                class="overflow-hidden
-                                       rounded-2xl
-                                       border border-white
-                                       bg-white">
-
-                                <div
-                                    class="aspect-square
-                                           animate-pulse
-                                           bg-[#EDE4DD]">
-                                </div>
-
-                                <div class="p-4">
-
-                                    <div
-                                        class="h-3
-                                               animate-pulse
-                                               rounded-full
-                                               bg-[#EDE4DD]">
-                                    </div>
-
-                                    <div
-                                        class="mt-2 h-3
-                                               w-3/4
-                                               animate-pulse
-                                               rounded-full
-                                               bg-[#EDE4DD]">
-                                    </div>
-
-                                    <div
-                                        class="mt-5 h-4
-                                               w-1/2
-                                               animate-pulse
-                                               rounded-full
-                                               bg-[#EDE4DD]">
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        @endfor
-
-                    </div>
-
-
-
-                    {{-- PRODUCT GRID --}}
-
-                    <div x-ref="productGrid" x-show="!loading">
-
-
-                        @if ($initialProducts->isNotEmpty())
-
-                            @php
-
-                                $productColors = [
-                                    [
-                                        'bar' => 'from-[#4371d1] via-[#9A6948] to-[#C89B55]',
-                                        'badge' => 'bg-[#F4EAE2] text-[#4371d1]',
-                                    ],
-
-                                    [
-                                        'bar' => 'from-[#C8795A] via-[#B56F52] to-[#A05E45]',
-                                        'badge' => 'bg-[#FBEAE2] text-[#A95E43]',
-                                    ],
-
-                                    [
-                                        'bar' => 'from-[#7F9275] via-[#8EA082] to-[#A7B39D]',
-                                        'badge' => 'bg-[#EFF4EC] text-[#65795E]',
-                                    ],
-
-                                    [
-                                        'bar' => 'from-[#C89B55] via-[#D1A963] to-[#B88944]',
-                                        'badge' => 'bg-[#FAF2DF] text-[#A87A37]',
-                                    ],
-
-                                    [
-                                        'bar' => 'from-[#B97972] via-[#C98C84] to-[#A86964]',
-                                        'badge' => 'bg-[#F8EDEC] text-[#9C625D]',
-                                    ],
-                                ];
-
-                            @endphp
-
-
-                            <div
-                                class="grid
-                                       grid-cols-2 gap-3
-                                       sm:grid-cols-3 sm:gap-4
-                                       lg:grid-cols-5">
-
-
-                                @foreach ($initialProducts as $index => $product)
-                                    @php
-
-                                        $productImage =
-                                            $product->image ?? ($product->photo ?? ($product->thumbnail ?? null));
-
-                                        if ($productImage) {
-                                            $imageUrl = \Illuminate\Support\Str::startsWith($productImage, [
-                                                'http://',
-                                                'https://',
-                                            ])
-                                                ? $productImage
-                                                : asset('storage/' . $productImage);
-                                        } else {
-                                            $imageUrl = null;
-                                        }
-
-                                        $productTheme = $productColors[$index % count($productColors)];
-
-                                    @endphp
-
-
-                                    <a href="{{ route('buyer.products.show', $product) }}"
-                                        class="group
-                                               overflow-hidden
-                                               rounded-2xl
-                                               border border-white/80
-                                               bg-white/90
-                                               shadow-sm
-                                               transition duration-300
-                                               hover:-translate-y-1.5
-                                               hover:border-[#E5D5C9]
-                                               hover:shadow-xl
-                                               hover:shadow-[#4371d1]/10">
-
-
-                                        <div
-                                            class="h-1
-                                                   bg-gradient-to-r
-                                                   {{ $productTheme['bar'] }}">
-                                        </div>
-
-
-                                        {{-- IMAGE --}}
-
-                                        <div
-                                            class="relative
-                                                   aspect-square
-                                                   overflow-hidden
-                                                   bg-[#F4EFEB]">
-
-
-                                            @if ($imageUrl)
-                                                <img src="{{ $imageUrl }}" alt="{{ $product->name }}"
-                                                    loading="lazy"
-                                                    class="size-full
-                                                           object-cover
-                                                           transition duration-500
-                                                           group-hover:scale-105">
-                                            @else
-                                                <div
-                                                    class="flex size-full
-                                                           items-center justify-center
-                                                           bg-gradient-to-br
-                                                           from-[#F5EFEB]
-                                                           to-[#EEE4DC]">
-
-                                                    <i
-                                                        class="fa-regular
-                                                               fa-image
-                                                               text-4xl
-                                                               text-[#C9B7AA]">
-                                                    </i>
-
-                                                </div>
-                                            @endif
-
-
-                                            @if ($product->category)
-                                                <span
-                                                    class="absolute
-                                                           bottom-2 left-2
-                                                           max-w-[85%]
-                                                           truncate
-                                                           rounded-lg
-                                                           px-2 py-1
-                                                           text-[9px]
-                                                           font-semibold
-                                                           shadow-sm
-                                                           {{ $productTheme['badge'] }}">
-
-                                                    {{ $product->category->name }}
-
-                                                </span>
-                                            @endif
-
-                                        </div>
-
-
-
-                                        {{-- CONTENT --}}
-
-                                        <div class="p-3 sm:p-4">
-
-                                            <h3
-                                                class="line-clamp-2
-                                                       min-h-10
-                                                       text-xs
-                                                       font-semibold
-                                                       leading-5
-                                                       text-slate-700
-                                                       transition
-                                                       group-hover:text-[#4371d1]
-                                                       sm:text-sm">
-
-                                                {{ $product->name }}
-
-                                            </h3>
-
-
-                                            <p
-                                                class="mt-2
-                                                       bg-gradient-to-r
-                                                       from-[#0a1d45]
-                                                       to-[#4371d1]
-                                                       bg-clip-text
-                                                       text-sm
-                                                       font-black
-                                                       text-transparent
-                                                       sm:mt-3
-                                                       sm:text-lg">
-
-                                                Rp{{ number_format($product->price ?? 0, 0, ',', '.') }}
-
-                                            </p>
-
-
-                                            <div
-                                                class="mt-3
-                                                       flex items-center
-                                                       justify-between
-                                                       gap-2">
-
-                                                <span
-                                                    class="rounded-md
-                                                           bg-[#FAF6F3]
-                                                           px-2 py-1
-                                                           text-[9px]
-                                                           font-medium
-                                                           text-slate-500
-                                                           sm:text-[10px]">
-
-                                                    Stok
-                                                    {{ $product->stock ?? 0 }}
-
-                                                </span>
-
-
-                                                @if ($product->user)
-                                                    <span
-                                                        class="max-w-24 truncate
-                                                               text-[9px]
-                                                               text-slate-400
-                                                               sm:text-[10px]">
-
-                                                        <i
-                                                            class="fa-solid
-                                                                   fa-store
-                                                                   mr-1
-                                                                   text-[#A97957]">
-                                                        </i>
-
-                                                        {{ $product->user->name }}
-
-                                                    </span>
-                                                @endif
-
-                                            </div>
-
-                                        </div>
-
-                                    </a>
-                                @endforeach
-
-                            </div>
-                        @else
-                            <div
-                                class="rounded-3xl
-                                       border border-dashed
-                                       border-[#DDD0C7]
-                                       bg-white/80
-                                       px-5 py-14
-                                       text-center">
-
-                                <div
-                                    class="mx-auto flex
-                                           size-16
-                                           items-center justify-center
-                                           rounded-2xl
-                                           bg-[#F4EAE2]
-                                           text-[#4371d1]">
-
-                                    <i class="fa-solid fa-box-open text-2xl"></i>
-
-                                </div>
-
-                                <h3
-                                    class="mt-4
-                                           font-bold
-                                           text-slate-700">
-
-                                    Produk tidak ditemukan
-
-                                </h3>
-
-                                <p
-                                    class="mt-1
-                                           text-sm
-                                           text-slate-500">
-
-                                    Coba pilih kategori atau kata pencarian lain.
-
-                                </p>
-
-                            </div>
-
-                        @endif
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-
             {{-- ===================================================== --}}
             {{-- RECOMMENDATION --}}
             {{-- ===================================================== --}}
 
-            <div x-show="
-                    selectedCategory === null
-                    && !loading
-                "
-                x-cloak>
+            <section
+                x-show="selectedCategory === null && !loading"
+                x-cloak
+                class="mt-6
+                       rounded-[28px]
+                       border
+                       border-slate-200
+                       bg-gradient-to-br
+                       from-[#0a1d45]
+                       via-[#153b82]
+                       to-[#244d9f]
+                       p-4
+                       text-white
+                       shadow-xl
+                       shadow-blue-950/10
+                       sm:p-6"
+            >
 
-                <section
-                    class="relative mt-6
-                           overflow-hidden
-                           rounded-3xl
-                           border border-[#E8D6D1]
-                           bg-gradient-to-br
-                           from-white
-                           via-[#FBF3F1]
-                           to-[#F6ECE8]
-                           p-4
-                           shadow-sm
-                           shadow-[#B97972]/5
-                           sm:p-6">
+                <div
+                    class="flex
+                           items-end
+                           justify-between
+                           gap-4"
+                >
 
+                    <div>
+
+                        <span
+                            class="inline-flex
+                                   items-center
+                                   gap-2
+                                   rounded-full
+                                   bg-white/10
+                                   px-3
+                                   py-1
+                                   text-[10px]
+                                   font-bold
+                                   uppercase
+                                   tracking-[0.16em]
+                                   text-blue-100"
+                        >
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            Rekomendasi
+                        </span>
+
+                        <h2
+                            class="mt-3
+                                   text-xl
+                                   font-black
+                                   tracking-tight
+                                   sm:text-2xl"
+                        >
+                            Pilihan untuk kamu
+                        </h2>
+
+                        <p class="mt-1 text-sm text-blue-100/80">
+                            Produk menarik dari berbagai seller.
+                        </p>
+
+                    </div>
+
+                    @if (Route::has('buyer.products.index'))
+                        <a
+                            href="{{ route('buyer.products.index') }}"
+                            class="hidden
+                                   items-center
+                                   gap-2
+                                   text-xs
+                                   font-bold
+                                   text-white
+                                   sm:inline-flex"
+                        >
+                            Lihat Semua
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    @endif
+
+                </div>
+
+
+                @if ($recommendedProducts->isNotEmpty())
 
                     <div
-                        class="pointer-events-none
-                               absolute -bottom-20 -left-20
-                               size-52 rounded-full
-                               bg-[#B97972]/10
-                               blur-3xl">
-                    </div>
+                        class="mt-5
+                               grid
+                               grid-cols-2
+                               gap-3
+                               sm:grid-cols-3
+                               sm:gap-4
+                               lg:grid-cols-5"
+                    >
 
+                        @foreach ($recommendedProducts as $product)
 
-                    <div class="relative z-10">
+                            @php
+                                $productImage =
+                                    $product->image
+                                    ?? ($product->photo
+                                    ?? ($product->thumbnail ?? null));
 
+                                if ($productImage) {
+                                    $imageUrl = \Illuminate\Support\Str::startsWith(
+                                        $productImage,
+                                        ['http://', 'https://']
+                                    )
+                                        ? $productImage
+                                        : asset('storage/' . $productImage);
+                                } else {
+                                    $imageUrl = null;
+                                }
 
-                        <div
-                            class="mb-5
-                                   flex items-end
-                                   justify-between
-                                   gap-4">
+                                $sellerLocation =
+                                    $product->user?->sellerProfile?->city
+                                    ?? ($product->user?->sellerProfile?->address ?? null);
+                            @endphp
 
-                            <div class="flex items-center gap-3">
+                            <a
+                                href="{{ route('buyer.products.show', $product) }}"
+                                class="group
+                                       overflow-hidden
+                                       rounded-2xl
+                                       bg-white
+                                       text-slate-800
+                                       shadow-sm
+                                       transition
+                                       duration-300
+                                       hover:-translate-y-1
+                                       hover:shadow-xl"
+                            >
 
                                 <div
-                                    class="flex size-10
-                                           shrink-0
-                                           items-center justify-center
-                                           rounded-xl
-                                           bg-gradient-to-br
-                                           from-[#4371d1]
-                                           via-[#4371d1]
-                                           to-[#B97972]
-                                           text-white
-                                           shadow-lg
-                                           shadow-[#4371d1]/20">
+                                    class="relative
+                                           aspect-square
+                                           overflow-hidden
+                                           bg-slate-100"
+                                >
 
-                                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                    @if ($imageUrl)
+                                        <img
+                                            src="{{ $imageUrl }}"
+                                            alt="{{ $product->name }}"
+                                            loading="lazy"
+                                            class="size-full
+                                                   object-cover
+                                                   transition
+                                                   duration-500
+                                                   group-hover:scale-105"
+                                        >
+                                    @else
+                                        <div
+                                            class="flex
+                                                   size-full
+                                                   items-center
+                                                   justify-center
+                                                   text-slate-300"
+                                        >
+                                            <i class="fa-regular fa-image text-4xl"></i>
+                                        </div>
+                                    @endif
+
+                                    <span
+                                        class="absolute
+                                               right-2
+                                               top-2
+                                               flex
+                                               size-8
+                                               items-center
+                                               justify-center
+                                               rounded-full
+                                               bg-white/90
+                                               text-rose-500
+                                               shadow-sm
+                                               backdrop-blur"
+                                    >
+                                        <i class="fa-solid fa-heart text-xs"></i>
+                                    </span>
 
                                 </div>
 
-                                <div>
 
-                                    <h2
-                                        class="text-xl font-bold
-                                               text-slate-900
-                                               sm:text-2xl">
+                                <div class="p-3 sm:p-4">
 
-                                        Rekomendasi Untuk Kamu
-
-                                    </h2>
+                                    <h3
+                                        class="line-clamp-2
+                                               min-h-10
+                                               text-xs
+                                               font-bold
+                                               leading-5
+                                               text-slate-700
+                                               group-hover:text-[#315ebc]
+                                               sm:text-sm"
+                                    >
+                                        {{ $product->name }}
+                                    </h3>
 
                                     <p
-                                        class="mt-1 hidden
-                                               text-sm text-slate-500
-                                               sm:block">
-
-                                        Pilihan produk menarik dari berbagai seller
-
+                                        class="mt-2
+                                               text-base
+                                               font-black
+                                               text-[#0a1d45]
+                                               sm:text-lg"
+                                    >
+                                        Rp{{ number_format($product->price ?? 0, 0, ',', '.') }}
                                     </p>
+
+                                    <div
+                                        class="mt-3
+                                               border-t
+                                               border-slate-100
+                                               pt-3"
+                                    >
+
+                                        <p
+                                            class="truncate
+                                                   text-[10px]
+                                                   font-semibold
+                                                   text-slate-500"
+                                        >
+                                            <i class="fa-solid fa-store mr-1 text-[#315ebc]"></i>
+                                            {{ $product->user?->name ?? 'Seller' }}
+                                        </p>
+
+                                        @if ($sellerLocation)
+                                            <p
+                                                class="mt-1
+                                                       truncate
+                                                       text-[9px]
+                                                       text-slate-400"
+                                            >
+                                                <i class="fa-solid fa-location-dot mr-1"></i>
+                                                {{ $sellerLocation }}
+                                            </p>
+                                        @endif
+
+                                    </div>
 
                                 </div>
 
-                            </div>
+                            </a>
 
-
-                            @if (Route::has('buyer.products.index'))
-                                <a href="{{ route('buyer.products.index') }}"
-                                    class="shrink-0
-                                           text-xs font-semibold
-                                           text-[#9A6244]
-                                           transition
-                                           hover:text-[#4371d1]
-                                           sm:text-sm">
-
-                                    Lihat Semua
-
-                                    <i class="fa-solid fa-chevron-right ml-1"></i>
-
-                                </a>
-                            @endif
-
-                        </div>
-
-
-
-                        @if ($recommendedProducts->isNotEmpty())
-
-                            <div
-                                class="grid
-                                       grid-cols-2 gap-3
-                                       sm:grid-cols-3 sm:gap-4
-                                       lg:grid-cols-5">
-
-                                @foreach ($recommendedProducts as $index => $product)
-                                    @php
-
-                                        $productImage =
-                                            $product->image ?? ($product->photo ?? ($product->thumbnail ?? null));
-
-                                        if ($productImage) {
-                                            $imageUrl = \Illuminate\Support\Str::startsWith($productImage, [
-                                                'http://',
-                                                'https://',
-                                            ])
-                                                ? $productImage
-                                                : asset('storage/' . $productImage);
-                                        } else {
-                                            $imageUrl = null;
-                                        }
-
-                                        $recommendThemes = [
-                                            [
-                                                'bar' => 'from-[#4371d1] to-[#4371d1]',
-                                                'badge' => 'bg-[#F4EAE2] text-[#4371d1]',
-                                                'heart' => 'text-[#4371d1]',
-                                            ],
-
-                                            [
-                                                'bar' => 'from-[#C8795A] to-[#A95E43]',
-                                                'badge' => 'bg-[#FBEAE2] text-[#A95E43]',
-                                                'heart' => 'text-[#C8795A]',
-                                            ],
-
-                                            [
-                                                'bar' => 'from-[#7F9275] to-[#647A5D]',
-                                                'badge' => 'bg-[#EFF4EC] text-[#647A5D]',
-                                                'heart' => 'text-[#7F9275]',
-                                            ],
-
-                                            [
-                                                'bar' => 'from-[#C89B55] to-[#AC7D38]',
-                                                'badge' => 'bg-[#FAF2DF] text-[#A87A37]',
-                                                'heart' => 'text-[#C89B55]',
-                                            ],
-
-                                            [
-                                                'bar' => 'from-[#B97972] to-[#9B5F59]',
-                                                'badge' => 'bg-[#F8EDEC] text-[#9C625D]',
-                                                'heart' => 'text-[#B97972]',
-                                            ],
-                                        ];
-
-                                        $recommendTheme = $recommendThemes[$index % count($recommendThemes)];
-
-                                        $sellerLocation =
-                                            $product->user?->sellerProfile?->city ??
-                                            ($product->user?->sellerProfile?->address ?? null);
-                                    @endphp
-
-
-                                    <a href="{{ route('buyer.products.show', $product) }}"
-                                        class="group
-                                               overflow-hidden
-                                               rounded-2xl
-                                               border border-white
-                                               bg-white/90
-                                               shadow-sm
-                                               transition duration-300
-                                               hover:-translate-y-1.5
-                                               hover:border-[#E8D6D1]
-                                               hover:shadow-xl
-                                               hover:shadow-[#B97972]/10">
-
-
-                                        <div
-                                            class="h-1
-                                                   bg-gradient-to-r
-                                                   {{ $recommendTheme['bar'] }}">
-                                        </div>
-
-
-                                        <div
-                                            class="relative
-                                                   aspect-square
-                                                   overflow-hidden
-                                                   bg-[#F4EFEB]">
-
-                                            @if ($imageUrl)
-                                                <img src="{{ $imageUrl }}" alt="{{ $product->name }}"
-                                                    loading="lazy"
-                                                    class="size-full
-                                                           object-cover
-                                                           transition duration-500
-                                                           group-hover:scale-105">
-                                            @else
-                                                <div
-                                                    class="flex size-full
-                                                           items-center justify-center
-                                                           bg-gradient-to-br
-                                                           from-[#F4EFEB]
-                                                           to-[#EEE4DC]">
-
-                                                    <i
-                                                        class="fa-regular
-                                                               fa-image
-                                                               text-4xl
-                                                               text-[#C9B7AA]">
-                                                    </i>
-
-                                                </div>
-                                            @endif
-
-
-                                            @if ($product->category)
-                                                <span
-                                                    class="absolute
-                                                           bottom-2 left-2
-                                                           max-w-[85%]
-                                                           truncate
-                                                           rounded-lg
-                                                           px-2 py-1
-                                                           text-[9px]
-                                                           font-semibold
-                                                           shadow-sm
-                                                           {{ $recommendTheme['badge'] }}">
-
-                                                    {{ $product->category->name }}
-
-                                                </span>
-                                            @endif
-
-                                        </div>
-
-
-
-                                        <div class="p-3 sm:p-4">
-
-                                            <h3
-                                                class="line-clamp-2
-                                                       min-h-10
-                                                       text-xs
-                                                       font-semibold
-                                                       leading-5
-                                                       text-slate-700
-                                                       transition
-                                                       group-hover:text-[#4371d1]
-                                                       sm:text-sm">
-
-                                                {{ $product->name }}
-
-                                            </h3>
-
-
-                                            <p
-                                                class="mt-2
-                                                       bg-gradient-to-r
-                                                       from-[#0a1d45]
-                                                       to-[#4371d1]
-                                                       bg-clip-text
-                                                       text-sm
-                                                       font-black
-                                                       text-transparent
-                                                       sm:mt-3
-                                                       sm:text-lg">
-
-                                                Rp{{ number_format($product->price ?? 0, 0, ',', '.') }}
-
-                                            </p>
-
-
-                                            <div
-                                                class="mt-2
-                                                       flex items-center
-                                                       justify-between
-                                                       gap-2">
-
-                                                <span
-                                                    class="text-[10px]
-                                                           text-slate-500
-                                                           sm:text-xs">
-
-                                                    Stok
-                                                    {{ $product->stock ?? 0 }}
-
-                                                </span>
-
-                                                <i
-                                                    class="fa-solid fa-heart
-                                                           text-xs
-                                                           {{ $recommendTheme['heart'] }}">
-                                                </i>
-
-                                            </div>
-
-
-                                            <div
-                                                class="mt-3
-                                                       border-t
-                                                       border-[#F0E7E0]
-                                                       pt-3">
-
-                                                <p
-                                                    class="truncate
-                                                           text-[10px]
-                                                           font-medium
-                                                           text-slate-600
-                                                           sm:text-xs">
-
-                                                    <i
-                                                        class="fa-solid fa-store
-                                                               mr-1
-                                                               text-[#A97957]">
-                                                    </i>
-
-                                                    {{ $product->user?->name ?? 'Seller' }}
-
-                                                </p>
-
-
-                                                @if ($sellerLocation)
-                                                    <p
-                                                        class="mt-1 truncate
-                                                               text-[9px]
-                                                               text-slate-400
-                                                               sm:text-[10px]">
-
-                                                        <i
-                                                            class="fa-solid
-                                                                   fa-location-dot
-                                                                   mr-1
-                                                                   text-[#C8795A]">
-                                                        </i>
-
-                                                        {{ $sellerLocation }}
-
-                                                    </p>
-                                                @endif
-
-                                            </div>
-
-                                        </div>
-
-                                    </a>
-                                @endforeach
-
-                            </div>
-                        @else
-                            <div
-                                class="rounded-2xl
-                                       border border-dashed
-                                       border-[#DDD0C7]
-                                       bg-white/60
-                                       py-12
-                                       text-center">
-
-                                <i
-                                    class="fa-solid fa-box-open
-                                           text-4xl
-                                           text-[#C9B7AA]">
-                                </i>
-
-                                <p class="mt-3
-                                           text-sm font-semibold">
-
-                                    Belum ada produk rekomendasi
-
-                                </p>
-
-                            </div>
-
-                        @endif
+                        @endforeach
 
                     </div>
 
-                </section>
+                @else
 
-            </div>
+                    <div
+                        class="mt-5
+                               rounded-2xl
+                               border
+                               border-white/10
+                               bg-white/10
+                               py-12
+                               text-center
+                               backdrop-blur"
+                    >
+                        <i class="fa-solid fa-box-open text-4xl text-blue-200"></i>
+
+                        <p class="mt-3 text-sm font-bold text-white">
+                            Belum ada produk rekomendasi
+                        </p>
+                    </div>
+
+                @endif
+
+            </section>
 
         </div>
 
     </main>
-
 
 
     {{-- ========================================================= --}}
@@ -2076,337 +1924,304 @@
     {{-- ========================================================= --}}
 
     <footer
-        class="mt-12 hidden
-               border-t border-[#E6D8CD]
-               bg-gradient-to-br
-               from-white
-               via-[#FBF6F2]
-               to-[#F4EAE2]
-               md:block">
+        class="mt-12
+               hidden
+               border-t
+               border-slate-200
+               bg-white
+               md:block"
+    >
 
         <div
-            class="mx-auto grid
+            class="mx-auto
+                   grid
                    max-w-7xl
-                   grid-cols-2 gap-10
-                   px-5 py-12
-                   lg:grid-cols-4">
-
-
-            {{-- BRAND --}}
+                   grid-cols-2
+                   gap-10
+                   px-5
+                   py-12
+                   lg:grid-cols-4"
+        >
 
             <div>
 
                 <div class="flex items-center gap-2">
 
                     <div
-                        class="flex size-10
-                               items-center justify-center
+                        class="flex
+                               size-10
+                               items-center
+                               justify-center
                                rounded-xl
-                               bg-gradient-to-br
-                               from-[#0a1d45]
-                               to-[#4371d1]
-                               font-black text-white">
-
-                        M
-
+                               bg-[#315ebc]
+                               font-black
+                               text-white"
+                    >
+                        {{ strtoupper(substr($siteSetting?->site_name ?? 'KampusMart', 0, 1)) }}
                     </div>
 
-                    <h3 class="text-xl font-black
-                               text-[#0a1d45]">
-
-                        <p>
+                    <div>
+                        <h3 class="font-black text-[#0a1d45]">
                             {{ $siteSetting?->site_name ?? 'KampusMart' }}
-                        </p>
+                        </h3>
 
-                    </h3>
+                        <p class="text-[9px] uppercase tracking-wider text-slate-400">
+                            Campus Marketplace
+                        </p>
+                    </div>
 
                 </div>
 
                 <p
-                    class="mt-4 max-w-xs
-                           text-sm leading-6
-                           text-slate-500">
-
-                    Marketplace modern untuk mempertemukan customer
-                    dengan seller secara mudah, nyaman, dan terstruktur.
-
+                    class="mt-4
+                           max-w-xs
+                           text-sm
+                           leading-6
+                           text-slate-500"
+                >
+                    Marketplace yang mempertemukan buyer dan seller kampus
+                    dalam pengalaman belanja yang sederhana dan terstruktur.
                 </p>
 
             </div>
 
 
-
-            {{-- ABOUT --}}
-
             <div>
-
-                <h4 class="font-semibold text-slate-800">
-                    Tentang Kami
+                <h4 class="font-bold text-slate-800">
+                    Jelajahi
                 </h4>
 
-                <div
-                    class="mt-4 flex
-                           flex-col gap-3
-                           text-sm text-slate-500">
-
-                    <a href="#" class="transition hover:text-[#4371d1]">
-
-                        Tentang MarketKu
-
-                    </a>
-
-                    <a href="#" class="transition hover:text-[#4371d1]">
-
-                        Kebijakan Privasi
-
-                    </a>
-
-                    <a href="#" class="transition hover:text-[#4371d1]">
-
-                        Syarat & Ketentuan
-
-                    </a>
-
+                <div class="mt-4 flex flex-col gap-3 text-sm text-slate-500">
+                    <a href="#produk" class="hover:text-[#315ebc]">Produk</a>
+                    <a href="#kategori" class="hover:text-[#315ebc]">Kategori</a>
+                    <a href="{{ route('home') }}" class="hover:text-[#315ebc]">Beranda</a>
                 </div>
-
             </div>
 
 
-
-            {{-- HELP --}}
-
             <div>
-
-                <h4 class="font-semibold text-slate-800">
+                <h4 class="font-bold text-slate-800">
                     Bantuan
                 </h4>
 
-                <div
-                    class="mt-4 flex
-                           flex-col gap-3
-                           text-sm text-slate-500">
-
-                    <a href="#" class="transition hover:text-[#4371d1]">
-
-                        Pusat Bantuan
-
-                    </a>
-
-                    <a href="#" class="transition hover:text-[#4371d1]">
-
-                        Cara Belanja
-
-                    </a>
-
-                    <a href="#" class="transition hover:text-[#4371d1]">
-
-                        Pembayaran
-
-                    </a>
-
-                    <a href="#" class="transition hover:text-[#4371d1]">
-
-                        Pengiriman
-
-                    </a>
-
+                <div class="mt-4 flex flex-col gap-3 text-sm text-slate-500">
+                    <span>Cara Belanja</span>
+                    <span>Pembayaran</span>
+                    <span>Kontak Seller</span>
                 </div>
-
             </div>
 
 
-
-            {{-- SECURITY --}}
-
             <div>
-
-                <h4 class="font-semibold text-slate-800">
-                    Keamanan
+                <h4 class="font-bold text-slate-800">
+                    Transaksi
                 </h4>
 
                 <div
-                    class="mt-4 flex gap-3
+                    class="mt-4
                            rounded-2xl
-                           border border-[#D3DFCE]
-                           bg-gradient-to-br
-                           from-[#F1F5ED]
-                           to-[#E4ECE0]
-                           p-4">
+                           border
+                           border-slate-200
+                           bg-slate-50
+                           p-4"
+                >
+                    <div class="flex items-start gap-3">
 
-                    <div
-                        class="flex size-10
-                               shrink-0
-                               items-center justify-center
-                               rounded-xl
-                               bg-[#7F9275]
-                               text-white">
+                        <div
+                            class="flex
+                                   size-10
+                                   shrink-0
+                                   items-center
+                                   justify-center
+                                   rounded-xl
+                                   bg-emerald-50
+                                   text-emerald-600"
+                        >
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </div>
 
-                        <i class="fa-solid fa-shield-halved"></i>
+                        <div>
+                            <p class="text-sm font-bold text-slate-700">
+                                Lanjut via WhatsApp
+                            </p>
+
+                            <p class="mt-1 text-xs leading-5 text-slate-500">
+                                Komunikasi transaksi dilakukan langsung dengan seller.
+                            </p>
+                        </div>
 
                     </div>
-
-                    <div>
-
-                        <p class="text-sm font-semibold">
-                            Transaksi Terlindungi
-                        </p>
-
-                        <p class="mt-1
-                                   text-xs text-slate-500">
-
-                            Belanja lebih nyaman bersama MarketKu.
-
-                        </p>
-
-                    </div>
-
                 </div>
 
             </div>
 
         </div>
 
-
         <div
-            class="border-t border-[#E6D8CD]
+            class="border-t
+                   border-slate-200
                    py-5
                    text-center
                    text-xs
-                   text-slate-500">
-
-            © {{ date('Y') }} MarketKu.
+                   text-slate-400"
+        >
+            © {{ date('Y') }} {{ $siteSetting?->site_name ?? 'KampusMart' }}.
             All rights reserved.
-
         </div>
 
     </footer>
 
 
-
     {{-- ========================================================= --}}
-    {{-- MOBILE BOTTOM NAVIGATION --}}
+    {{-- MOBILE BOTTOM NAV --}}
     {{-- ========================================================= --}}
 
     <nav
-        class="fixed inset-x-0 bottom-0 z-50
-               border-t border-[#E6D8CD]
+        class="fixed
+               inset-x-0
+               bottom-0
+               z-50
+               border-t
+               border-slate-200
                bg-white/95
                px-2
-               shadow-[0_-5px_20px_rgba(111,78,55,0.07)]
+               shadow-[0_-8px_30px_rgba(15,23,42,0.08)]
                backdrop-blur-xl
-               md:hidden">
+               md:hidden"
+    >
 
-        <div class="mx-auto grid
+        <div
+            class="mx-auto
+                   grid
                    max-w-md
-                   grid-cols-4">
+                   grid-cols-4"
+        >
 
-
-            {{-- HOME --}}
-
-            <a href="{{ route('home') }}"
-                class="flex flex-col
-                       items-center justify-center
-                       gap-1 py-3
-                       text-[#4371d1]">
-
-                <i class="fa-solid fa-house text-lg"></i>
-
-                <span class="text-[10px] font-semibold">
-                    Home
-                </span>
-
+            <a
+                href="{{ route('home') }}"
+                class="flex
+                       flex-col
+                       items-center
+                       justify-center
+                       gap-1
+                       py-3
+                       text-[#315ebc]"
+            >
+                <i class="fa-solid fa-house text-base"></i>
+                <span class="text-[9px] font-bold">Home</span>
             </a>
 
-
-
-            {{-- CATEGORY --}}
-
-            <a href="#kategori"
-                class="flex flex-col
-                       items-center justify-center
-                       gap-1 py-3
-                       text-[#C8795A]">
-
-                <i class="fa-solid fa-border-all text-lg"></i>
-
-                <span class="text-[10px] font-medium">
-                    Kategori
-                </span>
-
+            <a
+                href="#kategori"
+                class="flex
+                       flex-col
+                       items-center
+                       justify-center
+                       gap-1
+                       py-3
+                       text-slate-400"
+            >
+                <i class="fa-solid fa-border-all text-base"></i>
+                <span class="text-[9px] font-semibold">Kategori</span>
             </a>
-
-
-
-            {{-- CART --}}
 
             @auth
 
                 @if (auth()->user()->role === 'buyer' && Route::has('buyer.cart.index'))
-                    <a href="{{ route('buyer.cart.index') }}"
-                        class="flex flex-col
-                               items-center justify-center
-                               gap-1 py-3
-                               text-[#7F9275]">
-
-                        <i class="fa-solid fa-cart-shopping text-lg"></i>
-
-                        <span class="text-[10px]">
-                            Keranjang
-                        </span>
-
+                    <a
+                        href="{{ route('buyer.cart.index') }}"
+                        class="flex
+                               flex-col
+                               items-center
+                               justify-center
+                               gap-1
+                               py-3
+                               text-slate-400"
+                    >
+                        <i class="fa-solid fa-cart-shopping text-base"></i>
+                        <span class="text-[9px] font-semibold">Keranjang</span>
+                    </a>
+                @else
+                    <a
+                        href="{{ route('home') }}"
+                        class="flex
+                               flex-col
+                               items-center
+                               justify-center
+                               gap-1
+                               py-3
+                               text-slate-400"
+                    >
+                        <i class="fa-solid fa-cart-shopping text-base"></i>
+                        <span class="text-[9px] font-semibold">Keranjang</span>
                     </a>
                 @endif
+
             @else
-                <a href="{{ route('login') }}"
-                    class="flex flex-col
-                           items-center justify-center
-                           gap-1 py-3
-                           text-[#7F9275]">
 
-                    <i class="fa-solid fa-cart-shopping text-lg"></i>
-
-                    <span class="text-[10px]">
-                        Keranjang
-                    </span>
-
+                <a
+                    href="{{ route('login') }}"
+                    class="flex
+                           flex-col
+                           items-center
+                           justify-center
+                           gap-1
+                           py-3
+                           text-slate-400"
+                >
+                    <i class="fa-solid fa-cart-shopping text-base"></i>
+                    <span class="text-[9px] font-semibold">Keranjang</span>
                 </a>
 
             @endauth
 
 
-
-            {{-- ACCOUNT --}}
-
             @auth
 
                 @if (auth()->user()->role === 'buyer')
-                    <a href="{{ route('buyer.dashboard') }}"
-                        class="flex flex-col
-                               items-center justify-center
-                               gap-1 py-3
-                               text-[#C89B55]">
-
-                        <i class="fa-regular fa-user text-lg"></i>
-
-                        <span class="text-[10px]">
-                            Akun
-                        </span>
-
+                    <a
+                        href="{{ route('buyer.dashboard') }}"
+                        class="flex
+                               flex-col
+                               items-center
+                               justify-center
+                               gap-1
+                               py-3
+                               text-slate-400"
+                    >
+                        <i class="fa-regular fa-user text-base"></i>
+                        <span class="text-[9px] font-semibold">Akun</span>
+                    </a>
+                @else
+                    <a
+                        href="{{ route('home') }}"
+                        class="flex
+                               flex-col
+                               items-center
+                               justify-center
+                               gap-1
+                               py-3
+                               text-slate-400"
+                    >
+                        <i class="fa-regular fa-user text-base"></i>
+                        <span class="text-[9px] font-semibold">Akun</span>
                     </a>
                 @endif
+
             @else
-                <a href="{{ route('login') }}"
-                    class="flex flex-col
-                           items-center justify-center
-                           gap-1 py-3
-                           text-[#C89B55]">
 
-                    <i class="fa-regular fa-user text-lg"></i>
-
-                    <span class="text-[10px]">
-                        Masuk
-                    </span>
-
+                <a
+                    href="{{ route('login') }}"
+                    class="flex
+                           flex-col
+                           items-center
+                           justify-center
+                           gap-1
+                           py-3
+                           text-slate-400"
+                >
+                    <i class="fa-regular fa-user text-base"></i>
+                    <span class="text-[9px] font-semibold">Masuk</span>
                 </a>
 
             @endauth
@@ -2414,7 +2229,6 @@
         </div>
 
     </nav>
-
 
 
     {{-- ========================================================= --}}
@@ -2427,47 +2241,25 @@
             return {
 
                 selectedCategory: config.selectedCategory,
-
                 title: config.initialTitle,
-
                 total: config.initialTotal,
-
                 loading: false,
-
                 filterUrl: config.filterUrl,
 
-
-                async loadCategory(
-                    categoryId,
-                    categoryTitle
-                ) {
+                async loadCategory(categoryId, categoryTitle) {
 
                     if (this.loading) {
                         return;
                     }
 
+                    this.selectedCategory = categoryId;
+                    this.title = categoryTitle;
+                    this.loading = true;
 
-                    this.selectedCategory =
-                        categoryId;
-
-                    this.title =
-                        categoryTitle;
-
-                    this.loading =
-                        true;
-
-
-                    const browserUrl =
-                        new URL(
-                            window.location.href
-                        );
-
+                    const browserUrl = new URL(window.location.href);
 
                     const search =
-                        browserUrl
-                        .searchParams
-                        .get('search') ?? '';
-
+                        browserUrl.searchParams.get('search') ?? '';
 
                     const requestUrl =
                         new URL(
@@ -2475,97 +2267,53 @@
                             window.location.origin
                         );
 
-
-                    /*
-                    |--------------------------------------------------------------------------
-                    | CATEGORY
-                    |--------------------------------------------------------------------------
-                    */
-
                     if (categoryId !== null) {
-
                         requestUrl
                             .searchParams
                             .set(
                                 'category',
                                 categoryId
                             );
-
                     }
 
-
-                    /*
-                    |--------------------------------------------------------------------------
-                    | SEARCH
-                    |--------------------------------------------------------------------------
-                    */
-
                     if (search.trim() !== '') {
-
                         requestUrl
                             .searchParams
                             .set(
                                 'search',
                                 search
                             );
-
                     }
-
 
                     try {
 
-                        const response =
-                            await fetch(
-                                requestUrl.toString(), {
-                                    method: 'GET',
-
-                                    cache: 'no-store',
-
-                                    headers: {
-
-                                        'Accept': 'application/json',
-
-                                        'X-Requested-With': 'XMLHttpRequest',
-
-                                    },
-                                }
-                            );
-
+                        const response = await fetch(
+                            requestUrl.toString(), {
+                                method: 'GET',
+                                cache: 'no-store',
+                                headers: {
+                                    'Accept': 'application/json',
+                                    'X-Requested-With': 'XMLHttpRequest',
+                                },
+                            }
+                        );
 
                         if (!response.ok) {
-
                             throw new Error(
                                 'Gagal mengambil produk.'
                             );
-
                         }
-
 
                         const data =
                             await response.json();
-
-
-                        /*
-                        |--------------------------------------------------------------------------
-                        | UPDATE PRODUCT GRID
-                        |--------------------------------------------------------------------------
-                        */
 
                         this.$refs
                             .productGrid
                             .innerHTML =
                             data.html;
 
-
                         this.total =
                             data.total;
-
-
-                        /*
-                        |--------------------------------------------------------------------------
-                        | UPDATE URL TANPA REFRESH
-                        |--------------------------------------------------------------------------
-                        */
 
                         if (categoryId === null) {
 
@@ -2586,19 +2334,12 @@
 
                         }
 
-
                         window.history
-                            .replaceState({},
+                            .replaceState(
+                                {},
                                 '',
                                 browserUrl.toString()
                             );
-
-
-                        /*
-                        |--------------------------------------------------------------------------
-                        | UPDATE HIDDEN INPUT SEARCH
-                        |--------------------------------------------------------------------------
-                        */
 
                         document
                             .querySelectorAll(
@@ -2606,13 +2347,10 @@
                             )
                             .forEach(
                                 (input) => {
-
                                     input.value =
                                         categoryId ?? '';
-
                                 }
                             );
-
 
                     } catch (error) {
 
@@ -2621,11 +2359,9 @@
                             error
                         );
 
-
                     } finally {
 
-                        this.loading =
-                            false;
+                        this.loading = false;
 
                     }
 

@@ -269,7 +269,7 @@
                                    gap-3">
 
 
-                            <a href="{{ route('home') }}#produk"
+                            <a href="{{ route('home') }}"
                                 class="inline-flex
                                        items-center
                                        gap-2
@@ -331,86 +331,109 @@
 
                     {{-- HERO CARD --}}
 
-                    <div
-                        class="grid
-                               grid-cols-2
-                               gap-3
-                               sm:min-w-[320px]">
+                    <div class="grid
+           grid-cols-2
+           gap-3
+           sm:min-w-[320px]">
+
+                        {{-- Keranjang --}}
+                        <a href="{{ route('buyer.cart.index') }}"
+                            class="group
+               rounded-2xl
+               border
+               border-white/10
+               bg-white/10
+               p-4
+               backdrop-blur
+               transition-all
+               duration-300
+               hover:-translate-y-1
+               hover:bg-white/15
+               hover:shadow-lg">
+                            <div class="flex items-start justify-between gap-3">
+
+                                <div>
+                                    <p class="text-xs text-[#EAD9CD]">
+                                        Keranjang
+                                    </p>
+
+                                    <p class="mt-1 text-2xl font-black">
+                                        {{ $cartCount }}
+                                    </p>
+
+                                    <p class="mt-1 text-[10px] text-[#E8D6CA]">
+                                        produk tersimpan
+                                    </p>
+                                </div>
+
+                                <div
+                                    class="flex size-9
+                       items-center
+                       justify-center
+                       rounded-xl
+                       bg-white/10
+                       transition
+                       group-hover:bg-white/20">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.8" stroke="currentColor" class="size-4">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M2.25 3h1.386a1.5 1.5 0 011.442 1.088l.383 1.34m0 0L7.5 12.75h9.75l2.25-7.5H5.46zm2.04 10.5h10.96M9 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm8.25 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                                    </svg>
+                                </div>
+
+                            </div>
+                        </a>
 
 
-                        <div
-                            class="rounded-2xl
-                                   border
-                                   border-white/10
-                                   bg-white/10
-                                   p-4
-                                   backdrop-blur">
+                        {{-- Pesanan Aktif --}}
+                        <a href="{{ route('buyer.orders.index') }}"
+                            class="group
+               rounded-2xl
+               border
+               border-white/10
+               bg-white/10
+               p-4
+               backdrop-blur
+               transition-all
+               duration-300
+               hover:-translate-y-1
+               hover:bg-white/15
+               hover:shadow-lg">
+                            <div class="flex items-start justify-between gap-3">
 
-                            <p class="text-xs
-                                       text-[#EAD9CD]">
+                                <div>
+                                    <p class="text-xs text-[#EAD9CD]">
+                                        Pesanan Aktif
+                                    </p>
 
-                                Keranjang
+                                    <p class="mt-1 text-2xl font-black">
+                                        {{ $activeOrderCount }}
+                                    </p>
 
-                            </p>
+                                    <p class="mt-1 text-[10px] text-[#E8D6CA]">
+                                        sedang diproses
+                                    </p>
+                                </div>
 
-                            <p
-                                class="mt-1
-                                       text-2xl
-                                       font-black">
+                                <div
+                                    class="flex size-9
+                       items-center
+                       justify-center
+                       rounded-xl
+                       bg-white/10
+                       transition
+                       group-hover:bg-white/20">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.8" stroke="currentColor" class="size-4">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </div>
 
-                                {{ $cartCount }}
-
-                            </p>
-
-                            <p
-                                class="mt-1
-                                       text-[10px]
-                                       text-[#E8D6CA]">
-
-                                produk tersimpan
-
-                            </p>
-
-                        </div>
-
-
-                        <div
-                            class="rounded-2xl
-                                   border
-                                   border-white/10
-                                   bg-white/10
-                                   p-4
-                                   backdrop-blur">
-
-                            <p class="text-xs
-                                       text-[#EAD9CD]">
-
-                                Pesanan Aktif
-
-                            </p>
-
-                            <p
-                                class="mt-1
-                                       text-2xl
-                                       font-black">
-
-                                {{ $activeOrderCount }}
-
-                            </p>
-
-                            <p
-                                class="mt-1
-                                       text-[10px]
-                                       text-[#E8D6CA]">
-
-                                sedang diproses
-
-                            </p>
-
-                        </div>
+                            </div>
+                        </a>
 
                     </div>
-
                 </div>
 
             </section>
@@ -868,138 +891,234 @@
 
                         @foreach ($recentOrders as $order)
                             @php
-
                                 $status = strtolower($order->status ?? '');
 
                                 $statusClass = match ($status) {
-                                    'pending' => 'bg-[#FAF2DF] text-[#A87A37]',
-
-                                    'processing', 'diproses' => 'bg-[#FBEAE2] text-[#A95E43]',
-
-                                    'shipped', 'dikirim' => 'bg-[#F4EAE2] text-[#4371d1]',
-
-                                    'completed', 'selesai' => 'bg-[#EEF3EA] text-[#65795E]',
-
-                                    'cancelled', 'dibatalkan' => 'bg-[#FAEDEC] text-[#A65954]',
-
-                                    default => 'bg-slate-100 text-slate-600',
+                                    'pending' => 'bg-amber-50 text-amber-700 border-amber-200',
+                                    'processing' => 'bg-orange-50 text-orange-700 border-orange-200',
+                                    'completed' => 'bg-emerald-50 text-emerald-700 border-emerald-200',
+                                    'cancelled' => 'bg-rose-50 text-rose-700 border-rose-200',
+                                    default => 'bg-slate-50 text-slate-600 border-slate-200',
                                 };
 
-                                $orderTotal = $order->total_amount ?? ($order->total ?? 0);
+                                $statusLabel = match ($status) {
+                                    'pending' => 'Menunggu',
+                                    'processing' => 'Diproses',
+                                    'completed' => 'Selesai',
+                                    'cancelled' => 'Dibatalkan',
+                                    default => ucfirst($status),
+                                };
 
+                                $paymentLabel = match ($order->payment_method) {
+                                    'transfer' => 'Transfer',
+                                    'cash' => 'Cash / Tunai',
+                                    default => 'Belum ditentukan',
+                                };
+
+                                $firstItem = $order->items->first();
+                                $moreItems = max(0, $order->items->count() - 1);
+                                $totalQty = $order->items->sum('quantity');
                             @endphp
 
-
-                            <div
-                                class="flex
-                                       flex-col
-                                       gap-4
-                                       p-4
-                                       transition
-                                       hover:bg-[#FCF8F5]
-                                       sm:flex-row
-                                       sm:items-center
-                                       sm:justify-between
-                                       sm:px-6">
-
+                            <article
+                                class="group
+               relative
+               overflow-hidden
+               border-b
+               border-slate-100
+               bg-white
+               px-4
+               py-5
+               transition
+               duration-300
+               last:border-b-0
+               hover:bg-slate-50/70
+               sm:px-6">
 
                                 <div
                                     class="flex
-                                           items-center
-                                           gap-3">
+                   flex-col
+                   gap-4
+                   lg:flex-row
+                   lg:items-center
+                   lg:justify-between">
+
+                                    {{-- LEFT --}}
+                                    <div class="min-w-0 flex-1">
+
+                                        <div class="flex items-start gap-3">
+
+                                            <div
+                                                class="flex
+                               size-11
+                               shrink-0
+                               items-center
+                               justify-center
+                               rounded-2xl
+                               bg-gradient-to-br
+                               from-[#0a1d45]
+                               to-[#4371d1]
+                               text-white
+                               shadow-sm">
+                                                <i class="fa-solid fa-bag-shopping text-sm"></i>
+                                            </div>
+
+                                            <div class="min-w-0 flex-1">
+
+                                                {{-- PRODUCT --}}
+                                                <div
+                                                    class="flex
+                                   flex-col
+                                   gap-1
+                                   sm:flex-row
+                                   sm:items-center
+                                   sm:gap-2">
+
+                                                    <h3
+                                                        class="truncate
+                                       text-sm
+                                       font-bold
+                                       text-slate-900
+                                       sm:text-base">
+                                                        {{ $firstItem?->product_name ?? 'Produk' }}
+                                                    </h3>
+
+                                                    @if ($moreItems > 0)
+                                                        <span
+                                                            class="w-fit
+                                           rounded-full
+                                           bg-slate-100
+                                           px-2
+                                           py-0.5
+                                           text-[10px]
+                                           font-semibold
+                                           text-slate-500">
+                                                            +{{ $moreItems }} produk
+                                                        </span>
+                                                    @endif
+
+                                                </div>
+
+                                                {{-- META --}}
+                                                <div
+                                                    class="mt-2
+                                   flex
+                                   flex-wrap
+                                   items-center
+                                   gap-x-3
+                                   gap-y-1
+                                   text-[11px]
+                                   text-slate-500">
+
+                                                    <span>
+                                                        <i class="fa-solid fa-box mr-1 text-[#4371d1]"></i>
+                                                        {{ $totalQty }} item
+                                                    </span>
+
+                                                    <span>
+                                                        <i class="fa-regular fa-calendar mr-1 text-slate-400"></i>
+                                                        {{ optional($order->created_at)->format('d M Y, H:i') }}
+                                                    </span>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
 
 
+                                    {{-- RIGHT --}}
                                     <div
-                                        class="flex
-                                               size-11
-                                               shrink-0
-                                               items-center
-                                               justify-center
-                                               rounded-xl
-                                               bg-[#F4EAE2]
-                                               text-[#4371d1]">
+                                        class="grid
+                       grid-cols-2
+                       gap-3
+                       sm:grid-cols-3
+                       lg:min-w-[430px]">
 
-                                        <i
-                                            class="fa-solid
-                                                   fa-bag-shopping">
-                                        </i>
+                                        {{-- PAYMENT --}}
+                                        <div>
+                                            <p
+                                                class="text-[10px]
+                               font-medium
+                               uppercase
+                               tracking-wide
+                               text-slate-400">
+                                                Pembayaran
+                                            </p>
 
-                                    </div>
+                                            <p
+                                                class="mt-1
+                               text-sm
+                               font-bold
+                               text-slate-700">
+                                                @if ($order->payment_method === 'transfer')
+                                                    <i class="fa-solid fa-building-columns mr-1 text-[#4371d1]"></i>
+                                                @elseif ($order->payment_method === 'cash')
+                                                    <i class="fa-solid fa-money-bill-wave mr-1 text-emerald-600"></i>
+                                                @endif
+
+                                                {{ $paymentLabel }}
+                                            </p>
+                                        </div>
 
 
-                                    <div>
+                                        {{-- TOTAL --}}
+                                        <div>
+                                            <p
+                                                class="text-[10px]
+                               font-medium
+                               uppercase
+                               tracking-wide
+                               text-slate-400">
+                                                Total Bayar
+                                            </p>
 
-                                        <p
-                                            class="text-sm
-                                                   font-bold
-                                                   text-slate-800">
+                                            <p
+                                                class="mt-1
+                               text-sm
+                               font-black
+                               text-[#0a1d45]
+                               sm:text-base">
+                                                Rp{{ number_format($order->subtotal, 0, ',', '.') }}
+                                            </p>
+                                        </div>
 
-                                            Pesanan
-                                            #{{ $order->id }}
 
-                                        </p>
+                                        {{-- STATUS --}}
+                                        <div class="col-span-2 sm:col-span-1">
 
+                                            <p
+                                                class="text-[10px]
+                               font-medium
+                               uppercase
+                               tracking-wide
+                               text-slate-400">
+                                                Status
+                                            </p>
 
-                                        <p
-                                            class="mt-1
-                                                   text-xs
-                                                   text-slate-500">
+                                            <span
+                                                class="mt-1
+                               inline-flex
+                               items-center
+                               rounded-full
+                               border
+                               px-2.5
+                               py-1
+                               text-[10px]
+                               font-bold
+                               {{ $statusClass }}">
+                                                {{ $statusLabel }}
+                                            </span>
 
-                                            {{ optional($order->created_at)->format('d M Y, H:i') }}
-
-                                        </p>
+                                        </div>
 
                                     </div>
 
                                 </div>
 
-
-
-                                <div
-                                    class="flex
-                                           items-center
-                                           justify-between
-                                           gap-4
-                                           sm:justify-end">
-
-
-                                    <div class="text-right">
-
-                                        <p
-                                            class="text-[10px]
-                                                   text-slate-400">
-
-                                            Total
-
-                                        </p>
-
-                                        <p
-                                            class="text-sm
-                                                   font-bold
-                                                   text-[#4371d1]">
-
-                                            Rp{{ number_format($orderTotal, 0, ',', '.') }}
-
-                                        </p>
-
-                                    </div>
-
-
-                                    <span
-                                        class="rounded-full
-                                               px-3
-                                               py-1.5
-                                               text-[10px]
-                                               font-semibold
-                                               {{ $statusClass }}">
-
-                                        {{ ucfirst($order->status ?? 'Pesanan') }}
-
-                                    </span>
-
-                                </div>
-
-                            </div>
+                            </article>
                         @endforeach
 
                     </div>

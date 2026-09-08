@@ -96,6 +96,7 @@ class CheckoutController extends Controller
             'seller_id' => ['required', 'integer', 'exists:users,id'],
 
             'buyer_name' => ['required', 'string', 'max:255'],
+            'payment_method' => ['required', 'in:transfer,cash'],
 
             'buyer_phone' => ['required', 'string', 'max:20'],
 
@@ -166,6 +167,7 @@ class CheckoutController extends Controller
                 'buyer_name' => $validated['buyer_name'],
 
                 'buyer_phone' => $validated['buyer_phone'],
+                'payment_method' => $validated['payment_method'],
 
                 'subtotal' => 0,
 

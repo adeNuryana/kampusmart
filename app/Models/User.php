@@ -12,19 +12,9 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    protected $fillable = [
-        'name',
-        'email',
-        'phone',
-        'password',
-        'role',
-        'photo',
-    ];
+    protected $fillable = ['name', 'email', 'phone', 'password', 'role', 'photo', 'google_id', 'google_avatar'];
 
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    protected $hidden = ['password', 'remember_token'];
 
     protected function casts(): array
     {
@@ -39,9 +29,7 @@ class User extends Authenticatable
     }
     public function products(): HasMany
     {
-        return $this->hasMany(
-            Product::class
-        );
+        return $this->hasMany(Product::class);
     }
     public function cartItems()
     {
@@ -49,18 +37,11 @@ class User extends Authenticatable
     }
     public function buyerOrders()
     {
-        return $this->hasMany(
-            Order::class,
-            'buyer_id'
-        );
+        return $this->hasMany(Order::class, 'buyer_id');
     }
-
 
     public function sellerOrders()
     {
-        return $this->hasMany(
-            Order::class,
-            'seller_id'
-        );
+        return $this->hasMany(Order::class, 'seller_id');
     }
 }

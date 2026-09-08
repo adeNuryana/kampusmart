@@ -26,7 +26,20 @@
             {{-- ===================================================== --}}
             {{-- HEADER --}}
             {{-- ===================================================== --}}
+            <div class="mb-5">
 
+                <a href="{{ route('buyer.dashboard') }}"
+                    class="inline-flex items-center gap-2
+                           text-sm font-semibold
+                           text-slate-500
+                           transition
+                           hover:text-[#4371d1]">
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    Dashboard
+                </a>
+
+            </div>
             <section
                 class="relative
                        mb-5
@@ -584,9 +597,7 @@
 
 
 
-                            <form
-                                action="{{ route('buyer.profile.update') }}"
-                                method="POST">
+                            <form action="{{ route('buyer.profile.update') }}" method="POST">
 
                                 @csrf
                                 @method('PUT')
@@ -636,8 +647,7 @@
 
 
                                             <input type="text" name="name" id="name"
-                                                value="{{ old('name', $buyer->name) }}"
-                                                required
+                                                value="{{ old('name', $buyer->name) }}" required
                                                 class="h-11
                                                        w-full
                                                        rounded-xl
@@ -710,8 +720,7 @@
 
 
                                             <input type="email" name="email" id="email"
-                                                value="{{ old('email', $buyer->email) }}"
-                                                required
+                                                value="{{ old('email', $buyer->email) }}" required
                                                 class="h-11
                                                        w-full
                                                        rounded-xl
@@ -984,9 +993,7 @@
 
 
 
-                            <form
-                                action="{{ route('buyer.profile.password') }}"
-                                method="POST">
+                            <form action="{{ route('buyer.profile.password') }}" method="POST">
 
                                 @csrf
                                 @method('PUT')

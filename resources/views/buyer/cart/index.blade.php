@@ -25,7 +25,20 @@
             {{-- ===================================================== --}}
             {{-- HEADER --}}
             {{-- ===================================================== --}}
+            <div class="mb-5">
 
+                <a href="{{ route('buyer.dashboard') }}"
+                    class="inline-flex items-center gap-2
+                           text-sm font-semibold
+                           text-slate-500
+                           transition
+                           hover:text-[#4371d1]">
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    Dashboard
+                </a>
+
+            </div>
             <section
                 class="relative
                        mb-5
@@ -1465,34 +1478,6 @@
 
                                 {{-- CONTINUE SHOPPING --}}
 
-                                <a href="{{ route('buyer.products.index') }}"
-                                    class="mt-4
-                                           flex
-                                           w-full
-                                           items-center
-                                           justify-center
-                                           gap-2
-                                           rounded-xl
-                                           border
-                                           border-[#DCC9BB]
-                                           bg-white
-                                           px-4
-                                           py-2.5
-                                           text-xs
-                                           font-bold
-                                           text-[#4371d1]
-                                           transition
-                                           hover:bg-[#FBF4EF]">
-
-                                    <i
-                                        class="fa-solid
-                                               fa-arrow-left
-                                               text-[10px]">
-                                    </i>
-
-                                    Lanjut Belanja
-
-                                </a>
 
                             </div>
 

@@ -63,7 +63,9 @@
     <div x-data="{
         quantity: 1,
         maxStock: {{ (int) ($product->stock ?? 0) }},
-        showBuyConfirm: false
+        showBuyConfirm: false,
+        paymentMethod: '',
+        dashboardUrl: @js(route('buyer.dashboard'))
     }"
         class="min-h-screen
                bg-gradient-to-br
@@ -139,8 +141,22 @@
                     {{ $product->name }}
 
                 </span>
-
             </nav>
+            <div class="mb-5">
+
+                <a href="{{ route('buyer.dashboard') }}"
+                    class="inline-flex items-center gap-2
+                       text-sm font-semibold
+                       text-slate-500
+                       transition
+                       hover:text-[#4371d1]">
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    Dashboard
+                </a>
+
+            </div>
+
 
 
 
@@ -841,44 +857,36 @@
 
 
 
+
+
+
                                         {{-- BUY NOW --}}
 
+                                        <button type="button" @click="paymentMethod = ''; showBuyConfirm = true"
+                                            class="flex w-full
+           items-center
+           justify-center
+           gap-2
+           rounded-xl
+           bg-gradient-to-r
+           from-[#0a1d45]
+           via-[#4371d1]
+           to-[#4371d1]
+           px-4 py-3
+           text-sm
+           font-bold
+           text-white
+           shadow-lg
+           shadow-[#4371d1]/20
+           transition
+           hover:-translate-y-0.5
+           hover:shadow-xl">
 
-                                        <form method="POST" action="{{ route('buyer.products.buy-now', $product) }}">
+                                            <i class="fa-solid fa-bag-shopping"></i>
 
-                                            @csrf
+                                            Beli Sekarang
 
-                                            <input type="hidden" name="quantity" :value="quantity">
-
-
-                                            <button type="submit" @click="showBuyConfirm = true"
-                                                class="flex w-full
-               items-center
-               justify-center
-               gap-2
-               rounded-xl
-               bg-gradient-to-r
-               from-[#0a1d45]
-               via-[#4371d1]
-               to-[#4371d1]
-               px-4 py-3
-               text-sm
-               font-bold
-               text-white
-               shadow-lg
-               shadow-[#4371d1]/20
-               transition
-               hover:-translate-y-0.5
-               hover:shadow-xl">
-
-                                                <i class="fa-solid
-                   fa-bag-shopping"></i>
-
-                                                Beli Sekarang
-
-                                            </button>
-
-                                        </form>
+                                        </button>
                                     @else
                                         <a href="{{ route('login') }}"
                                             class="col-span-2
@@ -1098,36 +1106,35 @@
 
                         @if (auth()->user()->role === 'buyer')
                             <div class="shrink-0">
-
-                                <button type="button"
+                                <a href="{{ route('buyer.stores.show', $seller) }}"
                                     class="inline-flex
-                               w-full
-                               items-center
-                               justify-center
-                               gap-2
-                               rounded-xl
-                               bg-gradient-to-r
-                               from-[#4371d1]
-                               to-[#4371d1]
-                               px-5
-                               py-2.5
-                               text-sm
-                               font-semibold
-                               text-white
-                               shadow-sm
-                               transition
-                               duration-300
-                               hover:-translate-y-0.5
-                               hover:shadow-lg
-                               sm:w-auto">
+           w-full
+           items-center
+           justify-center
+           gap-2
+           rounded-xl
+           bg-gradient-to-r
+           from-[#0a1d45]
+           to-[#4371d1]
+           px-5
+           py-2.5
+           text-sm
+           font-semibold
+           text-white
+           shadow-sm
+           transition
+           duration-300
+           hover:-translate-y-0.5
+           hover:shadow-lg
+           sm:w-auto">
 
-                                    <i class="fa-solid
-                                   fa-store">
-                                    </i>
+                                    <i class="fa-solid fa-store"></i>
 
                                     Kunjungi Toko
 
-                                </button>
+                                    <i class="fa-solid fa-arrow-right text-xs"></i>
+
+                                </a>
 
                             </div>
                         @endif
@@ -1935,120 +1942,106 @@
         @if (($product->stock ?? 0) > 0)
             <div
                 class="fixed
-                       inset-x-0
-                       bottom-0
-                       z-50
-                       border-t
-                       border-[#E5D8CE]
-                       bg-white/95
-                       p-3
-                       shadow-[0_-6px_30px_rgba(111,78,55,0.08)]
-                       backdrop-blur-xl
-                       sm:hidden">
-
+               inset-x-0
+               bottom-[64px]
+               z-[70]
+               border-t
+               border-slate-200
+               bg-white/95
+               px-3
+               py-3
+               shadow-[0_-8px_30px_rgba(15,23,42,0.10)]
+               backdrop-blur-xl
+               sm:hidden">
 
                 <div
                     class="mx-auto
-                           flex
-                           max-w-md
-                           gap-2">
-
+                   flex
+                   max-w-md
+                   items-center
+                   gap-2">
 
                     @auth
 
-                        {{-- CART --}}
+                        {{-- ================================================= --}}
+                        {{-- ADD TO CART --}}
+                        {{-- ================================================= --}}
 
-                        <form method="POST" action="{{ route('buyer.cart.store', $product) }}">
+                        <form method="POST" action="{{ route('buyer.cart.store', $product) }}" class="shrink-0">
 
                             @csrf
 
-
                             <input type="hidden" name="quantity" :value="quantity">
-
 
                             <button type="submit"
                                 class="flex
-                                       size-12
-                                       shrink-0
-                                       items-center
-                                       justify-center
-                                       rounded-xl
-                                       border-2
-                                       border-[#4371d1]
-                                       bg-white
-                                       text-[#4371d1]
-                                       transition
-                                       active:scale-95">
-
-                                <i class="fa-solid
-                                           fa-cart-plus">
-                                </i>
-
+                               size-12
+                               items-center
+                               justify-center
+                               rounded-xl
+                               border
+                               border-[#315ebc]
+                               bg-white
+                               text-[#315ebc]
+                               shadow-sm
+                               transition
+                               active:scale-95"
+                                aria-label="Tambah ke keranjang">
+                                <i class="fa-solid fa-cart-plus"></i>
                             </button>
 
                         </form>
 
 
-
+                        {{-- ================================================= --}}
                         {{-- BUY NOW --}}
+                        {{-- ================================================= --}}
 
-                        <form method="POST" action="{{ route('buyer.products.buy-now', $product) }}">
+                        <button type="button"
+                            @click="
+                        paymentMethod = '';
+                        showBuyConfirm = true;
+                    "
+                            class="flex
+                           h-12
+                           flex-1
+                           items-center
+                           justify-center
+                           gap-2
+                           rounded-xl
+                           bg-gradient-to-r
+                           from-[#0a1d45]
+                           to-[#315ebc]
+                           px-4
+                           text-sm
+                           font-bold
+                           text-white
+                           shadow-lg
+                           shadow-blue-600/20
+                           transition
+                           active:scale-[0.98]">
 
-                            @csrf
+                            <i class="fa-solid fa-bag-shopping"></i>
 
-                            <input type="hidden" name="quantity" :value="quantity">
+                            Beli Sekarang
 
-
-                            <button type="submit" @click="showBuyConfirm = true"
-                                class="flex w-full
-               items-center
-               justify-center
-               gap-2
-               rounded-xl
-               bg-gradient-to-r
-               from-[#0a1d45]
-               via-[#4371d1]
-               to-[#4371d1]
-               px-4 py-3
-               text-sm
-               font-bold
-               text-white
-               shadow-lg
-               shadow-[#4371d1]/20
-               transition
-               hover:-translate-y-0.5
-               hover:shadow-xl">
-
-                                <i class="fa-solid
-                   fa-bag-shopping"></i>
-
-                                Beli Sekarang
-
-                            </button>
-
-                        </form>
+                        </button>
                     @else
                         <a href="{{ route('login') }}"
                             class="flex
-                                   flex-1
-                                   items-center
-                                   justify-center
-                                   gap-2
-                                   rounded-xl
-                                   bg-gradient-to-r
-                                   from-[#0a1d45]
-                                   via-[#4371d1]
-                                   to-[#4371d1]
-                                   px-4 py-3
-                                   text-sm
-                                   font-bold
-                                   text-white
-                                   shadow-lg
-                                   shadow-[#4371d1]/20">
+                           h-12
+                           flex-1
+                           items-center
+                           justify-center
+                           gap-2
+                           rounded-xl
+                           bg-[#315ebc]
+                           px-4
+                           text-sm
+                           font-bold
+                           text-white">
 
-                            <i class="fa-solid
-                                       fa-right-to-bracket">
-                            </i>
+                            <i class="fa-solid fa-right-to-bracket"></i>
 
                             Masuk untuk Membeli
 
@@ -2365,6 +2358,165 @@
 
 
 
+                    {{-- METODE PEMBAYARAN --}}
+                    <div class="mt-5">
+
+                        <div class="mb-3 flex items-center justify-between gap-3">
+
+                            <div>
+                                <p class="text-sm font-bold text-slate-800">
+                                    Metode Pembayaran
+                                </p>
+
+                                <p class="mt-1 text-[10px] leading-4 text-slate-400">
+                                    Pilih metode pembayaran sebelum membuat pesanan.
+                                </p>
+                            </div>
+
+                            <span x-show="paymentMethod" x-cloak
+                                class="rounded-full
+                                       bg-blue-50
+                                       px-2.5
+                                       py-1
+                                       text-[10px]
+                                       font-bold
+                                       text-[#4371d1]"
+                                x-text="
+                                    paymentMethod === 'transfer'
+                                        ? 'Transfer'
+                                        : 'Cash / Tunai'
+                                "></span>
+
+                        </div>
+
+
+                        <div class="grid grid-cols-2 gap-3">
+
+                            {{-- TRANSFER --}}
+                            <label
+                                class="relative
+                                       cursor-pointer
+                                       overflow-hidden
+                                       rounded-2xl
+                                       border
+                                       border-slate-200
+                                       bg-white
+                                       p-4
+                                       transition
+                                       hover:border-[#4371d1]
+                                       hover:bg-blue-50/40">
+
+                                <input type="radio" value="transfer" x-model="paymentMethod" class="peer sr-only">
+
+                                <div class="flex items-center gap-3">
+
+                                    <div
+                                        class="flex
+                                               size-10
+                                               shrink-0
+                                               items-center
+                                               justify-center
+                                               rounded-xl
+                                               bg-blue-50
+                                               text-[#4371d1]
+                                               transition
+                                               peer-checked:bg-[#4371d1]
+                                               peer-checked:text-white">
+                                        <i class="fa-solid fa-building-columns"></i>
+                                    </div>
+
+                                    <div class="min-w-0">
+
+                                        <p class="text-sm font-bold text-slate-800">
+                                            Transfer
+                                        </p>
+
+                                        <p class="mt-0.5 text-[10px] text-slate-400">
+                                            Transfer ke seller
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                                <div
+                                    class="pointer-events-none
+                                           absolute
+                                           inset-0
+                                           rounded-2xl
+                                           border-2
+                                           border-transparent
+                                           peer-checked:border-[#4371d1]">
+                                </div>
+
+                            </label>
+
+
+                            {{-- CASH --}}
+                            <label
+                                class="relative
+                                       cursor-pointer
+                                       overflow-hidden
+                                       rounded-2xl
+                                       border
+                                       border-slate-200
+                                       bg-white
+                                       p-4
+                                       transition
+                                       hover:border-emerald-500
+                                       hover:bg-emerald-50/40">
+
+                                <input type="radio" value="cash" x-model="paymentMethod" class="peer sr-only">
+
+                                <div class="flex items-center gap-3">
+
+                                    <div
+                                        class="flex
+                                               size-10
+                                               shrink-0
+                                               items-center
+                                               justify-center
+                                               rounded-xl
+                                               bg-emerald-50
+                                               text-emerald-600
+                                               transition
+                                               peer-checked:bg-emerald-600
+                                               peer-checked:text-white">
+                                        <i class="fa-solid fa-money-bill-wave"></i>
+                                    </div>
+
+                                    <div class="min-w-0">
+
+                                        <p class="text-sm font-bold text-slate-800">
+                                            Cash
+                                        </p>
+
+                                        <p class="mt-0.5 text-[10px] text-slate-400">
+                                            Bayar tunai
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                                <div
+                                    class="pointer-events-none
+                                           absolute
+                                           inset-0
+                                           rounded-2xl
+                                           border-2
+                                           border-transparent
+                                           peer-checked:border-emerald-500">
+                                </div>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+
                     {{-- WA INFO --}}
                     <div
                         class="mt-4
@@ -2441,35 +2593,53 @@
                     </button>
 
 
-                    <form method="POST"
-                        action="{{ route('buyer.products.buy-now', $product) }}"
+                    <form id="buy-now-form" method="POST" action="{{ route('buyer.products.buy-now', $product) }}"
+                        target="_blank"
+                        @submit="
+                            showBuyConfirm = false;
+
+                            setTimeout(() => {
+                                window.location.href = dashboardUrl;
+                            }, 500);
+                        "
                         class="w-full">
 
                         @csrf
 
-
                         <input type="hidden" name="quantity" :value="quantity">
 
+                        <input type="hidden" name="payment_method" :value="paymentMethod">
 
-                        <button type="submit"
-                            class="flex h-12
-                           w-full
-                           items-center
-                           justify-center
-                           gap-2
-                           rounded-xl
-                           bg-[#4371d1]
-                           px-4
-                           text-sm
-                           font-bold
-                           text-white
-                           shadow-sm
-                           transition
-                           hover:bg-[#315ebc]">
+                        <button type="submit" :disabled="!paymentMethod"
+                            class="flex
+                                   h-12
+                                   w-full
+                                   items-center
+                                   justify-center
+                                   gap-2
+                                   rounded-xl
+                                   bg-[#4371d1]
+                                   px-4
+                                   text-sm
+                                   font-bold
+                                   text-white
+                                   shadow-sm
+                                   transition
+                                   hover:bg-[#315ebc]
+                                   disabled:cursor-not-allowed
+                                   disabled:bg-slate-300
+                                   disabled:text-slate-500">
 
                             <i class="fa-brands fa-whatsapp"></i>
 
-                            Ya, Beli Sekarang
+                            <span
+                                x-text="
+                                    paymentMethod
+                                        ? 'Ya, Beli Sekarang'
+                                        : 'Pilih Pembayaran'
+                                ">
+                                Pilih Pembayaran
+                            </span>
 
                         </button>
 

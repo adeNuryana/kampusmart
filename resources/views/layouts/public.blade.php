@@ -19,1088 +19,885 @@
         [x-cloak] {
             display: none !important;
         }
-
-        html {
-            scroll-behavior: smooth;
-        }
     </style>
 
 </head>
 
 
-<body
-    class="min-h-screen
-           bg-gradient-to-br
-           from-[#FBF8F5]
-           via-[#FAF5F1]
-           to-[#F4EAE2]
-           text-slate-800
-           antialiased">
+<body class="min-h-screen
+           bg-slate-50
+           pb-20
+           text-slate-900
+           md:pb-0">
 
-
-    {{-- ========================================================= --}}
     {{-- NAVBAR --}}
-    {{-- ========================================================= --}}
-
     <header
-        class="sticky
-               top-0
-               z-50
-               border-b
-               border-[#E7D9CF]
-               bg-white/90
-               shadow-sm
-               shadow-[#4371d1]/5
-               backdrop-blur-xl">
+        class="sticky top-0 z-50
+               border-b border-slate-200/80
+               bg-white/90 backdrop-blur">
 
+        <div
+            class="mx-auto flex h-16 max-w-7xl
+                   items-center gap-6 px-4
+                   sm:px-6 lg:px-8">
 
-        <div class="mx-auto
-                   max-w-7xl
-                   px-4
-                   sm:px-5">
-
-
-            <div
+            {{-- LOGO --}}
+            {{-- BRAND --}}
+            <a href="{{ route('home') }}"
                 class="flex
-                       items-center
-                       gap-3
-                       py-3
-                       md:gap-5
-                       md:py-4">
-
-
-                {{-- ================================================= --}}
-                {{-- LOGO --}}
-                {{-- ================================================= --}}
-
-                <a href="{{ route('home') }}"
-                    class="flex
                            shrink-0
                            items-center
-                           gap-2">
+                           gap-2.5">
 
-
-                    @if ($siteSetting?->logo)
-                        <img src="{{ asset('storage/' . $siteSetting->logo) }}" alt="{{ $siteSetting->site_name }}"
-                            class="size-10
-               shrink-0
-               rounded-xl
-               object-contain">
-                    @else
-                        <div
-                            class="flex size-10
-               shrink-0
-               items-center justify-center
-               rounded-2xl
-               bg-gradient-to-br
-               from-[#C8795A]
-               to-[#4371d1]
-               font-black
-               text-white">
-
-                            {{ strtoupper(substr($siteSetting?->site_name ?? 'KampusMart', 0, 1)) }}
-
-                        </div>
-                    @endif
-
-
-                    <span
-                        class="hidden
-                               bg-gradient-to-r
-                               from-[#0a1d45]
-                               to-[#4371d1]
-                               bg-clip-text
-                               text-xl
-                               font-black
-                               tracking-tight
-                               text-transparent
-                               sm:block">
-
-                        {{ $siteSetting?->site_name ?? 'KampusMart' }}
-
-                    </span>
-
-                </a>
-
-
-
-                {{-- ================================================= --}}
-                {{-- SEARCH DESKTOP --}}
-                {{-- ================================================= --}}
-
-                <form action="{{ route('home') }}" method="GET"
-                    class="hidden
-                           min-w-0
-                           flex-1
-                           overflow-hidden
-                           rounded-2xl
-                           border
-                           border-[#E5D5C9]
-                           bg-white
-                           shadow-sm
-                           transition
-                           focus-within:border-[#A97957]
-                           focus-within:ring-4
-                           focus-within:ring-[#F5E9DF]
-                           sm:flex">
-
-
+                @if ($siteSetting?->logo)
+                    <img src="{{ asset('storage/' . $siteSetting->logo) }}"
+                        alt="{{ $siteSetting?->site_name ?? 'KampusMart' }}"
+                        class="size-10
+                                   rounded-2xl
+                                   object-contain
+                                   shadow-sm">
+                @else
                     <div
                         class="flex
-                               w-11
-                               shrink-0
-                               items-center
-                               justify-center
-                               text-[#A38B7B]">
+                                   size-10
+                                   items-center
+                                   justify-center
+                                   rounded-2xl
+                                   bg-gradient-to-br
+                                   from-[#0a1d45]
+                                   to-[#4371d1]
+                                   text-sm
+                                   font-black
+                                   text-white
+                                   shadow-lg
+                                   shadow-blue-600/20">
+                        {{ strtoupper(substr($siteSetting?->site_name ?? 'KampusMart', 0, 1)) }}
+                    </div>
+                @endif
 
-                        <i class="fa-solid
-                                   fa-magnifying-glass">
-                        </i>
+                <div class="hidden sm:block">
+
+                    <p
+                        class="text-lg
+                                   font-black
+                                   tracking-tight
+                                   text-[#0a1d45]">
+                        {{ $siteSetting?->site_name ?? 'KampusMart' }}
+                    </p>
+
+                    <p
+                        class="-mt-0.5
+                                   text-[9px]
+                                   font-semibold
+                                   uppercase
+                                   tracking-[0.18em]
+                                   text-slate-400">
+                        Campus Marketplace
+                    </p>
+
+                </div>
+
+            </a>
+
+
+            {{-- SEARCH --}}
+            <div class="hidden flex-1 md:block">
+                <form action="{{ route('buyer.products.index') }}" method="GET" class="hidden flex-1 md:block">
+
+                    <div class="relative max-w-xl">
+
+
+
+
+                        <input type="text" name="search" value="{{ request('search') }}"
+                            placeholder="Cari produk di KampusMart..."
+                            class="h-11 w-full rounded-xl
+                   border border-[#06296f]
+                   bg-slate-50 pl-11 pr-4
+                   text-sm outline-none
+                   transition
+                   focus:border-[#3b72df]
+                   focus:bg-white
+                   focus:ring-4
+                   focus:ring-[#477eec]">
 
                     </div>
 
-
-                    <input type="search" name="search" value="{{ request('search') }}"
-                        placeholder="Cari produk, kategori, atau toko..." autocomplete="off"
-                        class="min-w-0
-                               flex-1
-                               border-0
-                               bg-transparent
-                               py-2.5
-                               pr-4
-                               text-sm
-                               outline-none
-                               placeholder:text-slate-400">
-
-
-                    @if (request('search'))
-                        <a href="{{ route('home') }}"
-                            class="flex
-                                   w-10
-                                   shrink-0
-                                   items-center
-                                   justify-center
-                                   text-slate-400
-                                   transition
-                                   hover:text-[#B97972]">
-
-                            <i class="fa-solid fa-xmark"></i>
-
-                        </a>
-                    @endif
-
-
-                    <button type="submit"
-                        class="flex
-                               w-12
-                               shrink-0
-                               items-center
-                               justify-center
-                               bg-gradient-to-r
-                               from-[#0a1d45]
-                               via-[#4371d1]
-                               to-[#4371d1]
-                               text-white
-                               transition
-                               hover:from-[#0a1d45]
-                               hover:to-[#4371d1]
-                               md:w-14">
-
-                        <i class="fa-solid
-                                   fa-arrow-right">
-                        </i>
-
-                    </button>
-
                 </form>
-
-
-
-                {{-- ================================================= --}}
-                {{-- CART --}}
-                {{-- ================================================= --}}
-
-                @auth
-
-                    @if (auth()->user()->role === 'buyer' && Route::has('buyer.cart.index'))
-                        <a href="{{ route('buyer.cart.index') }}"
-                            class="relative
-               flex
-               size-10
-               shrink-0
-               items-center
-               justify-center
-               rounded-xl
-               border
-               border-[#EEE2D9]
-               bg-white
-               text-[#4371d1]
-               shadow-sm
-               transition
-               duration-300
-               hover:-translate-y-0.5
-               hover:border-[#DCC4B2]
-               hover:bg-[#FBF4EF]
-               hover:shadow-md
-               sm:size-11">
-
-                            <i class="fa-solid
-                   fa-cart-shopping
-                   text-lg">
-                            </i>
-
-
-                            {{-- CART BADGE --}}
-
-                            @if (($cartCount ?? 0) > 0)
-                                <span
-                                    class="absolute
-                       -right-1.5
-                       -top-1.5
-                       flex
-                       min-h-5
-                       min-w-5
-                       items-center
-                       justify-center
-                       rounded-full
-                       bg-[#C8795A]
-                       px-1
-                       text-[9px]
-                       font-black
-                       leading-none
-                       text-white
-                       shadow-sm
-                       ring-2
-                       ring-white">
-
-                                    {{ $cartCount > 99 ? '99+' : $cartCount }}
-
-                                </span>
-                            @endif
-
-                        </a>
-                    @endif
-                @else
-                    <a href="{{ route('login') }}"
-                        class="relative
-                               flex
-                               size-10
-                               shrink-0
-                               items-center
-                               justify-center
-                               rounded-xl
-                               border
-                               border-[#EEE2D9]
-                               bg-white
-                               text-[#4371d1]
-                               shadow-sm
-                               transition
-                               duration-300
-                               hover:-translate-y-0.5
-                               hover:border-[#DCC4B2]
-                               hover:bg-[#FBF4EF]
-                               sm:size-11">
-
-                        <i
-                            class="fa-solid
-                                   fa-cart-shopping
-                                   text-lg">
-                        </i>
-
-                    </a>
-
-                @endauth
-
-
-
-                {{-- ================================================= --}}
-                {{-- ACCOUNT --}}
-                {{-- ================================================= --}}
-
-                <div class="hidden
-           items-center
-           lg:flex">
-
-
-                    @guest
-
-                        {{-- LOGIN --}}
-
-                        <a href="{{ route('login') }}"
-                            class="rounded-xl
-                   border
-                   border-[#E5D5C9]
-                   bg-white
-                   px-4
-                   py-2
-                   text-sm
-                   font-semibold
-                   text-[#4371d1]
-                   shadow-sm
-                   transition
-                   duration-300
-                   hover:border-[#DCC4B2]
-                   hover:bg-[#FBF4EF]">
-
-                            Masuk
-
-                        </a>
-
-
-                        {{-- REGISTER --}}
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}"
-                                class="ml-2
-                       rounded-xl
-                       bg-gradient-to-r
-                       from-[#0a1d45]
-                       via-[#4371d1]
-                       to-[#4371d1]
-                       px-4
-                       py-2
-                       text-sm
-                       font-semibold
-                       text-white
-                       shadow-sm
-                       shadow-[#4371d1]/15
-                       transition
-                       duration-300
-                       hover:-translate-y-0.5
-                       hover:shadow-lg">
-
-                                Daftar
-
-                            </a>
-                        @endif
-                    @else
-                        @if (auth()->user()->role === 'buyer')
-                            {{-- ================================================= --}}
-                            {{-- BUYER DROPDOWN --}}
-                            {{-- ================================================= --}}
-
-                            <div x-data="{
-                                open: false
-                            }" @click.outside="open = false" @keydown.escape.window="open = false"
-                                class="relative">
-
-
-                                {{-- DROPDOWN TRIGGER --}}
-
-                                <button type="button" @click="open = !open"
-                                    class="flex
-                           items-center
-                           gap-3
-                           rounded-xl
-                           px-2
-                           py-1.5
-                           text-left
-                           transition
-                           duration-300
-                           hover:bg-[#FBF4EF]">
-
-
-                                    {{-- USER INFO --}}
-
-                                    <div
-                                        class="hidden
-                               text-right
-                               xl:block">
-
-                                        <p
-                                            class="max-w-36
-                                   truncate
-                                   text-sm
-                                   font-semibold
-                                   text-slate-800">
-
-                                            {{ auth()->user()->name }}
-
-                                        </p>
-
-                                        <p
-                                            class="mt-0.5
-                                   text-[10px]
-                                   text-[#A38B7B]">
-
-                                            buyer
-
-                                        </p>
-
-                                    </div>
-
-
-                                    {{-- AVATAR --}}
-
-                                    <div
-                                        class="flex
-                               size-10
-                               shrink-0
-                               items-center
-                               justify-center
-                               rounded-full
-                               bg-gradient-to-br
-                               from-[#F4EAE2]
-                               to-[#E4CDBD]
-                               text-sm
-                               font-black
-                               uppercase
-                               text-[#4371d1]
-                               ring-2
-                               ring-white
-                               shadow-sm">
-
-                                        {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
-
-                                    </div>
-
-
-                                    {{-- CHEVRON --}}
-
-                                    <div
-                                        class="flex
-                               size-6
-                               items-center
-                               justify-center
-                               text-[#A38B7B]">
-
-                                        <i class="fa-solid
-                                   fa-chevron-down
-                                   text-[10px]
-                                   transition
-                                   duration-300"
-                                            :class="open
-                                                ?
-                                                'rotate-180' :
-                                                ''">
-                                        </i>
-
-                                    </div>
-
-                                </button>
-
-
-
-                                {{-- ================================================= --}}
-                                {{-- DROPDOWN MENU --}}
-                                {{-- ================================================= --}}
-
-                                <div x-cloak x-show="open"
-                                    x-transition:enter="
-                        transition
-                        ease-out
-                        duration-150
-                    "
-                                    x-transition:enter-start="
-                        opacity-0
-                        translate-y-1
-                        scale-95
-                    "
-                                    x-transition:enter-end="
-                        opacity-100
-                        translate-y-0
-                        scale-100
-                    "
-                                    x-transition:leave="
-                        transition
-                        ease-in
-                        duration-100
-                    "
-                                    x-transition:leave-start="
-                        opacity-100
-                        translate-y-0
-                        scale-100
-                    "
-                                    x-transition:leave-end="
-                        opacity-0
-                        translate-y-1
-                        scale-95
-                    "
-                                    class="absolute
-                           right-0
-                           top-full
-                           z-50
-                           mt-3
-                           w-64
-                           origin-top-right
-                           overflow-hidden
-                           rounded-2xl
-                           border
-                           border-[#E6D8CD]
-                           bg-white
-                           shadow-2xl
-                           shadow-[#4371d1]/10">
-
-
-                                    {{-- USER HEADER --}}
-
-                                    <div
-                                        class="border-b
-                               border-[#EFE4DC]
-                               bg-gradient-to-br
-                               from-[#FBF8F5]
-                               to-[#F4EAE2]
-                               p-4">
-
-
-                                        <div
-                                            class="flex
-                                   items-center
-                                   gap-3">
-
-
-                                            <div
-                                                class="flex
-                                       size-11
-                                       shrink-0
-                                       items-center
-                                       justify-center
-                                       rounded-full
-                                       bg-gradient-to-br
-                                       from-[#0a1d45]
-                                       via-[#4371d1]
-                                       to-[#4371d1]
-                                       text-sm
-                                       font-black
-                                       uppercase
-                                       text-white
-                                       shadow-md">
-
-                                                {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
-
-                                            </div>
-
-
-                                            <div class="min-w-0">
-
-                                                <p
-                                                    class="truncate
-                                           text-sm
-                                           font-bold
-                                           text-slate-800">
-
-                                                    {{ auth()->user()->name }}
-
-                                                </p>
-
-
-                                                <p
-                                                    class="mt-0.5
-                                           truncate
-                                           text-xs
-                                           text-slate-500">
-
-                                                    {{ auth()->user()->email }}
-
-                                                </p>
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-
-
-                                    {{-- MENU --}}
-
-                                    <div class="p-2">
-
-
-                                        {{-- PROFILE --}}
-
-                                        <a href="{{ Route::has('buyer.profile.index') ? route('buyer.profile.index') : route('buyer.dashboard') }}"
-                                            @click="open = false"
-                                            class="group
-                                   flex
-                                   items-center
-                                   gap-3
-                                   rounded-xl
-                                   px-3
-                                   py-2.5
-                                   transition
-                                   hover:bg-[#FBF4EF]">
-
-
-                                            <div
-                                                class="flex
-                                       size-9
-                                       shrink-0
-                                       items-center
-                                       justify-center
-                                       rounded-xl
-                                       bg-[#F4EAE2]
-                                       text-[#4371d1]
-                                       transition
-                                       group-hover:bg-[#4371d1]
-                                       group-hover:text-white">
-
-                                                <i class="fa-regular
-                                           fa-user">
-                                                </i>
-
-                                            </div>
-
-
-                                            <div class="min-w-0">
-
-                                                <p
-                                                    class="text-sm
-                                           font-semibold
-                                           text-slate-700">
-
-                                                    Profil Saya
-
-                                                </p>
-
-                                                <p
-                                                    class="mt-0.5
-                                           text-[10px]
-                                           text-slate-400">
-
-                                                    Kelola informasi akun
-
-                                                </p>
-
-                                            </div>
-
-                                        </a>
-
-
-
-                                        {{-- DIVIDER --}}
-
-                                        <div
-                                            class="my-2
-                                   border-t
-                                   border-[#EFE4DC]">
-                                        </div>
-
-
-
-                                        {{-- LOGOUT --}}
-
-                                        <form action="{{ route('logout') }}" method="POST">
-
-                                            @csrf
-
-
-                                            <button type="submit"
-                                                class="group
-                                       flex
-                                       w-full
-                                       items-center
-                                       gap-3
-                                       rounded-xl
-                                       px-3
-                                       py-2.5
-                                       text-left
-                                       transition
-                                       hover:bg-[#FAEDEC]">
-
-
-                                                <div
-                                                    class="flex
-                                           size-9
-                                           shrink-0
-                                           items-center
-                                           justify-center
-                                           rounded-xl
-                                           bg-[#FAEDEC]
-                                           text-[#A65954]
-                                           transition
-                                           group-hover:bg-[#A65954]
-                                           group-hover:text-white">
-
-                                                    <i
-                                                        class="fa-solid
-                                               fa-arrow-right-from-bracket">
-                                                    </i>
-
-                                                </div>
-
-
-                                                <div>
-
-                                                    <p
-                                                        class="text-sm
-                                               font-semibold
-                                               text-[#A65954]">
-
-                                                        Keluar
-
-                                                    </p>
-
-
-                                                    <p
-                                                        class="mt-0.5
-                                               text-[10px]
-                                               text-slate-400">
-
-                                                        Logout dari akun
-
-                                                    </p>
-
-                                                </div>
-
-                                            </button>
-
-                                        </form>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        @endif
-
-                    @endguest
-
-                </div>
 
             </div>
 
 
+            {{-- RIGHT MENU --}}
+            <div class="ml-auto flex items-center gap-2">
+                <a href="{{ route('buyer.orders.index') }}"
+                    class="hidden rounded-xl
+           px-4 py-2
+           text-sm font-medium
+           text-slate-600
+           transition
+           hover:bg-slate-100
+           hover:text-[#315EBB]
+           md:inline-flex">
+                    Pesanan
+                </a>
 
-            {{-- ===================================================== --}}
-            {{-- SEARCH MOBILE --}}
-            {{-- ===================================================== --}}
+                {{-- CART --}}
+                @php
+                    $cartCount = auth()->check() ? auth()->user()->cartItems()->sum('quantity') : 0;
+                @endphp
 
-            <form action="{{ route('home') }}" method="GET"
-                class="mb-3
-                       flex
-                       overflow-hidden
-                       rounded-2xl
-                       border
-                       border-[#E5D5C9]
-                       bg-white
-                       shadow-sm
+
+                <a href="{{ route('buyer.cart.index') }}" title="Keranjang"
+                    class="relative hidden size-10
+           items-center justify-center
+           rounded-xl text-slate-600
+           transition hover:bg-slate-100
+           md:inline-flex">
+
+                    <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M3 4h2l2 11h10l2-7H6" />
+                        <circle cx="9" cy="19" r="1" />
+                        <circle cx="17" cy="19" r="1" />
+                    </svg>
+
+
+                    @if ($cartCount > 0)
+                        <span
+                            class="absolute -right-1 -top-1
+                   flex min-w-5 items-center
+                   justify-center rounded-full
+                   bg-[#315EBB] px-1
+                   text-[10px] font-bold
+                   text-white">
+                            {{ $cartCount > 99 ? '99+' : $cartCount }}
+                        </span>
+                    @endif
+
+                </a>
+
+                {{-- PROFILE --}}
+                {{-- PROFILE DROPDOWN --}}
+                @auth
+                    <details class="group relative hidden md:block">
+
+                        {{-- BUTTON PROFILE --}}
+                        <summary
+                            class="flex cursor-pointer
+               list-none items-center gap-3
+               rounded-xl px-2 py-1.5
+               transition
+               hover:bg-slate-100">
+
+                            {{-- AVATAR --}}
+                            <div
+                                class="flex size-9 shrink-0
+                   items-center justify-center
+                   rounded-full bg-[#315EBB]
+                   text-sm font-bold
+                   text-[#dfe5f1]">
+                                {{ strtoupper(substr(auth()->user()?->name ?? 'A', 0, 1)) }}
+                            </div>
+
+
+                            {{-- NAME --}}
+                            <div class="hidden text-left lg:block">
+
+                                <p
+                                    class="max-w-[130px] truncate
+                       text-sm font-semibold
+                       text-slate-800">
+                                    {{ auth()->user()?->name ?? 'Akun' }}
+                                </p>
+
+                                <p class="text-xs text-slate-400">
+                                    Pembeli
+                                </p>
+
+                            </div>
+
+
+                            {{-- ARROW --}}
+                            <svg class="hidden size-4
+                   text-slate-400
+                   transition-transform
+                   group-open:rotate-180
+                   lg:block"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="m6 9 6 6 6-6" />
+                            </svg>
+
+                        </summary>
+
+
+                        {{-- DROPDOWN --}}
+                        <div
+                            class="absolute right-0 top-full
+               z-50 mt-2 w-56
+               overflow-hidden rounded-2xl
+               border border-slate-200
+               bg-white p-2
+               shadow-xl shadow-slate-200/60">
+
+                            {{-- USER INFO --}}
+                            <div class="px-3 py-3">
+
+                                <p class="truncate text-sm
+                       font-semibold text-slate-900">
+                                    {{ auth()->user()?->name ?? 'Akun' }}
+                                </p>
+
+                                <p class="mt-1 truncate
+                       text-xs text-slate-400">
+                                    {{ auth()->user()?->email ?? '' }}
+                                </p>
+
+                            </div>
+
+
+                            <div class="my-1 border-t border-slate-100"></div>
+
+                            {{-- DASHBOARD --}}
+                            <a href="{{ route('buyer.dashboard') }}"
+                                class="flex
+           items-center
+           gap-3
+           rounded-xl
+           px-3
+           py-2.5
+           text-sm
+           font-medium
+           text-slate-600
+           transition
+           hover:bg-violet-50
+           hover:text-[#315EBB]">
+
+                                <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.8">
+                                    <path d="M3 3h7v7H3z" />
+                                    <path d="M14 3h7v7h-7z" />
+                                    <path d="M3 14h7v7H3z" />
+                                    <path d="M14 14h7v7h-7z" />
+                                </svg>
+
+                                Dashboard
+
+                            </a>
+                            {{-- PROFILE --}}
+                            <a href="{{ route('buyer.profile.index') }}"
+                                class="flex items-center gap-3
+                   rounded-xl px-3 py-2.5
+                   text-sm font-medium
+                   text-slate-600 transition
+                   hover:bg-violet-50
+                   hover:text-[#315EBB]">
+
+                                <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.8">
+                                    <circle cx="12" cy="8" r="4" />
+
+                                    <path d="M4 21a8 8 0 0 1
+                               16 0" />
+                                </svg>
+
+                                Profile
+
+                            </a>
+
+
+                            {{-- LOGOUT --}}
+                            <form action="{{ route('logout') }}" method="POST">
+
+                                @csrf
+
+                                <button type="submit"
+                                    class="flex w-full
+                       items-center gap-3
+                       rounded-xl px-3 py-2.5
+                       text-left text-sm
+                       font-medium text-red-500
                        transition
-                       focus-within:border-[#A97957]
-                       focus-within:ring-4
-                       focus-within:ring-[#F5E9DF]
-                       sm:hidden">
+                       hover:bg-red-50
+                       hover:text-red-600">
 
+                                    <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.8">
+                                        <path d="M10 17l5-5-5-5" />
 
-                <div
-                    class="flex
-                           w-10
-                           shrink-0
-                           items-center
-                           justify-center
-                           text-[#A38B7B]">
+                                        <path d="M15 12H3" />
 
-                    <i
-                        class="fa-solid
-                               fa-magnifying-glass
-                               text-sm">
-                    </i>
+                                        <path d="M14 3h5
+                                   a2 2 0 0 1 2 2
+                                   v14
+                                   a2 2 0 0 1-2 2
+                                   h-5" />
+                                    </svg>
 
-                </div>
+                                    Logout
 
+                                </button>
 
-                <input type="search" name="search" value="{{ request('search') }}" placeholder="Cari produk..."
-                    class="min-w-0
-                           flex-1
-                           bg-transparent
-                           py-2.5
-                           pr-3
-                           text-sm
-                           outline-none
-                           placeholder:text-slate-400">
+                            </form>
 
+                        </div>
 
-                <button type="submit"
-                    class="flex
-                           w-12
-                           items-center
-                           justify-center
-                           bg-gradient-to-r
-                           from-[#0a1d45]
-                           to-[#4371d1]
-                           text-white">
+                    </details>
+                @else
+                    <a href="{{ route('login') }}"
+                        class="hidden
+                               items-center
+                               justify-center
+                               rounded-xl
+                               bg-[#315EBB]
+                               px-4
+                               py-2.5
+                               text-sm
+                               font-bold
+                               text-white
+                               transition
+                               hover:bg-[#315EBB]
+                               md:inline-flex">
+                        Masuk
+                    </a>
 
-                    <i class="fa-solid
-                               fa-arrow-right">
-                    </i>
+                @endauth
 
-                </button>
-
-            </form>
+            </div>
 
         </div>
 
     </header>
 
 
-
-    {{-- ========================================================= --}}
     {{-- CONTENT --}}
-    {{-- ========================================================= --}}
+    <main>
+        @yield('content')
+    </main>
 
-    @yield('content')
 
-
-
-    {{-- ========================================================= --}}
     {{-- FOOTER --}}
-    {{-- ========================================================= --}}
-
-    <footer
-        class="
-               hidden
-               border-t
-               border-[#E6D8CD]
-               bg-gradient-to-br
-               from-white
-               via-[#FBF6F2]
-               to-[#F4EAE2]
-               md:block">
-
+    <footer class=" hidden border-t border-slate-200
+               bg-white md:block">
 
         <div
-            class="mx-auto
+            class="mx-auto max-w-7xl px-4 py-8
+                   text-center text-sm text-slate-500
+                   sm:px-6 lg:px-8">
+            © {{ date('Y') }} {{ $siteSetting?->site_name ?? 'KampusMart' }}.
+            Marketplace mahasiswa.
+        </div>
+
+    </footer>
+    {{-- ========================================================= --}}
+    {{-- MOBILE BOTTOM NAVIGATION --}}
+    {{-- ========================================================= --}}
+
+    <div x-data="{
+        accountMenu: false
+    }" class="md:hidden">
+
+        {{-- BOTTOM NAV --}}
+        <nav
+            class="fixed
+               inset-x-0
+               bottom-0
+               z-50
+               border-t
+               border-slate-200/80
+               bg-white/95
+               px-2
+               shadow-[0_-8px_30px_rgba(15,23,42,0.08)]
+               backdrop-blur-xl">
+
+            <div
+                class="mx-auto
                    grid
-                   max-w-7xl
-                   grid-cols-2
-                   gap-10
-                   px-5
-                   py-12
-                   lg:grid-cols-4">
+                   h-[68px]
+                   max-w-md
+                   grid-cols-4">
 
+                {{-- HOME --}}
+                <a href="{{ route('home') }}"
+                    class="group
+                       flex
+                       flex-col
+                       items-center
+                       justify-center
+                       gap-1
+                       transition
+                       {{ request()->routeIs('home') ? 'text-[#315EBB]' : 'text-slate-400' }}">
 
-            {{-- ================================================= --}}
-            {{-- BRAND --}}
-            {{-- ================================================= --}}
+                    <i class="fa-solid fa-house text-lg"></i>
 
-            <div>
+                    <span class="text-[10px] font-semibold">
+                        Home
+                    </span>
 
-
-                <div class="flex
-                           items-center
-                           gap-2">
-
-
-                    @if ($siteSetting?->logo)
-                        <img src="{{ asset('storage/' . $siteSetting->logo) }}"
-                            alt="{{ $siteSetting->site_name }}"
-                            class="size-10
-               shrink-0
-               rounded-xl
-               object-contain">
-                    @else
-                        <div
-                            class="flex size-10
-               shrink-0
-               items-center justify-center
-               rounded-2xl
-               bg-gradient-to-br
-               from-[#C8795A]
-               to-[#4371d1]
-               font-black
-               text-white">
-
-                            {{ strtoupper(substr($siteSetting?->site_name ?? 'KampusMart', 0, 1)) }}
-
-                        </div>
+                    @if (request()->routeIs('home'))
+                        <span class="h-1 w-1 rounded-full bg-[#315EBB]"></span>
                     @endif
 
+                </a>
 
-                    <h3
-                        class="text-xl
+
+                {{-- PESANAN --}}
+                <a href="{{ route('buyer.orders.index') }}"
+                    class="group
+                       flex
+                       flex-col
+                       items-center
+                       justify-center
+                       gap-1
+                       transition
+                       {{ request()->routeIs('buyer.orders.*') ? 'text-[#315EBB]' : 'text-slate-400' }}">
+
+                    <i class="fa-solid fa-receipt text-lg"></i>
+
+                    <span class="text-[10px] font-semibold">
+                        Pesanan
+                    </span>
+
+                    @if (request()->routeIs('buyer.orders.*'))
+                        <span class="h-1 w-1 rounded-full bg-[#315EBB]"></span>
+                    @endif
+
+                </a>
+
+
+                {{-- CART --}}
+                <a href="{{ route('buyer.cart.index') }}"
+                    class="group
+                       relative
+                       flex
+                       flex-col
+                       items-center
+                       justify-center
+                       gap-1
+                       transition
+                       {{ request()->routeIs('buyer.cart.*') ? 'text-[#315EBB]' : 'text-slate-400' }}">
+
+                    <div class="relative">
+
+                        <i class="fa-solid fa-cart-shopping text-lg"></i>
+
+                        @if ($cartCount > 0)
+                            <span
+                                class="absolute
+                                   -right-3
+                                   -top-2
+                                   flex
+                                   min-w-4
+                                   items-center
+                                   justify-center
+                                   rounded-full
+                                   bg-[#315EBB]
+                                   px-1
+                                   text-[8px]
+                                   font-bold
+                                   text-white">
+                                {{ $cartCount > 99 ? '99+' : $cartCount }}
+                            </span>
+                        @endif
+
+                    </div>
+
+                    <span class="text-[10px] font-semibold">
+                        Keranjang
+                    </span>
+
+                    @if (request()->routeIs('buyer.cart.*'))
+                        <span class="h-1 w-1 rounded-full bg-[#315EBB]"></span>
+                    @endif
+
+                </a>
+
+
+                {{-- ACCOUNT --}}
+                @auth
+
+                    <button type="button" @click="accountMenu = true"
+                        class="group
+                       flex
+                       flex-col
+                       items-center
+                       justify-center
+                       gap-1
+                       transition
+                       {{ request()->routeIs('buyer.dashboard', 'buyer.profile.*') ? 'text-[#315EBB]' : 'text-slate-400' }}">
+
+                        <div
+                            class="flex
+                           size-7
+                           items-center
+                           justify-center
+                           rounded-full
+                           text-[10px]
+                           font-black
+                           {{ request()->routeIs('buyer.dashboard', 'buyer.profile.*')
+                               ? 'bg-[#315EBB] text-white'
+                               : 'bg-[#315EBB] text-[#315EBB]' }}">
+                            {{ strtoupper(substr(auth()->user()?->name ?? 'A', 0, 1)) }}
+                        </div>
+
+                        <span class="text-[10px] font-semibold">
+                            Akun
+                        </span>
+
+                        @if (request()->routeIs('buyer.dashboard', 'buyer.profile.*'))
+                            <span class="h-1 w-1 rounded-full bg-[#315EBB]"></span>
+                        @endif
+
+                    </button>
+                @else
+                    <a href="{{ route('login') }}"
+                        class="group
+                           flex
+                           flex-col
+                           items-center
+                           justify-center
+                           gap-1
+                           text-slate-400
+                           transition">
+
+                        <div
+                            class="flex
+                               size-7
+                               items-center
+                               justify-center
+                               rounded-full
+                               bg-slate-100
+                               text-[10px]
                                font-black
-                               text-[#0a1d45]">
-                        <p>
-                            {{ $siteSetting?->site_name ?? 'KampusMart' }}
-                        </p>
+                               text-slate-500">
+                            <i class="fa-regular fa-user"></i>
+                        </div>
 
-                    </h3>
+                        <span class="text-[10px] font-semibold">
+                            Masuk
+                        </span>
 
-                </div>
+                    </a>
 
-
-                <p
-                    class="mt-4
-                           max-w-xs
-                           text-sm
-                           leading-6
-                           text-slate-500">
-
-                    Marketplace modern untuk memenuhi kebutuhan
-                    customer secara aman, mudah, dan nyaman.
-
-                </p>
+                @endauth
 
             </div>
 
+        </nav>
 
 
-            {{-- ================================================= --}}
-            {{-- ABOUT --}}
-            {{-- ================================================= --}}
+        {{-- ========================================================= --}}
+        {{-- ACCOUNT BOTTOM SHEET --}}
+        {{-- ========================================================= --}}
 
-            <div>
+        @auth
 
-                <h4 class="font-semibold
-                           text-slate-800">
+            <div x-cloak x-show="accountMenu" @keydown.escape.window="accountMenu = false"
+                class="fixed
+               inset-0
+               z-[100]
+               flex
+               items-end">
 
-                    Tentang Kami
-
-                </h4>
-
-
-                <div
-                    class="mt-4
-                           flex
-                           flex-col
-                           gap-3
-                           text-sm
-                           text-slate-500">
-
-                    <a href="#" class="transition
-                               hover:text-[#4371d1]">
-
-                        Tentang MarketKu
-
-                    </a>
-
-                    <a href="#" class="transition
-                               hover:text-[#4371d1]">
-
-                        Kebijakan Privasi
-
-                    </a>
-
-                    <a href="#" class="transition
-                               hover:text-[#4371d1]">
-
-                        Syarat & Ketentuan
-
-                    </a>
-
-                </div>
-
-            </div>
+                {{-- BACKDROP --}}
+                <button type="button" @click="accountMenu = false"
+                    class="absolute
+                   inset-0
+                   bg-slate-950/40
+                   backdrop-blur-[2px]"
+                    aria-label="Tutup menu akun"></button>
 
 
+                {{-- SHEET --}}
+                <div x-show="accountMenu" x-transition:enter="transition ease-out duration-300"
+                    x-transition:enter-start="translate-y-full" x-transition:enter-end="translate-y-0"
+                    x-transition:leave="transition ease-in duration-200" x-transition:leave-start="translate-y-0"
+                    x-transition:leave-end="translate-y-full" @click.stop
+                    class="relative
+                   w-full
+                   overflow-hidden
+                   rounded-t-[28px]
+                   bg-white
+                   shadow-2xl">
 
-            {{-- ================================================= --}}
-            {{-- HELP --}}
-            {{-- ================================================= --}}
+                    {{-- HANDLE --}}
+                    <div class="flex justify-center pt-3">
 
-            <div>
+                        <div
+                            class="h-1.5
+                           w-12
+                           rounded-full
+                           bg-slate-200">
+                        </div>
 
-                <h4 class="font-semibold
-                           text-slate-800">
-
-                    Bantuan
-
-                </h4>
-
-
-                <div
-                    class="mt-4
-                           flex
-                           flex-col
-                           gap-3
-                           text-sm
-                           text-slate-500">
-
-                    <a href="#" class="transition
-                               hover:text-[#4371d1]">
-
-                        Pusat Bantuan
-
-                    </a>
-
-                    <a href="#" class="transition
-                               hover:text-[#4371d1]">
-
-                        Cara Belanja
-
-                    </a>
-
-                    <a href="#" class="transition
-                               hover:text-[#4371d1]">
-
-                        Pembayaran
-
-                    </a>
-
-                </div>
-
-            </div>
+                    </div>
 
 
-
-            {{-- ================================================= --}}
-            {{-- SECURITY --}}
-            {{-- ================================================= --}}
-
-            <div>
-
-                <h4 class="font-semibold
-                           text-slate-800">
-
-                    Keamanan
-
-                </h4>
-
-
-                <div
-                    class="mt-4
-                           flex
-                           gap-3
-                           rounded-2xl
-                           border
-                           border-[#D3DFCE]
-                           bg-gradient-to-br
-                           from-[#F1F5ED]
-                           to-[#E4ECE0]
-                           p-4">
-
-
+                    {{-- USER --}}
                     <div
                         class="flex
+                       items-center
+                       gap-3
+                       px-5
+                       pb-5
+                       pt-4">
+
+                        <div
+                            class="flex
+                           size-12
+                           shrink-0
+                           items-center
+                           justify-center
+                           rounded-2xl
+                           bg-gradient-to-br
+                           from-[#315EBB]
+                           to-[#315EBB]
+                           text-lg
+                           font-black
+                           text-white
+                           shadow-lg
+                           shadow-[#315EBB]/20">
+                            {{ strtoupper(substr(auth()->user()?->name ?? 'A', 0, 1)) }}
+                        </div>
+
+
+                        <div class="min-w-0 flex-1">
+
+                            <p
+                                class="truncate
+                               text-sm
+                               font-bold
+                               text-slate-900">
+                                {{ auth()->user()?->name ?? 'Akun' }}
+                            </p>
+
+                            <p
+                                class="mt-0.5
+                               truncate
+                               text-xs
+                               text-slate-400">
+                                {{ auth()->user()?->email ?? '' }}
+                            </p>
+
+                        </div>
+
+
+                        <button type="button" @click="accountMenu = false"
+                            class="flex
+                           size-9
+                           items-center
+                           justify-center
+                           rounded-xl
+                           bg-slate-100
+                           text-slate-400">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+
+                    </div>
+
+
+                    <div class="h-px bg-slate-100"></div>
+
+
+                    {{-- MENU --}}
+                    <div class="space-y-1 p-3">
+
+                        {{-- DASHBOARD --}}
+                        <a href="{{ route('buyer.dashboard') }}"
+                            class="flex
+                           items-center
+                           gap-3
+                           rounded-2xl
+                           px-3
+                           py-3
+                           transition
+                           active:bg-violet-50">
+
+                            <div
+                                class="flex
                                size-10
                                shrink-0
                                items-center
                                justify-center
                                rounded-xl
-                               bg-gradient-to-br
-                               from-[#7F9275]
-                               to-[#647A5D]
-                               text-white
-                               shadow-sm">
+                               bg-violet-50
+                               text-[#315EBB]">
+                                <i class="fa-solid fa-chart-pie"></i>
+                            </div>
 
-                        <i class="fa-solid
-                                   fa-shield-halved">
-                        </i>
+                            <div class="flex-1">
+
+                                <p
+                                    class="text-sm
+                                   font-bold
+                                   text-slate-700">
+                                    Dashboard
+                                </p>
+
+                                <p class="mt-0.5 text-[10px] text-slate-400">
+                                    Ringkasan aktivitas akun
+                                </p>
+
+                            </div>
+
+                            <i
+                                class="fa-solid
+                               fa-chevron-right
+                               text-[10px]
+                               text-slate-300"></i>
+
+                        </a>
+
+
+                        {{-- PROFILE --}}
+                        <a href="{{ route('buyer.profile.index') }}"
+                            class="flex
+                           items-center
+                           gap-3
+                           rounded-2xl
+                           px-3
+                           py-3
+                           transition
+                           active:bg-blue-50">
+
+                            <div
+                                class="flex
+                               size-10
+                               shrink-0
+                               items-center
+                               justify-center
+                               rounded-xl
+                               bg-blue-50
+                               text-blue-600">
+                                <i class="fa-regular fa-user"></i>
+                            </div>
+
+                            <div class="flex-1">
+
+                                <p
+                                    class="text-sm
+                                   font-bold
+                                   text-slate-700">
+                                    Profil Saya
+                                </p>
+
+                                <p class="mt-0.5 text-[10px] text-slate-400">
+                                    Kelola informasi akun
+                                </p>
+
+                            </div>
+
+                            <i
+                                class="fa-solid
+                               fa-chevron-right
+                               text-[10px]
+                               text-slate-300"></i>
+
+                        </a>
+
+
+                        {{-- ORDER --}}
+                        <a href="{{ route('buyer.orders.index') }}"
+                            class="flex
+                           items-center
+                           gap-3
+                           rounded-2xl
+                           px-3
+                           py-3
+                           transition
+                           active:bg-amber-50">
+
+                            <div
+                                class="flex
+                               size-10
+                               shrink-0
+                               items-center
+                               justify-center
+                               rounded-xl
+                               bg-amber-50
+                               text-amber-600">
+                                <i class="fa-solid fa-receipt"></i>
+                            </div>
+
+                            <div class="flex-1">
+
+                                <p
+                                    class="text-sm
+                                   font-bold
+                                   text-slate-700">
+                                    Pesanan Saya
+                                </p>
+
+                                <p class="mt-0.5 text-[10px] text-slate-400">
+                                    Lihat transaksi dan status pesanan
+                                </p>
+
+                            </div>
+
+                            <i
+                                class="fa-solid
+                               fa-chevron-right
+                               text-[10px]
+                               text-slate-300"></i>
+
+                        </a>
 
                     </div>
 
 
-                    <div>
+                    {{-- LOGOUT --}}
+                    <div
+                        class="border-t
+                       border-slate-100
+                       px-3
+                       pb-[max(20px,env(safe-area-inset-bottom))]
+                       pt-3">
 
-                        <p
-                            class="text-sm
-                                   font-semibold
-                                   text-slate-800">
+                        <form action="{{ route('logout') }}" method="POST">
 
-                            Transaksi Terlindungi
+                            @csrf
 
-                        </p>
+                            <button type="submit"
+                                class="flex
+                               w-full
+                               items-center
+                               gap-3
+                               rounded-2xl
+                               px-3
+                               py-3
+                               text-left
+                               transition
+                               active:bg-red-50">
 
+                                <div
+                                    class="flex
+                                   size-10
+                                   shrink-0
+                                   items-center
+                                   justify-center
+                                   rounded-xl
+                                   bg-red-50
+                                   text-red-500">
+                                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                </div>
 
-                        <p
-                            class="mt-1
-                                   text-xs
-                                   leading-5
-                                   text-slate-500">
+                                <div class="flex-1">
 
-                            Belanja aman bersama MarketKu
+                                    <p
+                                        class="text-sm
+                                       font-bold
+                                       text-red-500">
+                                        Logout
+                                    </p>
 
-                        </p>
+                                    <p class="mt-0.5 text-[10px] text-slate-400">
+                                        Keluar dari akun KampusMart
+                                    </p>
+
+                                </div>
+
+                            </button>
+
+                        </form>
 
                     </div>
 
@@ -1108,234 +905,9 @@
 
             </div>
 
-        </div>
+        @endauth
 
-
-
-        {{-- FOOTER BOTTOM --}}
-
-        <div
-            class="border-t
-                   border-[#E6D8CD]
-                   py-5
-                   text-center
-                   text-xs
-                   text-slate-500">
-
-            © {{ date('Y') }} MarketKu.
-            All rights reserved.
-
-        </div>
-
-    </footer>
-
-
-
-    {{-- ========================================================= --}}
-    {{-- MOBILE NAVIGATION --}}
-    {{-- ========================================================= --}}
-
-    <nav
-        class="fixed
-               inset-x-0
-               bottom-0
-               z-50
-               border-t
-               border-[#E6D8CD]
-               bg-white/95
-               px-2
-               shadow-[0_-6px_30px_rgba(111,78,55,0.08)]
-               backdrop-blur-xl
-               md:hidden">
-
-
-        <div class="mx-auto
-                   grid
-                   max-w-md
-                   grid-cols-4">
-
-
-            {{-- ================================================= --}}
-            {{-- HOME --}}
-            {{-- ================================================= --}}
-
-            <a href="{{ route('home') }}"
-                class="flex
-                       flex-col
-                       items-center
-                       justify-center
-                       gap-1
-                       py-3
-                       text-[#4371d1]
-                       transition
-                       active:scale-95">
-
-                <i class="fa-solid
-                           fa-house
-                           text-lg">
-                </i>
-
-                <span class="text-[10px]
-                           font-semibold">
-
-                    Home
-
-                </span>
-
-            </a>
-
-
-
-            {{-- ================================================= --}}
-            {{-- CATEGORY --}}
-            {{-- ================================================= --}}
-
-            <a href="{{ route('home') }}#kategori"
-                class="flex
-                       flex-col
-                       items-center
-                       justify-center
-                       gap-1
-                       py-3
-                       text-[#C8795A]
-                       transition
-                       active:scale-95">
-
-                <i class="fa-solid
-                           fa-border-all
-                           text-lg">
-                </i>
-
-                <span class="text-[10px]
-                           font-medium">
-
-                    Kategori
-
-                </span>
-
-            </a>
-
-
-
-            {{-- ================================================= --}}
-            {{-- CART --}}
-            {{-- ================================================= --}}
-
-            @auth
-
-                @if (auth()->user()->role === 'buyer' && Route::has('buyer.cart.index'))
-                    <a href="{{ route('buyer.cart.index') }}"
-                        class="flex
-                               flex-col
-                               items-center
-                               justify-center
-                               gap-1
-                               py-3
-                               text-[#7F9275]
-                               transition
-                               active:scale-95">
-
-                        <i
-                            class="fa-solid
-                                   fa-cart-shopping
-                                   text-lg">
-                        </i>
-
-                        <span class="text-[10px]">
-                            Keranjang
-                        </span>
-
-                    </a>
-                @endif
-            @else
-                <a href="{{ route('login') }}"
-                    class="flex
-                           flex-col
-                           items-center
-                           justify-center
-                           gap-1
-                           py-3
-                           text-[#7F9275]
-                           transition
-                           active:scale-95">
-
-                    <i
-                        class="fa-solid
-                               fa-cart-shopping
-                               text-lg">
-                    </i>
-
-                    <span class="text-[10px]">
-                        Keranjang
-                    </span>
-
-                </a>
-
-            @endauth
-
-
-
-            {{-- ================================================= --}}
-            {{-- ACCOUNT --}}
-            {{-- ================================================= --}}
-
-            @auth
-
-                @if (auth()->user()->role === 'buyer')
-                    <a href="{{ route('buyer.dashboard') }}"
-                        class="flex
-                               flex-col
-                               items-center
-                               justify-center
-                               gap-1
-                               py-3
-                               text-[#C89B55]
-                               transition
-                               active:scale-95">
-
-                        <i
-                            class="fa-regular
-                                   fa-user
-                                   text-lg">
-                        </i>
-
-                        <span class="text-[10px]">
-                            Akun
-                        </span>
-
-                    </a>
-                @endif
-            @else
-                <a href="{{ route('login') }}"
-                    class="flex
-                           flex-col
-                           items-center
-                           justify-center
-                           gap-1
-                           py-3
-                           text-[#C89B55]
-                           transition
-                           active:scale-95">
-
-                    <i class="fa-regular
-                               fa-user
-                               text-lg">
-                    </i>
-
-                    <span class="text-[10px]">
-                        Masuk
-                    </span>
-
-                </a>
-
-            @endauth
-
-        </div>
-
-    </nav>
-
-
-    @stack('scripts')
+    </div>
 
 </body>
 

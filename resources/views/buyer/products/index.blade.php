@@ -26,7 +26,20 @@
             {{-- ===================================================== --}}
             {{-- HEADER --}}
             {{-- ===================================================== --}}
+            <div class="mb-5">
 
+                <a href="{{ route('buyer.dashboard') }}"
+                    class="inline-flex items-center gap-2
+                           text-sm font-semibold
+                           text-slate-500
+                           transition
+                           hover:text-[#4371d1]">
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    Dashboard
+                </a>
+
+            </div>
             <section
                 class="relative
                        mb-5
@@ -678,8 +691,7 @@
                         {{-- IMAGE --}}
                         {{-- ================================================= --}}
 
-                        <a href="{{ route('buyer.products.show', $product) }}"
-                            class="block">
+                        <a href="{{ route('buyer.products.show', $product) }}" class="block">
 
 
                             <div
@@ -692,8 +704,8 @@
 
 
                                 @if ($product->image)
-                                    <img src="{{ asset('storage/' . $product->image) }}"
-                                        alt="{{ $product->name }}" loading="lazy"
+                                    <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"
+                                        loading="lazy"
                                         class="size-full
                                                object-cover
                                                transition
@@ -805,8 +817,7 @@
 
                             {{-- NAME --}}
 
-                            <a href="{{ route('buyer.products.show', $product) }}"
-                                class="block">
+                            <a href="{{ route('buyer.products.show', $product) }}" class="block">
 
 
                                 <h2
@@ -923,8 +934,7 @@
 
 
                                 @if ($storePhoto)
-                                    <img src="{{ asset('storage/' . $storePhoto) }}"
-                                        alt="{{ $storeName }}"
+                                    <img src="{{ asset('storage/' . $storePhoto) }}" alt="{{ $storeName }}"
                                         class="size-8
                                                shrink-0
                                                rounded-full

@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\SellerController;
 use App\Http\Controllers\Admin\SettingController as AdminSettingController;
 use App\Http\Controllers\Admin\WebsiteSettingController;
+use App\Http\Controllers\Auth\GoogleAuthController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Buyer\CartController;
 use App\Http\Controllers\Buyer\CheckoutController;
@@ -17,6 +18,7 @@ use App\Http\Controllers\Buyer\HomeController;
 use App\Http\Controllers\Buyer\OrderController as BuyerOrderController;
 use App\Http\Controllers\Buyer\ProductController as BuyerProductController;
 use App\Http\Controllers\Buyer\ProfileController;
+use App\Http\Controllers\Buyer\StoreController;
 use App\Http\Controllers\Seller\DashboardController as SellerDashboardController;
 use App\Http\Controllers\Seller\OrderController as SellerOrderController;
 use App\Http\Controllers\Seller\ProductController;
@@ -41,6 +43,20 @@ Route::middleware('guest')->group(function () {
     Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 
     Route::post('/register', [AuthController::class, 'register'])->name('register.process');
+
+
+    Route::get(
+        '/auth/google',
+        [GoogleAuthController::class, 'redirect']
+    )->name('google.redirect');
+
+
+    Route::get(
+        '/auth/google/callback',
+        [GoogleAuthController::class, 'callback']
+    )->name('google.callback');
+
+
 });
 
 /*
@@ -207,10 +223,15 @@ Route::middleware(['auth', 'role:buyer'])
 
         Route::get('/pesanan', [BuyerOrderController::class, 'index'])->name('orders.index');
 
+        Route::post('/produk/{product}/beli-sekarang', [BuyerOrderController::class, 'storeDirect'])->name('products.buy-now');
         Route::get('/pesanan/{order}/whatsapp', [BuyerOrderController::class, 'whatsapp'])->name('orders.whatsapp');
+
+        Route::get('/toko/{seller}', [StoreController::class, 'show'])->name('stores.show');
         Route::get('/produk', [BuyerProductController::class, 'index'])->name('products.index');
-        Route::post('/produk/{product}/beli-sekarang', [BuyerOrderController::class, 'storeDirect'])->name('products.buy-now'); /*
-                                        |--------------------------------------------------------------------------
+        /*
+
+
+        |--------------------------------------------------------------------------
                                         | Profile Buyer
                                         |--------------------------------------------------------------------------
                                         */

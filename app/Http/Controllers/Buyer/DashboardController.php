@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Buyer;
 use App\Http\Controllers\Controller;
 use App\Models\CartItem;
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -15,7 +16,7 @@ class DashboardController extends Controller
     {
         /*
         |--------------------------------------------------------------------------
-        | Buyer Login
+        | BUYER LOGIN
         |--------------------------------------------------------------------------
         */
 
@@ -23,24 +24,57 @@ class DashboardController extends Controller
 
         /*
         |--------------------------------------------------------------------------
-        | Jumlah Keranjang Asli
+        | KERANJANG
         |--------------------------------------------------------------------------
-        |
-        | Menggunakan sum quantity.
-        |
-        | Contoh:
-        | Produk A x 2
-        | Produk B x 3
-        |
-        | Maka cartCount = 5
-        |
         */
 
-        $cartCount = CartItem::query()->where('user_id', $buyer->id)->sum('quantity');
+        $cartCount = CartItem::query()->where('user_id', $buyer->id)->count();
 
         /*
         |--------------------------------------------------------------------------
-        | Categories
+        | PESANAN AKTIF
+        |--------------------------------------------------------------------------
+        */
+
+        $activeOrderCount = Order::query()
+            ->where('buyer_id', $buyer->id)
+            ->whereIn('status', ['pending', 'processing'])
+            ->count();
+
+        /*
+        |--------------------------------------------------------------------------
+        | PESANAN SELESAI
+        |--------------------------------------------------------------------------
+        */
+
+        $completedOrderCount = Order::query()->where('buyer_id', $buyer->id)->where('status', 'completed')->count();
+
+        /*
+        |--------------------------------------------------------------------------
+        | TOTAL TRANSAKSI
+        |--------------------------------------------------------------------------
+        */
+
+        $totalTransactionCount = Order::query()->where('buyer_id', $buyer->id)->count();
+
+        $totalTransaction = Order::query()->where('buyer_id', $buyer->id)->sum('subtotal');
+
+        /*
+        |--------------------------------------------------------------------------
+        | 3 PESANAN TERBARU
+        |--------------------------------------------------------------------------
+        */
+
+        $recentOrders = Order::query()
+            ->with(['items.product', 'seller.sellerProfile'])
+            ->where('buyer_id', $buyer->id)
+            ->latest('created_at')
+            ->take(3)
+            ->get();
+
+        /*
+        |--------------------------------------------------------------------------
+        | CATEGORIES
         |--------------------------------------------------------------------------
         */
 
@@ -48,7 +82,7 @@ class DashboardController extends Controller
 
         /*
         |--------------------------------------------------------------------------
-        | Produk Terbaru
+        | PRODUK TERBARU
         |--------------------------------------------------------------------------
         */
 
@@ -62,7 +96,7 @@ class DashboardController extends Controller
 
         /*
         |--------------------------------------------------------------------------
-        | Produk Rekomendasi
+        | PRODUK REKOMENDASI
         |--------------------------------------------------------------------------
         */
 
@@ -76,10 +110,10 @@ class DashboardController extends Controller
 
         /*
         |--------------------------------------------------------------------------
-        | Return View
+        | RETURN VIEW
         |--------------------------------------------------------------------------
         */
 
-        return view('buyer.dashboard', compact('cartCount', 'categories', 'latestProducts', 'recommendedProducts'));
+        return view('buyer.dashboard', compact('cartCount', 'activeOrderCount', 'completedOrderCount', 'totalTransactionCount', 'totalTransaction', 'recentOrders', 'categories', 'latestProducts', 'recommendedProducts'));
     }
 }

@@ -13,7 +13,12 @@
     @endphp
 
 
-    <div
+    <div x-data="{
+        showConfirm: false,
+        paymentMethod: @js(old('payment_method', '')),
+        paymentError: '',
+        dashboardUrl: @js(route('buyer.dashboard'))
+    }"
         class="min-h-screen
                bg-gradient-to-br
                from-[#FBF8F5]
@@ -35,7 +40,20 @@
             {{-- ===================================================== --}}
             {{-- HEADER --}}
             {{-- ===================================================== --}}
+            <div class="mb-5">
 
+                <a href="{{ route('buyer.dashboard') }}"
+                    class="inline-flex items-center gap-2
+                           text-sm font-semibold
+                           text-slate-500
+                           transition
+                           hover:text-[#4371d1]">
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    Dashboard
+                </a>
+
+            </div>
             <section
                 class="relative
                        mb-5
@@ -296,7 +314,15 @@
             {{-- FORM --}}
             {{-- ===================================================== --}}
 
-            <form action="{{ route('buyer.checkout.store') }}" method="POST">
+            <form action="{{ route('buyer.checkout.store') }}" target="_blank"
+                id="checkout-form" method="POST" @submit="
+        showConfirm = false;
+
+        setTimeout(() => {
+            window.location.href = dashboardUrl;
+        }, 500);
+    "
+               >
 
                 @csrf
 
@@ -395,8 +421,7 @@
                                     {{-- STORE PHOTO --}}
 
                                     @if ($storePhoto)
-                                        <img src="{{ asset('storage/' . $storePhoto) }}"
-                                            alt="{{ $storeName }}"
+                                        <img src="{{ asset('storage/' . $storePhoto) }}" alt="{{ $storeName }}"
                                             class="size-14
                                                    shrink-0
                                                    rounded-full
@@ -590,8 +615,7 @@
 
                                             {{-- IMAGE --}}
 
-                                            <a href="{{ route('buyer.products.show', $product) }}"
-                                                class="shrink-0">
+                                            <a href="{{ route('buyer.products.show', $product) }}" class="shrink-0">
 
 
                                                 @if ($product->image)
@@ -903,8 +927,7 @@
 
 
                                         <input type="text" name="buyer_name" id="buyer_name"
-                                            value="{{ old('buyer_name', auth()->user()->name) }}"
-                                            required
+                                            value="{{ old('buyer_name', auth()->user()->name) }}" required
                                             class="h-11
                                                    w-full
                                                    rounded-xl
@@ -996,7 +1019,122 @@
                                     </p>
 
                                 </div>
+                                {{-- METODE PEMBAYARAN --}}
+                                <div class="mt-5">
 
+                                    <p class="mb-3 text-sm font-bold text-slate-800">
+                                        Metode Pembayaran
+                                    </p>
+
+                                    <div class="grid grid-cols-2 gap-3">
+
+                                        {{-- TRANSFER --}}
+                                        <label
+                                            class="relative flex cursor-pointer
+                   items-center gap-3
+                   rounded-2xl
+                   border border-slate-200
+                   bg-white
+                   p-4
+                   transition
+                   hover:border-[#4371d1]
+                   hover:bg-[#F7F9FF]">
+
+                                            <input type="radio" x-model="paymentMethod" name="payment_method"
+                                                value="transfer" required class="peer sr-only">
+
+                                            <div
+                                                class="flex size-10
+                       items-center
+                       justify-center
+                       rounded-xl
+                       bg-blue-50
+                       text-[#4371d1]
+                       peer-checked:bg-[#4371d1]
+                       peer-checked:text-white">
+                                                <i class="fa-solid fa-building-columns"></i>
+                                            </div>
+
+                                            <div>
+                                                <p class="text-sm font-bold text-slate-800">
+                                                    Transfer
+                                                </p>
+
+                                                <p class="mt-0.5 text-[10px] text-slate-400">
+                                                    Transfer ke seller
+                                                </p>
+                                            </div>
+
+                                            <div
+                                                class="absolute
+                       inset-0
+                       rounded-2xl
+                       border-2
+                       border-transparent
+                       peer-checked:border-[#4371d1]
+                       pointer-events-none">
+                                            </div>
+
+                                        </label>
+
+
+                                        {{-- CASH --}}
+                                        <label
+                                            class="relative flex cursor-pointer
+                   items-center gap-3
+                   rounded-2xl
+                   border border-slate-200
+                   bg-white
+                   p-4
+                   transition
+                   hover:border-[#4371d1]
+                   hover:bg-[#F7F9FF]">
+
+                                            <input type="radio" x-model="paymentMethod" name="payment_method"
+                                                value="cash" required class="peer sr-only">
+
+                                            <div
+                                                class="flex size-10
+                       items-center
+                       justify-center
+                       rounded-xl
+                       bg-emerald-50
+                       text-emerald-600
+                       peer-checked:bg-emerald-600
+                       peer-checked:text-white">
+                                                <i class="fa-solid fa-money-bill-wave"></i>
+                                            </div>
+
+                                            <div>
+                                                <p class="text-sm font-bold text-slate-800">
+                                                    Cash
+                                                </p>
+
+                                                <p class="mt-0.5 text-[10px] text-slate-400">
+                                                    Bayar secara tunai
+                                                </p>
+                                            </div>
+
+                                            <div
+                                                class="absolute
+                       inset-0
+                       rounded-2xl
+                       border-2
+                       border-transparent
+                       peer-checked:border-emerald-500
+                       pointer-events-none">
+                                            </div>
+
+                                        </label>
+
+                                    </div>
+
+                                    <p class="mt-2 text-[10px] leading-4 text-slate-400">
+                                        Metode pembayaran hanya digunakan sebagai informasi kepada seller.
+                                        Pembayaran dilakukan berdasarkan kesepakatan buyer dan seller.
+                                    </p>
+
+                                </div>
 
 
                                 {{-- NOTES --}}
@@ -1364,7 +1502,16 @@
                                 {{-- SUBMIT --}}
                                 {{-- ========================================= --}}
 
-                                <button type="submit"
+                                <button type="button"
+                                    @click="
+        if (!paymentMethod) {
+            paymentError = 'Pilih metode pembayaran terlebih dahulu.';
+            return;
+        }
+
+        paymentError = '';
+        showConfirm = true;
+    "
                                     class="group
                                            mt-5
                                            flex
@@ -1403,7 +1550,8 @@
                                                transition
                                                group-hover:translate-x-1">
                                     </i>
-
+                                    <p x-show="paymentError" x-text="paymentError" x-transition
+                                        class="mt-2 text-center text-xs font-semibold text-red-500"></p>
                                 </button>
 
 
@@ -1437,11 +1585,307 @@
                     </aside>
 
                 </div>
+                {{-- ========================================================= --}}
+                {{-- CONFIRM ORDER MODAL --}}
+                {{-- ========================================================= --}}
+
+                <div x-cloak x-show="showConfirm" x-transition.opacity @keydown.escape.window="showConfirm = false"
+                    class="fixed inset-0
+           z-[100]
+           flex items-end
+           justify-center
+           bg-slate-950/50
+           backdrop-blur-sm
+           sm:items-center
+           sm:p-4">
+
+                    {{-- BACKDROP --}}
+                    <button type="button" @click="showConfirm = false" class="absolute inset-0"
+                        aria-label="Tutup modal"></button>
+
+
+                    {{-- MODAL --}}
+                    <div x-show="showConfirm" x-transition:enter="transition ease-out duration-200"
+                        x-transition:enter-start="translate-y-8 opacity-0 sm:translate-y-0 sm:scale-95"
+                        x-transition:enter-end="translate-y-0 opacity-100 sm:scale-100"
+                        x-transition:leave="transition ease-in duration-150"
+                        x-transition:leave-start="translate-y-0 opacity-100 sm:scale-100"
+                        x-transition:leave-end="translate-y-8 opacity-0 sm:translate-y-0 sm:scale-95" @click.stop
+                        class="relative
+               w-full
+               max-w-lg
+               overflow-hidden
+               rounded-t-3xl
+               bg-white
+               shadow-2xl
+               sm:rounded-3xl">
+
+                        {{-- ACCENT --}}
+                        <div
+                            class="h-1.5
+                   bg-gradient-to-r
+                   from-[#0a1d45]
+                   via-[#4371d1]
+                   to-[#C8795A]">
+                        </div>
+
+
+                        {{-- HEADER --}}
+                        <div
+                            class="flex
+                   items-start
+                   justify-between
+                   gap-4
+                   border-b
+                   border-slate-100
+                   px-5
+                   py-5
+                   sm:px-6">
+
+                            <div class="flex items-start gap-3">
+
+                                <div
+                                    class="flex
+                           size-11
+                           shrink-0
+                           items-center
+                           justify-center
+                           rounded-2xl
+                           bg-[#EEF3FF]
+                           text-[#4371d1]">
+                                    <i class="fa-solid fa-receipt"></i>
+                                </div>
+
+                                <div>
+
+                                    <h2 class="text-lg font-black text-slate-900">
+                                        Konfirmasi Pesanan
+                                    </h2>
+
+                                    <p class="mt-1 text-xs leading-5 text-slate-500">
+                                        Pastikan informasi pesanan sudah benar sebelum dilanjutkan.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <button type="button" @click="showConfirm = false"
+                                class="flex
+                       size-9
+                       shrink-0
+                       items-center
+                       justify-center
+                       rounded-xl
+                       text-slate-400
+                       transition
+                       hover:bg-slate-100
+                       hover:text-slate-700">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+
+                        </div>
+
+
+                        {{-- BODY --}}
+                        <div class="px-5 py-5 sm:px-6">
+
+                            {{-- SELLER --}}
+                            <div
+                                class="flex
+                       items-center
+                       justify-between
+                       gap-4
+                       border-b
+                       border-slate-100
+                       py-3">
+
+                                <span class="text-sm text-slate-500">
+                                    Penjual
+                                </span>
+
+                                <span class="text-sm font-bold text-slate-800">
+                                    {{ $storeName }}
+                                </span>
+
+                            </div>
+
+
+                            {{-- ITEM --}}
+                            <div
+                                class="flex
+                       items-center
+                       justify-between
+                       gap-4
+                       border-b
+                       border-slate-100
+                       py-3">
+
+                                <span class="text-sm text-slate-500">
+                                    Jumlah Item
+                                </span>
+
+                                <span class="text-sm font-bold text-slate-800">
+                                    {{ $cartItems->sum('quantity') }} item
+                                </span>
+
+                            </div>
+
+
+                            {{-- PAYMENT --}}
+                            <div
+                                class="flex
+                       items-center
+                       justify-between
+                       gap-4
+                       border-b
+                       border-slate-100
+                       py-3">
+
+                                <span class="text-sm text-slate-500">
+                                    Metode Pembayaran
+                                </span>
+
+                                <span class="text-sm font-bold text-[#4371d1]"
+                                    x-text="
+                        paymentMethod === 'transfer'
+                            ? 'Transfer'
+                            : paymentMethod === 'cash'
+                                ? 'Cash / Tunai'
+                                : '-'
+                    "></span>
+
+                            </div>
+
+
+                            {{-- TOTAL --}}
+                            <div
+                                class="mt-4
+                       rounded-2xl
+                       bg-[#FBF8F5]
+                       p-4">
+
+                                <p class="text-xs text-slate-500">
+                                    Total Pesanan
+                                </p>
+
+                                <p
+                                    class="mt-1
+                           text-2xl
+                           font-black
+                           text-[#0a1d45]">
+                                    Rp{{ number_format($subtotal, 0, ',', '.') }}
+                                </p>
+
+                            </div>
+
+
+                            {{-- WARNING --}}
+                            <div
+                                class="mt-4
+                       flex
+                       items-start
+                       gap-3
+                       rounded-2xl
+                       border
+                       border-amber-200
+                       bg-amber-50
+                       p-4">
+
+                                <div
+                                    class="flex
+                           size-9
+                           shrink-0
+                           items-center
+                           justify-center
+                           rounded-xl
+                           bg-amber-100
+                           text-amber-600">
+                                    <i class="fa-solid fa-circle-exclamation"></i>
+                                </div>
+
+                                <div>
+
+                                    <p class="text-sm font-bold text-amber-800">
+                                        Yakin ingin membuat pesanan?
+                                    </p>
+
+                                    <p class="mt-1 text-xs leading-5 text-amber-700">
+                                        Setelah dikonfirmasi, pesanan akan tercatat dan
+                                        informasi pesanan akan diteruskan ke WhatsApp penjual.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        {{-- ACTION --}}
+                        <div
+                            class="grid
+                   grid-cols-2
+                   gap-3
+                   border-t
+                   border-slate-100
+                   bg-slate-50/70
+                   px-5
+                   py-4
+                   sm:px-6">
+
+                            <button type="button" @click="showConfirm = false"
+                                class="flex
+                       h-12
+                       items-center
+                       justify-center
+                       rounded-xl
+                       border
+                       border-slate-200
+                       bg-white
+                       text-sm
+                       font-bold
+                       text-slate-600
+                       transition
+                       hover:bg-slate-50">
+                                Batal
+                            </button>
+
+
+                            <button type="submit" form="checkout-form"
+                                class="flex
+                       h-12
+                       items-center
+                       justify-center
+                       gap-2
+                       rounded-xl
+                       bg-[#4371d1]
+                       px-4
+                       text-sm
+                       font-bold
+                       text-white
+                       shadow-sm
+                       transition
+                       hover:bg-[#315ebc]">
+
+                                <i class="fa-solid fa-check"></i>
+
+                                Ya, Buat Pesanan
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
 
             </form>
 
         </main>
 
     </div>
+
 
 @endsection

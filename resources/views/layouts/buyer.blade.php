@@ -8,15 +8,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>
-        @yield('title')- - {{ $siteSetting?->site_name ?? 'KampusMart' }}
+        @yield('title') - {{ $siteSetting?->site_name ?? 'KampusMart' }}
     </title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+    </style>
+
 </head>
 
 
-<body class="min-h-screen bg-slate-50 text-slate-900">
+<body class="min-h-screen
+           bg-slate-50
+           pb-20
+           text-slate-900
+           md:pb-0">
 
     {{-- NAVBAR --}}
     <header
@@ -33,7 +45,7 @@
             <a href="{{ route('buyer.dashboard') }}"
                 class="shrink-0 text-xl font-bold
                        tracking-tight text-violet-600">
-                KampusMart
+                {{ $siteSetting?->site_name ?? 'KampusMart' }}
             </a>
 
 
@@ -92,10 +104,11 @@
 
 
                 <a href="{{ route('buyer.cart.index') }}" title="Keranjang"
-                    class="relative inline-flex size-10
+                    class="relative hidden size-10
            items-center justify-center
            rounded-xl text-slate-600
-           transition hover:bg-slate-100">
+           transition hover:bg-slate-100
+           md:inline-flex">
 
                     <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                         <path d="M3 4h2l2 11h10l2-7H6" />
@@ -120,7 +133,7 @@
 
                 {{-- PROFILE --}}
                 {{-- PROFILE DROPDOWN --}}
-                <details class="group relative">
+                <details class="group relative hidden md:block">
 
                     {{-- BUTTON PROFILE --}}
                     <summary
@@ -198,7 +211,32 @@
 
                         <div class="my-1 border-t border-slate-100"></div>
 
+                        {{-- DASHBOARD --}}
+                        <a href="{{ route('buyer.dashboard') }}"
+                            class="flex
+           items-center
+           gap-3
+           rounded-xl
+           px-3
+           py-2.5
+           text-sm
+           font-medium
+           text-slate-600
+           transition
+           hover:bg-violet-50
+           hover:text-violet-700">
 
+                            <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8">
+                                <path d="M3 3h7v7H3z" />
+                                <path d="M14 3h7v7h-7z" />
+                                <path d="M3 14h7v7H3z" />
+                                <path d="M14 14h7v7h-7z" />
+                            </svg>
+
+                            Dashboard
+
+                        </a>
                         {{-- PROFILE --}}
                         <a href="{{ route('buyer.profile.index') }}"
                             class="flex items-center gap-3
@@ -273,18 +311,501 @@
 
 
     {{-- FOOTER --}}
-    <footer class="mt-16 border-t border-slate-200
-               bg-white">
+    <footer class="mt-16 hidden border-t border-slate-200
+               bg-white md:block">
 
         <div
             class="mx-auto max-w-7xl px-4 py-8
                    text-center text-sm text-slate-500
                    sm:px-6 lg:px-8">
-            © {{ date('Y') }} KampusMart.
+            © {{ date('Y') }} {{ $siteSetting?->site_name ?? 'KampusMart' }}.
             Marketplace mahasiswa.
         </div>
 
     </footer>
+    {{-- ========================================================= --}}
+    {{-- MOBILE BOTTOM NAVIGATION --}}
+    {{-- ========================================================= --}}
+
+    <div x-data="{
+        accountMenu: false
+    }" class="md:hidden">
+
+        {{-- BOTTOM NAV --}}
+        <nav
+            class="fixed
+               inset-x-0
+               bottom-0
+               z-50
+               border-t
+               border-slate-200/80
+               bg-white/95
+               px-2
+               shadow-[0_-8px_30px_rgba(15,23,42,0.08)]
+               backdrop-blur-xl">
+
+            <div
+                class="mx-auto
+                   grid
+                   h-[68px]
+                   max-w-md
+                   grid-cols-4">
+
+                {{-- HOME --}}
+                <a href="{{ route('home') }}"
+                    class="group
+                       flex
+                       flex-col
+                       items-center
+                       justify-center
+                       gap-1
+                       transition
+                       {{ request()->routeIs('home') ? 'text-violet-600' : 'text-slate-400' }}">
+
+                    <i class="fa-solid fa-house text-lg"></i>
+
+                    <span class="text-[10px] font-semibold">
+                        Home
+                    </span>
+
+                    @if (request()->routeIs('home'))
+                        <span class="h-1 w-1 rounded-full bg-violet-600"></span>
+                    @endif
+
+                </a>
+
+
+                {{-- PESANAN --}}
+                <a href="{{ route('buyer.orders.index') }}"
+                    class="group
+                       flex
+                       flex-col
+                       items-center
+                       justify-center
+                       gap-1
+                       transition
+                       {{ request()->routeIs('buyer.orders.*') ? 'text-violet-600' : 'text-slate-400' }}">
+
+                    <i class="fa-solid fa-receipt text-lg"></i>
+
+                    <span class="text-[10px] font-semibold">
+                        Pesanan
+                    </span>
+
+                    @if (request()->routeIs('buyer.orders.*'))
+                        <span class="h-1 w-1 rounded-full bg-violet-600"></span>
+                    @endif
+
+                </a>
+
+
+                {{-- CART --}}
+                <a href="{{ route('buyer.cart.index') }}"
+                    class="group
+                       relative
+                       flex
+                       flex-col
+                       items-center
+                       justify-center
+                       gap-1
+                       transition
+                       {{ request()->routeIs('buyer.cart.*') ? 'text-violet-600' : 'text-slate-400' }}">
+
+                    <div class="relative">
+
+                        <i class="fa-solid fa-cart-shopping text-lg"></i>
+
+                        @if ($cartCount > 0)
+                            <span
+                                class="absolute
+                                   -right-3
+                                   -top-2
+                                   flex
+                                   min-w-4
+                                   items-center
+                                   justify-center
+                                   rounded-full
+                                   bg-violet-600
+                                   px-1
+                                   text-[8px]
+                                   font-bold
+                                   text-white">
+                                {{ $cartCount > 99 ? '99+' : $cartCount }}
+                            </span>
+                        @endif
+
+                    </div>
+
+                    <span class="text-[10px] font-semibold">
+                        Keranjang
+                    </span>
+
+                    @if (request()->routeIs('buyer.cart.*'))
+                        <span class="h-1 w-1 rounded-full bg-violet-600"></span>
+                    @endif
+
+                </a>
+
+
+                {{-- ACCOUNT --}}
+                <button type="button" @click="accountMenu = true"
+                    class="group
+                       flex
+                       flex-col
+                       items-center
+                       justify-center
+                       gap-1
+                       transition
+                       {{ request()->routeIs('buyer.dashboard', 'buyer.profile.*') ? 'text-violet-600' : 'text-slate-400' }}">
+
+                    <div
+                        class="flex
+                           size-7
+                           items-center
+                           justify-center
+                           rounded-full
+                           text-[10px]
+                           font-black
+                           {{ request()->routeIs('buyer.dashboard', 'buyer.profile.*')
+                               ? 'bg-violet-600 text-white'
+                               : 'bg-violet-100 text-violet-700' }}">
+                        {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                    </div>
+
+                    <span class="text-[10px] font-semibold">
+                        Akun
+                    </span>
+
+                    @if (request()->routeIs('buyer.dashboard', 'buyer.profile.*'))
+                        <span class="h-1 w-1 rounded-full bg-violet-600"></span>
+                    @endif
+
+                </button>
+
+            </div>
+
+        </nav>
+
+
+        {{-- ========================================================= --}}
+        {{-- ACCOUNT BOTTOM SHEET --}}
+        {{-- ========================================================= --}}
+
+        <div x-cloak x-show="accountMenu" @keydown.escape.window="accountMenu = false"
+            class="fixed
+               inset-0
+               z-[100]
+               flex
+               items-end">
+
+            {{-- BACKDROP --}}
+            <button type="button" @click="accountMenu = false"
+                class="absolute
+                   inset-0
+                   bg-slate-950/40
+                   backdrop-blur-[2px]"
+                aria-label="Tutup menu akun"></button>
+
+
+            {{-- SHEET --}}
+            <div x-show="accountMenu" x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="translate-y-full" x-transition:enter-end="translate-y-0"
+                x-transition:leave="transition ease-in duration-200" x-transition:leave-start="translate-y-0"
+                x-transition:leave-end="translate-y-full" @click.stop
+                class="relative
+                   w-full
+                   overflow-hidden
+                   rounded-t-[28px]
+                   bg-white
+                   shadow-2xl">
+
+                {{-- HANDLE --}}
+                <div class="flex justify-center pt-3">
+
+                    <div
+                        class="h-1.5
+                           w-12
+                           rounded-full
+                           bg-slate-200">
+                    </div>
+
+                </div>
+
+
+                {{-- USER --}}
+                <div
+                    class="flex
+                       items-center
+                       gap-3
+                       px-5
+                       pb-5
+                       pt-4">
+
+                    <div
+                        class="flex
+                           size-12
+                           shrink-0
+                           items-center
+                           justify-center
+                           rounded-2xl
+                           bg-gradient-to-br
+                           from-violet-500
+                           to-violet-700
+                           text-lg
+                           font-black
+                           text-white
+                           shadow-lg
+                           shadow-violet-600/20">
+                        {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                    </div>
+
+
+                    <div class="min-w-0 flex-1">
+
+                        <p
+                            class="truncate
+                               text-sm
+                               font-bold
+                               text-slate-900">
+                            {{ auth()->user()->name }}
+                        </p>
+
+                        <p
+                            class="mt-0.5
+                               truncate
+                               text-xs
+                               text-slate-400">
+                            {{ auth()->user()->email }}
+                        </p>
+
+                    </div>
+
+
+                    <button type="button" @click="accountMenu = false"
+                        class="flex
+                           size-9
+                           items-center
+                           justify-center
+                           rounded-xl
+                           bg-slate-100
+                           text-slate-400">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+
+                </div>
+
+
+                <div class="h-px bg-slate-100"></div>
+
+
+                {{-- MENU --}}
+                <div class="space-y-1 p-3">
+
+                    {{-- DASHBOARD --}}
+                    <a href="{{ route('buyer.dashboard') }}"
+                        class="flex
+                           items-center
+                           gap-3
+                           rounded-2xl
+                           px-3
+                           py-3
+                           transition
+                           active:bg-violet-50">
+
+                        <div
+                            class="flex
+                               size-10
+                               shrink-0
+                               items-center
+                               justify-center
+                               rounded-xl
+                               bg-violet-50
+                               text-violet-600">
+                            <i class="fa-solid fa-chart-pie"></i>
+                        </div>
+
+                        <div class="flex-1">
+
+                            <p
+                                class="text-sm
+                                   font-bold
+                                   text-slate-700">
+                                Dashboard
+                            </p>
+
+                            <p class="mt-0.5 text-[10px] text-slate-400">
+                                Ringkasan aktivitas akun
+                            </p>
+
+                        </div>
+
+                        <i
+                            class="fa-solid
+                               fa-chevron-right
+                               text-[10px]
+                               text-slate-300"></i>
+
+                    </a>
+
+
+                    {{-- PROFILE --}}
+                    <a href="{{ route('buyer.profile.index') }}"
+                        class="flex
+                           items-center
+                           gap-3
+                           rounded-2xl
+                           px-3
+                           py-3
+                           transition
+                           active:bg-blue-50">
+
+                        <div
+                            class="flex
+                               size-10
+                               shrink-0
+                               items-center
+                               justify-center
+                               rounded-xl
+                               bg-blue-50
+                               text-blue-600">
+                            <i class="fa-regular fa-user"></i>
+                        </div>
+
+                        <div class="flex-1">
+
+                            <p
+                                class="text-sm
+                                   font-bold
+                                   text-slate-700">
+                                Profil Saya
+                            </p>
+
+                            <p class="mt-0.5 text-[10px] text-slate-400">
+                                Kelola informasi akun
+                            </p>
+
+                        </div>
+
+                        <i
+                            class="fa-solid
+                               fa-chevron-right
+                               text-[10px]
+                               text-slate-300"></i>
+
+                    </a>
+
+
+                    {{-- ORDER --}}
+                    <a href="{{ route('buyer.orders.index') }}"
+                        class="flex
+                           items-center
+                           gap-3
+                           rounded-2xl
+                           px-3
+                           py-3
+                           transition
+                           active:bg-amber-50">
+
+                        <div
+                            class="flex
+                               size-10
+                               shrink-0
+                               items-center
+                               justify-center
+                               rounded-xl
+                               bg-amber-50
+                               text-amber-600">
+                            <i class="fa-solid fa-receipt"></i>
+                        </div>
+
+                        <div class="flex-1">
+
+                            <p
+                                class="text-sm
+                                   font-bold
+                                   text-slate-700">
+                                Pesanan Saya
+                            </p>
+
+                            <p class="mt-0.5 text-[10px] text-slate-400">
+                                Lihat transaksi dan status pesanan
+                            </p>
+
+                        </div>
+
+                        <i
+                            class="fa-solid
+                               fa-chevron-right
+                               text-[10px]
+                               text-slate-300"></i>
+
+                    </a>
+
+                </div>
+
+
+                {{-- LOGOUT --}}
+                <div
+                    class="border-t
+                       border-slate-100
+                       px-3
+                       pb-[max(20px,env(safe-area-inset-bottom))]
+                       pt-3">
+
+                    <form action="{{ route('logout') }}" method="POST">
+
+                        @csrf
+
+                        <button type="submit"
+                            class="flex
+                               w-full
+                               items-center
+                               gap-3
+                               rounded-2xl
+                               px-3
+                               py-3
+                               text-left
+                               transition
+                               active:bg-red-50">
+
+                            <div
+                                class="flex
+                                   size-10
+                                   shrink-0
+                                   items-center
+                                   justify-center
+                                   rounded-xl
+                                   bg-red-50
+                                   text-red-500">
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                            </div>
+
+                            <div class="flex-1">
+
+                                <p
+                                    class="text-sm
+                                       font-bold
+                                       text-red-500">
+                                    Logout
+                                </p>
+
+                                <p class="mt-0.5 text-[10px] text-slate-400">
+                                    Keluar dari akun KampusMart
+                                </p>
+
+                            </div>
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </body>
 

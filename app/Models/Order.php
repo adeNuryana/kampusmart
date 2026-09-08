@@ -6,39 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    protected $fillable = [
-        'order_number',
-        'buyer_id',
-        'seller_id',
-        'buyer_name',
-        'buyer_phone',
-        'subtotal',
-        'status',
-        'notes',
-    ];
+    protected $fillable = ['order_number', 'buyer_id', 'seller_id', 'buyer_name', 'buyer_phone', 'payment_method', 'subtotal', 'status', 'notes'];
 
     protected $casts = [
         'subtotal' => 'decimal:2',
     ];
 
-
     public function buyer()
     {
-        return $this->belongsTo(
-            User::class,
-            'buyer_id'
-        );
+        return $this->belongsTo(User::class, 'buyer_id');
     }
-
 
     public function seller()
     {
-        return $this->belongsTo(
-            User::class,
-            'seller_id'
-        );
+        return $this->belongsTo(User::class, 'seller_id');
     }
-
 
     public function items()
     {
