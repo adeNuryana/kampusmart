@@ -32,35 +32,24 @@
 
             @php
                 $statusClass = match ($order->status) {
-                    'pending' => 'border-[#E8D8B9] bg-[#FAF2DF] text-[#A87A37]',
-
-                    'confirmed' => 'border-[#DFD2C7] bg-[#F1E6DE] text-[#4371d1]',
-
                     'processing' => 'border-[#EBCFC2] bg-[#FBEAE2] text-[#A95E43]',
-
-                    'completed', 'sold' => 'border-[#D3DFCE] bg-[#EEF3EA] text-[#65795E]',
-
+                    'sold' => 'border-[#D3DFCE] bg-[#EEF3EA] text-[#65795E]',
                     'cancelled' => 'border-[#ECD2CF] bg-[#FAEDEC] text-[#A65954]',
 
                     default => 'border-slate-200 bg-slate-100 text-slate-600',
                 };
 
                 $statusDot = match ($order->status) {
-                    'pending' => 'bg-[#C89B55]',
-                    'confirmed' => 'bg-[#4371d1]',
                     'processing' => 'bg-[#C8795A]',
-                    'completed', 'sold' => 'bg-[#718268]',
+                    'sold' => 'bg-[#718268]',
                     'cancelled' => 'bg-[#A65954]',
                     default => 'bg-slate-400',
                 };
 
                 $statusLabel = match ($order->status) {
-                    'pending' => 'Menunggu',
-                    'confirmed' => 'Dikonfirmasi',
                     'processing' => 'Diproses',
-                    'completed' => 'Selesai',
-                    'sold' => 'Sudah Terjual',
-                    'cancelled' => 'Dibatalkan',
+                    'sold' => 'Selesai',
+                    'cancelled' => 'Ditolak/Dibatalkan',
                     default => ucfirst($order->status),
                 };
             @endphp
@@ -735,352 +724,97 @@
 
 
                         {{-- ========================================= --}}
-                        {{-- PENDING --}}
+                        {{-- STATUS ACTION --}}
                         {{-- ========================================= --}}
 
-                        @if ($order->status === 'pending')
-                            <div class="mt-5 space-y-3">
-
-                                <form
-                                    action="{{ route('seller.orders.status', $order) }}"
-                                    method="POST">
-
+                        @if ($order->status === 'processing')
+                            <div class="mt-5 grid gap-3">
+                                <form action="{{ route('seller.orders.status', $order) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
 
-
-                                    <input type="hidden" name="status" value="confirmed">
-
+                                    <input type="hidden" name="status" value="sold">
 
                                     <button type="submit"
-                                        onclick="return confirm(
-                                            'Terima pesanan ini?'
-                                        )"
-                                        class="inline-flex h-11
-                                               w-full items-center
-                                               justify-center gap-2
-                                               rounded-xl
-                                               bg-[#4371d1]
-                                               px-4
-                                               text-sm font-bold
-                                               text-white
-                                               transition
-                                               hover:bg-[#0a1d45]">
-
-                                        <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2">
-
+                                        onclick="return confirm('Tandai pesanan ini sebagai selesai?')"
+                                        class="inline-flex h-11 w-full items-center justify-center gap-2
+                                               rounded-xl bg-[#718268] px-4 text-sm font-bold text-white
+                                               transition hover:bg-[#65795E]">
+                                        <svg class="size-4" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2">
                                             <path d="m5 12 4 4L19 6" />
-
-                                        </svg>
-
-                                        Terima Pesanan
-
-                                    </button>
-
-                                </form>
-
-
-
-                                <form
-                                    action="{{ route('seller.orders.status', $order) }}"
-                                    method="POST">
-
-                                    @csrf
-                                    @method('PATCH')
-
-
-                                    <input type="hidden" name="status" value="cancelled">
-
-
-                                    <button type="submit"
-                                        onclick="return confirm(
-                                            'Batalkan pesanan ini? Stok produk akan dikembalikan.'
-                                        )"
-                                        class="inline-flex h-11
-                                               w-full items-center
-                                               justify-center gap-2
-                                               rounded-xl
-                                               bg-[#FAEDEC]
-                                               px-4
-                                               text-sm font-bold
-                                               text-[#A65954]
-                                               transition
-                                               hover:bg-[#F5DEDB]">
-
-                                        Batalkan Pesanan
-
-                                    </button>
-
-                                </form>
-
-                            </div>
-
-
-
-                            {{-- ========================================= --}}
-                            {{-- CONFIRMED --}}
-                            {{-- ========================================= --}}
-                        @elseif ($order->status === 'confirmed')
-                            <div class="mt-5 space-y-3">
-
-                                <form
-                                    action="{{ route('seller.orders.status', $order) }}"
-                                    method="POST">
-
-                                    @csrf
-                                    @method('PATCH')
-
-
-                                    <input type="hidden" name="status" value="processing">
-
-
-                                    <button type="submit"
-                                        onclick="return confirm(
-                                            'Mulai proses pesanan ini?'
-                                        )"
-                                        class="inline-flex h-11
-                                               w-full items-center
-                                               justify-center gap-2
-                                               rounded-xl
-                                               bg-[#C8795A]
-                                               px-4
-                                               text-sm font-bold
-                                               text-white
-                                               transition
-                                               hover:bg-[#B66F52]">
-
-                                        <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="1.8">
-
-                                            <circle cx="12" cy="12" r="9" />
-                                            <path d="M12 7v5l3 2" />
-
-                                        </svg>
-
-                                        Proses Pesanan
-
-                                    </button>
-
-                                </form>
-
-
-                                <form
-                                    action="{{ route('seller.orders.status', $order) }}"
-                                    method="POST">
-
-                                    @csrf
-                                    @method('PATCH')
-
-
-                                    <input type="hidden" name="status" value="cancelled">
-
-
-                                    <button type="submit"
-                                        onclick="return confirm(
-                                            'Batalkan pesanan ini?'
-                                        )"
-                                        class="h-11 w-full
-                                               rounded-xl
-                                               bg-[#FAEDEC]
-                                               text-sm font-bold
-                                               text-[#A65954]
-                                               transition
-                                               hover:bg-[#F5DEDB]">
-
-                                        Batalkan Pesanan
-
-                                    </button>
-
-                                </form>
-
-                            </div>
-
-
-
-                            {{-- ========================================= --}}
-                            {{-- PROCESSING --}}
-                            {{-- ========================================= --}}
-                        @elseif ($order->status === 'processing')
-                            <div class="mt-5 space-y-3">
-
-                                <form
-                                    action="{{ route('seller.orders.status', $order) }}"
-                                    method="POST">
-
-                                    @csrf
-                                    @method('PATCH')
-
-
-                                    <input type="hidden" name="status" value="completed">
-
-
-                                    <button type="submit"
-                                        onclick="return confirm(
-                                            'Tandai pesanan ini sebagai selesai?'
-                                        )"
-                                        class="inline-flex h-11
-                                               w-full items-center
-                                               justify-center gap-2
-                                               rounded-xl
-                                               bg-[#718268]
-                                               px-4
-                                               text-sm font-bold
-                                               text-white
-                                               transition
-                                               hover:bg-[#65795E]">
-
-                                        <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2">
-
-                                            <path d="m5 12 4 4L19 6" />
-
                                         </svg>
 
                                         Selesaikan Pesanan
-
                                     </button>
-
                                 </form>
 
-
-                                <form
-                                    action="{{ route('seller.orders.status', $order) }}"
-                                    method="POST">
-
+                                <form action="{{ route('seller.orders.status', $order) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
 
-
                                     <input type="hidden" name="status" value="cancelled">
 
-
                                     <button type="submit"
-                                        onclick="return confirm(
-                                            'Batalkan pesanan ini?'
-                                        )"
-                                        class="h-11 w-full
-                                               rounded-xl
-                                               bg-[#FAEDEC]
-                                               text-sm font-bold
-                                               text-[#A65954]
-                                               transition
-                                               hover:bg-[#F5DEDB]">
+                                        onclick="return confirm('Tolak/batalkan pesanan ini? Stok produk akan dikembalikan.')"
+                                        class="inline-flex h-11 w-full items-center justify-center gap-2
+                                               rounded-xl border border-[#D79B96] bg-white px-4
+                                               text-sm font-bold text-[#A65954]
+                                               transition hover:bg-[#FAEDEC]">
+                                        <svg class="size-4" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <path d="M6 6l12 12M18 6 6 18" />
+                                        </svg>
 
-                                        Batalkan Pesanan
-
+                                        Tolak / Batalkan Pesanan
                                     </button>
-
                                 </form>
-
                             </div>
-
-
-
-                            {{-- ========================================= --}}
-                            {{-- COMPLETED --}}
-                            {{-- ========================================= --}}
-                        @elseif ($order->status === 'completed' || $order->status === 'sold')
+                        @elseif ($order->status === 'sold')
                             <div
-                                class="mt-5 flex items-start gap-3
-                                       rounded-2xl
-                                       border border-[#D3DFCE]
-                                       bg-[#EEF3EA]
-                                       p-4">
-
+                                class="mt-5 flex items-start gap-3 rounded-2xl
+                                       border border-[#D3DFCE] bg-[#EEF3EA] p-4">
                                 <div
-                                    class="flex size-8 shrink-0
-                                           items-center justify-center
-                                           rounded-lg
-                                           bg-[#718268]
-                                           text-white">
-
-                                    <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2">
-
+                                    class="flex size-8 shrink-0 items-center justify-center
+                                           rounded-lg bg-[#718268] text-white">
+                                    <svg class="size-4" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2">
                                         <path d="m5 12 4 4L19 6" />
-
                                     </svg>
-
                                 </div>
 
-
                                 <div>
-
-                                    <p
-                                        class="text-sm font-bold
-                                               text-[#65795E]">
-
+                                    <p class="text-sm font-bold text-[#65795E]">
                                         Pesanan selesai
-
                                     </p>
 
-                                    <p
-                                        class="mt-1 text-xs
-                                               leading-5
-                                               text-[#65795E]">
-
-                                        Transaksi ini telah berhasil
-                                        diselesaikan.
-
+                                    <p class="mt-1 text-xs leading-5 text-[#65795E]">
+                                        Transaksi ini telah berhasil diselesaikan.
                                     </p>
-
                                 </div>
-
                             </div>
-
-
-
-                            {{-- ========================================= --}}
-                            {{-- CANCELLED --}}
-                            {{-- ========================================= --}}
-                        @elseif ($order->status === 'cancelled')
+                        @else
                             <div
-                                class="mt-5 flex items-start gap-3
-                                       rounded-2xl
-                                       border border-[#ECD2CF]
-                                       bg-[#FAEDEC]
-                                       p-4">
-
+                                class="mt-5 flex items-start gap-3 rounded-2xl
+                                       border border-[#ECD2CF] bg-[#FAEDEC] p-4">
                                 <div
-                                    class="flex size-8 shrink-0
-                                           items-center justify-center
-                                           rounded-lg
-                                           bg-[#A65954]
-                                           text-white">
-
-                                    <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2">
-
-                                        <path d="m8 8 8 8" />
-                                        <path d="m16 8-8 8" />
-
+                                    class="flex size-8 shrink-0 items-center justify-center
+                                           rounded-lg bg-[#A65954] text-white">
+                                    <svg class="size-4" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2">
+                                        <path d="M6 6l12 12M18 6 6 18" />
                                     </svg>
-
                                 </div>
-
 
                                 <div>
-
-                                    <p
-                                        class="text-sm font-bold
-                                               text-[#A65954]">
-
-                                        Pesanan dibatalkan
-
+                                    <p class="text-sm font-bold text-[#A65954]">
+                                        Pesanan ditolak/dibatalkan
                                     </p>
 
-                                    <p
-                                        class="mt-1 text-xs
-                                               leading-5
-                                               text-[#A65954]">
-
-                                        Pesanan ini sudah tidak dapat diproses.
-
+                                    <p class="mt-1 text-xs leading-5 text-[#A65954]">
+                                        Pesanan tidak diproses dan stok produk telah dikembalikan.
                                     </p>
-
                                 </div>
-
                             </div>
                         @endif
 

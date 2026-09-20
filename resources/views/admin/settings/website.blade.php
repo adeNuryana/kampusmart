@@ -33,8 +33,8 @@
             <p class="mt-2 text-sm
                        leading-6 text-slate-500">
 
-                Atur nama dan logo utama
-                yang digunakan pada website.
+                Atur nama, kontak WhatsApp Admin, logo,
+                dan favicon yang digunakan pada website.
 
             </p>
 
@@ -140,6 +140,53 @@
 
 
 
+                    {{-- ADMIN WHATSAPP --}}
+                    <div>
+
+                        <label for="admin_whatsapp"
+                            class="mb-2 block
+                                   text-sm font-semibold
+                                   text-[#4D4038]">
+
+                            WhatsApp Admin
+
+                        </label>
+
+                        <input type="tel" name="admin_whatsapp" id="admin_whatsapp"
+                            value="{{ old('admin_whatsapp', $setting->admin_whatsapp ?? config('app.admin_whatsapp')) }}"
+                            placeholder="Contoh: 081234567890"
+                            autocomplete="tel"
+                            class="h-11 w-full
+                                   rounded-xl border
+                                   border-[#DFD2C7]
+                                   px-4 text-sm
+                                   text-[#4D4038]
+                                   outline-none
+                                   transition
+                                   focus:border-[#4371d1]
+                                   focus:ring-4
+                                   focus:ring-[#F4EAE2]">
+
+                        <p class="mt-2 text-xs leading-5 text-slate-400">
+                            Nomor ini digunakan oleh tombol WhatsApp mengambang pada seluruh halaman pembeli dan penjual.
+                            Gunakan nomor aktif, misalnya 081234567890 atau +6281234567890.
+                        </p>
+
+                        @error('admin_whatsapp')
+                            <p
+                                class="mt-2 text-xs
+                                       font-medium
+                                       text-[#A65954]">
+
+                                {{ $message }}
+
+                            </p>
+                        @enderror
+
+                    </div>
+
+
+
                     {{-- LOGO --}}
                     <div>
 
@@ -220,7 +267,7 @@
                                                text-slate-400">
 
                                         JPG, PNG atau WebP.
-                                        Maksimal 2 MB.
+                                        Maksimal 2 MB. Digunakan sebagai logo utama pada halaman website.
 
                                     </p>
 
@@ -232,6 +279,106 @@
 
 
                         @error('logo')
+                            <p
+                                class="mt-2 text-xs
+                                       font-medium
+                                       text-[#A65954]">
+
+                                {{ $message }}
+
+                            </p>
+                        @enderror
+
+                    </div>
+
+
+
+                    {{-- FAVICON --}}
+                    <div>
+
+                        <label for="favicon"
+                            class="mb-2 block
+                                   text-sm font-semibold
+                                   text-[#4D4038]">
+
+                            Favicon Website
+
+                        </label>
+
+
+                        <div
+                            class="rounded-2xl
+                                   border border-[#E7DBD1]
+                                   bg-[#FAF7F2]
+                                   p-5">
+
+                            <div
+                                class="flex flex-col gap-5
+                                       sm:flex-row
+                                       sm:items-center">
+
+
+                                {{-- PREVIEW --}}
+                                <div
+                                    class="flex size-24
+                                           shrink-0
+                                           items-center
+                                           justify-center
+                                           overflow-hidden
+                                           rounded-2xl
+                                           border
+                                           border-[#DFD2C7]
+                                           bg-white">
+
+                                    @if ($setting->favicon)
+                                        <img id="faviconPreview"
+                                            src="{{ asset('storage/' . $setting->favicon) }}"
+                                            alt="Favicon {{ $setting->site_name }}"
+                                            class="size-14 object-contain">
+                                    @else
+                                        <img id="faviconPreview" src="" alt=""
+                                            class="hidden size-14 object-contain">
+
+                                        <span id="faviconPlaceholder"
+                                            class="flex size-14 items-center justify-center rounded-xl
+                                                   bg-[#EEF3EA] text-xl text-[#65795E]">
+
+                                            <i class="fa-solid fa-globe"></i>
+
+                                        </span>
+                                    @endif
+
+                                </div>
+
+
+                                <div class="flex-1">
+
+                                    <input type="file" name="favicon" id="favicon"
+                                        accept=".ico,image/x-icon,image/vnd.microsoft.icon,image/jpeg,image/png,image/webp"
+                                        class="block w-full
+                                               rounded-xl border
+                                               border-[#DFD2C7]
+                                               bg-white
+                                               px-3 py-2
+                                               text-sm
+                                               text-[#6F6259]">
+
+                                    <p class="mt-2 text-xs
+                                               leading-5 text-slate-400">
+
+                                        ICO, JPG, PNG atau WebP. Maksimal 1 MB.
+                                        Disarankan menggunakan gambar persegi berukuran 32×32 atau 64×64 piksel.
+
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        @error('favicon')
                             <p
                                 class="mt-2 text-xs
                                        font-medium
@@ -288,56 +435,32 @@
             'DOMContentLoaded',
             function() {
 
-                const input =
-                    document.getElementById('logo');
+                const bindImagePreview = function(inputId, previewId, placeholderId) {
+                    const input = document.getElementById(inputId);
+                    const preview = document.getElementById(previewId);
+                    const placeholder = document.getElementById(placeholderId);
 
-                const preview =
-                    document.getElementById(
-                        'logoPreview'
-                    );
-
-                const placeholder =
-                    document.getElementById(
-                        'logoPlaceholder'
-                    );
-
-
-                input?.addEventListener(
-                    'change',
-                    function(event) {
-
-                        const file =
-                            event.target.files[0];
+                    input?.addEventListener('change', function(event) {
+                        const file = event.target.files[0];
 
                         if (!file || !preview) {
                             return;
                         }
 
+                        const reader = new FileReader();
 
-                        const reader =
-                            new FileReader();
-
-
-                        reader.onload =
-                            function(event) {
-
-                                preview.src =
-                                    event.target.result;
-
-                                preview.classList.remove(
-                                    'hidden'
-                                );
-
-                                placeholder?.classList.add(
-                                    'hidden'
-                                );
-                            };
-
+                        reader.onload = function(event) {
+                            preview.src = event.target.result;
+                            preview.classList.remove('hidden');
+                            placeholder?.classList.add('hidden');
+                        };
 
                         reader.readAsDataURL(file);
+                    });
+                };
 
-                    }
-                );
+                bindImagePreview('logo', 'logoPreview', 'logoPlaceholder');
+                bindImagePreview('favicon', 'faviconPreview', 'faviconPlaceholder');
 
             }
         );

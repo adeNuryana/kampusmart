@@ -4,7 +4,15 @@
 
 @section('content')
 
-    <div class="mx-auto max-w-[1400px]">
+    @php
+        $filterActive = request()->filled('search') || request()->filled('category') || request()->filled('status');
+    @endphp
+
+    <div
+        x-data="{
+            filterOpen: @js($filterActive)
+        }"
+        class="mx-auto max-w-[1400px]">
 
         {{-- ===================================================== --}}
         {{-- HEADER --}}
@@ -60,27 +68,59 @@
             </div>
 
 
-            <a href="{{ route('seller.products.create') }}"
-                class="inline-flex h-11
-                       items-center justify-center
-                       gap-2 rounded-xl
-                       bg-[#C8795A] px-5
-                       text-sm font-bold
-                       text-white shadow-sm
-                       transition
-                       hover:bg-[#B66F52]
-                       hover:shadow-md">
+            <div class="flex flex-wrap items-center gap-3">
 
-                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <button type="button" @click="filterOpen = !filterOpen"
+                    class="inline-flex h-11 items-center justify-center gap-2 rounded-xl border px-5
+                           text-sm font-bold transition"
+                    :class="filterOpen
+                        ? 'border-[#4371d1] bg-[#F4EAE2] text-[#4371d1]'
+                        : 'border-[#DFD2C7] bg-white text-[#6F6259] hover:bg-[#F5ECE6]'">
 
-                    <path d="M12 5v14" />
-                    <path d="M5 12h14" />
+                    <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8">
+                        <path d="M4 6h16" />
+                        <path d="M7 12h10" />
+                        <path d="M10 18h4" />
+                    </svg>
 
-                </svg>
+                    Filter
 
-                Tambah Produk
+                    @if ($filterActive)
+                        <span class="size-2 rounded-full bg-[#C8795A]"></span>
+                    @endif
 
-            </a>
+                    <svg class="size-3.5 transition-transform" :class="filterOpen ? 'rotate-180' : ''"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="m6 9 6 6 6-6" />
+                    </svg>
+
+                </button>
+
+
+                <a href="{{ route('seller.products.create') }}"
+                    class="inline-flex h-11
+                           items-center justify-center
+                           gap-2 rounded-xl
+                           bg-[#C8795A] px-5
+                           text-sm font-bold
+                           text-white shadow-sm
+                           transition
+                           hover:bg-[#B66F52]
+                           hover:shadow-md">
+
+                    <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+
+                        <path d="M12 5v14" />
+                        <path d="M5 12h14" />
+
+                    </svg>
+
+                    Tambah Produk
+
+                </a>
+
+            </div>
 
         </section>
 
@@ -140,7 +180,7 @@
         {{-- FILTER --}}
         {{-- ===================================================== --}}
 
-        <section
+        <section x-cloak x-show="filterOpen" x-transition.opacity.duration.200ms
             class="mb-5 overflow-hidden
                    rounded-3xl
                    border border-[#DFD2C7]
@@ -170,7 +210,7 @@
                     </div>
 
 
-                    <div>
+                    <div class="min-w-0 flex-1">
 
                         <p class="text-sm font-bold
                                    text-[#332B26]">
@@ -187,6 +227,19 @@
                         </p>
 
                     </div>
+
+
+                    <button type="button" @click="filterOpen = false" title="Tutup filter"
+                        class="flex size-9 shrink-0 items-center justify-center rounded-xl
+                               text-[#8B7465] transition hover:bg-[#EEE5DE]">
+
+                        <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M6 6l12 12" />
+                            <path d="M18 6 6 18" />
+                        </svg>
+
+                    </button>
 
                 </div>
 

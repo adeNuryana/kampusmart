@@ -7,6 +7,8 @@
 
     <title>{{ $siteSetting?->site_name ?? 'KampusMart' }}</title>
 
+    @include('partials.favicon')
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <link
@@ -50,7 +52,10 @@
         $categories = $categories ?? collect();
         $latestProducts = $latestProducts ?? collect();
         $recommendedProducts = $recommendedProducts ?? collect();
+        $allProducts = $allProducts ?? collect();
         $products = $products ?? collect();
+        $cartCount = (int) ($cartCount ?? 0);
+        $cartBadge = $cartCount > 99 ? '99+' : (string) $cartCount;
 
         $initialProducts = $isFiltering ? $products : $latestProducts;
 
@@ -131,13 +136,14 @@
                backdrop-blur-xl"
     >
 
-        <div class="mx-auto max-w-7xl px-4 sm:px-5">
+        <div class="mx-auto max-w-7xl px-3 sm:px-5">
 
             <div
                 class="flex
                        items-center
-                       gap-3
+                       gap-2
                        py-3
+                       sm:gap-3
                        md:gap-5"
             >
 
@@ -154,18 +160,20 @@
                         <img
                             src="{{ asset('storage/' . $siteSetting->logo) }}"
                             alt="{{ $siteSetting?->site_name ?? 'KampusMart' }}"
-                            class="size-10
-                                   rounded-2xl
+                            class="size-9
+                                   rounded-xl
                                    object-contain
-                                   shadow-sm"
+                                   shadow-sm
+                                   sm:size-10
+                                   sm:rounded-2xl"
                         >
                     @else
                         <div
                             class="flex
-                                   size-10
+                                   size-9
                                    items-center
                                    justify-center
-                                   rounded-2xl
+                                   rounded-xl
                                    bg-gradient-to-br
                                    from-[#0a1d45]
                                    to-[#4371d1]
@@ -173,7 +181,9 @@
                                    font-black
                                    text-white
                                    shadow-lg
-                                   shadow-blue-600/20"
+                                   shadow-blue-600/20
+                                   sm:size-10
+                                   sm:rounded-2xl"
                         >
                             {{ strtoupper(substr($siteSetting?->site_name ?? 'KampusMart', 0, 1)) }}
                         </div>
@@ -206,15 +216,16 @@
                 </a>
 
 
-                {{-- SEARCH DESKTOP --}}
+                {{-- SEARCH --}}
                 <form
+                    id="homeSearchForm"
                     action="{{ route('home') }}"
                     method="GET"
-                    class="hidden
+                    class="flex
                            min-w-0
                            flex-1
                            overflow-hidden
-                           rounded-2xl
+                           rounded-xl
                            border
                            border-slate-200
                            bg-slate-50
@@ -223,7 +234,7 @@
                            focus-within:bg-white
                            focus-within:ring-4
                            focus-within:ring-blue-100
-                           sm:flex"
+                           sm:rounded-2xl"
                 >
 
                     <input
@@ -233,30 +244,23 @@
                         class="js-category-input"
                     >
 
-                    <div
-                        class="flex
-                               w-11
-                               shrink-0
-                               items-center
-                               justify-center
-                               text-slate-400"
-                    >
-                        <i class="fa-solid fa-magnifying-glass text-sm"></i>
-                    </div>
-
                     <input
                         type="search"
                         name="search"
                         value="{{ $search }}"
-                        placeholder="Cari produk, kategori, atau toko..."
+                        placeholder="Cari produk..."
                         autocomplete="off"
+                        aria-label="Cari produk, kategori, atau toko"
                         class="min-w-0
                                flex-1
                                bg-transparent
+                               pl-3.5
                                py-2.5
-                               pr-4
+                               pr-2
                                text-sm
                                outline-none
+                               sm:pl-4
+                               sm:pr-4
                                placeholder:text-slate-400"
                     >
 
@@ -277,15 +281,17 @@
 
                     <button
                         type="submit"
+                        aria-label="Cari"
                         class="flex
-                               w-12
+                               w-10
                                shrink-0
                                items-center
                                justify-center
                                bg-[#315ebc]
                                text-white
                                transition
-                               hover:bg-[#244d9f]"
+                               hover:bg-[#244d9f]
+                               sm:w-12"
                     >
                         <i class="fa-solid fa-magnifying-glass text-sm"></i>
                     </button>
@@ -296,9 +302,10 @@
                 {{-- RIGHT ACTION --}}
                 <div
                     class="ml-auto
-                           flex
+                           hidden
                            items-center
-                           gap-2"
+                           gap-2
+                           md:flex"
                 >
 
                     @auth
@@ -306,6 +313,7 @@
                         @if (auth()->user()->role === 'buyer' && Route::has('buyer.cart.index'))
                             <a
                                 href="{{ route('buyer.cart.index') }}"
+                                aria-label="Keranjang ({{ $cartCount }} produk)"
                                 class="relative
                                        flex
                                        size-10
@@ -322,6 +330,16 @@
                                        sm:size-11"
                             >
                                 <i class="fa-solid fa-cart-shopping"></i>
+
+                                @if ($cartCount > 0)
+                                    <span
+                                        class="absolute -right-1.5 -top-1.5 flex h-5 min-w-5 items-center
+                                               justify-center rounded-full bg-rose-500 px-1 text-[10px]
+                                               font-black leading-none text-white ring-2 ring-white"
+                                    >
+                                        {{ $cartBadge }}
+                                    </span>
+                                @endif
                             </a>
                         @endif
 
@@ -342,17 +360,9 @@
                                        hover:bg-blue-50
                                        lg:flex"
                             >
-                                <div
-                                    class="flex
-                                           size-8
-                                           items-center
-                                           justify-center
-                                           rounded-lg
-                                           bg-blue-50
-                                           text-[#315ebc]"
-                                >
-                                    <i class="fa-regular fa-user text-xs"></i>
-                                </div>
+                                <x-user-avatar :user="auth()->user()"
+                                    class="size-8 rounded-lg border border-blue-100 bg-blue-50
+                                           text-xs font-black text-[#315ebc]" />
 
                                 <div class="max-w-32">
 
@@ -420,69 +430,6 @@
             </div>
 
 
-            {{-- SEARCH MOBILE --}}
-            <form
-                action="{{ route('home') }}"
-                method="GET"
-                class="mb-3
-                       flex
-                       overflow-hidden
-                       rounded-2xl
-                       border
-                       border-slate-200
-                       bg-slate-50
-                       focus-within:border-blue-300
-                       focus-within:bg-white
-                       focus-within:ring-4
-                       focus-within:ring-blue-100
-                       sm:hidden"
-            >
-
-                <input
-                    type="hidden"
-                    name="category"
-                    value="{{ $selectedCategory ?? '' }}"
-                    class="js-category-input"
-                >
-
-                <div
-                    class="flex
-                           w-10
-                           items-center
-                           justify-center
-                           text-slate-400"
-                >
-                    <i class="fa-solid fa-magnifying-glass text-sm"></i>
-                </div>
-
-                <input
-                    type="search"
-                    name="search"
-                    value="{{ $search }}"
-                    placeholder="Cari produk..."
-                    class="min-w-0
-                           flex-1
-                           bg-transparent
-                           py-2.5
-                           pr-3
-                           text-sm
-                           outline-none"
-                >
-
-                <button
-                    type="submit"
-                    class="flex
-                           w-12
-                           items-center
-                           justify-center
-                           bg-[#315ebc]
-                           text-white"
-                >
-                    <i class="fa-solid fa-arrow-right"></i>
-                </button>
-
-            </form>
-
         </div>
 
     </header>
@@ -502,6 +449,26 @@
                sm:py-6
                md:pb-10"
     >
+
+        @if (session('success'))
+            <div
+                class="mb-5 flex items-start gap-3 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700 shadow-sm"
+                role="status"
+            >
+                <i class="fa-solid fa-circle-check mt-0.5"></i>
+                <span>{{ session('success') }}</span>
+            </div>
+        @endif
+
+        @if ($errors->any())
+            <div
+                class="mb-5 flex items-start gap-3 rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700 shadow-sm"
+                role="alert"
+            >
+                <i class="fa-solid fa-circle-exclamation mt-0.5"></i>
+                <span>{{ $errors->first() }}</span>
+            </div>
+        @endif
 
         {{-- ===================================================== --}}
         {{-- HERO BENTO --}}
@@ -1082,7 +1049,7 @@
 
                     @if (Route::has('buyer.products.index'))
                         <a
-                            href="{{ route('buyer.products.index') }}"
+                            href="{{ route('home') }}#semua-produk"
                             class="inline-flex
                                    items-center
                                    gap-2
@@ -1270,6 +1237,7 @@
                 id="produk"
                 x-ref="productSection"
                 class="mt-6
+                       scroll-mt-20
                        rounded-[28px]
                        border
                        border-slate-200
@@ -1340,7 +1308,7 @@
 
                     @if (Route::has('buyer.products.index'))
                         <a
-                            href="{{ route('buyer.products.index') }}"
+                            href="{{ route('home') }}#semua-produk"
                             class="hidden
                                    items-center
                                    gap-2
@@ -1432,9 +1400,9 @@
                                     }
                                 @endphp
 
-                                <a
-                                    href="{{ route('buyer.products.show', $product) }}"
+                                <article
                                     class="group
+                                           relative
                                            overflow-hidden
                                            rounded-2xl
                                            border
@@ -1447,6 +1415,11 @@
                                            hover:shadow-xl
                                            hover:shadow-blue-950/5"
                                 >
+
+                                    <a
+                                        href="{{ route('buyer.products.show', $product) }}"
+                                        class="block"
+                                    >
 
                                     {{-- IMAGE --}}
                                     <div
@@ -1587,7 +1560,13 @@
 
                                     </div>
 
-                                </a>
+                                    </a>
+
+                                    <div class="absolute right-2 top-2 z-10">
+                                        @include('buyer.partials.home-cart-button', ['product' => $product])
+                                    </div>
+
+                                </article>
 
                             @endforeach
 
@@ -1641,6 +1620,51 @@
                 </div>
 
             </section>
+
+
+            {{-- ===================================================== --}}
+            {{-- ALL PRODUCTS --}}
+            {{-- ===================================================== --}}
+
+            @unless ($isFiltering)
+                <section
+                    id="semua-produk"
+                    class="mt-6 scroll-mt-24 rounded-[28px] border border-slate-200 bg-white p-4 shadow-sm sm:p-6"
+                >
+                    <div class="flex items-end justify-between gap-4">
+                        <div>
+                            <span
+                                class="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-emerald-600"
+                            >
+                                <i class="fa-solid fa-store"></i>
+                                Katalog
+                            </span>
+
+                            <h2 class="mt-3 text-xl font-black tracking-tight text-slate-900 sm:text-2xl">
+                                Semua Produk
+                            </h2>
+
+                            <p class="mt-1 text-sm text-slate-500">
+                                Jelajahi seluruh produk aktif yang masih tersedia.
+                            </p>
+                        </div>
+
+                        <span class="hidden rounded-full bg-slate-100 px-3 py-1.5 text-xs font-bold text-slate-600 sm:inline-flex">
+                            {{ $allProducts->total() }} produk
+                        </span>
+                    </div>
+
+                    <div class="mt-5">
+                        @include('buyer.partials.product-grid', ['products' => $allProducts])
+                    </div>
+
+                    @if ($allProducts->hasPages())
+                        <div class="mt-6 border-t border-slate-100 pt-5">
+                            {{ $allProducts->links() }}
+                        </div>
+                    @endif
+                </section>
+            @endunless
 
 
             {{-- ===================================================== --}}
@@ -1710,7 +1734,7 @@
 
                     @if (Route::has('buyer.products.index'))
                         <a
-                            href="{{ route('buyer.products.index') }}"
+                            href="{{ route('home') }}#semua-produk"
                             class="hidden
                                    items-center
                                    gap-2
@@ -1763,9 +1787,9 @@
                                     ?? ($product->user?->sellerProfile?->address ?? null);
                             @endphp
 
-                            <a
-                                href="{{ route('buyer.products.show', $product) }}"
+                            <article
                                 class="group
+                                       relative
                                        overflow-hidden
                                        rounded-2xl
                                        bg-white
@@ -1776,6 +1800,11 @@
                                        hover:-translate-y-1
                                        hover:shadow-xl"
                             >
+
+                                <a
+                                    href="{{ route('buyer.products.show', $product) }}"
+                                    class="block"
+                                >
 
                                 <div
                                     class="relative
@@ -1806,23 +1835,6 @@
                                             <i class="fa-regular fa-image text-4xl"></i>
                                         </div>
                                     @endif
-
-                                    <span
-                                        class="absolute
-                                               right-2
-                                               top-2
-                                               flex
-                                               size-8
-                                               items-center
-                                               justify-center
-                                               rounded-full
-                                               bg-white/90
-                                               text-rose-500
-                                               shadow-sm
-                                               backdrop-blur"
-                                    >
-                                        <i class="fa-solid fa-heart text-xs"></i>
-                                    </span>
 
                                 </div>
 
@@ -1885,7 +1897,13 @@
 
                                 </div>
 
-                            </a>
+                                </a>
+
+                                <div class="absolute right-2 top-2 z-10">
+                                    @include('buyer.partials.home-cart-button', ['product' => $product])
+                                </div>
+
+                            </article>
 
                         @endforeach
 
@@ -2138,7 +2156,19 @@
                                py-3
                                text-slate-400"
                     >
-                        <i class="fa-solid fa-cart-shopping text-base"></i>
+                        <span class="relative leading-none">
+                            <i class="fa-solid fa-cart-shopping text-base"></i>
+
+                            @if ($cartCount > 0)
+                                <span
+                                    class="absolute -right-3 -top-2 flex h-4 min-w-4 items-center justify-center
+                                           rounded-full bg-rose-500 px-1 text-[8px] font-black leading-none
+                                           text-white ring-2 ring-white"
+                                >
+                                    {{ $cartBadge }}
+                                </span>
+                            @endif
+                        </span>
                         <span class="text-[9px] font-semibold">Keranjang</span>
                     </a>
                 @else
@@ -2189,7 +2219,9 @@
                                py-3
                                text-slate-400"
                     >
-                        <i class="fa-regular fa-user text-base"></i>
+                        <x-user-avatar :user="auth()->user()"
+                            class="size-5 rounded-full bg-blue-100 text-[8px]
+                                   font-black text-[#315ebc]" />
                         <span class="text-[9px] font-semibold">Akun</span>
                     </a>
                 @else
@@ -2231,9 +2263,36 @@
     </nav>
 
 
+    <x-floating-whatsapp />
+
+
     {{-- ========================================================= --}}
     {{-- ALPINE CATEGORY FILTER --}}
     {{-- ========================================================= --}}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchForm = document.getElementById('homeSearchForm');
+
+            if (!searchForm) {
+                return;
+            }
+
+            searchForm.addEventListener('submit', function(event) {
+                if (!window.matchMedia('(max-width: 767px)').matches) {
+                    return;
+                }
+
+                event.preventDefault();
+
+                const targetUrl = new URL(searchForm.action, window.location.origin);
+                targetUrl.search = new URLSearchParams(new FormData(searchForm)).toString();
+                targetUrl.hash = 'produk';
+
+                window.location.assign(targetUrl.toString());
+            });
+        });
+    </script>
 
     <script>
         function categoryFilter(config) {

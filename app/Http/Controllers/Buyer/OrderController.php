@@ -35,12 +35,18 @@ class OrderController extends Controller
 
         $activeOrderCount = Order::query()
             ->where('buyer_id', $buyer->id)
-            ->whereIn('status', ['pending', 'processing'])
+            ->where('status', 'processing')
             ->count();
 
-        $totalTransactionCount = Order::query()->where('buyer_id', $buyer->id)->count();
+        $totalTransactionCount = Order::query()
+            ->where('buyer_id', $buyer->id)
+            ->where('status', '!=', 'cancelled')
+            ->count();
 
-        $totalTransactionAmount = Order::query()->where('buyer_id', $buyer->id)->sum('subtotal');
+        $totalTransactionAmount = Order::query()
+            ->where('buyer_id', $buyer->id)
+            ->where('status', '!=', 'cancelled')
+            ->sum('subtotal');
 
         return view('buyer.orders.index', compact('orders', 'cartCount', 'activeOrderCount', 'totalTransactionCount', 'totalTransactionAmount'));
     }
@@ -159,7 +165,7 @@ class OrderController extends Controller
                 'subtotal' => $subtotal,
                 'payment_method' => $paymentMethod,
 
-                'status' => 'pending',
+                'status' => 'processing',
             ]);
 
             /*
@@ -242,6 +248,12 @@ class OrderController extends Controller
         |--------------------------------------------------------------------------
         */
         abort_unless((int) $order->buyer_id === (int) $buyer->id, 403, 'Kamu tidak memiliki akses ke pesanan ini.');
+
+        if ($order->status === 'cancelled') {
+            return back()->withErrors([
+                'whatsapp' => 'Pesanan yang ditolak/dibatalkan tidak dapat ditindaklanjuti melalui WhatsApp.',
+            ]);
+        }
 
         /*
         |--------------------------------------------------------------------------

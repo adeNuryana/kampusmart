@@ -124,6 +124,9 @@ Route::middleware(['auth', 'role:admin'])
 
         // product
         Route::get('/produk', [AdminProductController::class, 'index'])->name('products.index');
+        Route::get('/produk/{product}/edit', [AdminProductController::class, 'edit'])->name('products.edit');
+        Route::put('/produk/{product}', [AdminProductController::class, 'update'])->name('products.update');
+        Route::delete('/produk/{product}', [AdminProductController::class, 'destroy'])->name('products.destroy');
 
         Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
 

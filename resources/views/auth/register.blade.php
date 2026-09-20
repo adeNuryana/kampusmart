@@ -7,7 +7,13 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Daftar - KampusMart</title>
+    @php
+        $siteName = $siteSetting?->site_name ?? 'KampusMart';
+    @endphp
+
+    <title>Daftar - {{ $siteName }}</title>
+
+    @include('partials.favicon')
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -102,19 +108,16 @@
                            gap-3">
 
                     <div
-                        class="flex
-                               size-11
-                               items-center
-                               justify-center
-                               rounded-xl
-                               bg-white
-                               text-lg
-                               font-black
-                               text-[#4371d1]
-                               shadow-lg
-                               shadow-black/10">
+                        class="flex size-11 shrink-0 items-center justify-center overflow-hidden
+                               rounded-xl border border-slate-200 bg-white text-lg font-black
+                               text-[#4371d1] shadow-lg shadow-black/10">
 
-                        K
+                        @if ($siteSetting?->logo)
+                            <img src="{{ asset('storage/' . $siteSetting->logo) }}" alt="{{ $siteName }}"
+                                class="h-full w-full bg-white object-contain p-1">
+                        @else
+                            <span>{{ strtoupper(substr($siteName, 0, 1)) }}</span>
+                        @endif
 
                     </div>
 
@@ -123,7 +126,7 @@
                                font-black
                                tracking-tight">
 
-                        KampusMart
+                        {{ $siteName }}
 
                     </span>
 
@@ -190,7 +193,7 @@
                                    bg-clip-text
                                    text-transparent">
 
-                            mudah di KampusMart.
+                            mudah di {{ $siteName }}.
 
                         </span>
 
@@ -206,7 +209,7 @@
 
                         Buat akun pembeli untuk menyimpan keranjang,
                         melakukan transaksi, dan melihat riwayat
-                        pembelian dari berbagai seller KampusMart.
+                        pembelian dari berbagai seller {{ $siteName }}.
 
                     </p>
 
@@ -328,7 +331,7 @@
 
 
                 <p class="text-sm text-[#E8D4C6]">
-                    © {{ date('Y') }} KampusMart
+                    © {{ date('Y') }} {{ $siteName }}
                 </p>
 
             </div>
@@ -396,21 +399,16 @@
                                gap-3">
 
                         <div
-                            class="flex
-                                   size-10
-                                   items-center
-                                   justify-center
-                                   rounded-xl
-                                   bg-gradient-to-br
-                                   from-[#0a1d45]
-                                   via-[#4371d1]
-                                   to-[#9A6948]
-                                   font-black
-                                   text-white
-                                   shadow-lg
-                                   shadow-[#4371d1]/20">
+                            class="flex size-10 shrink-0 items-center justify-center overflow-hidden
+                                   rounded-xl border border-slate-200 bg-white font-black
+                                   text-[#4371d1] shadow-lg shadow-slate-950/10">
 
-                            K
+                            @if ($siteSetting?->logo)
+                                <img src="{{ asset('storage/' . $siteSetting->logo) }}" alt="{{ $siteName }}"
+                                    class="h-full w-full bg-white object-contain p-1">
+                            @else
+                                <span>{{ strtoupper(substr($siteName, 0, 1)) }}</span>
+                            @endif
 
                         </div>
 
@@ -423,7 +421,7 @@
                                    font-black
                                    text-transparent">
 
-                            KampusMart
+                            {{ $siteName }}
 
                         </span>
 
@@ -473,7 +471,7 @@
                                    tracking-tight
                                    text-slate-900">
 
-                            Daftar ke KampusMart
+                            Daftar ke {{ $siteName }}
 
                         </h2>
 
@@ -928,13 +926,6 @@
 
                             Buat Akun
 
-                            <i
-                                class="fa-solid
-                                       fa-arrow-right
-                                       text-xs
-                                       transition
-                                       group-hover:translate-x-1">
-                            </i>
 
                         </button>
 
@@ -1023,7 +1014,7 @@
 
                                 Akun seller tidak dapat didaftarkan
                                 melalui halaman ini. Akun seller dibuat
-                                oleh Super Admin KampusMart.
+                                oleh Super Admin {{ $siteName }}.
 
                             </p>
 

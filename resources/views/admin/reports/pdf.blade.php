@@ -265,29 +265,16 @@
         }
 
 
-        .status-pending {
-            background: #FAF2DF;
-            color: #A87A37;
-        }
-
-
-        .status-confirmed {
-            background: #F1E6DE;
-            color: #4371d1;
-        }
-
-
         .status-processing {
             background: #FBEAE2;
             color: #A95E43;
         }
 
 
-        .status-completed {
+        .status-sold {
             background: #EEF3EA;
             color: #65795E;
         }
-
 
         .status-cancelled {
             background: #FAEDEC;
@@ -434,18 +421,6 @@
             </td>
 
 
-            <td class="summary-card">
-
-                <div class="summary-label">
-                    Dibatalkan
-                </div>
-
-                <div class="summary-value red">
-                    {{ number_format($cancelledOrders) }}
-                </div>
-
-            </td>
-
         </tr>
 
     </table>
@@ -487,11 +462,11 @@
             <td class="summary-card">
 
                 <div class="summary-label">
-                    Menunggu
+                    Selesai
                 </div>
 
-                <div class="summary-value gold">
-                    {{ $statusSummary->get('pending', 0) }}
+                <div class="summary-value sage">
+                    {{ $statusSummary->get('sold', 0) }}
                 </div>
 
             </td>
@@ -505,6 +480,19 @@
 
                 <div class="summary-value terracotta">
                     {{ $statusSummary->get('processing', 0) }}
+                </div>
+
+            </td>
+
+
+            <td class="summary-card">
+
+                <div class="summary-label">
+                    Ditolak/Dibatalkan
+                </div>
+
+                <div class="summary-value coffee">
+                    {{ $statusSummary->get('cancelled', 0) }}
                 </div>
 
             </td>
@@ -731,30 +719,16 @@
             @forelse ($orders as $index => $order)
                 @php
                     $statusLabel = match ($order->status) {
-                        'pending' => 'Menunggu',
-
-                        'confirmed' => 'Dikonfirmasi',
-
                         'processing' => 'Diproses',
-
-                        'completed' => 'Selesai',
-
-                        'sold' => 'Terjual',
-
-                        'cancelled' => 'Dibatalkan',
+                        'sold' => 'Selesai',
+                        'cancelled' => 'Ditolak/Dibatalkan',
 
                         default => ucfirst($order->status),
                     };
 
                     $statusClass = match ($order->status) {
-                        'pending' => 'status-pending',
-
-                        'confirmed' => 'status-confirmed',
-
                         'processing' => 'status-processing',
-
-                        'completed', 'sold' => 'status-completed',
-
+                        'sold' => 'status-sold',
                         'cancelled' => 'status-cancelled',
 
                         default => '',

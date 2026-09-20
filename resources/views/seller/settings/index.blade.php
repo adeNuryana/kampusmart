@@ -55,8 +55,8 @@
                        text-sm leading-6
                        text-slate-500">
 
-                Kelola informasi akun, profil toko,
-                identitas seller, dan keamanan akun.
+                Lihat data identitas, kelola profil toko,
+                dan perbarui keamanan akun.
 
             </p>
 
@@ -368,8 +368,8 @@
                                 <p class="mt-1 text-xs
                                            text-slate-500">
 
-                                    Informasi ini ditampilkan pada
-                                    produk dan profil tokomu.
+                                    Data identitas dikelola admin,
+                                    sedangkan informasi toko tetap dapat diperbarui.
 
                                 </p>
 
@@ -433,6 +433,36 @@
                         @endif
 
 
+                        <div
+                            class="mb-5 flex items-start gap-3 rounded-2xl border border-[#E8D8B9]
+                                   bg-[#FAF2DF] px-4 py-3.5">
+
+                            <div
+                                class="flex size-8 shrink-0 items-center justify-center rounded-lg
+                                       bg-[#C89B55] text-white">
+
+                                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.8">
+                                    <rect x="5" y="10" width="14" height="10" rx="2" />
+                                    <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+                                </svg>
+
+                            </div>
+
+                            <div>
+                                <p class="text-sm font-bold text-[#8A672F]">
+                                    Data identitas dikelola oleh admin
+                                </p>
+
+                                <p class="mt-1 text-xs leading-5 text-[#8A672F]">
+                                    Nama, email, nomor telepon, WhatsApp, NIM, dan fakultas tidak dapat
+                                    diubah dari akun seller. Hubungi admin jika ada data yang perlu diperbarui.
+                                </p>
+                            </div>
+
+                        </div>
+
+
 
                         <form
                             action="{{ route('seller.settings.profile.update') }}"
@@ -456,36 +486,15 @@
 
                                         Nama Lengkap
 
-                                        <span class="text-[#A65954]">
-                                            *
-                                        </span>
-
                                     </label>
 
 
                                     <input type="text" name="name" id="name"
-                                        value="{{ old('name', $seller->name) }}"
+                                        value="{{ $seller->name }}" readonly aria-readonly="true"
                                         class="h-11 w-full
-                                               rounded-xl border
-                                               {{ $errors->has('name') ? 'border-[#D79B96]' : 'border-[#DFD2C7]' }}
-                                               bg-white px-4
-                                               text-sm text-[#4D4038]
-                                               outline-none transition
-                                               focus:border-[#C8795A]
-                                               focus:ring-4
-                                               focus:ring-[#FBEAE2]">
-
-
-                                    @error('name')
-                                        <p
-                                            class="mt-2 text-xs
-                                                   font-medium
-                                                   text-[#A65954]">
-
-                                            {{ $message }}
-
-                                        </p>
-                                    @enderror
+                                               cursor-not-allowed rounded-xl border border-[#DFD2C7]
+                                               bg-[#F5F1EC] px-4 text-sm text-[#806F64]
+                                               outline-none">
 
                                 </div>
 
@@ -548,36 +557,15 @@
 
                                         Email
 
-                                        <span class="text-[#A65954]">
-                                            *
-                                        </span>
-
                                     </label>
 
 
                                     <input type="email" name="email" id="email"
-                                        value="{{ old('email', $seller->email) }}"
+                                        value="{{ $seller->email }}" readonly aria-readonly="true"
                                         class="h-11 w-full
-                                               rounded-xl border
-                                               {{ $errors->has('email') ? 'border-[#D79B96]' : 'border-[#DFD2C7]' }}
-                                               bg-white px-4
-                                               text-sm text-[#4D4038]
-                                               outline-none transition
-                                               focus:border-[#C8795A]
-                                               focus:ring-4
-                                               focus:ring-[#FBEAE2]">
-
-
-                                    @error('email')
-                                        <p
-                                            class="mt-2 text-xs
-                                                   font-medium
-                                                   text-[#A65954]">
-
-                                            {{ $message }}
-
-                                        </p>
-                                    @enderror
+                                               cursor-not-allowed rounded-xl border border-[#DFD2C7]
+                                               bg-[#F5F1EC] px-4 text-sm text-[#806F64]
+                                               outline-none">
 
                                 </div>
 
@@ -597,30 +585,12 @@
 
 
                                     <input type="text" name="phone" id="phone"
-                                        value="{{ old('phone', $seller->phone) }}"
-                                        placeholder="081234567890"
+                                        value="{{ $seller->phone }}" readonly aria-readonly="true"
+                                        placeholder="Belum diatur"
                                         class="h-11 w-full
-                                               rounded-xl border
-                                               {{ $errors->has('phone') ? 'border-[#D79B96]' : 'border-[#DFD2C7]' }}
-                                               bg-white px-4
-                                               text-sm text-[#4D4038]
-                                               outline-none transition
-                                               placeholder:text-[#B3A195]
-                                               focus:border-[#C8795A]
-                                               focus:ring-4
-                                               focus:ring-[#FBEAE2]">
-
-
-                                    @error('phone')
-                                        <p
-                                            class="mt-2 text-xs
-                                                   font-medium
-                                                   text-[#A65954]">
-
-                                            {{ $message }}
-
-                                        </p>
-                                    @enderror
+                                               cursor-not-allowed rounded-xl border border-[#DFD2C7]
+                                               bg-[#F5F1EC] px-4 text-sm text-[#806F64]
+                                               outline-none placeholder:text-[#A28A7A]">
 
                                 </div>
 
@@ -640,38 +610,12 @@
 
 
                                     <input type="text" name="whatsapp" id="whatsapp"
-                                        value="{{ old('whatsapp', $seller->sellerProfile?->whatsapp) }}"
-                                        placeholder="6281234567890"
+                                        value="{{ $seller->sellerProfile?->whatsapp }}" readonly aria-readonly="true"
+                                        placeholder="Belum diatur"
                                         class="h-11 w-full
-                                               rounded-xl border
-                                               {{ $errors->has('whatsapp') ? 'border-[#D79B96]' : 'border-[#DFD2C7]' }}
-                                               bg-white px-4
-                                               text-sm text-[#4D4038]
-                                               outline-none transition
-                                               placeholder:text-[#B3A195]
-                                               focus:border-[#C8795A]
-                                               focus:ring-4
-                                               focus:ring-[#FBEAE2]">
-
-
-                                    <p class="mt-2 text-xs
-                                               text-slate-400">
-
-                                        Gunakan format 62 tanpa tanda `+`.
-
-                                    </p>
-
-
-                                    @error('whatsapp')
-                                        <p
-                                            class="mt-2 text-xs
-                                                   font-medium
-                                                   text-[#A65954]">
-
-                                            {{ $message }}
-
-                                        </p>
-                                    @enderror
+                                               cursor-not-allowed rounded-xl border border-[#DFD2C7]
+                                               bg-[#F5F1EC] px-4 text-sm text-[#806F64]
+                                               outline-none placeholder:text-[#A28A7A]">
 
                                 </div>
 
@@ -691,28 +635,12 @@
 
 
                                     <input type="text" name="nim" id="nim"
-                                        value="{{ old('nim', $seller->sellerProfile?->nim) }}"
+                                        value="{{ $seller->sellerProfile?->nim }}" readonly aria-readonly="true"
+                                        placeholder="Belum diatur"
                                         class="h-11 w-full
-                                               rounded-xl border
-                                               {{ $errors->has('nim') ? 'border-[#D79B96]' : 'border-[#DFD2C7]' }}
-                                               bg-white px-4
-                                               text-sm text-[#4D4038]
-                                               outline-none transition
-                                               focus:border-[#C8795A]
-                                               focus:ring-4
-                                               focus:ring-[#FBEAE2]">
-
-
-                                    @error('nim')
-                                        <p
-                                            class="mt-2 text-xs
-                                                   font-medium
-                                                   text-[#A65954]">
-
-                                            {{ $message }}
-
-                                        </p>
-                                    @enderror
+                                               cursor-not-allowed rounded-xl border border-[#DFD2C7]
+                                               bg-[#F5F1EC] px-4 text-sm text-[#806F64]
+                                               outline-none placeholder:text-[#A28A7A]">
 
                                 </div>
 
@@ -732,30 +660,12 @@
 
 
                                     <input type="text" name="faculty" id="faculty"
-                                        value="{{ old('faculty', $seller->sellerProfile?->faculty) }}"
-                                        placeholder="Contoh: Fakultas Teknik"
+                                        value="{{ $seller->sellerProfile?->faculty }}" readonly aria-readonly="true"
+                                        placeholder="Belum diatur"
                                         class="h-11 w-full
-                                               rounded-xl border
-                                               {{ $errors->has('faculty') ? 'border-[#D79B96]' : 'border-[#DFD2C7]' }}
-                                               bg-white px-4
-                                               text-sm text-[#4D4038]
-                                               outline-none transition
-                                               placeholder:text-[#B3A195]
-                                               focus:border-[#C8795A]
-                                               focus:ring-4
-                                               focus:ring-[#FBEAE2]">
-
-
-                                    @error('faculty')
-                                        <p
-                                            class="mt-2 text-xs
-                                                   font-medium
-                                                   text-[#A65954]">
-
-                                            {{ $message }}
-
-                                        </p>
-                                    @enderror
+                                               cursor-not-allowed rounded-xl border border-[#DFD2C7]
+                                               bg-[#F5F1EC] px-4 text-sm text-[#806F64]
+                                               outline-none placeholder:text-[#A28A7A]">
 
                                 </div>
 
@@ -954,7 +864,7 @@
 
                                     </svg>
 
-                                    Simpan Perubahan
+                                    Simpan Informasi Toko
 
                                 </button>
 

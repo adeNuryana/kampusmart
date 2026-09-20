@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class SiteSetting extends Model
 {
-    protected $fillable = ['site_name', 'logo'];
+    protected $fillable = ['site_name', 'admin_whatsapp', 'logo', 'favicon'];
 }

@@ -38,7 +38,7 @@ class DashboardController extends Controller
 
         $activeOrderCount = Order::query()
             ->where('buyer_id', $buyer->id)
-            ->whereIn('status', ['pending', 'processing'])
+            ->where('status', 'processing')
             ->count();
 
         /*
@@ -47,7 +47,7 @@ class DashboardController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        $completedOrderCount = Order::query()->where('buyer_id', $buyer->id)->where('status', 'completed')->count();
+        $completedOrderCount = Order::query()->where('buyer_id', $buyer->id)->where('status', 'sold')->count();
 
         /*
         |--------------------------------------------------------------------------
@@ -55,9 +55,15 @@ class DashboardController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        $totalTransactionCount = Order::query()->where('buyer_id', $buyer->id)->count();
+        $totalTransactionCount = Order::query()
+            ->where('buyer_id', $buyer->id)
+            ->where('status', '!=', 'cancelled')
+            ->count();
 
-        $totalTransaction = Order::query()->where('buyer_id', $buyer->id)->sum('subtotal');
+        $totalTransaction = Order::query()
+            ->where('buyer_id', $buyer->id)
+            ->where('status', '!=', 'cancelled')
+            ->sum('subtotal');
 
         /*
         |--------------------------------------------------------------------------

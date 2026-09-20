@@ -4,7 +4,11 @@
 
 @section('content')
 
-    <div class="mx-auto max-w-[1400px]">
+    <div
+        x-data="{
+            filterOpen: @js($filterActive || $errors->any())
+        }"
+        class="mx-auto max-w-[1400px]">
 
         {{-- ===================================================== --}}
         {{-- HEADER --}}
@@ -61,29 +65,50 @@
 
 
 
-                <a href="{{ route('seller.export.pdf', request()->query()) }}"
-                    class="inline-flex h-11
-           items-center justify-center
-           gap-2 rounded-xl
-           bg-[#C8795A]
-           px-5
-           text-sm font-bold
-           text-white
-           shadow-sm transition
-           hover:bg-[#B66F52]
-           hover:shadow-md">
+                <div class="mt-4 flex flex-wrap items-center gap-3">
+                    <button type="button" @click="filterOpen = !filterOpen"
+                        class="inline-flex h-11 items-center justify-center gap-2 rounded-xl border px-5
+                               text-sm font-bold transition"
+                        :class="filterOpen
+                            ? 'border-[#4371d1] bg-[#F4EAE2] text-[#4371d1]'
+                            : 'border-[#DFD2C7] bg-white text-[#6F6259] hover:bg-[#F5ECE6]'">
+                        <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.8">
+                            <path d="M4 6h16" />
+                            <path d="M7 12h10" />
+                            <path d="M10 18h4" />
+                        </svg>
 
-                    <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        Filter
 
-                        <path d="M12 3v12" />
-                        <path d="m7 10 5 5 5-5" />
-                        <path d="M5 21h14" />
+                        @if ($filterActive)
+                            <span class="size-2 rounded-full bg-[#C8795A]"></span>
+                        @endif
 
-                    </svg>
+                        <svg class="size-3.5 transition-transform" :class="filterOpen ? 'rotate-180' : ''"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="m6 9 6 6 6-6" />
+                        </svg>
+                    </button>
 
-                    Export PDF
+                    <a href="{{ route('seller.export.pdf', request()->only(['date_from', 'date_to'])) }}"
+                        class="inline-flex h-11 items-center justify-center gap-2 rounded-xl
+                               bg-[#C8795A] px-5 text-sm font-bold text-white shadow-sm
+                               transition hover:bg-[#B66F52] hover:shadow-md">
 
-                </a>
+                        <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.8">
+
+                            <path d="M12 3v12" />
+                            <path d="m7 10 5 5 5-5" />
+                            <path d="M5 21h14" />
+
+                        </svg>
+
+                        Export PDF
+
+                    </a>
+                </div>
             </div>
             <div
                 class="hidden items-center gap-3
@@ -143,7 +168,7 @@
         {{-- FILTER --}}
         {{-- ===================================================== --}}
 
-        <section
+        <section x-cloak x-show="filterOpen" x-transition.opacity.duration.200ms
             class="mb-6 overflow-hidden
                    rounded-3xl
                    border border-[#DFD2C7]
@@ -177,7 +202,7 @@
                     </div>
 
 
-                    <div>
+                    <div class="min-w-0 flex-1">
 
                         <h2 class="text-sm font-bold
                                    text-[#332B26]">
@@ -194,6 +219,16 @@
                         </p>
 
                     </div>
+
+                    <button type="button" @click="filterOpen = false" title="Tutup filter"
+                        class="flex size-9 shrink-0 items-center justify-center rounded-xl
+                               text-[#8B7465] transition hover:bg-[#EEE5DE]">
+                        <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M6 6l12 12" />
+                            <path d="M18 6 6 18" />
+                        </svg>
+                    </button>
 
                 </div>
 
@@ -230,6 +265,10 @@
                                focus:ring-4
                                focus:ring-[#FBEAE2]">
 
+                    @error('date_from')
+                        <p class="mt-2 text-xs font-semibold text-red-600">{{ $message }}</p>
+                    @enderror
+
                 </div>
 
 
@@ -257,6 +296,10 @@
                                focus:border-[#C8795A]
                                focus:ring-4
                                focus:ring-[#FBEAE2]">
+
+                    @error('date_to')
+                        <p class="mt-2 text-xs font-semibold text-red-600">{{ $message }}</p>
+                    @enderror
 
                 </div>
 
@@ -553,6 +596,68 @@
 
             </div>
 
+        </section>
+
+
+        {{-- ===================================================== --}}
+        {{-- SALES CHART --}}
+        {{-- ===================================================== --}}
+
+        <section
+            class="mt-6 overflow-hidden rounded-3xl border border-[#DFD2C7]
+                   bg-white shadow-sm">
+            <div
+                class="flex flex-col gap-4 border-b border-[#E7DBD1] bg-[#FAF7F2]
+                       px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="flex size-10 shrink-0 items-center justify-center rounded-xl
+                               bg-[#F4EAE2] text-[#4371d1]">
+                        <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.8">
+                            <path d="M4 19V9" />
+                            <path d="M10 19V5" />
+                            <path d="M16 19v-7" />
+                            <path d="M22 19V3" />
+                        </svg>
+                    </div>
+
+                    <div>
+                        <h2 class="font-bold text-[#332B26]">{{ $chartTitle }}</h2>
+                        <p class="mt-0.5 text-xs text-slate-500">
+                            Perbandingan omzet dan jumlah transaksi selesai.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-3 text-xs font-semibold text-slate-500">
+                    <span
+                        class="inline-flex items-center gap-2 rounded-full border border-[#DFD2C7]
+                               bg-white px-3 py-1.5">
+                        {{ $periodLabel }}
+                    </span>
+
+                    <span class="inline-flex items-center gap-1.5">
+                        <span class="size-2.5 rounded-sm bg-[#718268]"></span>
+                        Omzet
+                    </span>
+
+                    <span class="inline-flex items-center gap-1.5">
+                        <span class="size-2.5 rounded-full bg-[#C8795A]"></span>
+                        Transaksi
+                    </span>
+                </div>
+            </div>
+
+            <div class="p-5">
+                <div class="relative h-[300px] sm:h-[340px]">
+                    <canvas id="salesChart"
+                        data-labels='@json($chartLabels)'
+                        data-revenue='@json($chartRevenue)'
+                        data-orders='@json($chartOrders)'>
+                    </canvas>
+                </div>
+            </div>
         </section>
 
 
@@ -1097,3 +1202,142 @@
     </div>
 
 @endsection
+
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const canvas = document.getElementById('salesChart');
+
+            if (!canvas || !window.Chart) {
+                return;
+            }
+
+            const labels = JSON.parse(canvas.dataset.labels || '[]');
+            const revenue = JSON.parse(canvas.dataset.revenue || '[]');
+            const orders = JSON.parse(canvas.dataset.orders || '[]');
+
+            const currencyFormatter = new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                maximumFractionDigits: 0,
+            });
+
+            const compactCurrencyFormatter = new Intl.NumberFormat('id-ID', {
+                notation: 'compact',
+                maximumFractionDigits: 1,
+            });
+
+            new window.Chart(canvas, {
+                type: 'line',
+                data: {
+                    labels,
+                    datasets: [
+                        {
+                            label: 'Omzet',
+                            data: revenue,
+                            yAxisID: 'revenue',
+                            backgroundColor: '#65795E',
+                            borderColor: '#65795E',
+                            pointBackgroundColor: '#FFFFFF',
+                            pointBorderColor: '#65795E',
+                            pointBorderWidth: 2,
+                            pointRadius: 3,
+                            pointHoverRadius: 5,
+                            borderWidth: 2.5,
+                            tension: 0.32,
+                        },
+                        {
+                            type: 'line',
+                            label: 'Transaksi',
+                            data: orders,
+                            yAxisID: 'orders',
+                            borderColor: '#C8795A',
+                            backgroundColor: '#C8795A',
+                            pointBackgroundColor: '#FFFFFF',
+                            pointBorderColor: '#C8795A',
+                            pointBorderWidth: 2,
+                            pointRadius: 3,
+                            pointHoverRadius: 5,
+                            borderWidth: 2.5,
+                            tension: 0.32,
+                        },
+                    ],
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        legend: {
+                            display: false,
+                        },
+                        tooltip: {
+                            backgroundColor: '#332B26',
+                            padding: 12,
+                            cornerRadius: 10,
+                            callbacks: {
+                                label(context) {
+                                    if (context.dataset.yAxisID === 'revenue') {
+                                        return ` Omzet: ${currencyFormatter.format(context.parsed.y)}`;
+                                    }
+
+                                    return ` Transaksi: ${context.parsed.y}`;
+                                },
+                            },
+                        },
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false,
+                            },
+                            border: {
+                                display: false,
+                            },
+                            ticks: {
+                                color: '#927D6F',
+                                maxRotation: 0,
+                                autoSkip: true,
+                                maxTicksLimit: 12,
+                            },
+                        },
+                        revenue: {
+                            beginAtZero: true,
+                            position: 'left',
+                            border: {
+                                display: false,
+                            },
+                            grid: {
+                                color: '#EEE5DE',
+                            },
+                            ticks: {
+                                color: '#65795E',
+                                callback(value) {
+                                    return `Rp${compactCurrencyFormatter.format(value)}`;
+                                },
+                            },
+                        },
+                        orders: {
+                            beginAtZero: true,
+                            position: 'right',
+                            border: {
+                                display: false,
+                            },
+                            grid: {
+                                display: false,
+                            },
+                            ticks: {
+                                color: '#A95E43',
+                                precision: 0,
+                                stepSize: 1,
+                            },
+                        },
+                    },
+                },
+            });
+        });
+    </script>
+@endpush

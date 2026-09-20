@@ -6,35 +6,24 @@
 
     @php
         $statusClass = match ($order->status) {
-            'pending' => 'border-[#E8D8B9] bg-[#FAF2DF] text-[#A87A37]',
-
-            'confirmed' => 'border-[#DFD2C7] bg-[#F1E6DE] text-[#4371d1]',
-
             'processing' => 'border-[#EBCFC2] bg-[#FBEAE2] text-[#A95E43]',
-
-            'completed', 'sold' => 'border-[#D3DFCE] bg-[#EEF3EA] text-[#65795E]',
-
+            'sold' => 'border-[#D3DFCE] bg-[#EEF3EA] text-[#65795E]',
             'cancelled' => 'border-[#ECD2CF] bg-[#FAEDEC] text-[#A65954]',
 
             default => 'border-slate-200 bg-slate-100 text-slate-600',
         };
 
         $statusDot = match ($order->status) {
-            'pending' => 'bg-[#C89B55]',
-            'confirmed' => 'bg-[#4371d1]',
             'processing' => 'bg-[#C8795A]',
-            'completed', 'sold' => 'bg-[#718268]',
+            'sold' => 'bg-[#718268]',
             'cancelled' => 'bg-[#A65954]',
             default => 'bg-slate-400',
         };
 
         $statusLabel = match ($order->status) {
-            'pending' => 'Menunggu',
-            'confirmed' => 'Dikonfirmasi',
             'processing' => 'Diproses',
-            'completed' => 'Selesai',
-            'sold' => 'Sudah Terjual',
-            'cancelled' => 'Dibatalkan',
+            'sold' => 'Selesai',
+            'cancelled' => 'Ditolak/Dibatalkan',
             default => ucfirst($order->status),
         };
     @endphp

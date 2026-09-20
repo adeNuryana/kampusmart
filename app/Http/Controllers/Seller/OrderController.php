@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Seller;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Product;
+use App\Services\ActivityLogger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
@@ -51,10 +52,8 @@ class OrderController extends Controller
                 in_array(
                     $status->value(),
                     [
-                        'pending',
-                        'confirmed',
                         'processing',
-                        'completed',
+                        'sold',
                         'cancelled',
                     ],
                     true
@@ -132,65 +131,13 @@ class OrderController extends Controller
         $validated = $request->validate([
             'status' => [
                 'required',
-                Rule::in([
-                    'confirmed',
-                    'processing',
-                    'completed',
-                    'cancelled',
-                ]),
+                Rule::in(['sold', 'cancelled']),
             ],
         ]);
 
-
         $newStatus = $validated['status'];
 
-
-        /*
-        |--------------------------------------------------------------------------
-        | Tentukan Perubahan Status Yang Diperbolehkan
-        |--------------------------------------------------------------------------
-        */
-
-        $allowedTransitions = [
-
-            'pending' => [
-                'confirmed',
-                'cancelled',
-            ],
-
-            'confirmed' => [
-                'processing',
-                'cancelled',
-            ],
-
-            'processing' => [
-                'completed',
-                'cancelled',
-            ],
-
-            'completed' => [],
-
-            'cancelled' => [],
-
-        ];
-
-
-        if (
-            !in_array(
-                $newStatus,
-                $allowedTransitions[$order->status] ?? [],
-                true
-            )
-        ) {
-
-            throw ValidationException::withMessages([
-                'status' =>
-                    'Perubahan status pesanan tidak diperbolehkan.',
-            ]);
-        }
-
-
-        DB::transaction(function () use (
+        $updatedOrder = DB::transaction(function () use (
             $order,
             $newStatus
         ) {
@@ -203,44 +150,34 @@ class OrderController extends Controller
 
             $lockedOrder = Order::query()
                 ->whereKey($order->id)
+                ->with('items')
                 ->lockForUpdate()
                 ->firstOrFail();
 
+            if ($lockedOrder->status !== 'processing') {
+                throw ValidationException::withMessages([
+                    'status' => 'Pesanan ini sudah memiliki keputusan akhir dan tidak dapat diubah lagi.',
+                ]);
+            }
 
             /*
             |--------------------------------------------------------------------------
-            | Kalau Dibatalkan, Kembalikan Stok
+            | Kembalikan Stok Jika Pesanan Ditolak / Dibatalkan
             |--------------------------------------------------------------------------
             */
 
-            if (
-                $newStatus === 'cancelled' &&
-                $lockedOrder->status !== 'cancelled'
-            ) {
-
-                $lockedOrder->load('items');
-
-                foreach ($lockedOrder->items as $item) {
-
-                    if (!$item->product_id) {
+            if ($newStatus === 'cancelled') {
+                foreach ($lockedOrder->items->sortBy('product_id') as $item) {
+                    if (! $item->product_id) {
                         continue;
                     }
-
 
                     $product = Product::query()
                         ->whereKey($item->product_id)
                         ->lockForUpdate()
                         ->first();
 
-
-                    if ($product) {
-
-                        $product->increment(
-                            'stock',
-                            $item->quantity
-                        );
-
-                    }
+                    $product?->increment('stock', $item->quantity);
                 }
             }
 
@@ -254,12 +191,25 @@ class OrderController extends Controller
             $lockedOrder->update([
                 'status' => $newStatus,
             ]);
+
+            return $lockedOrder;
         });
 
+        $isCancelled = $updatedOrder->status === 'cancelled';
+
+        ActivityLogger::log(
+            $isCancelled ? 'order_cancelled' : 'order_sold',
+            $isCancelled
+                ? 'menolak atau membatalkan pesanan #'.$updatedOrder->id
+                : 'menandai pesanan #'.$updatedOrder->id.' sebagai selesai',
+            $updatedOrder
+        );
 
         return back()->with(
             'success',
-            'Status pesanan berhasil diperbarui.'
+            $isCancelled
+                ? 'Pesanan berhasil ditolak/dibatalkan dan stok telah dikembalikan.'
+                : 'Pesanan berhasil ditandai selesai.'
         );
     }
 }

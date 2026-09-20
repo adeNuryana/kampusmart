@@ -172,29 +172,11 @@
 
                             {{-- AVATAR --}}
 
-                            <div
-                                class="mx-auto
-                                       flex
-                                       size-24
-                                       items-center
-                                       justify-center
-                                       rounded-full
-                                       bg-gradient-to-br
-                                       from-[#0a1d45]
-                                       via-[#4371d1]
-                                       to-[#9A6948]
-                                       text-3xl
-                                       font-black
-                                       uppercase
-                                       text-white
-                                       shadow-xl
-                                       shadow-[#4371d1]/20
-                                       ring-4
-                                       ring-[#F4EAE2]">
-
-                                {{ strtoupper(substr($buyer->name, 0, 1)) }}
-
-                            </div>
+                            <x-user-avatar :user="$buyer"
+                                class="mx-auto size-24 rounded-full bg-gradient-to-br
+                                       from-[#0a1d45] via-[#4371d1] to-[#9A6948]
+                                       text-3xl font-black uppercase text-white shadow-xl
+                                       shadow-[#4371d1]/20 ring-4 ring-[#F4EAE2]" />
 
 
 

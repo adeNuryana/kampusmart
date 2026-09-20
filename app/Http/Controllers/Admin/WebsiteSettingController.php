@@ -28,7 +28,11 @@ class WebsiteSettingController extends Controller
         $validated = $request->validate([
             'site_name' => ['required', 'string', 'max:100'],
 
+            'admin_whatsapp' => ['nullable', 'string', 'min:9', 'max:25', 'regex:/^[+0-9()\-\s]+$/'],
+
             'logo' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+
+            'favicon' => ['nullable', 'file', 'mimes:ico,jpg,jpeg,png,webp', 'max:1024'],
         ]);
 
         $setting = SiteSetting::query()->firstOrCreate(
@@ -39,6 +43,7 @@ class WebsiteSettingController extends Controller
         );
 
         $setting->site_name = $validated['site_name'];
+        $setting->admin_whatsapp = $validated['admin_whatsapp'] ?? null;
 
         if ($request->hasFile('logo')) {
             if ($setting->logo) {
@@ -46,6 +51,14 @@ class WebsiteSettingController extends Controller
             }
 
             $setting->logo = $request->file('logo')->store('branding', 'public');
+        }
+
+        if ($request->hasFile('favicon')) {
+            if ($setting->favicon) {
+                Storage::disk('public')->delete($setting->favicon);
+            }
+
+            $setting->favicon = $request->file('favicon')->store('branding/favicons', 'public');
         }
 
         $setting->save();

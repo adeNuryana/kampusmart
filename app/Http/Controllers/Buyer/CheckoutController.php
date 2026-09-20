@@ -310,7 +310,6 @@ class CheckoutController extends Controller
             return $order;
         });
 
-        ActivityLogger::log('order_sold', 'menandai pesanan #' . $order->id . ' sebagai sudah terjual', $order);
         /*
         |--------------------------------------------------------------------------
         | Redirect Langsung Ke WhatsApp Seller

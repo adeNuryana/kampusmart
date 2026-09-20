@@ -137,75 +137,6 @@
 
 
 
-            {{-- PENDING --}}
-
-            <section
-                class="relative overflow-hidden
-                       rounded-3xl border
-                       border-[#E8D8B9]
-                       bg-white p-5
-                       shadow-sm">
-
-                <div class="absolute inset-x-0 top-0
-                           h-1 bg-[#C89B55]">
-                </div>
-
-
-                <div class="flex items-start
-                           justify-between gap-4">
-
-                    <div>
-
-                        <p
-                            class="text-xs font-bold
-                                   uppercase tracking-wide
-                                   text-[#A87A37]">
-
-                            Menunggu
-
-                        </p>
-
-                        <p
-                            class="mt-5 text-3xl
-                                   font-black
-                                   text-[#A87A37]">
-
-                            {{ number_format($pendingOrders) }}
-
-                        </p>
-
-                        <p class="mt-2 text-xs
-                                   text-slate-400">
-
-                            Belum dikonfirmasi
-
-                        </p>
-
-                    </div>
-
-
-                    <div
-                        class="flex size-11
-                               items-center justify-center
-                               rounded-xl
-                               bg-[#C89B55]
-                               text-white">
-
-                        <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-
-                            <circle cx="12" cy="12" r="9" />
-                            <path d="M12 7v5l3 2" />
-
-                        </svg>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-
             {{-- PROCESSING --}}
 
             <section
@@ -343,6 +274,46 @@
 
             </section>
 
+
+
+            {{-- CANCELLED --}}
+
+            <section
+                class="relative overflow-hidden
+                       rounded-3xl border
+                       border-[#ECD2CF]
+                       bg-white p-5
+                       shadow-sm">
+
+                <div class="absolute inset-x-0 top-0
+                            h-1 bg-[#A65954]">
+                </div>
+
+                <div class="flex items-start justify-between gap-4">
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-wide text-[#A65954]">
+                            Ditolak/Dibatalkan
+                        </p>
+
+                        <p class="mt-5 text-3xl font-black text-[#A65954]">
+                            {{ number_format($cancelledOrders) }}
+                        </p>
+
+                        <p class="mt-2 text-xs text-slate-400">
+                            Stok dikembalikan
+                        </p>
+                    </div>
+
+                    <div class="flex size-11 items-center justify-center rounded-xl bg-[#A65954] text-white">
+                        <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M6 6l12 12M18 6 6 18" />
+                        </svg>
+                    </div>
+                </div>
+
+            </section>
+
         </div>
 
 
@@ -382,32 +353,6 @@
                     </a>
 
 
-                    <a href="{{ route('admin.orders.index', ['status' => 'pending']) }}"
-                        class="rounded-xl px-4 py-2
-                               text-sm font-semibold
-                               transition
-                               {{ request('status') === 'pending'
-                                   ? 'bg-[#C89B55] text-white shadow-sm'
-                                   : 'bg-white text-[#7C695C] hover:bg-[#FAF2DF] hover:text-[#A87A37]' }}">
-
-                        Menunggu
-
-                    </a>
-
-
-                    <a href="{{ route('admin.orders.index', ['status' => 'confirmed']) }}"
-                        class="rounded-xl px-4 py-2
-                               text-sm font-semibold
-                               transition
-                               {{ request('status') === 'confirmed'
-                                   ? 'bg-[#4371d1] text-white shadow-sm'
-                                   : 'bg-white text-[#7C695C] hover:bg-[#F1E6DE] hover:text-[#4371d1]' }}">
-
-                        Dikonfirmasi
-
-                    </a>
-
-
                     <a href="{{ route('admin.orders.index', ['status' => 'processing']) }}"
                         class="rounded-xl px-4 py-2
                                text-sm font-semibold
@@ -421,11 +366,11 @@
                     </a>
 
 
-                    <a href="{{ route('admin.orders.index', ['status' => 'completed']) }}"
+                    <a href="{{ route('admin.orders.index', ['status' => 'sold']) }}"
                         class="rounded-xl px-4 py-2
                                text-sm font-semibold
                                transition
-                               {{ request('status') === 'completed'
+                               {{ request('status') === 'sold'
                                    ? 'bg-[#718268] text-white shadow-sm'
                                    : 'bg-white text-[#7C695C] hover:bg-[#EEF3EA] hover:text-[#65795E]' }}">
 
@@ -442,9 +387,10 @@
                                    ? 'bg-[#A65954] text-white shadow-sm'
                                    : 'bg-white text-[#7C695C] hover:bg-[#FAEDEC] hover:text-[#A65954]' }}">
 
-                        Dibatalkan
+                        Ditolak/Dibatalkan
 
                     </a>
+
 
                 </div>
 
@@ -553,35 +499,24 @@
                         @forelse ($orders as $order)
                             @php
                                 $statusClass = match ($order->status) {
-                                    'pending' => 'border-[#E8D8B9] bg-[#FAF2DF] text-[#A87A37]',
-
-                                    'confirmed' => 'border-[#DFD2C7] bg-[#F1E6DE] text-[#4371d1]',
-
                                     'processing' => 'border-[#EBCFC2] bg-[#FBEAE2] text-[#A95E43]',
-
-                                    'completed', 'sold' => 'border-[#D3DFCE] bg-[#EEF3EA] text-[#65795E]',
-
+                                    'sold' => 'border-[#D3DFCE] bg-[#EEF3EA] text-[#65795E]',
                                     'cancelled' => 'border-[#ECD2CF] bg-[#FAEDEC] text-[#A65954]',
 
                                     default => 'border-slate-200 bg-slate-100 text-slate-600',
                                 };
 
                                 $statusDot = match ($order->status) {
-                                    'pending' => 'bg-[#C89B55]',
-                                    'confirmed' => 'bg-[#4371d1]',
                                     'processing' => 'bg-[#C8795A]',
-                                    'completed', 'sold' => 'bg-[#718268]',
+                                    'sold' => 'bg-[#718268]',
                                     'cancelled' => 'bg-[#A65954]',
                                     default => 'bg-slate-400',
                                 };
 
                                 $statusLabel = match ($order->status) {
-                                    'pending' => 'Menunggu',
-                                    'confirmed' => 'Dikonfirmasi',
                                     'processing' => 'Diproses',
-                                    'completed' => 'Selesai',
-                                    'sold' => 'Sudah Terjual',
-                                    'cancelled' => 'Dibatalkan',
+                                    'sold' => 'Selesai',
+                                    'cancelled' => 'Ditolak/Dibatalkan',
                                     default => ucfirst($order->status),
                                 };
                             @endphp

@@ -277,29 +277,23 @@
                         $status = strtolower($order->status ?? '');
 
                         $statusClass = match ($status) {
-                            'pending' => 'border-amber-200 bg-amber-50 text-amber-700',
-                            'confirmed' => 'border-blue-200 bg-blue-50 text-blue-700',
                             'processing' => 'border-orange-200 bg-orange-50 text-orange-700',
-                            'completed' => 'border-emerald-200 bg-emerald-50 text-emerald-700',
-                            'cancelled' => 'border-rose-200 bg-rose-50 text-rose-700',
+                            'sold' => 'border-emerald-200 bg-emerald-50 text-emerald-700',
+                            'cancelled' => 'border-red-200 bg-red-50 text-red-700',
                             default => 'border-slate-200 bg-slate-50 text-slate-600',
                         };
 
                         $statusLabel = match ($status) {
-                            'pending' => 'Menunggu',
-                            'confirmed' => 'Dikonfirmasi',
                             'processing' => 'Diproses',
-                            'completed' => 'Selesai',
-                            'cancelled' => 'Dibatalkan',
+                            'sold' => 'Selesai',
+                            'cancelled' => 'Ditolak/Dibatalkan',
                             default => ucfirst($status ?: 'Pesanan'),
                         };
 
                         $statusIcon = match ($status) {
-                            'pending' => 'fa-clock',
-                            'confirmed' => 'fa-circle-check',
                             'processing' => 'fa-box',
-                            'completed' => 'fa-check-double',
-                            'cancelled' => 'fa-circle-xmark',
+                            'sold' => 'fa-check-double',
+                            'cancelled' => 'fa-ban',
                             default => 'fa-circle',
                         };
 

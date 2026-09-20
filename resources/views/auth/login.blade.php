@@ -7,7 +7,11 @@
     @php
         $siteName = $siteSetting?->site_name ?? 'KampusMart';
 
-        $adminWhatsapp = preg_replace('/\D+/', '', (string) config('app.admin_whatsapp', ''));
+        $adminWhatsapp = preg_replace(
+            '/\D+/',
+            '',
+            (string) ($siteSetting?->admin_whatsapp ?? config('app.admin_whatsapp', '')),
+        );
 
         if (str_starts_with($adminWhatsapp, '0')) {
             $adminWhatsapp = '62' . substr($adminWhatsapp, 1);
@@ -25,6 +29,8 @@
         $sellerWhatsappUrl = $adminWhatsapp ? "https://wa.me/{$adminWhatsapp}?text={$sellerMessage}" : null;
     @endphp
     <title>Masuk - {{ $siteName }}</title>
+
+    @include('partials.favicon')
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -171,12 +177,18 @@
 
                     <a href="{{ route('home') }}" class="inline-flex items-center gap-2.5">
 
-                        <div
-                            class="flex size-10 items-center justify-center rounded-2xl
-                                   bg-gradient-to-br from-[#0a1d45] to-[#315ebc]
-                                   text-sm font-black text-white shadow-lg shadow-blue-600/20">
-                            {{ strtoupper(substr($siteName, 0, 1)) }}
-                        </div>
+                        @if ($siteSetting?->logo)
+                            <img src="{{ asset('storage/' . $siteSetting->logo) }}" alt="{{ $siteName }}"
+                                class="size-10 rounded-xl border border-slate-200 bg-white
+                                       object-contain p-1 shadow-lg shadow-slate-950/10">
+                        @else
+                            <div
+                                class="flex size-10 items-center justify-center rounded-xl
+                                       bg-gradient-to-br from-[#0a1d45] to-[#315ebc]
+                                       text-sm font-black text-white shadow-lg shadow-blue-600/20">
+                                {{ strtoupper(substr($siteName, 0, 1)) }}
+                            </div>
+                        @endif
 
                         <div>
                             <p class="text-sm font-black text-[#0a1d45]">
@@ -349,10 +361,6 @@
                                    px-5 text-sm font-bold text-white shadow-lg shadow-blue-600/20
                                    transition hover:-translate-y-0.5 hover:shadow-xl">
                             Masuk
-
-                            <i
-                                class="fa-solid fa-arrow-right text-xs transition
-                                       group-hover:translate-x-1"></i>
                         </button>
 
                     </form>

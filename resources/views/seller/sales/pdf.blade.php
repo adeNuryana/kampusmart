@@ -2,654 +2,409 @@
 <html lang="id">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <title>
-        Laporan Penjualan
-    </title>
-
+    <title>Laporan Penjualan - {{ $seller->sellerProfile?->store_name ?? $seller->name }}</title>
 
     <style>
         @page {
-            margin: 25px 28px;
+            margin: 24px 26px 38px;
         }
-
 
         * {
             box-sizing: border-box;
         }
 
-
         body {
             margin: 0;
-            padding: 0;
-
-            font-family:
-                DejaVu Sans,
-                sans-serif;
-
-            font-size: 10px;
-
+            font-family: DejaVu Sans, sans-serif;
+            font-size: 9px;
+            line-height: 1.4;
             color: #332B26;
-
             background: #ffffff;
         }
 
-
-        .header {
+        .header-table,
+        .summary-table,
+        .data-table {
             width: 100%;
+        }
 
-            padding-bottom: 15px;
-
-            margin-bottom: 18px;
-
+        .header-table {
+            border-collapse: collapse;
+            margin-bottom: 14px;
             border-bottom: 2px solid #C8795A;
         }
 
+        .header-table td {
+            padding: 0 0 12px;
+            vertical-align: top;
+        }
 
         .brand {
             margin: 0;
-
-            color: #4371d1;
-
+            color: #4371D1;
             font-size: 21px;
-
             font-weight: bold;
+            line-height: 1.1;
         }
 
-
-        .seller-center {
-            margin-top: 3px;
-
+        .document-label {
+            margin-top: 4px;
             color: #A95E43;
-
-            font-size: 9px;
-
+            font-size: 8px;
             font-weight: bold;
-
+            letter-spacing: 0.8px;
             text-transform: uppercase;
         }
 
-
         .store-name {
-            margin-top: 12px;
-
+            margin-top: 11px;
             font-size: 14px;
-
             font-weight: bold;
-
-            color: #332B26;
         }
 
-
-        .store-owner {
-            margin-top: 3px;
-
+        .store-meta {
+            margin-top: 2px;
             color: #806F64;
+            font-size: 8px;
         }
 
+        .document-info {
+            width: 42%;
+            text-align: right;
+        }
 
-        .period {
+        .document-info-title {
+            margin-bottom: 5px;
+            color: #927D6F;
+            font-size: 8px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .period-badge {
             display: inline-block;
-
-            margin-top: 9px;
-
-            padding: 5px 9px;
-
+            padding: 6px 9px;
+            border: 1px solid #E8CFC4;
             border-radius: 5px;
-
             background: #FBEAE2;
-
             color: #A95E43;
-
             font-size: 9px;
-
             font-weight: bold;
         }
 
-
-        .section-title {
-            margin-top: 18px;
-
-            margin-bottom: 8px;
-
-            color: #332B26;
-
-            font-size: 12px;
-
-            font-weight: bold;
+        .printed-at {
+            margin-top: 5px;
+            color: #927D6F;
+            font-size: 8px;
         }
 
-
-        /*
-        |--------------------------------------------------------------------------
-        | SUMMARY
-        |--------------------------------------------------------------------------
-        */
-
-        .summary {
-            width: 100%;
-
+        .summary-table {
+            margin-bottom: 14px;
             border-collapse: separate;
-
-            border-spacing: 8px 0;
-
-            margin-left: -8px;
+            border-spacing: 7px 0;
         }
 
-
-        .summary td {
+        .summary-table td {
             width: 33.333%;
-
-            padding: 12px;
-
-            vertical-align: top;
-
+            padding: 9px 11px;
             border: 1px solid #DFD2C7;
-
             border-radius: 6px;
-
             background: #FAF7F2;
         }
 
-
         .summary-label {
-            margin-bottom: 6px;
-
             color: #927D6F;
-
-            font-size: 8px;
-
+            font-size: 7px;
             font-weight: bold;
-
+            letter-spacing: 0.5px;
             text-transform: uppercase;
         }
 
-
         .summary-value {
-            color: #332B26;
-
-            font-size: 18px;
-
+            margin-top: 3px;
+            font-size: 16px;
             font-weight: bold;
+            line-height: 1.2;
         }
 
-
-        .sage {
+        .summary-value.revenue {
             color: #65795E;
         }
 
-
-        .coffee {
-            color: #4371d1;
+        .summary-value.transactions {
+            color: #806F64;
         }
 
-
-        .terracotta {
-            color: #A95E43;
+        .summary-value.items {
+            color: #C16848;
         }
 
+        .section {
+            margin-top: 13px;
+        }
 
-        /*
-        |--------------------------------------------------------------------------
-        | TABLE
-        |--------------------------------------------------------------------------
-        */
+        .section-heading {
+            margin: 0 0 6px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .section-caption {
+            margin-left: 5px;
+            color: #927D6F;
+            font-size: 8px;
+            font-weight: normal;
+        }
 
         .data-table {
-            width: 100%;
-
             border-collapse: collapse;
+            table-layout: fixed;
         }
 
+        .data-table thead {
+            display: table-header-group;
+        }
+
+        .data-table tr {
+            page-break-inside: avoid;
+        }
 
         .data-table th {
-            padding: 8px 7px;
-
-            border: 1px solid #DFD2C7;
-
-            background: #F4EAE2;
-
-            color: #4371d1;
-
-            font-size: 8px;
-
+            padding: 6px 7px;
+            border: 1px solid #DCCFC5;
+            background: #6B7D63;
+            color: #ffffff;
+            font-size: 7px;
             font-weight: bold;
-
+            letter-spacing: 0.35px;
             text-align: left;
-
             text-transform: uppercase;
         }
 
-
         .data-table td {
-            padding: 8px 7px;
-
+            padding: 6px 7px;
             border: 1px solid #E7DBD1;
-
             vertical-align: top;
+            overflow-wrap: break-word;
         }
 
-
-        .data-table tr:nth-child(even) td {
-            background: #FCFAF8;
+        .data-table tbody tr:nth-child(even) {
+            background: #FCFAF7;
         }
 
-
-        .text-right {
-            text-align: right !important;
+        .top-products th {
+            background: #8A765F;
         }
-
 
         .text-center {
             text-align: center !important;
         }
 
-
-        /*
-        |--------------------------------------------------------------------------
-        | TOP PRODUCT
-        |--------------------------------------------------------------------------
-        */
-
-        .two-column {
-            width: 100%;
-
-            border-collapse: separate;
-
-            border-spacing: 8px 0;
-
-            margin-left: -8px;
+        .text-right {
+            text-align: right !important;
         }
 
-
-        .two-column>tbody>tr>td {
-            width: 50%;
-
-            vertical-align: top;
-        }
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | FOOTER
-        |--------------------------------------------------------------------------
-        */
-
-        .footer {
-            margin-top: 20px;
-
-            padding-top: 10px;
-
-            border-top: 1px solid #DFD2C7;
-
+        .muted {
             color: #927D6F;
-
             font-size: 8px;
         }
-    </style>
 
+        .order-number {
+            color: #4371D1;
+            font-weight: bold;
+        }
+
+        .amount {
+            color: #65795E;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .product-line {
+            margin-bottom: 2px;
+        }
+
+        .product-line:last-child {
+            margin-bottom: 0;
+        }
+
+        .empty-state {
+            padding: 13px !important;
+            color: #927D6F;
+            text-align: center;
+        }
+
+        .page-footer {
+            position: fixed;
+            right: 0;
+            bottom: -24px;
+            left: 0;
+            padding-top: 7px;
+            border-top: 1px solid #E7DBD1;
+            color: #927D6F;
+            font-size: 7px;
+        }
+
+        .footer-right {
+            float: right;
+        }
+    </style>
 </head>
 
-
 <body>
-
-
-    {{-- ========================================================= --}}
-    {{-- HEADER --}}
-    {{-- ========================================================= --}}
-
-    <div class="header">
-
-        <h1 class="brand">
-            KampusMart
-        </h1>
-
-        <div class="seller-center">
-            Seller Center • Laporan Penjualan
-        </div>
-
-
-        <div class="store-name">
-
-            {{ $seller->sellerProfile?->store_name ?? 'Toko Seller' }}
-
-        </div>
-
-
-        <div class="store-owner">
-
-            Penjual:
-            {{ $seller->name }}
-
-            @if ($seller->phone)
-                &nbsp; | &nbsp;
-
-                {{ $seller->phone }}
-            @endif
-
-        </div>
-
-
-        <div class="period">
-            Periode: {{ $periodLabel }}
-        </div>
-
-    </div>
-
-
-
-    {{-- ========================================================= --}}
-    {{-- SUMMARY --}}
-    {{-- ========================================================= --}}
-
-    <div class="section-title">
-        Ringkasan Penjualan
-    </div>
-
-
-    <table class="summary">
-
+    <table class="header-table">
         <tr>
-
             <td>
+                <h1 class="brand">{{ $siteSetting?->site_name ?? 'KampusMart' }}</h1>
+                <div class="document-label">Seller Center &bull; Laporan Penjualan</div>
 
-                <div class="summary-label">
-                    Total Omzet
+                <div class="store-name">
+                    {{ $seller->sellerProfile?->store_name ?? 'Toko Seller' }}
                 </div>
 
-                <div class="summary-value sage">
-
-                    Rp{{ number_format($totalRevenue, 0, ',', '.') }}
-
+                <div class="store-meta">
+                    Penjual: {{ $seller->name }}
+                    @if ($seller->phone)
+                        &nbsp;&bull;&nbsp; {{ $seller->phone }}
+                    @endif
                 </div>
-
             </td>
 
-
-            <td>
-
-                <div class="summary-label">
-                    Transaksi Selesai
+            <td class="document-info">
+                <div class="document-info-title">Periode laporan</div>
+                <div class="period-badge">{{ $periodLabel }}</div>
+                <div class="printed-at">
+                    Dicetak {{ now('Asia/Jakarta')->locale('id')->translatedFormat('d F Y, H:i') }} WIB
                 </div>
-
-                <div class="summary-value coffee">
-
-                    {{ number_format($totalCompletedOrders) }}
-
-                </div>
-
             </td>
-
-
-            <td>
-
-                <div class="summary-label">
-                    Produk Terjual
-                </div>
-
-                <div class="summary-value terracotta">
-
-                    {{ number_format($totalItemsSold) }}
-
-                </div>
-
-            </td>
-
         </tr>
-
     </table>
 
-
-
-    {{-- ========================================================= --}}
-    {{-- TOP PRODUCT --}}
-    {{-- ========================================================= --}}
-
-    <div class="section-title">
-        Produk Terlaris
-    </div>
-
-
-    <table class="data-table">
-
-        <thead>
-
-            <tr>
-
-                <th style="width: 50px;">
-                    Peringkat
-                </th>
-
-                <th>
-                    Produk
-                </th>
-
-                <th class="text-center" style="width: 120px;">
-
-                    Unit Terjual
-
-                </th>
-
-                <th class="text-right" style="width: 180px;">
-
-                    Nilai Penjualan
-
-                </th>
-
-            </tr>
-
-        </thead>
-
-
-        <tbody>
-
-            @forelse ($bestSellingProducts as $index => $product)
-                <tr>
-
-                    <td class="text-center">
-
-                        {{ $index + 1 }}
-
-                    </td>
-
-
-                    <td>
-
-                        <strong>
-                            {{ $product['product_name'] }}
-                        </strong>
-
-                    </td>
-
-
-                    <td class="text-center">
-
-                        {{ number_format($product['total_sold']) }}
-
-                    </td>
-
-
-                    <td class="text-right">
-
-                        Rp{{ number_format($product['total_revenue'], 0, ',', '.') }}
-
-                    </td>
-
-                </tr>
-
-            @empty
-
-                <tr>
-
-                    <td colspan="4" class="text-center">
-
-                        Belum ada data penjualan.
-
-                    </td>
-
-                </tr>
-            @endforelse
-
-        </tbody>
-
+    <table class="summary-table">
+        <tr>
+            <td>
+                <div class="summary-label">Total omzet</div>
+                <div class="summary-value revenue">
+                    Rp{{ number_format($totalRevenue, 0, ',', '.') }}
+                </div>
+            </td>
+            <td>
+                <div class="summary-label">Transaksi selesai</div>
+                <div class="summary-value transactions">
+                    {{ number_format($totalCompletedOrders) }}
+                </div>
+            </td>
+            <td>
+                <div class="summary-label">Produk terjual</div>
+                <div class="summary-value items">
+                    {{ number_format($totalItemsSold) }}
+                </div>
+            </td>
+        </tr>
     </table>
 
+    <div class="section">
+        <h2 class="section-heading">
+            Produk Terlaris
+            <span class="section-caption">Maksimal 5 produk berdasarkan unit terjual</span>
+        </h2>
 
-
-    {{-- ========================================================= --}}
-    {{-- SALES HISTORY --}}
-    {{-- ========================================================= --}}
-
-    <div class="section-title">
-        Riwayat Penjualan
+        <table class="data-table top-products">
+            <thead>
+                <tr>
+                    <th class="text-center" style="width: 7%;">Peringkat</th>
+                    <th style="width: 55%;">Nama Produk</th>
+                    <th class="text-center" style="width: 16%;">Unit Terjual</th>
+                    <th class="text-right" style="width: 22%;">Nilai Penjualan</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($bestSellingProducts as $index => $product)
+                    <tr>
+                        <td class="text-center">{{ $index + 1 }}</td>
+                        <td><strong>{{ $product['product_name'] }}</strong></td>
+                        <td class="text-center">{{ number_format($product['total_sold']) }}</td>
+                        <td class="text-right amount">
+                            Rp{{ number_format($product['total_revenue'], 0, ',', '.') }}
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="4" class="empty-state">
+                            Belum ada data produk pada periode ini.
+                        </td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
     </div>
 
+    <div class="section">
+        <h2 class="section-heading">
+            Rincian Transaksi
+            <span class="section-caption">{{ number_format($totalCompletedOrders) }} transaksi selesai</span>
+        </h2>
 
-    <table class="data-table">
-
-        <thead>
-
-            <tr>
-
-                <th style="width: 35px;">
-                    No
-                </th>
-
-                <th>
-                    Nomor Pesanan
-                </th>
-
-                <th>
-                    Pembeli
-                </th>
-
-                <th class="text-center">
-                    Jumlah Barang
-                </th>
-
-                <th class="text-right">
-                    Total
-                </th>
-
-                <th>
-                    Tanggal
-                </th>
-
-            </tr>
-
-        </thead>
-
-
-        <tbody>
-
-            @forelse ($sales as $index => $sale)
+        <table class="data-table">
+            <thead>
                 <tr>
-
-                    <td class="text-center">
-
-                        {{ $index + 1 }}
-
-                    </td>
-
-
-                    <td>
-
-                        <strong>
-                            {{ $sale->order_number }}
-                        </strong>
-
-                    </td>
-
-
-                    <td>
-
-                        <strong>
-                            {{ $sale->buyer_name }}
-                        </strong>
-
-                        @if ($sale->buyer_phone)
-                            <br>
-
-                            <span style="color:#927D6F;">
-                                {{ $sale->buyer_phone }}
-                            </span>
-                        @endif
-
-                    </td>
-
-
-                    <td class="text-center">
-
-                        {{ $sale->items->sum('quantity') }}
-
-                    </td>
-
-
-                    <td class="text-right">
-
-                        <strong>
-
+                    <th class="text-center" style="width: 4%;">No.</th>
+                    <th style="width: 13%;">Nomor Pesanan</th>
+                    <th style="width: 17%;">Pembeli</th>
+                    <th style="width: 26%;">Produk</th>
+                    <th class="text-center" style="width: 9%;">Pembayaran</th>
+                    <th class="text-right" style="width: 14%;">Total</th>
+                    <th style="width: 17%;">Waktu Transaksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($sales as $index => $sale)
+                    <tr>
+                        <td class="text-center">{{ $index + 1 }}</td>
+                        <td class="order-number">{{ $sale->order_number }}</td>
+                        <td>
+                            <strong>{{ $sale->buyer_name }}</strong>
+                            @if ($sale->buyer_phone)
+                                <br><span class="muted">{{ $sale->buyer_phone }}</span>
+                            @endif
+                        </td>
+                        <td>
+                            @foreach ($sale->items as $item)
+                                <div class="product-line">
+                                    {{ $item->product_name }}
+                                    <span class="muted">({{ number_format($item->quantity) }} item)</span>
+                                </div>
+                            @endforeach
+                        </td>
+                        <td class="text-center">
+                            {{ ucfirst(str_replace('_', ' ', $sale->payment_method ?? '-')) }}
+                        </td>
+                        <td class="text-right amount">
                             Rp{{ number_format($sale->subtotal, 0, ',', '.') }}
-
-                        </strong>
-
-                    </td>
-
-
-                    <td>
-
-                        {{ $sale->created_at->timezone('Asia/Jakarta')->locale('id')->translatedFormat('d M Y, H:i') }}
-
-                        WIB
-
-                    </td>
-
-                </tr>
-
-            @empty
-
-                <tr>
-
-                    <td colspan="6" class="text-center">
-
-                        Tidak ada transaksi selesai
-                        pada periode ini.
-
-                    </td>
-
-                </tr>
-            @endforelse
-
-        </tbody>
-
-    </table>
-
-
-
-    {{-- ========================================================= --}}
-    {{-- FOOTER --}}
-    {{-- ========================================================= --}}
-
-    <div class="footer">
-
-        Laporan Penjualan KampusMart
-
-        &nbsp; | &nbsp;
-
-        {{ $seller->sellerProfile?->store_name ?? $seller->name }}
-
-        &nbsp; | &nbsp;
-
-        Dicetak:
-
-        {{ now('Asia/Jakarta')->locale('id')->translatedFormat('d F Y, H:i') }}
-
-        WIB
-
+                        </td>
+                        <td>
+                            {{ $sale->created_at->timezone('Asia/Jakarta')->locale('id')->translatedFormat('d M Y') }}
+                            <br><span class="muted">{{ $sale->created_at->timezone('Asia/Jakarta')->format('H:i') }} WIB</span>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="7" class="empty-state">
+                            Tidak ada transaksi selesai pada periode ini.
+                        </td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
     </div>
 
+    <div class="page-footer">
+        {{ $siteSetting?->site_name ?? 'KampusMart' }} &bull;
+        {{ $seller->sellerProfile?->store_name ?? $seller->name }}
+        <span class="footer-right">Laporan penjualan &bull; {{ $periodLabel }}</span>
+    </div>
 </body>
 
 </html>

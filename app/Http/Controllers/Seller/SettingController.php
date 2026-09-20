@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Services\ActivityLogger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
 
@@ -30,7 +29,6 @@ class SettingController extends Controller
         );
     }
 
-
     /*
     |--------------------------------------------------------------------------
     | Update Profil & Toko
@@ -44,57 +42,12 @@ class SettingController extends Controller
         $validated = $request->validate([
             /*
             |--------------------------------------------------------------------------
-            | User
-            |--------------------------------------------------------------------------
-            */
-
-            'name' => [
-                'required',
-                'string',
-                'max:255',
-            ],
-
-            'email' => [
-                'required',
-                'email',
-                'max:255',
-                Rule::unique('users', 'email')
-                    ->ignore($seller->id),
-            ],
-
-            'phone' => [
-                'nullable',
-                'string',
-                'max:20',
-            ],
-
-
-            /*
-            |--------------------------------------------------------------------------
             | Seller Profile
             |--------------------------------------------------------------------------
             */
 
             'store_name' => [
                 'required',
-                'string',
-                'max:255',
-            ],
-
-            'whatsapp' => [
-                'required',
-                'string',
-                'max:20',
-            ],
-
-            'nim' => [
-                'nullable',
-                'string',
-                'max:50',
-            ],
-
-            'faculty' => [
-                'nullable',
                 'string',
                 'max:255',
             ],
@@ -113,20 +66,6 @@ class SettingController extends Controller
             ],
         ]);
 
-
-        /*
-        |--------------------------------------------------------------------------
-        | Update Data User
-        |--------------------------------------------------------------------------
-        */
-
-        $seller->update([
-            'name' => $validated['name'],
-            'email' => $validated['email'],
-            'phone' => $validated['phone'] ?? null,
-        ]);
-
-
         /*
         |--------------------------------------------------------------------------
         | Ambil Seller Profile
@@ -136,7 +75,6 @@ class SettingController extends Controller
         $profile = $seller->sellerProfile;
 
         $photoPath = $profile?->photo;
-
 
         /*
         |--------------------------------------------------------------------------
@@ -155,12 +93,10 @@ class SettingController extends Controller
                     ->delete($photoPath);
             }
 
-
             $photoPath = $request
                 ->file('photo')
                 ->store('sellers', 'public');
         }
-
 
         /*
         |--------------------------------------------------------------------------
@@ -168,28 +104,22 @@ class SettingController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        $seller->sellerProfile()->updateOrCreate(
+        $profile = $seller->sellerProfile()->updateOrCreate(
             [
                 'user_id' => $seller->id,
             ],
             [
-                'store_name' =>
-                $validated['store_name'],
+                'store_name' => $validated['store_name'],
 
-                'whatsapp' =>
-                $validated['whatsapp'],
+                'whatsapp' => $profile?->whatsapp ?? '',
 
-                'nim' =>
-                $validated['nim'] ?? null,
+                'nim' => $profile?->nim,
 
-                'faculty' =>
-                $validated['faculty'] ?? null,
+                'faculty' => $profile?->faculty,
 
-                'description' =>
-                $validated['description'] ?? null,
+                'description' => $validated['description'] ?? null,
 
-                'photo' =>
-                $photoPath,
+                'photo' => $photoPath,
             ]
         );
 
@@ -201,12 +131,12 @@ class SettingController extends Controller
                 'store_name' => $profile->store_name,
             ]
         );
+
         return back()->with(
             'profile_success',
-            'Profil toko berhasil diperbarui.'
+            'Informasi toko berhasil diperbarui.'
         );
     }
-
 
     /*
     |--------------------------------------------------------------------------
@@ -232,11 +162,9 @@ class SettingController extends Controller
             ]
         );
 
-
         $request->user()->update([
             'password' => $validated['password'],
         ]);
-
 
         return back()->with(
             'password_success',

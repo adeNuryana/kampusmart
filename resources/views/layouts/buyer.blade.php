@@ -11,6 +11,8 @@
         @yield('title') - {{ $siteSetting?->site_name ?? 'KampusMart' }}
     </title>
 
+    @include('partials.favicon')
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -144,14 +146,9 @@
                hover:bg-slate-100">
 
                         {{-- AVATAR --}}
-                        <div
-                            class="flex size-9 shrink-0
-                   items-center justify-center
-                   rounded-full bg-violet-100
-                   text-sm font-bold
-                   text-violet-700">
-                            {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
-                        </div>
+                        <x-user-avatar :user="auth()->user()"
+                            class="size-9 rounded-full bg-violet-100
+                                   text-sm font-bold text-violet-700" />
 
 
                         {{-- NAME --}}
@@ -458,19 +455,11 @@
                        transition
                        {{ request()->routeIs('buyer.dashboard', 'buyer.profile.*') ? 'text-violet-600' : 'text-slate-400' }}">
 
-                    <div
-                        class="flex
-                           size-7
-                           items-center
-                           justify-center
-                           rounded-full
-                           text-[10px]
-                           font-black
-                           {{ request()->routeIs('buyer.dashboard', 'buyer.profile.*')
-                               ? 'bg-violet-600 text-white'
-                               : 'bg-violet-100 text-violet-700' }}">
-                        {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
-                    </div>
+                    <x-user-avatar :user="auth()->user()"
+                        class="size-7 rounded-full text-[10px] font-black
+                               {{ request()->routeIs('buyer.dashboard', 'buyer.profile.*')
+                                   ? 'bg-violet-600 text-white'
+                                   : 'bg-violet-100 text-violet-700' }}" />
 
                     <span class="text-[10px] font-semibold">
                         Akun
@@ -541,23 +530,10 @@
                        pb-5
                        pt-4">
 
-                    <div
-                        class="flex
-                           size-12
-                           shrink-0
-                           items-center
-                           justify-center
-                           rounded-2xl
-                           bg-gradient-to-br
-                           from-violet-500
-                           to-violet-700
-                           text-lg
-                           font-black
-                           text-white
-                           shadow-lg
-                           shadow-violet-600/20">
-                        {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
-                    </div>
+                    <x-user-avatar :user="auth()->user()"
+                        class="size-12 rounded-2xl bg-gradient-to-br from-violet-500
+                               to-violet-700 text-lg font-black text-white shadow-lg
+                               shadow-violet-600/20" />
 
 
                     <div class="min-w-0 flex-1">
@@ -806,6 +782,8 @@
         </div>
 
     </div>
+
+    <x-floating-whatsapp />
 
 </body>
 

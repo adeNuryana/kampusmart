@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Buyer;
 
 use App\Http\Controllers\Controller;
+use App\Models\CartItem;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -28,7 +30,12 @@ class HomeController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        $categories = Category::query()->withCount('products')->orderBy('name')->get();
+        $categories = Category::query()
+            ->withCount([
+                'products' => fn (Builder $query) => $this->availableProductConstraints($query),
+            ])
+            ->orderBy('name')
+            ->get();
 
         /*
         |--------------------------------------------------------------------------
@@ -44,8 +51,7 @@ class HomeController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        $products = Product::query()
-            ->with(['category', 'user.sellerProfile'])
+        $products = $this->availableProductsQuery()
 
             /*
             |--------------------------------------------------------------
@@ -74,7 +80,7 @@ class HomeController extends Controller
             |--------------------------------------------------------------
             */
 
-            ->when($selectedCategory, fn($query) => $query->where('category_id', $selectedCategory))
+            ->when($selectedCategory, fn ($query) => $query->where('category_id', $selectedCategory))
 
             ->latest()
 
@@ -91,8 +97,7 @@ class HomeController extends Controller
         |
         */
 
-        $latestProducts = Product::query()
-            ->with(['category', 'user.sellerProfile'])
+        $latestProducts = $this->availableProductsQuery()
             ->latest()
             ->take(10)
             ->get();
@@ -103,20 +108,40 @@ class HomeController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        $recommendedProducts = Product::query()
-            ->with(['category', 'user.sellerProfile'])
+        $recommendedProducts = $this->availableProductsQuery()
             ->inRandomOrder()
             ->take(10)
             ->get();
 
-        return view('buyer.home', compact('categories', 'products', 'latestProducts', 'recommendedProducts', 'search', 'selectedCategory', 'isFiltering'));
+        /*
+        |--------------------------------------------------------------------------
+        | Semua Produk
+        |--------------------------------------------------------------------------
+        */
+
+        $allProducts = $this->availableProductsQuery()
+            ->latest()
+            ->paginate(12, ['*'], 'all_page')
+            ->withQueryString()
+            ->fragment('semua-produk');
+
+        $cartCount = 0;
+
+        if ($request->user()?->role === 'buyer') {
+            $cartCount = CartItem::query()
+                ->where('user_id', $request->user()->id)
+                ->sum('quantity');
+        }
+
+        return view('buyer.home', compact('categories', 'products', 'latestProducts', 'recommendedProducts', 'allProducts', 'search', 'selectedCategory', 'isFiltering', 'cartCount'));
     }
+
     public function filterProducts(Request $request)
     {
         $categoryId = $request->query('category');
         $search = trim((string) $request->query('search', ''));
 
-        $query = Product::query()->with(['category', 'user.sellerProfile']);
+        $query = $this->availableProductsQuery();
 
         /*
     |--------------------------------------------------------------------------
@@ -154,5 +179,24 @@ class HomeController extends Controller
 
             'html' => view('buyer.partials.product-grid', compact('products'))->render(),
         ]);
+    }
+
+    private function availableProductsQuery(): Builder
+    {
+        return $this->availableProductConstraints(
+            Product::query()->with(['category', 'user.sellerProfile'])
+        );
+    }
+
+    private function availableProductConstraints(Builder $query): Builder
+    {
+        return $query
+            ->where('status', 'active')
+            ->where('stock', '>', 0)
+            ->whereHas('user', function (Builder $query) {
+                $query
+                    ->where('role', 'seller')
+                    ->where('status', 'active');
+            });
     }
 }

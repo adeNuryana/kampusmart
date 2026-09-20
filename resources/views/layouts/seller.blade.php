@@ -11,6 +11,8 @@
         @yield('title', 'Seller') - {{ $siteSetting?->site_name ?? 'KampusMart' }}
     </title>
 
+    @include('partials.favicon')
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 
@@ -1004,6 +1006,9 @@
         </div>
 
     </div>
+
+
+    <x-floating-whatsapp />
 
 
     @stack('scripts')

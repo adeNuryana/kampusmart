@@ -4,13 +4,19 @@
 
 @section('content')
 
-    <div class="mx-auto max-w-[1400px] space-y-6">
+    <div
+        x-data="{
+            filterOpen: @js($filterActive)
+        }"
+        class="mx-auto max-w-[1400px] space-y-6">
 
         {{-- ===================================================== --}}
         {{-- HEADER --}}
         {{-- ===================================================== --}}
 
-        <section>
+        <section class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+
+            <div>
 
             <div
                 class="inline-flex
@@ -61,7 +67,78 @@
 
             </p>
 
+            </div>
+
+
+            <button type="button" @click="filterOpen = !filterOpen"
+                class="inline-flex h-11 items-center justify-center gap-2 rounded-xl border px-5
+                       text-sm font-bold transition"
+                :class="filterOpen
+                    ? 'border-[#4371d1] bg-[#F4EAE2] text-[#4371d1]'
+                    : 'border-[#DFD2C7] bg-white text-[#6F6259] hover:bg-[#F5ECE6]'">
+
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M4 6h16" />
+                    <path d="M7 12h10" />
+                    <path d="M10 18h4" />
+                </svg>
+
+                Filter
+
+                @if ($filterActive)
+                    <span class="size-2 rounded-full bg-[#C8795A]"></span>
+                @endif
+
+                <svg class="size-3.5 transition-transform" :class="filterOpen ? 'rotate-180' : ''"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m6 9 6 6 6-6" />
+                </svg>
+
+            </button>
+
         </section>
+
+
+        @if (session('success'))
+            <div
+                class="flex items-start gap-3 rounded-2xl border border-[#D3DFCE]
+                       bg-[#EEF3EA] px-4 py-3.5 text-[#65795E]">
+
+                <div class="flex size-8 shrink-0 items-center justify-center rounded-lg bg-[#718268] text-white">
+                    <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="m5 12 4 4L19 6" />
+                    </svg>
+                </div>
+
+                <div>
+                    <p class="text-sm font-bold">Berhasil</p>
+                    <p class="mt-0.5 text-xs">{{ session('success') }}</p>
+                </div>
+
+            </div>
+        @endif
+
+
+        @if (session('error'))
+            <div
+                class="flex items-start gap-3 rounded-2xl border border-[#ECD2CF]
+                       bg-[#FAEDEC] px-4 py-3.5 text-[#A65954]">
+
+                <div class="flex size-8 shrink-0 items-center justify-center rounded-lg bg-[#A65954] text-white">
+                    <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="9" />
+                        <path d="M12 8v5" />
+                        <path d="M12 17h.01" />
+                    </svg>
+                </div>
+
+                <div>
+                    <p class="text-sm font-bold">Gagal</p>
+                    <p class="mt-0.5 text-xs">{{ session('error') }}</p>
+                </div>
+
+            </div>
+        @endif
 
 
 
@@ -122,7 +199,7 @@
                                    font-black
                                    text-[#332B26]">
 
-                            {{ number_format($products->total()) }}
+                            {{ number_format($totalProducts) }}
 
                         </p>
 
@@ -170,7 +247,7 @@
         {{-- FILTER --}}
         {{-- ===================================================== --}}
 
-        <section
+        <section x-cloak x-show="filterOpen" x-transition.opacity.duration.200ms
             class="overflow-hidden
                    rounded-3xl
                    border
@@ -212,7 +289,7 @@
                     </div>
 
 
-                    <div>
+                    <div class="min-w-0 flex-1">
 
                         <p
                             class="text-sm
@@ -228,12 +305,25 @@
                                    text-xs
                                    text-slate-500">
 
-                            Cari produk berdasarkan nama,
-                            kategori, atau status.
+                            Cari berdasarkan nama produk atau seller,
+                            lalu saring kategori dan statusnya.
 
                         </p>
 
                     </div>
+
+
+                    <button type="button" @click="filterOpen = false" title="Tutup filter"
+                        class="flex size-9 shrink-0 items-center justify-center rounded-xl
+                               text-[#8B7465] transition hover:bg-[#EEE5DE]">
+
+                        <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M6 6l12 12" />
+                            <path d="M18 6 6 18" />
+                        </svg>
+
+                    </button>
 
                 </div>
 
@@ -283,7 +373,7 @@
 
 
                             <input type="text" name="search" id="search" value="{{ request('search') }}"
-                                placeholder="Cari nama produk..."
+                                placeholder="Nama produk atau seller..."
                                 class="h-11
                                        w-full
                                        rounded-xl
@@ -443,7 +533,7 @@
 
                             </svg>
 
-                            Filter
+                            Terapkan
 
                         </button>
 
@@ -885,31 +975,41 @@
 
                                 <td class="px-5 py-4">
 
-                                    <div class="flex
-                                               justify-end">
+                                    <div class="flex justify-end gap-2">
 
-                                        <button type="button" title="Aksi Produk"
-                                            class="inline-flex
-                                                   size-9
-                                                   items-center
-                                                   justify-center
-                                                   rounded-xl
-                                                   text-[#8B7465]
-                                                   transition
-                                                   hover:bg-[#F1E6DE]
-                                                   hover:text-[#4371d1]">
+                                        <a href="{{ route('admin.products.edit', $product) }}" title="Ubah Produk"
+                                            class="inline-flex size-9 items-center justify-center rounded-xl
+                                                   text-[#4371d1] transition hover:bg-[#F1E6DE]">
 
-                                            <svg class="size-5" viewBox="0 0 24 24" fill="currentColor">
-
-                                                <circle cx="5" cy="12" r="1.5" />
-
-                                                <circle cx="12" cy="12" r="1.5" />
-
-                                                <circle cx="19" cy="12" r="1.5" />
-
+                                            <svg class="size-4" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="1.8">
+                                                <path d="M12 20h9" />
+                                                <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4Z" />
                                             </svg>
 
-                                        </button>
+                                        </a>
+
+
+                                        <form action="{{ route('admin.products.destroy', $product) }}" method="POST"
+                                            onsubmit="return confirm('Hapus produk ini? Tindakan ini tidak dapat dibatalkan.')">
+
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <button type="submit" title="Hapus Produk"
+                                                class="inline-flex size-9 items-center justify-center rounded-xl
+                                                       text-[#A65954] transition hover:bg-[#FAEDEC]">
+
+                                                <svg class="size-4" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="1.8">
+                                                    <path d="M4 7h16" />
+                                                    <path d="M9 7V4h6v3" />
+                                                    <path d="m7 7 1 13h8l1-13" />
+                                                </svg>
+
+                                            </button>
+
+                                        </form>
 
                                     </div>
 

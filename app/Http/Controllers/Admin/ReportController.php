@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Collection;
+use Illuminate\Validation\Rule;
+use Illuminate\View\View;
 
 class ReportController extends Controller
 {
@@ -16,9 +19,9 @@ class ReportController extends Controller
     |--------------------------------------------------------------------------
     */
 
-    public function index(Request $request)
+    public function index(Request $request): View
     {
-        [$startDate, $endDate, $periodLabel] = $this->resolvePeriod($request);
+        [$startDate, $endDate, $periodLabel, $period] = $this->resolvePeriod($request);
 
         /*
         |--------------------------------------------------------------------------
@@ -40,22 +43,17 @@ class ReportController extends Controller
 
         $totalOrders = $orders->count();
 
-        $totalTransactionValue = $orders->sum('subtotal');
+        $validOrders = $orders->where('status', '!=', 'cancelled');
 
-        $totalItems = $orders->sum(function ($order) {
+        $totalTransactionValue = $validOrders->sum('subtotal');
+
+        $totalItems = $validOrders->sum(function ($order) {
             return $order->items->sum('quantity');
         });
 
-        /*
-        | Selesai
-        |
-        | "sold" tetap dimasukkan karena pada implementasi
-        | pesanan KampusMart sebelumnya status ini juga digunakan.
-        */
+        $completedOrders = $orders->where('status', 'sold')->count();
 
-        $completedOrders = $orders->whereIn('status', ['completed', 'sold'])->count();
-
-        $cancelledOrders = $orders->where('status', 'cancelled')->count();
+        $soldOrders = $orders->where('status', 'sold');
 
         /*
         |--------------------------------------------------------------------------
@@ -74,10 +72,7 @@ class ReportController extends Controller
         */
 
         $statusSummary = collect([
-            'pending' => 0,
-            'confirmed' => 0,
             'processing' => 0,
-            'completed' => 0,
             'sold' => 0,
             'cancelled' => 0,
         ]);
@@ -94,7 +89,14 @@ class ReportController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        [$chartLabels, $chartValues] = $this->buildChart($orders, $startDate, $endDate, $request);
+        [$chartLabels, $chartRevenue, $chartTransactions, $chartTitle] = $this->buildSalesChart(
+            $soldOrders,
+            $startDate,
+            $endDate,
+            $period,
+        );
+
+        $filterActive = $request->hasAny(['period', 'month', 'year', 'start_date', 'end_date']);
 
         /*
         |--------------------------------------------------------------------------
@@ -102,8 +104,8 @@ class ReportController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        $topSellers = $orders
-            ->filter(fn($order) => $order->seller)
+        $topSellers = $validOrders
+            ->filter(fn ($order) => $order->seller)
             ->groupBy('seller_id')
             ->map(function ($sellerOrders) {
                 $firstOrder = $sellerOrders->first();
@@ -128,7 +130,7 @@ class ReportController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        $topProducts = $orders
+        $topProducts = $validOrders
             ->flatMap(function ($order) {
                 return $order->items;
             })
@@ -158,14 +160,16 @@ class ReportController extends Controller
                 'totalTransactionValue',
                 'totalItems',
                 'completedOrders',
-                'cancelledOrders',
                 'totalBuyers',
                 'totalSellers',
 
                 'statusSummary',
 
                 'chartLabels',
-                'chartValues',
+                'chartRevenue',
+                'chartTransactions',
+                'chartTitle',
+                'filterActive',
 
                 'topSellers',
                 'topProducts',
@@ -203,15 +207,15 @@ class ReportController extends Controller
 
         $totalOrders = $orders->count();
 
-        $totalTransactionValue = $orders->sum('subtotal');
+        $validOrders = $orders->where('status', '!=', 'cancelled');
 
-        $totalItems = $orders->sum(function ($order) {
+        $totalTransactionValue = $validOrders->sum('subtotal');
+
+        $totalItems = $validOrders->sum(function ($order) {
             return $order->items->sum('quantity');
         });
 
-        $completedOrders = $orders->whereIn('status', ['completed', 'sold'])->count();
-
-        $cancelledOrders = $orders->where('status', 'cancelled')->count();
+        $completedOrders = $orders->where('status', 'sold')->count();
 
         /*
     |--------------------------------------------------------------------------
@@ -229,13 +233,10 @@ class ReportController extends Controller
     |--------------------------------------------------------------------------
     */
 
-        $statusCounts = $orders->groupBy('status')->map(fn($items) => $items->count());
+        $statusCounts = $orders->groupBy('status')->map(fn ($items) => $items->count());
 
         $statusSummary = collect([
-            'pending' => $statusCounts->get('pending', 0),
-            'confirmed' => $statusCounts->get('confirmed', 0),
             'processing' => $statusCounts->get('processing', 0),
-            'completed' => $statusCounts->get('completed', 0),
             'sold' => $statusCounts->get('sold', 0),
             'cancelled' => $statusCounts->get('cancelled', 0),
         ]);
@@ -246,8 +247,8 @@ class ReportController extends Controller
     |--------------------------------------------------------------------------
     */
 
-        $topSellers = $orders
-            ->filter(fn($order) => $order->seller)
+        $topSellers = $validOrders
+            ->filter(fn ($order) => $order->seller)
             ->groupBy('seller_id')
             ->map(function ($sellerOrders) {
                 $firstOrder = $sellerOrders->first();
@@ -272,8 +273,8 @@ class ReportController extends Controller
     |--------------------------------------------------------------------------
     */
 
-        $topProducts = $orders
-            ->flatMap(fn($order) => $order->items)
+        $topProducts = $validOrders
+            ->flatMap(fn ($order) => $order->items)
             ->groupBy('product_name')
             ->map(function ($items, $productName) {
                 return [
@@ -306,7 +307,6 @@ class ReportController extends Controller
                 'totalTransactionValue',
                 'totalItems',
                 'completedOrders',
-                'cancelledOrders',
                 'totalBuyers',
                 'totalSellers',
 
@@ -325,7 +325,7 @@ class ReportController extends Controller
 
         $pdf->setPaper('a4', 'landscape');
 
-        $filename = 'laporan-kampusmart-' . $startDate->format('Y-m-d') . '-' . $endDate->format('Y-m-d') . '.pdf';
+        $filename = 'laporan-kampusmart-'.$startDate->format('Y-m-d').'-'.$endDate->format('Y-m-d').'.pdf';
 
         return $pdf->download($filename);
     }
@@ -338,61 +338,68 @@ class ReportController extends Controller
 
     private function resolvePeriod(Request $request): array
     {
-        $period = $request->query('period', 'month');
+        $requestedPeriod = $request->query('period', 'month');
 
-        /*
-        |--------------------------------------------------------------------------
-        | MONTH
-        |--------------------------------------------------------------------------
-        */
+        $validated = $request->validate([
+            'period' => ['nullable', Rule::in(['month', 'year', 'custom'])],
+            'month' => ['nullable', 'date_format:Y-m'],
+            'year' => ['nullable', 'integer', 'min:2000', 'max:'.now()->year],
+            'start_date' => ['nullable', 'date'],
+            'end_date' => [
+                'nullable',
+                'date',
+                Rule::when(
+                    $requestedPeriod === 'custom' && $request->filled('start_date'),
+                    ['after_or_equal:start_date'],
+                ),
+            ],
+        ]);
+
+        $period = $validated['period'] ?? 'month';
+        $timezone = config('app.timezone', 'Asia/Jakarta');
 
         if ($period === 'month') {
-            $month = $request->query('month', now()->format('Y-m'));
+            $month = $validated['month'] ?? now($timezone)->format('Y-m');
+            $date = Carbon::createFromFormat('!Y-m', $month, $timezone)->startOfMonth();
 
-            try {
-                $date = Carbon::createFromFormat('Y-m', $month)->startOfMonth();
-            } catch (\Throwable $e) {
-                $date = now()->startOfMonth();
-            }
-
-            return [$date->copy()->startOfMonth(), $date->copy()->endOfMonth(), $date->locale('id')->translatedFormat('F Y')];
+            return [
+                $date->copy()->startOfMonth(),
+                $date->copy()->endOfMonth(),
+                $date->copy()->locale('id')->translatedFormat('F Y'),
+                $period,
+            ];
         }
-
-        /*
-        |--------------------------------------------------------------------------
-        | YEAR
-        |--------------------------------------------------------------------------
-        */
 
         if ($period === 'year') {
-            $year = (int) $request->query('year', now()->year);
+            $year = (int) ($validated['year'] ?? now($timezone)->year);
+            $date = Carbon::create($year, 1, 1, 0, 0, 0, $timezone);
 
-            $date = Carbon::create($year, 1, 1);
-
-            return [$date->copy()->startOfYear(), $date->copy()->endOfYear(), 'Tahun ' . $year];
+            return [
+                $date->copy()->startOfYear(),
+                $date->copy()->endOfYear(),
+                'Tahun '.$year,
+                $period,
+            ];
         }
 
-        /*
-        |--------------------------------------------------------------------------
-        | CUSTOM RANGE
-        |--------------------------------------------------------------------------
-        */
+        $startDate = Carbon::parse(
+            $validated['start_date'] ?? now($timezone)->startOfMonth()->format('Y-m-d'),
+            $timezone,
+        )->startOfDay();
 
-        try {
-            $startDate = Carbon::parse($request->query('start_date', now()->startOfMonth()->format('Y-m-d')))->startOfDay();
+        $endDate = Carbon::parse(
+            $validated['end_date'] ?? now($timezone)->format('Y-m-d'),
+            $timezone,
+        )->endOfDay();
 
-            $endDate = Carbon::parse($request->query('end_date', now()->format('Y-m-d')))->endOfDay();
-        } catch (\Throwable $e) {
-            $startDate = now()->startOfMonth();
-
-            $endDate = now()->endOfDay();
-        }
-
-        if ($startDate->gt($endDate)) {
-            [$startDate, $endDate] = [$endDate, $startDate];
-        }
-
-        return [$startDate, $endDate, $startDate->format('d M Y') . ' - ' . $endDate->format('d M Y')];
+        return [
+            $startDate,
+            $endDate,
+            $startDate->copy()->locale('id')->translatedFormat('d M Y')
+                .' - '
+                .$endDate->copy()->locale('id')->translatedFormat('d M Y'),
+            $period,
+        ];
     }
 
     /*
@@ -401,62 +408,58 @@ class ReportController extends Controller
     |--------------------------------------------------------------------------
     */
 
-    private function buildChart($orders, Carbon $startDate, Carbon $endDate, Request $request): array
-    {
-        $period = $request->query('period', 'month');
-
-        /*
-        |--------------------------------------------------------------------------
-        | YEAR = JAN - DEC
-        |--------------------------------------------------------------------------
-        */
-
-        if ($period === 'year') {
-            $labels = [];
-
-            $values = [];
-
-            for ($month = 1; $month <= 12; $month++) {
-                $monthDate = Carbon::create(null, $month, 1);
-
-                $labels[] = $monthDate->locale('id')->translatedFormat('M');
-
-                $values[] = $orders->filter(fn($order) => $order->created_at->month === $month)->count();
-            }
-
-            return [$labels, $values];
+    private function buildSalesChart(
+        Collection $orders,
+        Carbon $startDate,
+        Carbon $endDate,
+        string $period,
+    ): array {
+        if ($period === 'year' || $startDate->diffInDays($endDate) > 62) {
+            return $this->monthlySalesChart($orders, $startDate, $endDate, $period === 'year');
         }
 
-        /*
-        |--------------------------------------------------------------------------
-        | MONTH / CUSTOM = PER DAY
-        |--------------------------------------------------------------------------
-        */
+        return $this->dailySalesChart($orders, $startDate, $endDate);
+    }
 
-        $ordersByDate = $orders->groupBy(fn($order) => $order->created_at->format('Y-m-d'));
+    private function dailySalesChart(Collection $orders, Carbon $startDate, Carbon $endDate): array
+    {
+        $ordersByDate = $orders->groupBy(fn ($order) => $order->created_at->format('Y-m-d'));
 
         $labels = [];
+        $revenue = [];
+        $transactions = [];
 
-        $values = [];
+        for ($date = $startDate->copy()->startOfDay(); $date->lte($endDate); $date->addDay()) {
+            $items = $ordersByDate->get($date->format('Y-m-d'), collect());
 
-        $date = $startDate->copy();
-
-        while ($date->lte($endDate)) {
-            /*
-            | Jika custom sangat panjang,
-            | nanti bisa kita ubah menjadi
-            | grouping per bulan.
-            */
-
-            $key = $date->format('Y-m-d');
-
-            $labels[] = $date->format('j');
-
-            $values[] = isset($ordersByDate[$key]) ? $ordersByDate[$key]->count() : 0;
-
-            $date->addDay();
+            $labels[] = $date->copy()->locale('id')->translatedFormat('d M');
+            $revenue[] = (float) $items->sum('subtotal');
+            $transactions[] = $items->count();
         }
 
-        return [$labels, $values];
+        return [$labels, $revenue, $transactions, 'Tren Penjualan Harian'];
+    }
+
+    private function monthlySalesChart(
+        Collection $orders,
+        Carbon $startDate,
+        Carbon $endDate,
+        bool $singleYear,
+    ): array {
+        $ordersByMonth = $orders->groupBy(fn ($order) => $order->created_at->format('Y-m'));
+
+        $labels = [];
+        $revenue = [];
+        $transactions = [];
+
+        for ($date = $startDate->copy()->startOfMonth(); $date->lte($endDate); $date->addMonth()) {
+            $items = $ordersByMonth->get($date->format('Y-m'), collect());
+
+            $labels[] = $date->copy()->locale('id')->translatedFormat($singleYear ? 'M' : 'M Y');
+            $revenue[] = (float) $items->sum('subtotal');
+            $transactions[] = $items->count();
+        }
+
+        return [$labels, $revenue, $transactions, 'Tren Penjualan Bulanan'];
     }
 }

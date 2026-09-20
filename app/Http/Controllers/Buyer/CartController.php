@@ -159,6 +159,10 @@ class CartController extends Controller
                 'min:1',
                 'max:' . $product->stock,
             ],
+            'redirect_to' => [
+                'nullable',
+                'in:home',
+            ],
         ]);
 
 
@@ -219,6 +223,15 @@ class CartController extends Controller
             ]);
         }
 
+
+        if (($validated['redirect_to'] ?? null) === 'home') {
+            return redirect()
+                ->route('home')
+                ->with(
+                    'success',
+                    'Produk berhasil ditambahkan ke keranjang.'
+                );
+        }
 
         return redirect()
             ->route(

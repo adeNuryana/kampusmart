@@ -123,7 +123,7 @@
 
         <section class="grid gap-4
                    sm:grid-cols-2
-                   xl:grid-cols-4">
+                   xl:grid-cols-3">
 
 
             {{-- TOTAL PRODUCT --}}
@@ -202,78 +202,6 @@
 
 
 
-            {{-- NEW ORDER --}}
-            <div
-                class="relative overflow-hidden
-                       rounded-3xl border
-                       border-[#E8D8B9]
-                       bg-white p-5 shadow-sm">
-
-                <div class="absolute inset-x-0 top-0
-                           h-1 bg-[#C89B55]">
-                </div>
-
-
-                <div class="flex items-start
-                           justify-between gap-4">
-
-                    <div>
-
-                        <p
-                            class="text-xs font-bold
-                                   uppercase tracking-wide
-                                   text-[#A87A37]">
-
-                            Pesanan Baru
-
-                        </p>
-
-
-                        <p
-                            class="mt-5 text-3xl
-                                   font-black
-                                   tracking-tight
-                                   text-[#A87A37]">
-
-                            {{ number_format($pendingOrders) }}
-
-                        </p>
-
-
-                        <p class="mt-2 text-xs
-                                   text-slate-400">
-
-                            Menunggu konfirmasi
-
-                        </p>
-
-                    </div>
-
-
-                    <div
-                        class="flex size-11
-                               shrink-0 items-center
-                               justify-center
-                               rounded-xl
-                               bg-[#C89B55]
-                               text-white">
-
-                        <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-
-                            <path d="M6 3h12v18H6z" />
-                            <path d="M9 8h6" />
-                            <path d="M9 12h6" />
-
-                        </svg>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
             {{-- PROCESSING --}}
             <div
                 class="relative overflow-hidden
@@ -315,7 +243,7 @@
                         <p class="mt-2 text-xs
                                    text-slate-400">
 
-                            Dikonfirmasi & diproses
+                            Pesanan yang sedang ditangani
 
                         </p>
 
@@ -538,6 +466,134 @@
 
 
         {{-- ===================================================== --}}
+        {{-- SALES CHART --}}
+        {{-- ===================================================== --}}
+
+        <section
+            class="mt-6 overflow-hidden rounded-3xl border border-[#DFD2C7]
+                   bg-white shadow-sm">
+
+            <div
+                class="flex flex-col gap-4 border-b border-[#E7DBD1] bg-[#FAF7F2]
+                       px-5 py-4 lg:flex-row lg:items-center lg:justify-between">
+
+                <div class="flex items-center gap-3">
+
+                    <div
+                        class="flex size-10 shrink-0 items-center justify-center rounded-xl
+                               bg-[#EEF3EA] text-[#65795E]">
+
+                        <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.8">
+                            <path d="M4 19V9" />
+                            <path d="M10 19V5" />
+                            <path d="M16 19v-7" />
+                            <path d="M22 19V3" />
+                        </svg>
+
+                    </div>
+
+                    <div>
+                        <h2 id="dashboardSalesChartTitle" class="font-bold text-[#332B26]">
+                            1 Bulan Terakhir
+                        </h2>
+
+                        <p class="mt-0.5 text-xs text-slate-500">
+                            Omzet dan transaksi dari pesanan yang sudah selesai.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="inline-flex w-full rounded-xl border border-[#DFD2C7]
+                           bg-white p-1 sm:w-auto">
+
+                    <button type="button" data-sales-period="month" aria-pressed="true"
+                        class="flex-1 rounded-lg bg-[#4371d1] px-4 py-2 text-xs font-bold
+                               text-white transition sm:flex-none">
+                        1 Bulan
+                    </button>
+
+                    <button type="button" data-sales-period="six_months" aria-pressed="false"
+                        class="flex-1 rounded-lg px-4 py-2 text-xs font-bold text-[#806F64]
+                               transition hover:bg-[#F5ECE6] sm:flex-none">
+                        6 Bulan
+                    </button>
+
+                    <button type="button" data-sales-period="year" aria-pressed="false"
+                        class="flex-1 rounded-lg px-4 py-2 text-xs font-bold text-[#806F64]
+                               transition hover:bg-[#F5ECE6] sm:flex-none">
+                        1 Tahun
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="grid gap-5 p-5 lg:grid-cols-[220px_minmax(0,1fr)]">
+
+                <div class="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+
+                    <div class="rounded-2xl border border-[#D3DFCE] bg-[#F7FAF5] p-4">
+                        <p class="text-[10px] font-bold uppercase tracking-wide text-[#65795E]">
+                            Omzet Periode
+                        </p>
+                        <p id="dashboardSalesRevenue"
+                            class="mt-2 break-words text-xl font-black text-[#332B26]">
+                            Rp0
+                        </p>
+                    </div>
+
+                    <div class="rounded-2xl border border-[#EBCFC2] bg-[#FFF8F4] p-4">
+                        <p class="text-[10px] font-bold uppercase tracking-wide text-[#A95E43]">
+                            Transaksi Selesai
+                        </p>
+                        <p id="dashboardSalesTransactions" class="mt-2 text-xl font-black text-[#332B26]">
+                            0
+                        </p>
+                    </div>
+
+                    <div class="rounded-2xl border border-[#DFD2C7] bg-[#FAF7F2] p-4">
+                        <p class="text-[10px] font-bold uppercase tracking-wide text-[#927D6F]">
+                            Rentang Data
+                        </p>
+                        <p id="dashboardSalesPeriod" class="mt-2 text-xs font-semibold leading-5 text-[#4D4038]">
+                            -
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="min-w-0">
+                    <div class="mb-3 flex flex-wrap items-center justify-end gap-4 text-xs font-semibold text-slate-500">
+                        <span class="inline-flex items-center gap-1.5">
+                            <span class="size-2.5 rounded-sm bg-[#718268]"></span>
+                            Omzet
+                        </span>
+                        <span class="inline-flex items-center gap-1.5">
+                            <span class="size-2.5 rounded-full bg-[#C8795A]"></span>
+                            Transaksi
+                        </span>
+                    </div>
+
+                    <div class="relative h-[300px] sm:h-[340px]">
+                        <canvas id="dashboardSalesChart"></canvas>
+                    </div>
+                </div>
+
+            </div>
+
+            <script id="dashboardSalesChartData" type="application/json">@json($salesChartData)</script>
+
+        </section>
+
+
+
+        {{-- ===================================================== --}}
         {{-- RECENT ORDERS + LOW STOCK --}}
         {{-- ===================================================== --}}
 
@@ -675,35 +731,24 @@
                             @forelse ($recentOrders as $order)
                                 @php
                                     $statusClass = match ($order->status) {
-                                        'pending' => 'border-[#E8D8B9] bg-[#FAF2DF] text-[#A87A37]',
-
-                                        'confirmed' => 'border-[#DFD2C7] bg-[#F1E6DE] text-[#4371d1]',
-
                                         'processing' => 'border-[#EBCFC2] bg-[#FBEAE2] text-[#A95E43]',
-
-                                        'completed', 'sold' => 'border-[#D3DFCE] bg-[#EEF3EA] text-[#65795E]',
-
+                                        'sold' => 'border-[#D3DFCE] bg-[#EEF3EA] text-[#65795E]',
                                         'cancelled' => 'border-[#ECD2CF] bg-[#FAEDEC] text-[#A65954]',
 
                                         default => 'border-slate-200 bg-slate-100 text-slate-600',
                                     };
 
                                     $statusDot = match ($order->status) {
-                                        'pending' => 'bg-[#C89B55]',
-                                        'confirmed' => 'bg-[#4371d1]',
                                         'processing' => 'bg-[#C8795A]',
-                                        'completed', 'sold' => 'bg-[#718268]',
+                                        'sold' => 'bg-[#718268]',
                                         'cancelled' => 'bg-[#A65954]',
                                         default => 'bg-slate-400',
                                     };
 
                                     $statusLabel = match ($order->status) {
-                                        'pending' => 'Menunggu',
-                                        'confirmed' => 'Dikonfirmasi',
                                         'processing' => 'Diproses',
-                                        'completed' => 'Selesai',
-                                        'sold' => 'Terjual',
-                                        'cancelled' => 'Dibatalkan',
+                                        'sold' => 'Selesai',
+                                        'cancelled' => 'Ditolak/Dibatalkan',
                                         default => ucfirst($order->status),
                                     };
                                 @endphp
@@ -1295,3 +1340,194 @@
     </div>
 
 @endsection
+
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const canvas = document.getElementById('dashboardSalesChart');
+            const dataElement = document.getElementById('dashboardSalesChartData');
+
+            if (!canvas || !dataElement || !window.Chart) {
+                return;
+            }
+
+            const periods = JSON.parse(dataElement.textContent || '{}');
+            const buttons = document.querySelectorAll('[data-sales-period]');
+            const titleElement = document.getElementById('dashboardSalesChartTitle');
+            const periodElement = document.getElementById('dashboardSalesPeriod');
+            const revenueElement = document.getElementById('dashboardSalesRevenue');
+            const transactionsElement = document.getElementById('dashboardSalesTransactions');
+
+            const currencyFormatter = new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                maximumFractionDigits: 0,
+            });
+
+            const compactCurrencyFormatter = new Intl.NumberFormat('id-ID', {
+                notation: 'compact',
+                maximumFractionDigits: 1,
+            });
+
+            const initialData = periods.month;
+
+            if (!initialData) {
+                return;
+            }
+
+            const chart = new window.Chart(canvas, {
+                type: 'line',
+                data: {
+                    labels: initialData.labels,
+                    datasets: [
+                        {
+                            label: 'Omzet',
+                            data: initialData.revenue,
+                            yAxisID: 'revenue',
+                            backgroundColor: '#65795E',
+                            borderColor: '#65795E',
+                            pointBackgroundColor: '#FFFFFF',
+                            pointBorderColor: '#65795E',
+                            pointBorderWidth: 2,
+                            pointRadius: 3,
+                            pointHoverRadius: 5,
+                            borderWidth: 2.5,
+                            tension: 0.32,
+                        },
+                        {
+                            type: 'line',
+                            label: 'Transaksi',
+                            data: initialData.transactions,
+                            yAxisID: 'transactions',
+                            borderColor: '#C8795A',
+                            backgroundColor: '#C8795A',
+                            pointBackgroundColor: '#FFFFFF',
+                            pointBorderColor: '#C8795A',
+                            pointBorderWidth: 2,
+                            pointRadius: 3,
+                            pointHoverRadius: 5,
+                            borderWidth: 2.5,
+                            tension: 0.32,
+                        },
+                    ],
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        legend: {
+                            display: false,
+                        },
+                        tooltip: {
+                            backgroundColor: '#332B26',
+                            padding: 12,
+                            cornerRadius: 10,
+                            callbacks: {
+                                label(context) {
+                                    if (context.dataset.yAxisID === 'revenue') {
+                                        return ` Omzet: ${currencyFormatter.format(context.parsed.y)}`;
+                                    }
+
+                                    return ` Transaksi: ${context.parsed.y}`;
+                                },
+                            },
+                        },
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false,
+                            },
+                            border: {
+                                display: false,
+                            },
+                            ticks: {
+                                color: '#927D6F',
+                                maxRotation: 0,
+                                autoSkip: true,
+                                maxTicksLimit: 12,
+                            },
+                        },
+                        revenue: {
+                            beginAtZero: true,
+                            position: 'left',
+                            border: {
+                                display: false,
+                            },
+                            grid: {
+                                color: '#EEE5DE',
+                            },
+                            ticks: {
+                                color: '#65795E',
+                                callback(value) {
+                                    return `Rp${compactCurrencyFormatter.format(value)}`;
+                                },
+                            },
+                        },
+                        transactions: {
+                            beginAtZero: true,
+                            position: 'right',
+                            border: {
+                                display: false,
+                            },
+                            grid: {
+                                display: false,
+                            },
+                            ticks: {
+                                color: '#A95E43',
+                                precision: 0,
+                                stepSize: 1,
+                            },
+                        },
+                    },
+                },
+            });
+
+            const setActiveButton = function(activePeriod) {
+                buttons.forEach(function(button) {
+                    const isActive = button.dataset.salesPeriod === activePeriod;
+
+                    button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+                    button.classList.toggle('bg-[#4371d1]', isActive);
+                    button.classList.toggle('text-white', isActive);
+                    button.classList.toggle('text-[#806F64]', !isActive);
+                    button.classList.toggle('hover:bg-[#F5ECE6]', !isActive);
+                });
+            };
+
+            const showPeriod = function(periodKey) {
+                const periodData = periods[periodKey];
+
+                if (!periodData) {
+                    return;
+                }
+
+                titleElement.textContent = periodData.title;
+                periodElement.textContent = periodData.period;
+                revenueElement.textContent = currencyFormatter.format(periodData.total_revenue);
+                transactionsElement.textContent = new Intl.NumberFormat('id-ID').format(
+                    periodData.total_transactions,
+                );
+
+                chart.data.labels = periodData.labels;
+                chart.data.datasets[0].data = periodData.revenue;
+                chart.data.datasets[1].data = periodData.transactions;
+                chart.update();
+
+                setActiveButton(periodKey);
+            };
+
+            buttons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    showPeriod(button.dataset.salesPeriod);
+                });
+            });
+
+            showPeriod('month');
+        });
+    </script>
+@endpush

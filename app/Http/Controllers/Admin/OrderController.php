@@ -94,10 +94,8 @@ class OrderController extends Controller
                 in_array(
                     $status->value(),
                     [
-                        'pending',
-                        'confirmed',
                         'processing',
-                        'completed',
+                        'sold',
                         'cancelled',
                     ],
                     true
@@ -125,23 +123,14 @@ class OrderController extends Controller
 
         $totalOrders = Order::count();
 
-        $pendingOrders = Order::where(
-            'status',
-            'pending'
-        )->count();
-
-        $processingOrders = Order::whereIn(
-            'status',
-            [
-                'confirmed',
-                'processing',
-            ]
-        )->count();
+        $processingOrders = Order::where('status', 'processing')->count();
 
         $completedOrders = Order::where(
             'status',
-            'completed'
+            'sold'
         )->count();
+
+        $cancelledOrders = Order::where('status', 'cancelled')->count();
 
 
         return view(
@@ -149,9 +138,9 @@ class OrderController extends Controller
             compact(
                 'orders',
                 'totalOrders',
-                'pendingOrders',
                 'processingOrders',
-                'completedOrders'
+                'completedOrders',
+                'cancelledOrders'
             )
         );
     }

@@ -10,6 +10,8 @@
         @yield('title', 'Admin')  - {{ $siteSetting?->site_name ?? 'KampusMart' }}
     </title>
 
+    @include('partials.favicon')
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
@@ -99,41 +101,16 @@
                         {{-- LOGO --}}
 
                         <div
-                            class="flex
-                                   size-11
-                                   shrink-0
-                                   items-center
-                                   justify-center
-                                   rounded-2xl
-                                   bg-gradient-to-br
-                                   from-[#0a1d45]
-                                   via-[#4371d1]
-                                   to-[#9A6948]
-                                   text-white
-                                   shadow-sm">
+                            class="flex size-11 shrink-0 items-center justify-center overflow-hidden
+                                   rounded-xl border border-slate-200 bg-white font-black
+                                   text-[#4371d1] shadow-sm">
 
                             @if ($siteSetting?->logo)
                                 <img src="{{ asset('storage/' . $siteSetting->logo) }}"
                                     alt="{{ $siteSetting->site_name }}"
-                                    class="size-10
-               shrink-0
-               rounded-xl
-               object-contain">
+                                    class="h-full w-full bg-white object-contain p-1">
                             @else
-                                <div
-                                    class="flex size-10
-               shrink-0
-               items-center justify-center
-               rounded-2xl
-               bg-gradient-to-br
-               from-[#C8795A]
-               to-[#4371d1]
-               font-black
-               text-white">
-
-                                    {{ strtoupper(substr($siteSetting?->site_name ?? 'KampusMart', 0, 1)) }}
-
-                                </div>
+                                <span>{{ strtoupper(substr($siteSetting?->site_name ?? 'KampusMart', 0, 1)) }}</span>
                             @endif
                         </div>
 
@@ -837,14 +814,13 @@
                                        items-center
                                        justify-center
                                        rounded-full
-                                       bg-gradient-to-br
-                                       from-[#0a1d45]
-                                       via-[#4371d1]
-                                       to-[#9A6948]
+                                       border
+                                       border-slate-200
+                                       bg-white
                                        text-sm
                                        font-black
                                        uppercase
-                                       text-white
+                                       text-[#4371d1]
                                        shadow-sm
                                        ring-2
                                        ring-[#F1E6DE]">
@@ -943,11 +919,14 @@
                                                items-center
                                                justify-center
                                                rounded-full
-                                               bg-[#4371d1]
+                                               border
+                                               border-slate-200
+                                               bg-white
                                                text-sm
                                                font-black
                                                uppercase
-                                               text-white">
+                                               text-[#4371d1]
+                                               shadow-sm">
 
                                         {{ strtoupper(substr(auth()->user()?->name ?? 'A', 0, 1)) }}
 

@@ -45,9 +45,8 @@
             @endphp
 
 
-            <a
-                href="{{ route('buyer.products.show', $product) }}"
-                class="group overflow-hidden
+            <article
+                class="group relative overflow-hidden
                        rounded-2xl
                        border border-slate-100
                        bg-white
@@ -55,12 +54,16 @@
                        hover:-translate-y-1
                        hover:shadow-xl">
 
+                <a
+                    href="{{ route('buyer.products.show', $product) }}"
+                    class="block"
+                >
 
-                {{-- FOTO --}}
+                    {{-- FOTO --}}
 
-                <div
-                    class="relative aspect-square
-                           overflow-hidden bg-slate-100">
+                    <div
+                        class="relative aspect-square
+                               overflow-hidden bg-slate-100">
 
                     @if ($imageUrl)
 
@@ -103,12 +106,12 @@
 
                     @endif
 
-                </div>
+                    </div>
 
 
-                {{-- INFORMASI --}}
+                    {{-- INFORMASI --}}
 
-                <div class="p-3 sm:p-4">
+                    <div class="p-3 sm:p-4">
 
                     <h3
                         class="line-clamp-2
@@ -174,9 +177,15 @@
 
                     </div>
 
+                    </div>
+
+                </a>
+
+                <div class="absolute right-2 top-2 z-10">
+                    @include('buyer.partials.home-cart-button', ['product' => $product])
                 </div>
 
-            </a>
+            </article>
 
         @endforeach
 

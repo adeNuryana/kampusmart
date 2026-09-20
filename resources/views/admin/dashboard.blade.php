@@ -1558,6 +1558,8 @@
 
                                         'order_sold' => 'bg-[#EEF3EA] text-[#65795E]',
 
+                                        'order_cancelled' => 'bg-[#FAEDEC] text-[#A65954]',
+
                                         'product_created' => 'bg-[#EDF3EA] text-[#65795E]',
 
                                         'product_updated' => 'bg-[#FAF2DF] text-[#A87A37]',
@@ -1712,6 +1714,16 @@
                                                             stroke="currentColor" stroke-width="2">
 
                                                             <path d="m5 12 4 4L19 6" />
+
+                                                        </svg>
+                                                    @break
+
+                                                    {{-- ORDER CANCELLED --}}
+                                                    @case('order_cancelled')
+                                                        <svg class="size-4" viewBox="0 0 24 24" fill="none"
+                                                            stroke="currentColor" stroke-width="2">
+
+                                                            <path d="M6 6l12 12M18 6 6 18" />
 
                                                         </svg>
                                                     @break
