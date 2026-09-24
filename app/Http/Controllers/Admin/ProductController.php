@@ -97,8 +97,14 @@ class ProductController extends Controller
 
     public function destroy(Product $product): RedirectResponse
     {
+        $product->load('images');
+
         $productName = $product->name;
-        $imagePath = $product->image;
+        $imagePaths = $product->images
+            ->pluck('path')
+            ->push($product->image)
+            ->filter()
+            ->unique();
 
         ActivityLogger::log(
             'product_deleted_by_admin',
@@ -108,9 +114,9 @@ class ProductController extends Controller
 
         $product->delete();
 
-        if ($imagePath) {
-            Storage::disk('public')->delete($imagePath);
-        }
+        $imagePaths->each(
+            fn (string $path) => Storage::disk('public')->delete($path)
+        );
 
         return redirect()
             ->route('admin.products.index')

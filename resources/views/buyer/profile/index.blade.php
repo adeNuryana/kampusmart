@@ -579,7 +579,8 @@
 
 
 
-                            <form action="{{ route('buyer.profile.update') }}" method="POST">
+                            <form action="{{ route('buyer.profile.update') }}" method="POST"
+                                enctype="multipart/form-data">
 
                                 @csrf
                                 @method('PUT')
@@ -589,6 +590,71 @@
                                     class="grid
                                            gap-5
                                            sm:grid-cols-2">
+
+
+                                    {{-- PHOTO --}}
+
+                                    <div class="sm:col-span-2" x-data="{ previewUrl: null }">
+
+                                        <label for="photo"
+                                            class="mb-2 block text-sm font-semibold text-slate-700">
+
+                                            Foto Profil
+
+                                        </label>
+
+
+                                        <div
+                                            class="flex flex-col gap-4 rounded-2xl border border-[#E5D5C9]
+                                                   bg-[#FBF8F5] p-4 sm:flex-row sm:items-center">
+
+                                            <div class="relative size-20 shrink-0">
+                                                <x-user-avatar :user="$buyer" x-show="!previewUrl"
+                                                    class="size-20 rounded-full bg-gradient-to-br
+                                                           from-[#0a1d45] via-[#4371d1] to-[#9A6948]
+                                                           text-2xl font-black uppercase text-white
+                                                           shadow-lg ring-4 ring-white" />
+
+                                                <img x-cloak x-show="previewUrl" :src="previewUrl"
+                                                    alt="Preview foto profil"
+                                                    class="absolute inset-0 size-20 rounded-full object-cover
+                                                           shadow-lg ring-4 ring-white">
+                                            </div>
+
+
+                                            <div class="min-w-0 flex-1">
+                                                <input type="file" name="photo" id="photo"
+                                                    accept="image/jpeg,image/png,image/webp"
+                                                    @change="
+                                                        const file = $event.target.files[0];
+
+                                                        if (file) {
+                                                            if (previewUrl) {
+                                                                URL.revokeObjectURL(previewUrl);
+                                                            }
+
+                                                            previewUrl = URL.createObjectURL(file);
+                                                        }
+                                                    "
+                                                    class="block w-full rounded-xl border border-[#E5D5C9]
+                                                           bg-white px-3 py-2 text-sm text-slate-600">
+
+                                                <p class="mt-2 text-xs leading-5 text-slate-400">
+                                                    JPG, PNG, atau WebP. Maksimal 2 MB. Gunakan foto persegi agar hasil avatar lebih rapi.
+                                                </p>
+                                            </div>
+
+                                        </div>
+
+
+                                        @error('photo')
+                                            <p class="mt-2 text-xs font-medium text-[#A65954]">
+                                                {{ $message }}
+                                            </p>
+                                        @enderror
+
+                                    </div>
+
 
 
                                     {{-- NAME --}}

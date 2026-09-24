@@ -551,7 +551,7 @@
                                     <h2 class="font-bold
                                                text-[#332B26]">
 
-                                        Foto Produk
+                                        Foto Produk (Maksimal 5)
 
                                     </h2>
 
@@ -559,7 +559,7 @@
                                         class="mt-0.5 text-xs
                                                text-slate-500">
 
-                                        Foto utama produk.
+                                        Foto pertama akan menjadi foto utama produk.
 
                                     </p>
 
@@ -573,7 +573,7 @@
                         <div class="p-5">
 
                             <div id="imagePreviewContainer"
-                                class="flex aspect-square
+                                class="flex min-h-72
                                        items-center justify-center
                                        overflow-hidden
                                        rounded-2xl
@@ -581,9 +581,11 @@
                                        border-[#DFD2C7]
                                        bg-[#FAF7F2]">
 
-                                <img id="imagePreview" src="" alt="Preview Produk"
-                                    class="hidden h-full
-                                           w-full object-cover">
+                                <div id="imagePreviews"
+                                    class="hidden h-full w-full
+                                           grid-cols-2 gap-2 p-2
+                                           sm:grid-cols-3">
+                                </div>
 
 
                                 <div id="imagePlaceholder" class="px-4 text-center">
@@ -622,7 +624,7 @@
                                     <p class="mt-1 text-xs
                                                text-slate-400">
 
-                                        Pilih foto untuk menampilkan preview.
+                                        Pilih satu sampai lima foto untuk menampilkan preview.
 
                                     </p>
 
@@ -631,7 +633,7 @@
                             </div>
 
 
-                            <label for="image"
+                            <label for="images"
                                 class="mt-4 inline-flex
                                        h-10 w-full
                                        cursor-pointer
@@ -652,25 +654,30 @@
 
                                 </svg>
 
-                                Pilih Foto
+                                Pilih Foto Produk
 
                             </label>
 
 
-                            <input type="file" name="image" id="image" accept="image/jpeg,image/png,image/webp"
-                                class="hidden">
+                            <input type="file" name="images[]" id="images"
+                                accept="image/jpeg,image/png,image/webp" multiple class="hidden">
 
 
                             <p class="mt-3 text-xs
                                        leading-5 text-slate-400">
 
-                                JPG, PNG atau WebP.
-                                Maksimal 2 MB.
+                                JPG, PNG atau WebP. Maksimal 5 foto dan 2 MB per foto.
 
                             </p>
 
 
-                            @error('image')
+                            <p id="imageLimitError"
+                                class="mt-2 hidden text-xs font-medium text-[#A65954]">
+                                Maksimal lima foto dapat dipilih.
+                            </p>
+
+
+                            @error('images')
                                 <p
                                     class="mt-2 text-xs
                                            font-medium
@@ -678,6 +685,12 @@
 
                                     {{ $message }}
 
+                                </p>
+                            @enderror
+
+                            @error('images.*')
+                                <p class="mt-2 text-xs font-medium text-[#A65954]">
+                                    {{ $message }}
                                 </p>
                             @enderror
 
@@ -905,26 +918,51 @@
         document.addEventListener('DOMContentLoaded', function() {
 
             const imageInput =
-                document.getElementById('image');
+                document.getElementById('images');
 
-            const imagePreview =
-                document.getElementById('imagePreview');
+            const imagePreviews =
+                document.getElementById('imagePreviews');
 
             const imagePlaceholder =
                 document.getElementById('imagePlaceholder');
+
+            const imageLimitError =
+                document.getElementById('imageLimitError');
+
+            let previewUrls = [];
 
 
             imageInput?.addEventListener(
                 'change',
                 function(event) {
 
-                    const file =
-                        event.target.files[0];
+                    const files =
+                        Array.from(event.target.files ?? []);
 
 
-                    if (!file) {
+                    previewUrls.forEach(url => URL.revokeObjectURL(url));
+                    previewUrls = [];
 
-                        imagePreview?.classList.add('hidden');
+                    if (files.length > 5) {
+                        event.target.value = '';
+                        imagePreviews?.classList.add('hidden');
+                        imagePreviews?.classList.remove('grid');
+                        imagePlaceholder?.classList.remove('hidden');
+                        imageLimitError?.classList.remove('hidden');
+
+                        return;
+                    }
+
+                    imageLimitError?.classList.add('hidden');
+
+                    if (files.length === 0) {
+
+                        if (imagePreviews) {
+                            imagePreviews.innerHTML = '';
+                            imagePreviews.classList.add('hidden');
+                            imagePreviews.classList.remove('grid');
+                        }
+
 
                         imagePlaceholder?.classList.remove(
                             'hidden'
@@ -934,31 +972,36 @@
                     }
 
 
-                    const reader =
-                        new FileReader();
+                    if (!imagePreviews) {
+                        return;
+                    }
 
+                    imagePreviews.innerHTML = '';
+                    imagePreviews.classList.remove('hidden');
+                    imagePreviews.classList.add('grid');
+                    imagePlaceholder?.classList.add('hidden');
 
-                    reader.onload =
-                        function(event) {
+                    files.forEach(function(file, index) {
+                        const previewUrl = URL.createObjectURL(file);
+                        previewUrls.push(previewUrl);
 
-                            if (!imagePreview) {
-                                return;
-                            }
+                        const figure = document.createElement('figure');
+                        figure.className =
+                            'relative aspect-square overflow-hidden rounded-xl border border-[#E7DBD1] bg-white';
 
-                            imagePreview.src =
-                                event.target.result;
+                        const image = document.createElement('img');
+                        image.src = previewUrl;
+                        image.alt = `Preview foto produk ${index + 1}`;
+                        image.className = 'size-full object-cover';
 
-                            imagePreview.classList.remove(
-                                'hidden'
-                            );
+                        const badge = document.createElement('span');
+                        badge.className =
+                            'absolute left-2 top-2 rounded-full bg-slate-950/70 px-2 py-1 text-[10px] font-bold text-white';
+                        badge.textContent = index === 0 ? 'Utama' : `${index + 1}`;
 
-                            imagePlaceholder?.classList.add(
-                                'hidden'
-                            );
-                        };
-
-
-                    reader.readAsDataURL(file);
+                        figure.append(image, badge);
+                        imagePreviews.appendChild(figure);
+                    });
                 }
             );
 

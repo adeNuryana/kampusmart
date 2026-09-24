@@ -82,7 +82,7 @@ class ProductController extends Controller
     }
     public function show(Product $product): View
     {
-        $product->load(['category', 'user.sellerProfile']);
+        $product->load(['category', 'images', 'user.sellerProfile']);
 
         /*
     |--------------------------------------------------------------------------

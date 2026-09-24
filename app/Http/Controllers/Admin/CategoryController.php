@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Services\ImageCompressor;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -13,6 +14,8 @@ use Illuminate\View\View;
 
 class CategoryController extends Controller
 {
+    public function __construct(private readonly ImageCompressor $imageCompressor) {}
+
     public function index(Request $request): View
     {
         $search = $request->string('search')->trim();
@@ -41,7 +44,7 @@ class CategoryController extends Controller
 
             'icon' => ['required', Rule::in(['food', 'drink', 'electronics', 'fashion', 'book', 'accessories', 'health', 'sport', 'beauty', 'home', 'service', 'other', 'custom'])],
 
-            'icon_image' => [Rule::requiredIf($request->input('icon') === 'custom'), 'nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:1024'],
+            'icon_image' => [Rule::requiredIf($request->input('icon') === 'custom'), 'nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:1024', 'dimensions:max_width=6000,max_height=6000'],
 
             'status' => ['required', Rule::in(['active', 'inactive'])],
         ]);
@@ -60,7 +63,13 @@ class CategoryController extends Controller
         $validated['slug'] = $slug;
 
         if ($request->input('icon') === 'custom') {
-            $validated['icon_image'] = $request->file('icon_image')->store('category-icons', 'public');
+            $validated['icon_image'] = $this->imageCompressor->store(
+                $request->file('icon_image'),
+                'category-icons',
+                512,
+                512,
+                85,
+            );
         } else {
             $validated['icon_image'] = null;
         }
@@ -80,7 +89,7 @@ class CategoryController extends Controller
 
             'icon' => ['required', Rule::in(['food', 'drink', 'electronics', 'fashion', 'book', 'accessories', 'health', 'sport', 'beauty', 'home', 'service', 'other', 'custom'])],
 
-            'icon_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:1024'],
+            'icon_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:1024', 'dimensions:max_width=6000,max_height=6000'],
 
             'status' => ['required', Rule::in(['active', 'inactive'])],
         ]);
@@ -91,13 +100,17 @@ class CategoryController extends Controller
     |--------------------------------------------------------------------------
     */
 
+        $oldIconPath = $category->icon_image;
+
         if ($request->input('icon') === 'custom') {
             if ($request->hasFile('icon_image')) {
-                if ($category->icon_image) {
-                    Storage::disk('public')->delete($category->icon_image);
-                }
-
-                $validated['icon_image'] = $request->file('icon_image')->store('category-icons', 'public');
+                $validated['icon_image'] = $this->imageCompressor->store(
+                    $request->file('icon_image'),
+                    'category-icons',
+                    512,
+                    512,
+                    85,
+                );
             } else {
                 /*
             | Kalau edit dan tidak upload gambar baru,
@@ -111,14 +124,18 @@ class CategoryController extends Controller
         | Beralih dari custom ke icon bawaan.
         */
 
-            if ($category->icon_image) {
-                Storage::disk('public')->delete($category->icon_image);
-            }
-
             $validated['icon_image'] = null;
         }
 
         $category->update($validated);
+
+        if (
+            $oldIconPath &&
+            $oldIconPath !== $validated['icon_image'] &&
+            Storage::disk('public')->exists($oldIconPath)
+        ) {
+            Storage::disk('public')->delete($oldIconPath);
+        }
 
         return redirect()->route('admin.categories.index')->with('success', 'Kategori berhasil diperbarui.');
     }

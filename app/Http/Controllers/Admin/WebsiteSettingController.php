@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\SiteSetting;
+use App\Services\ImageCompressor;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -11,6 +12,8 @@ use Illuminate\View\View;
 
 class WebsiteSettingController extends Controller
 {
+    public function __construct(private readonly ImageCompressor $imageCompressor) {}
+
     public function edit(): View
     {
         $setting = SiteSetting::query()->firstOrCreate(
@@ -30,7 +33,7 @@ class WebsiteSettingController extends Controller
 
             'admin_whatsapp' => ['nullable', 'string', 'min:9', 'max:25', 'regex:/^[+0-9()\-\s]+$/'],
 
-            'logo' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'logo' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048', 'dimensions:max_width=6000,max_height=6000'],
 
             'favicon' => ['nullable', 'file', 'mimes:ico,jpg,jpeg,png,webp', 'max:1024'],
         ]);
@@ -46,19 +49,38 @@ class WebsiteSettingController extends Controller
         $setting->admin_whatsapp = $validated['admin_whatsapp'] ?? null;
 
         if ($request->hasFile('logo')) {
+            $logoPath = $this->imageCompressor->store(
+                $request->file('logo'),
+                'branding',
+                1000,
+                1000,
+                88,
+            );
+
             if ($setting->logo) {
                 Storage::disk('public')->delete($setting->logo);
             }
 
-            $setting->logo = $request->file('logo')->store('branding', 'public');
+            $setting->logo = $logoPath;
         }
 
         if ($request->hasFile('favicon')) {
+            $favicon = $request->file('favicon');
+            $faviconPath = strtolower($favicon->getClientOriginalExtension()) === 'ico'
+                ? $favicon->store('branding/favicons', 'public')
+                : $this->imageCompressor->store(
+                    $favicon,
+                    'branding/favicons',
+                    256,
+                    256,
+                    90,
+                );
+
             if ($setting->favicon) {
                 Storage::disk('public')->delete($setting->favicon);
             }
 
-            $setting->favicon = $request->file('favicon')->store('branding/favicons', 'public');
+            $setting->favicon = $faviconPath;
         }
 
         $setting->save();

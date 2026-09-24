@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Seller;
 
 use App\Http\Controllers\Controller;
 use App\Services\ActivityLogger;
+use App\Services\ImageCompressor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules\Password;
@@ -11,6 +12,8 @@ use Illuminate\View\View;
 
 class SettingController extends Controller
 {
+    public function __construct(private readonly ImageCompressor $imageCompressor) {}
+
     /*
     |--------------------------------------------------------------------------
     | Halaman Pengaturan
@@ -63,6 +66,7 @@ class SettingController extends Controller
                 'image',
                 'mimes:jpg,jpeg,png,webp',
                 'max:2048',
+                'dimensions:max_width=6000,max_height=6000',
             ],
         ]);
 
@@ -75,6 +79,7 @@ class SettingController extends Controller
         $profile = $seller->sellerProfile;
 
         $photoPath = $profile?->photo;
+        $oldPhotoPath = $photoPath;
 
         /*
         |--------------------------------------------------------------------------
@@ -83,19 +88,12 @@ class SettingController extends Controller
         */
 
         if ($request->hasFile('photo')) {
-
-            if (
-                $photoPath &&
-                Storage::disk('public')->exists($photoPath)
-            ) {
-
-                Storage::disk('public')
-                    ->delete($photoPath);
-            }
-
-            $photoPath = $request
-                ->file('photo')
-                ->store('sellers', 'public');
+            $photoPath = $this->imageCompressor->store(
+                $request->file('photo'),
+                'sellers',
+                1000,
+                1000,
+            );
         }
 
         /*
@@ -122,6 +120,14 @@ class SettingController extends Controller
                 'photo' => $photoPath,
             ]
         );
+
+        if (
+            $oldPhotoPath &&
+            $oldPhotoPath !== $photoPath &&
+            Storage::disk('public')->exists($oldPhotoPath)
+        ) {
+            Storage::disk('public')->delete($oldPhotoPath);
+        }
 
         ActivityLogger::log(
             'seller_profile_updated',

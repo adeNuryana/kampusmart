@@ -3,14 +3,18 @@
 namespace App\Http\Controllers\Buyer;
 
 use App\Http\Controllers\Controller;
+use App\Services\ActivityLogger;
+use App\Services\ImageCompressor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
-use App\Services\ActivityLogger;
 
 class ProfileController extends Controller
 {
+    public function __construct(private readonly ImageCompressor $imageCompressor) {}
+
     /*
     |--------------------------------------------------------------------------
     | Halaman Profile
@@ -59,14 +63,43 @@ class ProfileController extends Controller
                 'string',
                 'max:20',
             ],
+
+            'photo' => [
+                'nullable',
+                'image',
+                'mimes:jpg,jpeg,png,webp',
+                'max:2048',
+                'dimensions:max_width=6000,max_height=6000',
+            ],
         ]);
 
+        $oldPhoto = $buyer->photo;
+        $photoPath = $oldPhoto;
+
+        if ($request->hasFile('photo')) {
+            $photoPath = $this->imageCompressor->store(
+                $request->file('photo'),
+                'buyers',
+                800,
+                800,
+            );
+        }
 
         $buyer->update([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'phone' => $validated['phone'] ?? null,
+            'photo' => $photoPath,
         ]);
+
+        if (
+            $request->hasFile('photo') &&
+            $oldPhoto &&
+            !str_starts_with($oldPhoto, 'http://') &&
+            !str_starts_with($oldPhoto, 'https://')
+        ) {
+            Storage::disk('public')->delete($oldPhoto);
+        }
 
         ActivityLogger::log(
             'profile_updated',

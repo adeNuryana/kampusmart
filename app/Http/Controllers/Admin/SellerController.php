@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Services\ImageCompressor;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,6 +15,8 @@ use Illuminate\View\View;
 
 class SellerController extends Controller
 {
+    public function __construct(private readonly ImageCompressor $imageCompressor) {}
+
     public function index(Request $request): View
     {
         $search = $request->string('search')->trim();
@@ -130,6 +133,7 @@ class SellerController extends Controller
                 'image',
                 'mimes:jpg,jpeg,png,webp',
                 'max:2048',
+                'dimensions:max_width=6000,max_height=6000',
             ],
         ]);
 
@@ -143,9 +147,12 @@ class SellerController extends Controller
         $photoPath = null;
 
         if ($request->hasFile('photo')) {
-            $photoPath = $request
-                ->file('photo')
-                ->store('sellers', 'public');
+            $photoPath = $this->imageCompressor->store(
+                $request->file('photo'),
+                'sellers',
+                1000,
+                1000,
+            );
         }
 
 
@@ -313,6 +320,7 @@ class SellerController extends Controller
                 'image',
                 'mimes:jpg,jpeg,png,webp',
                 'max:2048',
+                'dimensions:max_width=6000,max_height=6000',
             ],
 
             'password' => [
@@ -371,15 +379,19 @@ class SellerController extends Controller
 
             if ($request->hasFile('photo')) {
 
+                $newPhotoPath = $this->imageCompressor->store(
+                    $request->file('photo'),
+                    'sellers',
+                    1000,
+                    1000,
+                );
+
                 // Hapus foto lama
                 if ($photoPath && Storage::disk('public')->exists($photoPath)) {
                     Storage::disk('public')->delete($photoPath);
                 }
 
-                // Simpan foto baru
-                $photoPath = $request
-                    ->file('photo')
-                    ->store('sellers', 'public');
+                $photoPath = $newPhotoPath;
             }
 
 

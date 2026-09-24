@@ -14,13 +14,25 @@
 
         $productImage = $product->image ?? ($product->photo ?? ($product->thumbnail ?? null));
 
-        if ($productImage) {
-            $imageUrl = \Illuminate\Support\Str::startsWith($productImage, ['http://', 'https://'])
-                ? $productImage
-                : asset('storage/' . $productImage);
-        } else {
-            $imageUrl = null;
+        $galleryPaths = $product->images
+            ->pluck('path');
+
+        if ($productImage && !$galleryPaths->contains($productImage)) {
+            $galleryPaths->prepend($productImage);
         }
+
+        $galleryUrls = $galleryPaths
+            ->filter()
+            ->unique()
+            ->take(5)
+            ->map(
+                fn($path) => \Illuminate\Support\Str::startsWith($path, ['http://', 'https://'])
+                    ? $path
+                    : asset('storage/' . $path),
+            )
+            ->values();
+
+        $imageUrl = $galleryUrls->first();
 
         /*
         |--------------------------------------------------------------------------
@@ -63,6 +75,7 @@
     <div x-data="{
         quantity: 1,
         maxStock: {{ (int) ($product->stock ?? 0) }},
+        activeImage: @js($imageUrl),
         showBuyConfirm: false,
         paymentMethod: '',
         dashboardUrl: @js(route('buyer.dashboard'))
@@ -219,7 +232,7 @@
 
 
                             @if ($imageUrl)
-                                <img src="{{ $imageUrl }}" alt="{{ $product->name }}"
+                                <img src="{{ $imageUrl }}" :src="activeImage" alt="{{ $product->name }}"
                                     class="size-full
                                            object-cover
                                            transition
@@ -301,28 +314,37 @@
 
                         {{-- THUMBNAIL --}}
 
-                        @if ($imageUrl)
+                        @if ($galleryUrls->isNotEmpty())
                             <div
                                 class="mt-3
-                                       flex
+                                       grid grid-cols-5
                                        gap-2">
 
-                                <button type="button"
-                                    class="size-16
-                                           overflow-hidden
-                                           rounded-xl
-                                           border-2
-                                           border-[#4371d1]
-                                           bg-white
-                                           p-0.5
-                                           shadow-sm">
+                                @foreach ($galleryUrls as $index => $galleryImageUrl)
+                                    <button type="button"
+                                        @click="activeImage = @js($galleryImageUrl)"
+                                        :aria-pressed="activeImage === @js($galleryImageUrl)"
+                                        :class="activeImage === @js($galleryImageUrl)
+                                            ? 'border-[#4371d1] ring-2 ring-[#4371d1]/15'
+                                            : 'border-[#E7DBD1] hover:border-[#9AB5EB]'"
+                                        class="aspect-square
+                                               overflow-hidden
+                                               rounded-xl
+                                               border-2
+                                               bg-white
+                                               p-0.5
+                                               shadow-sm
+                                               transition"
+                                        aria-label="Tampilkan foto produk {{ $index + 1 }}">
 
-                                    <img src="{{ $imageUrl }}" alt="{{ $product->name }}"
-                                        class="size-full
-                                               rounded-lg
-                                               object-cover">
+                                        <img src="{{ $galleryImageUrl }}"
+                                            alt="{{ $product->name }} - foto {{ $index + 1 }}"
+                                            class="size-full
+                                                   rounded-lg
+                                                   object-cover">
 
-                                </button>
+                                    </button>
+                                @endforeach
 
                             </div>
                         @endif
@@ -685,11 +707,7 @@
 
 
                                     <button type="button"
-                                        @click="
-                                            if (quantity > 1) {
-                                                quantity--
-                                            }
-                                        "
+                                        @click="quantity = Math.max(quantity - 1, 1)"
                                         :disabled="quantity <= 1"
                                         class="flex
                                                size-10
@@ -725,14 +743,7 @@
 
 
                                     <button type="button"
-                                        @click="
-                                            if (
-                                                quantity <
-                                                maxStock
-                                            ) {
-                                                quantity++
-                                            }
-                                        "
+                                        @click="quantity = Math.min(quantity + 1, maxStock)"
                                         :disabled="quantity >=
                                             maxStock"
                                         class="flex
