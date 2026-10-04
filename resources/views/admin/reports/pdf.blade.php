@@ -30,7 +30,7 @@
 
             font-size: 10px;
 
-            color: #332B26;
+            color: #172554;
 
             background: #ffffff;
         }
@@ -49,7 +49,7 @@
 
             margin-bottom: 18px;
 
-            border-bottom: 2px solid #4371d1;
+            border-bottom: 2px solid #F97516;
         }
 
 
@@ -58,7 +58,7 @@
 
             font-weight: bold;
 
-            color: #4371d1;
+            color: #F97516;
 
             margin: 0;
         }
@@ -82,9 +82,9 @@
 
             border-radius: 5px;
 
-            background: #F4EAE2;
+            background: #FFF7ED;
 
-            color: #4371d1;
+            color: #F97516;
 
             font-weight: bold;
         }
@@ -105,7 +105,7 @@
 
             font-weight: bold;
 
-            color: #332B26;
+            color: #172554;
         }
 
 
@@ -135,7 +135,7 @@
 
             border-radius: 6px;
 
-            background: #FAF7F2;
+            background: #FFF7ED;
 
             vertical-align: top;
         }
@@ -159,12 +159,12 @@
 
             font-weight: bold;
 
-            color: #332B26;
+            color: #172554;
         }
 
 
         .coffee {
-            color: #4371d1;
+            color: #F97516;
         }
 
 
@@ -179,12 +179,12 @@
 
 
         .terracotta {
-            color: #A95E43;
+            color: #F97516;
         }
 
 
         .red {
-            color: #A65954;
+            color: #F97516;
         }
 
 
@@ -208,9 +208,9 @@
 
             border: 1px solid #DFD2C7;
 
-            background: #F4EAE2;
+            background: #FFF7ED;
 
-            color: #4371d1;
+            color: #F97516;
 
             font-size: 8px;
 
@@ -266,19 +266,19 @@
 
 
         .status-processing {
-            background: #FBEAE2;
-            color: #A95E43;
+            background: #FFF7ED;
+            color: #F97516;
         }
 
 
         .status-sold {
-            background: #EEF3EA;
+            background: #FFF7ED;
             color: #65795E;
         }
 
         .status-cancelled {
-            background: #FAEDEC;
-            color: #A65954;
+            background: #FFF7ED;
+            color: #F97516;
         }
 
 

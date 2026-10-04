@@ -19,7 +19,7 @@
             font-family: DejaVu Sans, sans-serif;
             font-size: 9px;
             line-height: 1.4;
-            color: #332B26;
+            color: #172554;
             background: #ffffff;
         }
 
@@ -32,7 +32,7 @@
         .header-table {
             border-collapse: collapse;
             margin-bottom: 14px;
-            border-bottom: 2px solid #C8795A;
+            border-bottom: 2px solid #F97516;
         }
 
         .header-table td {
@@ -42,7 +42,7 @@
 
         .brand {
             margin: 0;
-            color: #4371D1;
+            color: #F97516;
             font-size: 21px;
             font-weight: bold;
             line-height: 1.1;
@@ -50,7 +50,7 @@
 
         .document-label {
             margin-top: 4px;
-            color: #A95E43;
+            color: #F97516;
             font-size: 8px;
             font-weight: bold;
             letter-spacing: 0.8px;
@@ -88,8 +88,8 @@
             padding: 6px 9px;
             border: 1px solid #E8CFC4;
             border-radius: 5px;
-            background: #FBEAE2;
-            color: #A95E43;
+            background: #FFF7ED;
+            color: #F97516;
             font-size: 9px;
             font-weight: bold;
         }
@@ -111,7 +111,7 @@
             padding: 9px 11px;
             border: 1px solid #DFD2C7;
             border-radius: 6px;
-            background: #FAF7F2;
+            background: #FFF7ED;
         }
 
         .summary-label {
@@ -212,7 +212,7 @@
         }
 
         .order-number {
-            color: #4371D1;
+            color: #F97516;
             font-weight: bold;
         }
 

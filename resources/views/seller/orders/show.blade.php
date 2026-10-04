@@ -17,7 +17,7 @@
                        text-sm font-semibold
                        text-[#8B7465]
                        transition
-                       hover:text-[#A95E43]">
+                       hover:text-[#F97516]">
 
                 <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 
@@ -32,17 +32,17 @@
 
             @php
                 $statusClass = match ($order->status) {
-                    'processing' => 'border-[#EBCFC2] bg-[#FBEAE2] text-[#A95E43]',
-                    'sold' => 'border-[#D3DFCE] bg-[#EEF3EA] text-[#65795E]',
-                    'cancelled' => 'border-[#ECD2CF] bg-[#FAEDEC] text-[#A65954]',
+                    'processing' => 'border-[#EBCFC2] bg-[#FFF7ED] text-[#F97516]',
+                    'sold' => 'border-[#D3DFCE] bg-[#FFF7ED] text-[#65795E]',
+                    'cancelled' => 'border-[#ECD2CF] bg-[#FFF7ED] text-[#F97516]',
 
                     default => 'border-slate-200 bg-slate-100 text-slate-600',
                 };
 
                 $statusDot = match ($order->status) {
-                    'processing' => 'bg-[#C8795A]',
+                    'processing' => 'bg-[#F97516]',
                     'sold' => 'bg-[#718268]',
-                    'cancelled' => 'bg-[#A65954]',
+                    'cancelled' => 'bg-[#F97516]',
                     default => 'bg-slate-400',
                 };
 
@@ -64,10 +64,10 @@
 
                     <div
                         class="inline-flex items-center gap-2
-                               rounded-full bg-[#FBEAE2]
+                               rounded-full bg-[#FFF7ED]
                                px-3 py-1.5
                                text-xs font-bold
-                               text-[#A95E43]">
+                               text-[#F97516]">
 
                         <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
 
@@ -84,7 +84,7 @@
                     <h1
                         class="mt-3 text-2xl
                                font-black tracking-tight
-                               text-[#332B26]
+                               text-[#172554]
                                lg:text-3xl">
 
                         Detail Pesanan
@@ -136,7 +136,7 @@
                 class="mb-5 flex items-start gap-3
                        rounded-2xl
                        border border-[#D3DFCE]
-                       bg-[#EEF3EA]
+                       bg-[#FFF7ED]
                        px-4 py-3.5">
 
                 <div
@@ -172,14 +172,14 @@
                 class="mb-5 flex items-start gap-3
                        rounded-2xl
                        border border-[#ECD2CF]
-                       bg-[#FAEDEC]
+                       bg-[#FFF7ED]
                        px-4 py-3.5">
 
                 <div
                     class="flex size-8 shrink-0
                            items-center justify-center
                            rounded-lg
-                           bg-[#A65954]
+                           bg-[#F97516]
                            text-white">
 
                     <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -194,7 +194,7 @@
 
                 <p class="pt-1 text-sm
                            font-medium
-                           text-[#A65954]">
+                           text-[#F97516]">
 
                     {{ $message }}
 
@@ -229,7 +229,7 @@
                     <div
                         class="border-b
                                border-[#E7DBD1]
-                               bg-[#FAF7F2]
+                               bg-[#FFF7ED]
                                p-5">
 
                         <div class="flex items-center gap-3">
@@ -238,8 +238,8 @@
                                 class="flex size-9
                                        items-center justify-center
                                        rounded-xl
-                                       bg-[#F4EAE2]
-                                       text-[#4371d1]">
+                                       bg-[#FFF7ED]
+                                       text-[#F97516]">
 
                                 <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="1.8">
@@ -255,7 +255,7 @@
                             <div>
 
                                 <h2 class="font-bold
-                                           text-[#332B26]">
+                                           text-[#172554]">
 
                                     Informasi Pembeli
 
@@ -296,7 +296,7 @@
                                 <p
                                     class="mt-2 text-sm
                                            font-bold
-                                           text-[#4D4038]">
+                                           text-[#172554]">
 
                                     {{ $order->buyer_name }}
 
@@ -321,7 +321,7 @@
                                 <p
                                     class="mt-2 text-sm
                                            font-semibold
-                                           text-[#4D4038]">
+                                           text-[#172554]">
 
                                     {{ $order->buyer_phone ?? '-' }}
 
@@ -353,7 +353,7 @@
                                 <div
                                     class="mt-3 rounded-2xl
                                            border border-[#E8D8B9]
-                                           bg-[#FAF2DF]
+                                           bg-[#FFF7ED]
                                            p-4">
 
                                     <p
@@ -389,7 +389,7 @@
                     <div
                         class="border-b
                                border-[#E7DBD1]
-                               bg-[#FAF7F2]
+                               bg-[#FFF7ED]
                                p-5">
 
                         <div class="flex items-center
@@ -398,7 +398,7 @@
                             <div>
 
                                 <h2 class="font-bold
-                                           text-[#332B26]">
+                                           text-[#172554]">
 
                                     Produk Pesanan
 
@@ -416,10 +416,10 @@
 
                             <span
                                 class="rounded-full
-                                       bg-[#F4EAE2]
+                                       bg-[#FFF7ED]
                                        px-3 py-1.5
                                        text-xs font-bold
-                                       text-[#4371d1]">
+                                       text-[#F97516]">
 
                                 {{ $order->items->sum('quantity') }}
                                 barang
@@ -457,7 +457,7 @@
                                                items-center
                                                justify-center
                                                rounded-2xl
-                                               bg-[#FAF7F2]
+                                               bg-[#FFF7ED]
                                                text-[#B09C90]">
 
                                         <svg class="size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -480,7 +480,7 @@
                                 <div class="min-w-0 flex-1">
 
                                     <p class="font-bold
-                                               text-[#332B26]">
+                                               text-[#172554]">
 
                                         {{ $item->product_name }}
 
@@ -516,7 +516,7 @@
                                     <p
                                         class="mt-1 whitespace-nowrap
                                                font-black
-                                               text-[#332B26]">
+                                               text-[#172554]">
 
                                         Rp{{ number_format($item->subtotal, 0, ',', '.') }}
 
@@ -555,11 +555,11 @@
                     <div
                         class="border-b
                                border-[#E7DBD1]
-                               bg-[#FAF7F2]
+                               bg-[#FFF7ED]
                                p-5">
 
                         <h2 class="font-bold
-                                   text-[#332B26]">
+                                   text-[#172554]">
 
                             Ringkasan Pesanan
 
@@ -581,7 +581,7 @@
                             </span>
 
                             <span class="text-sm font-bold
-                                       text-[#4D4038]">
+                                       text-[#172554]">
 
                                 {{ $order->items->sum('quantity') }}
 
@@ -607,7 +607,7 @@
                                 class="mt-2 text-2xl
                                        font-black
                                        tracking-tight
-                                       text-[#4371d1]">
+                                       text-[#F97516]">
 
                                 Rp{{ number_format($order->subtotal, 0, ',', '.') }}
 
@@ -634,7 +634,7 @@
                     <div
                         class="border-b
                                border-[#E7DBD1]
-                               bg-[#FAF7F2]
+                               bg-[#FFF7ED]
                                p-5">
 
                         <div class="flex items-center gap-3">
@@ -644,8 +644,8 @@
                                        items-center
                                        justify-center
                                        rounded-xl
-                                       bg-[#FBEAE2]
-                                       text-[#A95E43]">
+                                       bg-[#FFF7ED]
+                                       text-[#F97516]">
 
                                 <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="1.8">
@@ -661,7 +661,7 @@
                             <div>
 
                                 <h2 class="font-bold
-                                           text-[#332B26]">
+                                           text-[#172554]">
 
                                     Status Pesanan
 
@@ -688,7 +688,7 @@
                         <div
                             class="rounded-2xl
                                    border border-[#E7DBD1]
-                                   bg-[#FAF7F2]
+                                   bg-[#FFF7ED]
                                    p-4">
 
                             <p
@@ -759,8 +759,8 @@
                                         onclick="return confirm('Tolak/batalkan pesanan ini? Stok produk akan dikembalikan.')"
                                         class="inline-flex h-11 w-full items-center justify-center gap-2
                                                rounded-xl border border-[#D79B96] bg-white px-4
-                                               text-sm font-bold text-[#A65954]
-                                               transition hover:bg-[#FAEDEC]">
+                                               text-sm font-bold text-[#F97516]
+                                               transition hover:bg-[#FFF7ED]">
                                         <svg class="size-4" viewBox="0 0 24 24" fill="none"
                                             stroke="currentColor" stroke-width="2">
                                             <path d="M6 6l12 12M18 6 6 18" />
@@ -773,7 +773,7 @@
                         @elseif ($order->status === 'sold')
                             <div
                                 class="mt-5 flex items-start gap-3 rounded-2xl
-                                       border border-[#D3DFCE] bg-[#EEF3EA] p-4">
+                                       border border-[#D3DFCE] bg-[#FFF7ED] p-4">
                                 <div
                                     class="flex size-8 shrink-0 items-center justify-center
                                            rounded-lg bg-[#718268] text-white">
@@ -796,10 +796,10 @@
                         @else
                             <div
                                 class="mt-5 flex items-start gap-3 rounded-2xl
-                                       border border-[#ECD2CF] bg-[#FAEDEC] p-4">
+                                       border border-[#ECD2CF] bg-[#FFF7ED] p-4">
                                 <div
                                     class="flex size-8 shrink-0 items-center justify-center
-                                           rounded-lg bg-[#A65954] text-white">
+                                           rounded-lg bg-[#F97516] text-white">
                                     <svg class="size-4" viewBox="0 0 24 24" fill="none"
                                         stroke="currentColor" stroke-width="2">
                                         <path d="M6 6l12 12M18 6 6 18" />
@@ -807,11 +807,11 @@
                                 </div>
 
                                 <div>
-                                    <p class="text-sm font-bold text-[#A65954]">
+                                    <p class="text-sm font-bold text-[#F97516]">
                                         Pesanan ditolak/dibatalkan
                                     </p>
 
-                                    <p class="mt-1 text-xs leading-5 text-[#A65954]">
+                                    <p class="mt-1 text-xs leading-5 text-[#F97516]">
                                         Pesanan tidak diproses dan stok produk telah dikembalikan.
                                     </p>
                                 </div>

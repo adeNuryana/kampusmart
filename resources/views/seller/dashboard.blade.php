@@ -19,10 +19,10 @@
 
                 <div
                     class="inline-flex items-center gap-2
-                           rounded-full bg-[#FBEAE2]
+                           rounded-full bg-[#FFF7ED]
                            px-3 py-1.5
                            text-xs font-bold
-                           text-[#A95E43]">
+                           text-[#F97516]">
 
                     <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
 
@@ -40,7 +40,7 @@
                 <h1
                     class="mt-3 text-2xl
                            font-black tracking-tight
-                           text-[#332B26]
+                           text-[#172554]
                            lg:text-3xl">
 
                     Selamat datang,
@@ -74,8 +74,8 @@
                     class="flex size-9
                            items-center justify-center
                            rounded-xl
-                           bg-[#FBEAE2]
-                           text-[#A95E43]">
+                           bg-[#FFF7ED]
+                           text-[#F97516]">
 
                     <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
 
@@ -103,7 +103,7 @@
                     <p
                         class="mt-0.5 max-w-[200px]
                                truncate text-sm
-                               font-bold text-[#4D4038]">
+                               font-bold text-[#172554]">
 
                         {{ auth()->user()?->sellerProfile?->store_name ?? 'Toko Saya' }}
 
@@ -134,7 +134,7 @@
                        bg-white p-5 shadow-sm">
 
                 <div class="absolute inset-x-0 top-0
-                           h-1 bg-[#4371d1]">
+                           h-1 bg-[#F97516]">
                 </div>
 
 
@@ -157,7 +157,7 @@
                             class="mt-5 text-3xl
                                    font-black
                                    tracking-tight
-                                   text-[#332B26]">
+                                   text-[#172554]">
 
                             {{ number_format($totalProducts) }}
 
@@ -184,7 +184,7 @@
                                shrink-0 items-center
                                justify-center
                                rounded-xl
-                               bg-[#4371d1]
+                               bg-[#F97516]
                                text-white">
 
                         <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -210,7 +210,7 @@
                        bg-white p-5 shadow-sm">
 
                 <div class="absolute inset-x-0 top-0
-                           h-1 bg-[#C8795A]">
+                           h-1 bg-[#F97516]">
                 </div>
 
 
@@ -222,7 +222,7 @@
                         <p
                             class="text-xs font-bold
                                    uppercase tracking-wide
-                                   text-[#A95E43]">
+                                   text-[#F97516]">
 
                             Sedang Diproses
 
@@ -233,7 +233,7 @@
                             class="mt-5 text-3xl
                                    font-black
                                    tracking-tight
-                                   text-[#A95E43]">
+                                   text-[#F97516]">
 
                             {{ number_format($processingOrders) }}
 
@@ -255,7 +255,7 @@
                                shrink-0 items-center
                                justify-center
                                rounded-xl
-                               bg-[#C8795A]
+                               bg-[#F97516]
                                text-white">
 
                         <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -382,7 +382,7 @@
                     <p
                         class="mt-1 text-2xl
                                font-black
-                               text-[#332B26]">
+                               text-[#172554]">
 
                         {{ number_format($completedOrders) }}
 
@@ -395,7 +395,7 @@
                     class="flex size-10
                            items-center justify-center
                            rounded-xl
-                           bg-[#EEF3EA]
+                           bg-[#FFF7ED]
                            text-[#65795E]">
 
                     <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -433,7 +433,7 @@
                     <p
                         class="mt-1 text-2xl
                                font-black
-                               text-[#332B26]">
+                               text-[#172554]">
 
                         {{ number_format($lowStockProducts) }}
 
@@ -446,7 +446,7 @@
                     class="flex size-10
                            items-center justify-center
                            rounded-xl
-                           bg-[#FAF2DF]
+                           bg-[#FFF7ED]
                            text-[#A87A37]">
 
                     <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -474,14 +474,14 @@
                    bg-white shadow-sm">
 
             <div
-                class="flex flex-col gap-4 border-b border-[#E7DBD1] bg-[#FAF7F2]
+                class="flex flex-col gap-4 border-b border-[#E7DBD1] bg-[#FFF7ED]
                        px-5 py-4 lg:flex-row lg:items-center lg:justify-between">
 
                 <div class="flex items-center gap-3">
 
                     <div
                         class="flex size-10 shrink-0 items-center justify-center rounded-xl
-                               bg-[#EEF3EA] text-[#65795E]">
+                               bg-[#FFF7ED] text-[#65795E]">
 
                         <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="1.8">
@@ -494,7 +494,7 @@
                     </div>
 
                     <div>
-                        <h2 id="dashboardSalesChartTitle" class="font-bold text-[#332B26]">
+                        <h2 id="dashboardSalesChartTitle" class="font-bold text-[#172554]">
                             1 Bulan Terakhir
                         </h2>
 
@@ -511,20 +511,20 @@
                            bg-white p-1 sm:w-auto">
 
                     <button type="button" data-sales-period="month" aria-pressed="true"
-                        class="flex-1 rounded-lg bg-[#4371d1] px-4 py-2 text-xs font-bold
+                        class="flex-1 rounded-lg bg-[#F97516] px-4 py-2 text-xs font-bold
                                text-white transition sm:flex-none">
                         1 Bulan
                     </button>
 
                     <button type="button" data-sales-period="six_months" aria-pressed="false"
                         class="flex-1 rounded-lg px-4 py-2 text-xs font-bold text-[#806F64]
-                               transition hover:bg-[#F5ECE6] sm:flex-none">
+                               transition hover:bg-[#FFF7ED] sm:flex-none">
                         6 Bulan
                     </button>
 
                     <button type="button" data-sales-period="year" aria-pressed="false"
                         class="flex-1 rounded-lg px-4 py-2 text-xs font-bold text-[#806F64]
-                               transition hover:bg-[#F5ECE6] sm:flex-none">
+                               transition hover:bg-[#FFF7ED] sm:flex-none">
                         1 Tahun
                     </button>
 
@@ -542,25 +542,25 @@
                             Omzet Periode
                         </p>
                         <p id="dashboardSalesRevenue"
-                            class="mt-2 break-words text-xl font-black text-[#332B26]">
+                            class="mt-2 break-words text-xl font-black text-[#172554]">
                             Rp0
                         </p>
                     </div>
 
                     <div class="rounded-2xl border border-[#EBCFC2] bg-[#FFF8F4] p-4">
-                        <p class="text-[10px] font-bold uppercase tracking-wide text-[#A95E43]">
+                        <p class="text-[10px] font-bold uppercase tracking-wide text-[#F97516]">
                             Transaksi Selesai
                         </p>
-                        <p id="dashboardSalesTransactions" class="mt-2 text-xl font-black text-[#332B26]">
+                        <p id="dashboardSalesTransactions" class="mt-2 text-xl font-black text-[#172554]">
                             0
                         </p>
                     </div>
 
-                    <div class="rounded-2xl border border-[#DFD2C7] bg-[#FAF7F2] p-4">
+                    <div class="rounded-2xl border border-[#DFD2C7] bg-[#FFF7ED] p-4">
                         <p class="text-[10px] font-bold uppercase tracking-wide text-[#927D6F]">
                             Rentang Data
                         </p>
-                        <p id="dashboardSalesPeriod" class="mt-2 text-xs font-semibold leading-5 text-[#4D4038]">
+                        <p id="dashboardSalesPeriod" class="mt-2 text-xs font-semibold leading-5 text-[#172554]">
                             -
                         </p>
                     </div>
@@ -575,7 +575,7 @@
                             Omzet
                         </span>
                         <span class="inline-flex items-center gap-1.5">
-                            <span class="size-2.5 rounded-full bg-[#C8795A]"></span>
+                            <span class="size-2.5 rounded-full bg-[#F97516]"></span>
                             Transaksi
                         </span>
                     </div>
@@ -618,7 +618,7 @@
                            justify-between gap-4
                            border-b
                            border-[#E7DBD1]
-                           bg-[#FAF7F2]
+                           bg-[#FFF7ED]
                            px-5 py-4">
 
                     <div class="flex items-center gap-3">
@@ -627,8 +627,8 @@
                             class="flex size-9
                                    items-center justify-center
                                    rounded-xl
-                                   bg-[#FBEAE2]
-                                   text-[#A95E43]">
+                                   bg-[#FFF7ED]
+                                   text-[#F97516]">
 
                             <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="1.8">
@@ -645,7 +645,7 @@
                         <div>
 
                             <h2 class="font-bold
-                                       text-[#332B26]">
+                                       text-[#172554]">
 
                                 Pesanan Terbaru
 
@@ -668,7 +668,7 @@
                             class="inline-flex items-center
                                    gap-1 text-xs
                                    font-bold
-                                   text-[#A95E43]
+                                   text-[#F97516]
                                    transition
                                    hover:text-[#8E4E38]">
 
@@ -693,7 +693,7 @@
 
                     <table class="w-full min-w-[720px]">
 
-                        <thead class="bg-[#F8F3ED]">
+                        <thead class="bg-[#FFF7ED]">
 
                             <tr
                                 class="text-left
@@ -731,17 +731,17 @@
                             @forelse ($recentOrders as $order)
                                 @php
                                     $statusClass = match ($order->status) {
-                                        'processing' => 'border-[#EBCFC2] bg-[#FBEAE2] text-[#A95E43]',
-                                        'sold' => 'border-[#D3DFCE] bg-[#EEF3EA] text-[#65795E]',
-                                        'cancelled' => 'border-[#ECD2CF] bg-[#FAEDEC] text-[#A65954]',
+                                        'processing' => 'border-[#EBCFC2] bg-[#FFF7ED] text-[#F97516]',
+                                        'sold' => 'border-[#D3DFCE] bg-[#FFF7ED] text-[#65795E]',
+                                        'cancelled' => 'border-[#ECD2CF] bg-[#FFF7ED] text-[#F97516]',
 
                                         default => 'border-slate-200 bg-slate-100 text-slate-600',
                                     };
 
                                     $statusDot = match ($order->status) {
-                                        'processing' => 'bg-[#C8795A]',
+                                        'processing' => 'bg-[#F97516]',
                                         'sold' => 'bg-[#718268]',
-                                        'cancelled' => 'bg-[#A65954]',
+                                        'cancelled' => 'bg-[#F97516]',
                                         default => 'bg-slate-400',
                                     };
 
@@ -756,7 +756,7 @@
 
                                 <tr
                                     class="text-sm transition
-                                           hover:bg-[#FBF7F3]">
+                                           hover:bg-[#FFF7ED]">
 
 
                                     {{-- ORDER --}}
@@ -764,7 +764,7 @@
 
                                         <p
                                             class="font-bold
-                                                   text-[#332B26]">
+                                                   text-[#172554]">
 
                                             {{ $order->order_number }}
 
@@ -789,7 +789,7 @@
 
                                         <p
                                             class="font-semibold
-                                                   text-[#4D4038]">
+                                                   text-[#172554]">
 
                                             {{ $order->buyer_name }}
 
@@ -814,7 +814,7 @@
 
                                         <p
                                             class="font-bold
-                                                   text-[#332B26]">
+                                                   text-[#172554]">
 
                                             Rp{{ number_format($order->subtotal, 0, ',', '.') }}
 
@@ -863,8 +863,8 @@
                                                            rounded-xl
                                                            text-[#8B7465]
                                                            transition
-                                                           hover:bg-[#FBEAE2]
-                                                           hover:text-[#A95E43]">
+                                                           hover:bg-[#FFF7ED]
+                                                           hover:text-[#F97516]">
 
                                                     <svg class="size-4.5" viewBox="0 0 24 24" fill="none"
                                                         stroke="currentColor" stroke-width="1.8">
@@ -901,8 +901,8 @@
                                                        items-center
                                                        justify-center
                                                        rounded-2xl
-                                                       bg-[#F4EAE2]
-                                                       text-[#4371d1]">
+                                                       bg-[#FFF7ED]
+                                                       text-[#F97516]">
 
                                                 <svg class="size-6" viewBox="0 0 24 24" fill="none"
                                                     stroke="currentColor" stroke-width="1.6">
@@ -918,7 +918,7 @@
 
                                             <p
                                                 class="mt-4 font-bold
-                                                       text-[#4D4038]">
+                                                       text-[#172554]">
 
                                                 Belum ada pesanan
 
@@ -968,7 +968,7 @@
                            justify-between gap-4
                            border-b
                            border-[#E7DBD1]
-                           bg-[#FAF7F2]
+                           bg-[#FFF7ED]
                            px-5 py-4">
 
                     <div class="flex items-center gap-3">
@@ -977,7 +977,7 @@
                             class="flex size-9
                                    items-center justify-center
                                    rounded-xl
-                                   bg-[#FAF2DF]
+                                   bg-[#FFF7ED]
                                    text-[#A87A37]">
 
                             <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -995,7 +995,7 @@
                         <div>
 
                             <h2 class="font-bold
-                                       text-[#332B26]">
+                                       text-[#172554]">
 
                                 Stok Menipis
 
@@ -1054,7 +1054,7 @@
                                            items-center
                                            justify-center
                                            rounded-xl
-                                           bg-[#FAF7F2]
+                                           bg-[#FFF7ED]
                                            text-[#B19E91]">
 
                                     <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -1078,7 +1078,7 @@
                                 <p
                                     class="truncate
                                            text-sm font-bold
-                                           text-[#4D4038]">
+                                           text-[#172554]">
 
                                     {{ $product->name }}
 
@@ -1104,10 +1104,10 @@
                                     <span
                                         class="inline-flex
                                                rounded-lg
-                                               bg-[#FAEDEC]
+                                               bg-[#FFF7ED]
                                                px-2.5 py-1
                                                text-xs font-black
-                                               text-[#A65954]">
+                                               text-[#F97516]">
 
                                         Habis
 
@@ -1116,7 +1116,7 @@
                                     <span
                                         class="inline-flex
                                                rounded-lg
-                                               bg-[#FAF2DF]
+                                               bg-[#FFF7ED]
                                                px-2.5 py-1
                                                text-xs font-black
                                                text-[#A87A37]">
@@ -1149,7 +1149,7 @@
                                        items-center
                                        justify-center
                                        rounded-2xl
-                                       bg-[#EEF3EA]
+                                       bg-[#FFF7ED]
                                        text-[#65795E]">
 
                                 <svg class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -1164,7 +1164,7 @@
 
 
                             <p class="mt-4 font-bold
-                                       text-[#4D4038]">
+                                       text-[#172554]">
 
                                 Stok produk aman
 
@@ -1199,10 +1199,10 @@
             <div
                 class="relative overflow-hidden
                        rounded-3xl
-                       bg-gradient-to-r
-                       from-[#A95E43]
-                       via-[#B96F51]
-                       to-[#4371d1]
+                       bg-[#F97516]
+
+
+
                        p-6 text-white
                        shadow-sm
                        sm:p-7">
@@ -1285,7 +1285,7 @@
                                        gap-2 rounded-xl
                                        bg-white px-5
                                        text-sm font-bold
-                                       text-[#A95E43]
+                                       text-[#F97516]
                                        shadow-sm transition
                                        hover:bg-[#FFF8F3]">
 
@@ -1399,10 +1399,10 @@
                             label: 'Transaksi',
                             data: initialData.transactions,
                             yAxisID: 'transactions',
-                            borderColor: '#C8795A',
-                            backgroundColor: '#C8795A',
+                            borderColor: '#F97516',
+                            backgroundColor: '#F97516',
                             pointBackgroundColor: '#FFFFFF',
-                            pointBorderColor: '#C8795A',
+                            pointBorderColor: '#F97516',
                             pointBorderWidth: 2,
                             pointRadius: 3,
                             pointHoverRadius: 5,
@@ -1423,7 +1423,7 @@
                             display: false,
                         },
                         tooltip: {
-                            backgroundColor: '#332B26',
+                            backgroundColor: '#172554',
                             padding: 12,
                             cornerRadius: 10,
                             callbacks: {
@@ -1478,7 +1478,7 @@
                                 display: false,
                             },
                             ticks: {
-                                color: '#A95E43',
+                                color: '#F97516',
                                 precision: 0,
                                 stepSize: 1,
                             },
@@ -1492,10 +1492,10 @@
                     const isActive = button.dataset.salesPeriod === activePeriod;
 
                     button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-                    button.classList.toggle('bg-[#4371d1]', isActive);
+                    button.classList.toggle('bg-[#F97516]', isActive);
                     button.classList.toggle('text-white', isActive);
                     button.classList.toggle('text-[#806F64]', !isActive);
-                    button.classList.toggle('hover:bg-[#F5ECE6]', !isActive);
+                    button.classList.toggle('hover:bg-[#FFF7ED]', !isActive);
                 });
             };
 

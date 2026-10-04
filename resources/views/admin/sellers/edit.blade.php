@@ -12,7 +12,7 @@
             <a href="{{ route('admin.sellers.index') }}"
                 class="inline-flex items-center gap-2
                        text-sm font-semibold text-[#8B7465]
-                       transition hover:text-[#4371d1]">
+                       transition hover:text-[#F97516]">
 
                 <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="m15 18-6-6 6-6" />
@@ -29,9 +29,9 @@
 
                     <div
                         class="inline-flex items-center gap-2
-                               rounded-full bg-[#FBEAE2]
+                               rounded-full bg-[#FFF7ED]
                                px-3 py-1.5 text-xs
-                               font-bold text-[#A95E43]">
+                               font-bold text-[#F97516]">
 
                         <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                             <path d="M12 20h9" />
@@ -43,7 +43,7 @@
 
                     <h1
                         class="mt-3 text-2xl font-black
-                               tracking-tight text-[#332B26]
+                               tracking-tight text-[#172554]
                                lg:text-3xl">
                         Edit Penjual
                     </h1>
@@ -59,7 +59,7 @@
                     <span
                         class="inline-flex w-fit items-center gap-2
                                rounded-full border border-[#D3DFCE]
-                               bg-[#EEF3EA] px-3 py-1.5
+                               bg-[#FFF7ED] px-3 py-1.5
                                text-xs font-bold text-[#65795E]">
 
                         <span class="size-1.5 rounded-full bg-[#718268]"></span>
@@ -71,10 +71,10 @@
                     <span
                         class="inline-flex w-fit items-center gap-2
                                rounded-full border border-[#ECD2CF]
-                               bg-[#FAEDEC] px-3 py-1.5
-                               text-xs font-bold text-[#A65954]">
+                               bg-[#FFF7ED] px-3 py-1.5
+                               text-xs font-bold text-[#F97516]">
 
-                        <span class="size-1.5 rounded-full bg-[#A65954]"></span>
+                        <span class="size-1.5 rounded-full bg-[#F97516]"></span>
 
                         Akun Nonaktif
 
@@ -90,9 +90,9 @@
             <div
                 class="mb-6 rounded-2xl
                        border border-[#ECD2CF]
-                       bg-[#FAEDEC] p-4">
+                       bg-[#FFF7ED] p-4">
 
-                <p class="text-sm font-bold text-[#A65954]">
+                <p class="text-sm font-bold text-[#F97516]">
                     Data belum dapat disimpan.
                 </p>
 
@@ -121,13 +121,13 @@
                        bg-white shadow-sm">
 
                 <div class="border-b border-[#E7DBD1]
-                           bg-[#FAF7F2] p-5 sm:p-6">
+                           bg-[#FFF7ED] p-5 sm:p-6">
 
                     <div class="flex items-center gap-3">
 
                         <div
                             class="flex size-10 items-center justify-center
-                                   rounded-xl bg-[#C8795A]
+                                   rounded-xl bg-[#F97516]
                                    text-white">
 
                             <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -141,7 +141,7 @@
                         </div>
 
                         <div>
-                            <h2 class="font-bold text-[#332B26]">
+                            <h2 class="font-bold text-[#172554]">
                                 Informasi Akun
                             </h2>
 
@@ -161,7 +161,7 @@
                     <div
                         class="mb-6 rounded-2xl
                                border border-[#E7DBD1]
-                               bg-[#FAF7F2] p-5">
+                               bg-[#FFF7ED] p-5">
 
                         <div class="flex flex-col gap-5 sm:flex-row sm:items-center">
 
@@ -177,7 +177,7 @@
                                     <div id="photoPlaceholder"
                                         class="flex size-24
                                                items-center justify-center
-                                               rounded-2xl bg-[#C8795A]
+                                               rounded-2xl bg-[#F97516]
                                                text-2xl font-black
                                                text-white">
 
@@ -198,7 +198,7 @@
 
                                 <label for="photo"
                                     class="mb-2 block text-sm
-                                           font-semibold text-[#4D4038]">
+                                           font-semibold text-[#172554]">
                                     Ganti Foto
                                 </label>
 
@@ -209,10 +209,10 @@
                                            text-sm text-slate-600
                                            file:mr-4 file:rounded-lg
                                            file:border-0
-                                           file:bg-[#FBEAE2]
+                                           file:bg-[#FFF7ED]
                                            file:px-4 file:py-2
                                            file:text-sm file:font-bold
-                                           file:text-[#A95E43]
+                                           file:text-[#F97516]
                                            hover:file:bg-[#F5DDD2]">
 
                                 <p class="mt-2 text-xs text-slate-400">
@@ -221,7 +221,7 @@
                                 </p>
 
                                 @error('photo')
-                                    <p class="mt-2 text-xs font-medium text-[#A65954]">
+                                    <p class="mt-2 text-xs font-medium text-[#F97516]">
                                         {{ $message }}
                                     </p>
                                 @enderror
@@ -236,9 +236,9 @@
                     <div class="grid gap-5 md:grid-cols-2">
 
                         <div>
-                            <label for="name" class="mb-2 block text-sm font-semibold text-[#4D4038]">
+                            <label for="name" class="mb-2 block text-sm font-semibold text-[#172554]">
                                 Nama Penjual
-                                <span class="text-[#A65954]">*</span>
+                                <span class="text-[#F97516]">*</span>
                             </label>
 
                             <input id="name" type="text" name="name" value="{{ old('name', $seller->name) }}"
@@ -246,17 +246,17 @@
                                 class="h-11 w-full rounded-xl border
                                        {{ $errors->has('name') ? 'border-[#D79B96]' : 'border-[#DFD2C7]' }}
                                        px-4 text-sm outline-none
-                                       focus:border-[#A97957]
-                                       focus:ring-4 focus:ring-[#F1E6DE]">
+                                       focus:border-[#F97516]
+                                       focus:ring-4 focus:ring-[#FFF7ED]">
 
                             @error('name')
-                                <p class="mt-2 text-xs text-[#A65954]">{{ $message }}</p>
+                                <p class="mt-2 text-xs text-[#F97516]">{{ $message }}</p>
                             @enderror
                         </div>
 
 
                         <div>
-                            <label for="nim" class="mb-2 block text-sm font-semibold text-[#4D4038]">
+                            <label for="nim" class="mb-2 block text-sm font-semibold text-[#172554]">
                                 NIM
                             </label>
 
@@ -265,19 +265,19 @@
                                 class="h-11 w-full rounded-xl
                                        border border-[#DFD2C7]
                                        px-4 text-sm outline-none
-                                       focus:border-[#A97957]
-                                       focus:ring-4 focus:ring-[#F1E6DE]">
+                                       focus:border-[#F97516]
+                                       focus:ring-4 focus:ring-[#FFF7ED]">
 
                             @error('nim')
-                                <p class="mt-2 text-xs text-[#A65954]">{{ $message }}</p>
+                                <p class="mt-2 text-xs text-[#F97516]">{{ $message }}</p>
                             @enderror
                         </div>
 
 
                         <div>
-                            <label for="email" class="mb-2 block text-sm font-semibold text-[#4D4038]">
+                            <label for="email" class="mb-2 block text-sm font-semibold text-[#172554]">
                                 Email
-                                <span class="text-[#A65954]">*</span>
+                                <span class="text-[#F97516]">*</span>
                             </label>
 
                             <input id="email" type="email" name="email" value="{{ old('email', $seller->email) }}"
@@ -285,17 +285,17 @@
                                 class="h-11 w-full rounded-xl border
                                        {{ $errors->has('email') ? 'border-[#D79B96]' : 'border-[#DFD2C7]' }}
                                        px-4 text-sm outline-none
-                                       focus:border-[#A97957]
-                                       focus:ring-4 focus:ring-[#F1E6DE]">
+                                       focus:border-[#F97516]
+                                       focus:ring-4 focus:ring-[#FFF7ED]">
 
                             @error('email')
-                                <p class="mt-2 text-xs text-[#A65954]">{{ $message }}</p>
+                                <p class="mt-2 text-xs text-[#F97516]">{{ $message }}</p>
                             @enderror
                         </div>
 
 
                         <div>
-                            <label for="phone" class="mb-2 block text-sm font-semibold text-[#4D4038]">
+                            <label for="phone" class="mb-2 block text-sm font-semibold text-[#172554]">
                                 Nomor HP
                             </label>
 
@@ -304,18 +304,18 @@
                                 class="h-11 w-full rounded-xl
                                        border border-[#DFD2C7]
                                        px-4 text-sm outline-none
-                                       focus:border-[#A97957]
-                                       focus:ring-4 focus:ring-[#F1E6DE]">
+                                       focus:border-[#F97516]
+                                       focus:ring-4 focus:ring-[#FFF7ED]">
 
                             @error('phone')
-                                <p class="mt-2 text-xs text-[#A65954]">{{ $message }}</p>
+                                <p class="mt-2 text-xs text-[#F97516]">{{ $message }}</p>
                             @enderror
                         </div>
 
 
                         <div class="md:col-span-2">
 
-                            <label for="status" class="mb-2 block text-sm font-semibold text-[#4D4038]">
+                            <label for="status" class="mb-2 block text-sm font-semibold text-[#172554]">
                                 Status Akun
                             </label>
 
@@ -324,8 +324,8 @@
                                        border border-[#DFD2C7]
                                        bg-white px-4 text-sm
                                        outline-none
-                                       focus:border-[#A97957]
-                                       focus:ring-4 focus:ring-[#F1E6DE]
+                                       focus:border-[#F97516]
+                                       focus:ring-4 focus:ring-[#FFF7ED]
                                        md:max-w-sm">
 
                                 <option value="active" @selected(old('status', $seller->status) === 'active')>
@@ -358,13 +358,13 @@
                        bg-white shadow-sm">
 
                 <div class="border-b border-[#E7DBD1]
-                           bg-[#FAF7F2] p-5 sm:p-6">
+                           bg-[#FFF7ED] p-5 sm:p-6">
 
                     <div class="flex items-center gap-3">
 
                         <div
                             class="flex size-10 items-center justify-center
-                                   rounded-xl bg-[#4371d1] text-white">
+                                   rounded-xl bg-[#F97516] text-white">
 
                             <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="1.8">
@@ -376,7 +376,7 @@
                         </div>
 
                         <div>
-                            <h2 class="font-bold text-[#332B26]">
+                            <h2 class="font-bold text-[#172554]">
                                 Informasi Toko
                             </h2>
 
@@ -394,9 +394,9 @@
 
                     <div>
 
-                        <label for="store_name" class="mb-2 block text-sm font-semibold text-[#4D4038]">
+                        <label for="store_name" class="mb-2 block text-sm font-semibold text-[#172554]">
                             Nama Toko
-                            <span class="text-[#A65954]">*</span>
+                            <span class="text-[#F97516]">*</span>
                         </label>
 
                         <input id="store_name" type="text" name="store_name"
@@ -404,11 +404,11 @@
                             class="h-11 w-full rounded-xl
                                    border border-[#DFD2C7]
                                    px-4 text-sm outline-none
-                                   focus:border-[#A97957]
-                                   focus:ring-4 focus:ring-[#F1E6DE]">
+                                   focus:border-[#F97516]
+                                   focus:ring-4 focus:ring-[#FFF7ED]">
 
                         @error('store_name')
-                            <p class="mt-2 text-xs text-[#A65954]">{{ $message }}</p>
+                            <p class="mt-2 text-xs text-[#F97516]">{{ $message }}</p>
                         @enderror
 
                     </div>
@@ -416,9 +416,9 @@
 
                     <div>
 
-                        <label for="whatsapp" class="mb-2 block text-sm font-semibold text-[#4D4038]">
+                        <label for="whatsapp" class="mb-2 block text-sm font-semibold text-[#172554]">
                             Nomor WhatsApp
-                            <span class="text-[#A65954]">*</span>
+                            <span class="text-[#F97516]">*</span>
                         </label>
 
                         <input id="whatsapp" type="text" name="whatsapp"
@@ -427,15 +427,15 @@
                             class="h-11 w-full rounded-xl
                                    border border-[#DFD2C7]
                                    px-4 text-sm outline-none
-                                   focus:border-[#A97957]
-                                   focus:ring-4 focus:ring-[#F1E6DE]">
+                                   focus:border-[#F97516]
+                                   focus:ring-4 focus:ring-[#FFF7ED]">
 
                         <p class="mt-2 text-xs text-slate-500">
                             Digunakan pembeli untuk menghubungi seller.
                         </p>
 
                         @error('whatsapp')
-                            <p class="mt-2 text-xs text-[#A65954]">{{ $message }}</p>
+                            <p class="mt-2 text-xs text-[#F97516]">{{ $message }}</p>
                         @enderror
 
                     </div>
@@ -443,7 +443,7 @@
 
                     <div class="md:col-span-2">
 
-                        <label for="faculty" class="mb-2 block text-sm font-semibold text-[#4D4038]">
+                        <label for="faculty" class="mb-2 block text-sm font-semibold text-[#172554]">
                             Fakultas
                         </label>
 
@@ -452,15 +452,15 @@
                             class="h-11 w-full rounded-xl
                                    border border-[#DFD2C7]
                                    px-4 text-sm outline-none
-                                   focus:border-[#A97957]
-                                   focus:ring-4 focus:ring-[#F1E6DE]">
+                                   focus:border-[#F97516]
+                                   focus:ring-4 focus:ring-[#FFF7ED]">
 
                     </div>
 
 
                     <div class="md:col-span-2">
 
-                        <label for="description" class="mb-2 block text-sm font-semibold text-[#4D4038]">
+                        <label for="description" class="mb-2 block text-sm font-semibold text-[#172554]">
                             Deskripsi Toko
                         </label>
 
@@ -468,8 +468,8 @@
                             class="w-full resize-none rounded-xl
                                    border border-[#DFD2C7]
                                    p-4 text-sm leading-6
-                                   outline-none focus:border-[#A97957]
-                                   focus:ring-4 focus:ring-[#F1E6DE]">{{ old('description', $seller->sellerProfile?->description) }}</textarea>
+                                   outline-none focus:border-[#F97516]
+                                   focus:ring-4 focus:ring-[#FFF7ED]">{{ old('description', $seller->sellerProfile?->description) }}</textarea>
 
                         <p class="mt-2 text-right text-xs text-slate-400">
                             Maksimal 1000 karakter
@@ -492,13 +492,13 @@
                        bg-white shadow-sm">
 
                 <div class="border-b border-[#E7DBD1]
-                           bg-[#FAF7F2] p-5 sm:p-6">
+                           bg-[#FFF7ED] p-5 sm:p-6">
 
                     <div class="flex items-center gap-3">
 
                         <div
                             class="flex size-10 items-center justify-center
-                                   rounded-xl bg-[#C89B55] text-white">
+                                   rounded-xl bg-[#FACC15] text-white">
 
                             <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="1.8">
@@ -509,7 +509,7 @@
                         </div>
 
                         <div>
-                            <h2 class="font-bold text-[#332B26]">
+                            <h2 class="font-bold text-[#172554]">
                                 Ubah Password
                             </h2>
 
@@ -527,7 +527,7 @@
 
                     <div>
 
-                        <label for="password" class="mb-2 block text-sm font-semibold text-[#4D4038]">
+                        <label for="password" class="mb-2 block text-sm font-semibold text-[#172554]">
                             Password Baru
                         </label>
 
@@ -539,15 +539,15 @@
                                        border border-[#DFD2C7]
                                        px-4 pr-11 text-sm
                                        outline-none
-                                       focus:border-[#A97957]
-                                       focus:ring-4 focus:ring-[#F1E6DE]">
+                                       focus:border-[#F97516]
+                                       focus:ring-4 focus:ring-[#FFF7ED]">
 
                             <button type="button" @click="showPassword = !showPassword"
                                 class="absolute right-3 top-1/2
                                        flex size-8 -translate-y-1/2
                                        items-center justify-center
                                        rounded-lg text-[#9C8677]
-                                       hover:bg-[#F1E6DE]">
+                                       hover:bg-[#FFF7ED]">
 
                                 <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="1.8">
@@ -560,7 +560,7 @@
                         </div>
 
                         @error('password')
-                            <p class="mt-2 text-xs text-[#A65954]">{{ $message }}</p>
+                            <p class="mt-2 text-xs text-[#F97516]">{{ $message }}</p>
                         @enderror
 
                     </div>
@@ -568,7 +568,7 @@
 
                     <div>
 
-                        <label for="password_confirmation" class="mb-2 block text-sm font-semibold text-[#4D4038]">
+                        <label for="password_confirmation" class="mb-2 block text-sm font-semibold text-[#172554]">
                             Konfirmasi Password Baru
                         </label>
 
@@ -581,15 +581,15 @@
                                        border border-[#DFD2C7]
                                        px-4 pr-11 text-sm
                                        outline-none
-                                       focus:border-[#A97957]
-                                       focus:ring-4 focus:ring-[#F1E6DE]">
+                                       focus:border-[#F97516]
+                                       focus:ring-4 focus:ring-[#FFF7ED]">
 
                             <button type="button" @click="showConfirmation = !showConfirmation"
                                 class="absolute right-3 top-1/2
                                        flex size-8 -translate-y-1/2
                                        items-center justify-center
                                        rounded-lg text-[#9C8677]
-                                       hover:bg-[#F1E6DE]">
+                                       hover:bg-[#FFF7ED]">
 
                                 <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="1.8">
@@ -622,15 +622,15 @@
                            rounded-xl border border-[#DFD2C7]
                            bg-white px-6 text-sm font-semibold
                            text-[#6F6259] transition
-                           hover:bg-[#F3EAE3]">
+                           hover:bg-[#FFF7ED]">
                     Batal
                 </a>
 
                 <button type="submit"
                     class="inline-flex h-11 items-center justify-center gap-2
-                           rounded-xl bg-[#C8795A] px-7
+                           rounded-xl bg-[#F97516] px-7
                            text-sm font-bold text-white shadow-sm
-                           transition hover:bg-[#B66F52]
+                           transition hover:bg-[#F97516]
                            focus:outline-none focus:ring-4
                            focus:ring-[#F5DDD2]">
 

@@ -14,10 +14,10 @@
 
             <div
                 class="inline-flex items-center gap-2
-                       rounded-full bg-[#FBEAE2]
+                       rounded-full bg-[#FFF7ED]
                        px-3 py-1.5
                        text-xs font-bold
-                       text-[#A95E43]">
+                       text-[#F97516]">
 
                 <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
 
@@ -35,7 +35,7 @@
             <h1
                 class="mt-3 text-2xl
                        font-black tracking-tight
-                       text-[#332B26]
+                       text-[#172554]
                        lg:text-3xl">
 
                 Pesanan Masuk
@@ -64,7 +64,7 @@
                 class="mb-5 flex items-start gap-3
                        rounded-2xl
                        border border-[#D3DFCE]
-                       bg-[#EEF3EA]
+                       bg-[#FFF7ED]
                        px-4 py-3.5">
 
                 <div
@@ -115,14 +115,14 @@
                 class="mb-5 flex items-start gap-3
                        rounded-2xl
                        border border-[#ECD2CF]
-                       bg-[#FAEDEC]
+                       bg-[#FFF7ED]
                        px-4 py-3.5">
 
                 <div
                     class="flex size-8 shrink-0
                            items-center justify-center
                            rounded-lg
-                           bg-[#A65954]
+                           bg-[#F97516]
                            text-white">
 
                     <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -137,7 +137,7 @@
 
                 <p class="pt-1 text-sm
                            font-medium
-                           text-[#A65954]">
+                           text-[#F97516]">
 
                     {{ $message }}
 
@@ -166,7 +166,7 @@
             <div
                 class="border-b
                        border-[#E7DBD1]
-                       bg-[#FAF7F2]
+                       bg-[#FFF7ED]
                        p-5">
 
 
@@ -180,8 +180,8 @@
                                text-sm font-bold
                                transition
                                {{ !request('status')
-                                   ? 'border-[#EBCFC2] bg-[#FBEAE2] text-[#A95E43]'
-                                   : 'border-transparent text-[#6F6259] hover:bg-[#F5ECE6]' }}">
+                                   ? 'border-[#EBCFC2] bg-[#FFF7ED] text-[#F97516]'
+                                   : 'border-transparent text-[#6F6259] hover:bg-[#FFF7ED]' }}">
 
                         Semua
 
@@ -195,10 +195,10 @@
                                text-sm font-bold
                                transition
                                {{ request('status') === 'processing'
-                                   ? 'border-[#EBCFC2] bg-[#FBEAE2] text-[#A95E43]'
-                                   : 'border-transparent text-[#6F6259] hover:bg-[#F5ECE6]' }}">
+                                   ? 'border-[#EBCFC2] bg-[#FFF7ED] text-[#F97516]'
+                                   : 'border-transparent text-[#6F6259] hover:bg-[#FFF7ED]' }}">
 
-                        <span class="size-1.5 rounded-full bg-[#C8795A]"></span>
+                        <span class="size-1.5 rounded-full bg-[#F97516]"></span>
 
                         Diproses
 
@@ -212,8 +212,8 @@
                                text-sm font-bold
                                transition
                                {{ request('status') === 'sold'
-                                   ? 'border-[#D3DFCE] bg-[#EEF3EA] text-[#65795E]'
-                                   : 'border-transparent text-[#6F6259] hover:bg-[#F5ECE6]' }}">
+                                   ? 'border-[#D3DFCE] bg-[#FFF7ED] text-[#65795E]'
+                                   : 'border-transparent text-[#6F6259] hover:bg-[#FFF7ED]' }}">
 
                         <span class="size-1.5 rounded-full bg-[#718268]"></span>
 
@@ -229,10 +229,10 @@
                                text-sm font-bold
                                transition
                                {{ request('status') === 'cancelled'
-                                   ? 'border-[#ECD2CF] bg-[#FAEDEC] text-[#A65954]'
-                                   : 'border-transparent text-[#6F6259] hover:bg-[#FAEDEC]' }}">
+                                   ? 'border-[#ECD2CF] bg-[#FFF7ED] text-[#F97516]'
+                                   : 'border-transparent text-[#6F6259] hover:bg-[#FFF7ED]' }}">
 
-                        <span class="size-1.5 rounded-full bg-[#A65954]"></span>
+                        <span class="size-1.5 rounded-full bg-[#F97516]"></span>
 
                         Ditolak/Dibatalkan
 
@@ -273,12 +273,12 @@
                                    rounded-xl border
                                    border-[#DFD2C7]
                                    bg-white pl-11 pr-4
-                                   text-sm text-[#4D4038]
+                                   text-sm text-[#172554]
                                    outline-none transition
                                    placeholder:text-[#B3A195]
-                                   focus:border-[#C8795A]
+                                   focus:border-[#F97516]
                                    focus:ring-4
-                                   focus:ring-[#FBEAE2]">
+                                   focus:ring-[#FFF7ED]">
 
                     </div>
 
@@ -287,11 +287,11 @@
                         class="inline-flex h-11
                                items-center justify-center
                                gap-2 rounded-xl
-                               bg-[#4371d1]
+                               bg-[#F97516]
                                px-5 text-sm
                                font-bold text-white
                                transition
-                               hover:bg-[#0a1d45]">
+                               hover:bg-[#172554]">
 
                         <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 
@@ -318,7 +318,7 @@
 
                 <table class="w-full min-w-[1050px]">
 
-                    <thead class="bg-[#F8F3ED]">
+                    <thead class="bg-[#FFF7ED]">
 
                         <tr
                             class="text-left text-xs
@@ -364,17 +364,17 @@
                         @forelse ($orders as $order)
                             @php
                                 $statusClass = match ($order->status) {
-                                    'processing' => 'border-[#EBCFC2] bg-[#FBEAE2] text-[#A95E43]',
-                                    'sold' => 'border-[#D3DFCE] bg-[#EEF3EA] text-[#65795E]',
-                                    'cancelled' => 'border-[#ECD2CF] bg-[#FAEDEC] text-[#A65954]',
+                                    'processing' => 'border-[#EBCFC2] bg-[#FFF7ED] text-[#F97516]',
+                                    'sold' => 'border-[#D3DFCE] bg-[#FFF7ED] text-[#65795E]',
+                                    'cancelled' => 'border-[#ECD2CF] bg-[#FFF7ED] text-[#F97516]',
 
                                     default => 'border-slate-200 bg-slate-100 text-slate-600',
                                 };
 
                                 $statusDot = match ($order->status) {
-                                    'processing' => 'bg-[#C8795A]',
+                                    'processing' => 'bg-[#F97516]',
                                     'sold' => 'bg-[#718268]',
-                                    'cancelled' => 'bg-[#A65954]',
+                                    'cancelled' => 'bg-[#F97516]',
                                     default => 'bg-slate-400',
                                 };
 
@@ -388,14 +388,14 @@
 
 
                             <tr class="text-sm transition
-                                       hover:bg-[#FBF7F3]">
+                                       hover:bg-[#FFF7ED]">
 
 
                                 {{-- ORDER --}}
                                 <td class="px-5 py-4">
 
                                     <p class="font-bold
-                                               text-[#332B26]">
+                                               text-[#172554]">
 
                                         {{ $order->order_number }}
 
@@ -417,7 +417,7 @@
                                 <td class="px-5 py-4">
 
                                     <p class="font-semibold
-                                               text-[#4D4038]">
+                                               text-[#172554]">
 
                                         {{ $order->buyer_name }}
 
@@ -441,10 +441,10 @@
                                     <span
                                         class="inline-flex items-center
                                                gap-2 rounded-lg
-                                               bg-[#F4EAE2]
+                                               bg-[#FFF7ED]
                                                px-2.5 py-1.5
                                                text-xs font-bold
-                                               text-[#4371d1]">
+                                               text-[#F97516]">
 
                                         {{ $order->items->sum('quantity') }}
 
@@ -462,7 +462,7 @@
                                     <span
                                         class="whitespace-nowrap
                                                font-bold
-                                               text-[#332B26]">
+                                               text-[#172554]">
 
                                         Rp{{ number_format($order->subtotal, 0, ',', '.') }}
 
@@ -528,9 +528,9 @@
                                             class="inline-flex size-9
                                                    items-center justify-center
                                                    rounded-xl
-                                                   text-[#A95E43]
+                                                   text-[#F97516]
                                                    transition
-                                                   hover:bg-[#FBEAE2]">
+                                                   hover:bg-[#FFF7ED]">
 
                                             <svg class="size-4.5" viewBox="0 0 24 24" fill="none"
                                                 stroke="currentColor" stroke-width="1.8">
@@ -565,8 +565,8 @@
                                                    size-16 items-center
                                                    justify-center
                                                    rounded-2xl
-                                                   bg-[#FBEAE2]
-                                                   text-[#A95E43]">
+                                                   bg-[#FFF7ED]
+                                                   text-[#F97516]">
 
                                             <svg class="size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                 stroke-width="1.7">
@@ -582,7 +582,7 @@
 
                                         <p
                                             class="mt-4 font-bold
-                                                   text-[#4D4038]">
+                                                   text-[#172554]">
 
                                             Belum ada pesanan
 
@@ -621,7 +621,7 @@
                 <div
                     class="border-t
                            border-[#E7DBD1]
-                           bg-[#FAF7F2]
+                           bg-[#FFF7ED]
                            px-5 py-4">
 
                     {{ $orders->links() }}

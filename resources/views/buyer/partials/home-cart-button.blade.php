@@ -11,7 +11,7 @@
 
             <button
                 type="submit"
-                class="flex size-9 items-center justify-center rounded-full bg-white/95 text-[#315ebc] shadow-lg ring-1 ring-slate-200 transition hover:scale-105 hover:bg-[#315ebc] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#315ebc] focus:ring-offset-2"
+                class="flex size-9 items-center justify-center rounded-full bg-white/95 text-[#F97516] shadow-lg ring-1 ring-slate-200 transition hover:scale-105 hover:bg-[#F97516] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#F97516] focus:ring-offset-2"
                 title="Tambah ke keranjang"
                 aria-label="Tambah {{ $product->name }} ke keranjang"
             >
@@ -32,7 +32,7 @@
 @else
     <a
         href="{{ route('login') }}"
-        class="flex size-9 items-center justify-center rounded-full bg-white/95 text-[#315ebc] shadow-lg ring-1 ring-slate-200 transition hover:scale-105 hover:bg-[#315ebc] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#315ebc] focus:ring-offset-2"
+        class="flex size-9 items-center justify-center rounded-full bg-white/95 text-[#F97516] shadow-lg ring-1 ring-slate-200 transition hover:scale-105 hover:bg-[#F97516] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#F97516] focus:ring-offset-2"
         title="Masuk untuk menambah ke keranjang"
         aria-label="Masuk untuk menambah {{ $product->name }} ke keranjang"
     >

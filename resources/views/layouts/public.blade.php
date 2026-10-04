@@ -65,14 +65,12 @@
                                    items-center
                                    justify-center
                                    rounded-2xl
-                                   bg-gradient-to-br
-                                   from-[#0a1d45]
-                                   to-[#4371d1]
+                                   bg-[#172554]
                                    text-sm
                                    font-black
                                    text-white
                                    shadow-lg
-                                   shadow-blue-600/20">
+                                   shadow-[#F97516]/20">
                         {{ strtoupper(substr($siteSetting?->site_name ?? 'KampusMart', 0, 1)) }}
                     </div>
                 @endif
@@ -83,7 +81,7 @@
                         class="text-lg
                                    font-black
                                    tracking-tight
-                                   text-[#0a1d45]">
+                                   text-[#172554]">
                         {{ $siteSetting?->site_name ?? 'KampusMart' }}
                     </p>
 
@@ -114,14 +112,14 @@
                         <input type="text" name="search" value="{{ request('search') }}"
                             placeholder="Cari produk di KampusMart..."
                             class="h-11 w-full rounded-xl
-                   border border-[#06296f]
-                   bg-slate-50 pl-11 pr-4
+                   border border-[#172554]/30
+                   bg-[#FFF7ED] pl-11 pr-4
                    text-sm outline-none
                    transition
-                   focus:border-[#3b72df]
+                   focus:border-[#F97516]
                    focus:bg-white
                    focus:ring-4
-                   focus:ring-[#477eec]">
+                   focus:ring-[#F97516]/20">
 
                     </div>
 
@@ -139,7 +137,7 @@
            text-slate-600
            transition
            hover:bg-slate-100
-           hover:text-[#315EBB]
+            hover:text-[#F97516]
            md:inline-flex">
                     Pesanan
                 </a>
@@ -169,7 +167,7 @@
                             class="absolute -right-1 -top-1
                    flex min-w-5 items-center
                    justify-center rounded-full
-                   bg-[#315EBB] px-1
+                    bg-[#F97516] px-1
                    text-[10px] font-bold
                    text-white">
                             {{ $cartCount > 99 ? '99+' : $cartCount }}
@@ -193,8 +191,8 @@
 
                             {{-- AVATAR --}}
                             <x-user-avatar :user="auth()->user()"
-                                class="size-9 rounded-full bg-[#315EBB]
-                                       text-sm font-bold text-[#dfe5f1]" />
+                                 class="size-9 rounded-full bg-[#172554]
+                                       text-sm font-bold text-[#FFF7ED]" />
 
 
                             {{-- NAME --}}
@@ -266,8 +264,8 @@
            font-medium
            text-slate-600
            transition
-           hover:bg-violet-50
-           hover:text-[#315EBB]">
+           hover:bg-[#FFF7ED]
+           hover:text-[#F97516]">
 
                                 <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="1.8">
@@ -286,8 +284,8 @@
                    rounded-xl px-3 py-2.5
                    text-sm font-medium
                    text-slate-600 transition
-                   hover:bg-violet-50
-                   hover:text-[#315EBB]">
+                   hover:bg-[#FFF7ED]
+                    hover:text-[#F97516]">
 
                                 <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="1.8">
@@ -345,14 +343,14 @@
                                items-center
                                justify-center
                                rounded-xl
-                               bg-[#315EBB]
+                                bg-[#F97516]
                                px-4
                                py-2.5
                                text-sm
                                font-bold
                                text-white
                                transition
-                               hover:bg-[#315EBB]
+                                hover:bg-[#172554]
                                md:inline-flex">
                         Masuk
                     </a>
@@ -422,7 +420,7 @@
                        justify-center
                        gap-1
                        transition
-                       {{ request()->routeIs('home') ? 'text-[#315EBB]' : 'text-slate-400' }}">
+                       {{ request()->routeIs('home') ? 'text-[#F97516]' : 'text-slate-400' }}">
 
                     <i class="fa-solid fa-house text-lg"></i>
 
@@ -431,7 +429,7 @@
                     </span>
 
                     @if (request()->routeIs('home'))
-                        <span class="h-1 w-1 rounded-full bg-[#315EBB]"></span>
+                        <span class="h-1 w-1 rounded-full bg-[#F97516]"></span>
                     @endif
 
                 </a>
@@ -446,7 +444,7 @@
                        justify-center
                        gap-1
                        transition
-                       {{ request()->routeIs('buyer.orders.*') ? 'text-[#315EBB]' : 'text-slate-400' }}">
+                       {{ request()->routeIs('buyer.orders.*') ? 'text-[#F97516]' : 'text-slate-400' }}">
 
                     <i class="fa-solid fa-receipt text-lg"></i>
 
@@ -455,7 +453,7 @@
                     </span>
 
                     @if (request()->routeIs('buyer.orders.*'))
-                        <span class="h-1 w-1 rounded-full bg-[#315EBB]"></span>
+                        <span class="h-1 w-1 rounded-full bg-[#F97516]"></span>
                     @endif
 
                 </a>
@@ -471,7 +469,7 @@
                        justify-center
                        gap-1
                        transition
-                       {{ request()->routeIs('buyer.cart.*') ? 'text-[#315EBB]' : 'text-slate-400' }}">
+                       {{ request()->routeIs('buyer.cart.*') ? 'text-[#F97516]' : 'text-slate-400' }}">
 
                     <div class="relative">
 
@@ -487,7 +485,7 @@
                                    items-center
                                    justify-center
                                    rounded-full
-                                   bg-[#315EBB]
+                                   bg-[#F97516]
                                    px-1
                                    text-[8px]
                                    font-bold
@@ -503,7 +501,7 @@
                     </span>
 
                     @if (request()->routeIs('buyer.cart.*'))
-                        <span class="h-1 w-1 rounded-full bg-[#315EBB]"></span>
+                        <span class="h-1 w-1 rounded-full bg-[#F97516]"></span>
                     @endif
 
                 </a>
@@ -520,20 +518,20 @@
                        justify-center
                        gap-1
                        transition
-                       {{ request()->routeIs('buyer.dashboard', 'buyer.profile.*') ? 'text-[#315EBB]' : 'text-slate-400' }}">
+                       {{ request()->routeIs('buyer.dashboard', 'buyer.profile.*') ? 'text-[#F97516]' : 'text-slate-400' }}">
 
                         <x-user-avatar :user="auth()->user()"
                             class="size-7 rounded-full text-[10px] font-black
                                    {{ request()->routeIs('buyer.dashboard', 'buyer.profile.*')
-                                       ? 'bg-[#315EBB] text-white'
-                                       : 'bg-blue-100 text-[#315EBB]' }}" />
+                                       ? 'bg-[#F97516] text-white'
+                                       : 'bg-[#FFF7ED] text-[#172554]' }}" />
 
                         <span class="text-[10px] font-semibold">
                             Akun
                         </span>
 
                         @if (request()->routeIs('buyer.dashboard', 'buyer.profile.*'))
-                            <span class="h-1 w-1 rounded-full bg-[#315EBB]"></span>
+                            <span class="h-1 w-1 rounded-full bg-[#F97516]"></span>
                         @endif
 
                     </button>
@@ -631,8 +629,8 @@
                        pt-4">
 
                         <x-user-avatar :user="auth()->user()"
-                            class="size-12 rounded-2xl bg-[#315EBB] text-lg font-black
-                                   text-white shadow-lg shadow-[#315EBB]/20" />
+                            class="size-12 rounded-2xl bg-[#172554] text-lg font-black
+                                   text-white shadow-lg shadow-[#172554]/20" />
 
 
                         <div class="min-w-0 flex-1">
@@ -685,7 +683,7 @@
                            px-3
                            py-3
                            transition
-                           active:bg-violet-50">
+                           active:bg-[#FFF7ED]">
 
                             <div
                                 class="flex
@@ -694,8 +692,8 @@
                                items-center
                                justify-center
                                rounded-xl
-                               bg-violet-50
-                               text-[#315EBB]">
+                               bg-[#FFF7ED]
+                               text-[#F97516]">
                                 <i class="fa-solid fa-chart-pie"></i>
                             </div>
 

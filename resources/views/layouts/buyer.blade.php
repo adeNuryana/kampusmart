@@ -531,8 +531,8 @@
                        pt-4">
 
                     <x-user-avatar :user="auth()->user()"
-                        class="size-12 rounded-2xl bg-gradient-to-br from-violet-500
-                               to-violet-700 text-lg font-black text-white shadow-lg
+                        class="size-12 rounded-2xl bg-[#F97516]
+                                text-lg font-black text-white shadow-lg
                                shadow-violet-600/20" />
 
 

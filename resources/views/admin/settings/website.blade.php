@@ -11,10 +11,10 @@
 
             <div
                 class="inline-flex items-center gap-2
-                       rounded-full bg-[#F4EAE2]
+                       rounded-full bg-[#FFF7ED]
                        px-3 py-1.5
                        text-xs font-bold
-                       text-[#4371d1]">
+                       text-[#F97516]">
 
                 Branding Website
 
@@ -23,7 +23,7 @@
             <h1
                 class="mt-3 text-2xl
                        font-black tracking-tight
-                       text-[#332B26]
+                       text-[#172554]
                        lg:text-3xl">
 
                 Identitas Website
@@ -46,7 +46,7 @@
             <div
                 class="mb-5 rounded-2xl
                        border border-[#D3DFCE]
-                       bg-[#EEF3EA]
+                       bg-[#FFF7ED]
                        px-4 py-3
                        text-sm font-semibold
                        text-[#65795E]">
@@ -75,11 +75,11 @@
                 <div
                     class="border-b
                            border-[#E7DBD1]
-                           bg-[#FAF7F2]
+                           bg-[#FFF7ED]
                            p-5 sm:p-6">
 
                     <h2 class="font-bold
-                               text-[#332B26]">
+                               text-[#172554]">
 
                         Branding Utama
 
@@ -105,7 +105,7 @@
                         <label for="site_name"
                             class="mb-2 block
                                    text-sm font-semibold
-                                   text-[#4D4038]">
+                                   text-[#172554]">
 
                             Nama Website
 
@@ -118,18 +118,18 @@
                                    rounded-xl border
                                    border-[#DFD2C7]
                                    px-4 text-sm
-                                   text-[#4D4038]
+                                   text-[#172554]
                                    outline-none
                                    transition
-                                   focus:border-[#4371d1]
+                                   focus:border-[#F97516]
                                    focus:ring-4
-                                   focus:ring-[#F4EAE2]">
+                                   focus:ring-[#FFF7ED]">
 
                         @error('site_name')
                             <p
                                 class="mt-2 text-xs
                                        font-medium
-                                       text-[#A65954]">
+                                       text-[#F97516]">
 
                                 {{ $message }}
 
@@ -146,7 +146,7 @@
                         <label for="admin_whatsapp"
                             class="mb-2 block
                                    text-sm font-semibold
-                                   text-[#4D4038]">
+                                   text-[#172554]">
 
                             WhatsApp Admin
 
@@ -160,12 +160,12 @@
                                    rounded-xl border
                                    border-[#DFD2C7]
                                    px-4 text-sm
-                                   text-[#4D4038]
+                                   text-[#172554]
                                    outline-none
                                    transition
-                                   focus:border-[#4371d1]
+                                   focus:border-[#F97516]
                                    focus:ring-4
-                                   focus:ring-[#F4EAE2]">
+                                   focus:ring-[#FFF7ED]">
 
                         <p class="mt-2 text-xs leading-5 text-slate-400">
                             Nomor ini digunakan oleh tombol WhatsApp mengambang pada seluruh halaman pembeli dan penjual.
@@ -176,7 +176,7 @@
                             <p
                                 class="mt-2 text-xs
                                        font-medium
-                                       text-[#A65954]">
+                                       text-[#F97516]">
 
                                 {{ $message }}
 
@@ -193,7 +193,7 @@
                         <label for="logo"
                             class="mb-2 block
                                    text-sm font-semibold
-                                   text-[#4D4038]">
+                                   text-[#172554]">
 
                             Logo Website
 
@@ -203,7 +203,7 @@
                         <div
                             class="rounded-2xl
                                    border border-[#E7DBD1]
-                                   bg-[#FAF7F2]
+                                   bg-[#FFF7ED]
                                    p-5">
 
                             <div
@@ -241,7 +241,7 @@
                                         <span id="logoPlaceholder"
                                             class="text-2xl
                                                    font-black
-                                                   text-[#4371d1]">
+                                                   text-[#F97516]">
 
                                             {{ strtoupper(substr($setting->site_name, 0, 1)) }}
 
@@ -282,7 +282,7 @@
                             <p
                                 class="mt-2 text-xs
                                        font-medium
-                                       text-[#A65954]">
+                                       text-[#F97516]">
 
                                 {{ $message }}
 
@@ -299,7 +299,7 @@
                         <label for="favicon"
                             class="mb-2 block
                                    text-sm font-semibold
-                                   text-[#4D4038]">
+                                   text-[#172554]">
 
                             Favicon Website
 
@@ -309,7 +309,7 @@
                         <div
                             class="rounded-2xl
                                    border border-[#E7DBD1]
-                                   bg-[#FAF7F2]
+                                   bg-[#FFF7ED]
                                    p-5">
 
                             <div
@@ -341,7 +341,7 @@
 
                                         <span id="faviconPlaceholder"
                                             class="flex size-14 items-center justify-center rounded-xl
-                                                   bg-[#EEF3EA] text-xl text-[#65795E]">
+                                                   bg-[#FFF7ED] text-xl text-[#65795E]">
 
                                             <i class="fa-solid fa-globe"></i>
 
@@ -382,7 +382,7 @@
                             <p
                                 class="mt-2 text-xs
                                        font-medium
-                                       text-[#A65954]">
+                                       text-[#F97516]">
 
                                 {{ $message }}
 
@@ -400,19 +400,19 @@
                     class="flex justify-end
                            border-t
                            border-[#E7DBD1]
-                           bg-[#FAF7F2]
+                           bg-[#FFF7ED]
                            px-5 py-4">
 
                     <button type="submit"
                         class="inline-flex h-11
                                items-center justify-center
                                gap-2 rounded-xl
-                               bg-[#4371d1]
+                               bg-[#F97516]
                                px-5
                                text-sm font-bold
                                text-white
                                transition
-                               hover:bg-[#0a1d45]">
+                               hover:bg-[#172554]">
 
                         Simpan Branding
 

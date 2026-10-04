@@ -27,7 +27,7 @@
 
 <body class="bg-[#F5F1EC]
            font-sans
-           text-[#332B26]
+           text-[#172554]
            antialiased">
 
 
@@ -43,7 +43,7 @@
         <div x-cloak x-show="mobileSidebar" x-transition.opacity @click="mobileSidebar = false"
             class="fixed inset-0
                    z-40
-                   bg-[#332B26]/40
+                   bg-[#172554]/40
                    backdrop-blur-sm
                    lg:hidden">
         </div>
@@ -65,7 +65,7 @@
                    flex-col
                    border-r
                    border-[#DFD2C7]
-                   bg-[#FFFDF9]
+                   bg-[#FFFFFF]
                    transition-transform
                    duration-300
                    lg:z-30">
@@ -103,9 +103,9 @@
                shrink-0
                items-center justify-center
                rounded-2xl
-               bg-gradient-to-br
-               from-[#C8795A]
-               to-[#4371d1]
+               bg-[#F97516]
+
+
                font-black
                text-white">
 
@@ -122,7 +122,7 @@
                                    text-lg
                                    font-black
                                    tracking-tight
-                                   text-[#332B26]">
+                                   text-[#172554]">
 
                         <p>
                             {{ $siteSetting?->site_name ?? 'KampusMart' }}
@@ -137,7 +137,7 @@
                             <span
                                 class="size-1.5
                                        rounded-full
-                                       bg-[#C8795A]">
+                                       bg-[#F97516]">
                             </span>
 
                             <p
@@ -145,7 +145,7 @@
                                        font-bold
                                        uppercase
                                        tracking-[0.12em]
-                                       text-[#A95E43]">
+                                       text-[#F97516]">
 
                                 Seller Center
 
@@ -167,7 +167,7 @@
                            rounded-xl
                            text-[#8B7465]
                            transition
-                           hover:bg-[#F3EAE3]
+                           hover:bg-[#FFF7ED]
                            lg:hidden">
 
                     <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -195,7 +195,7 @@
                     class="rounded-2xl
                            border
                            border-[#E7DBD1]
-                           bg-[#FAF7F2]
+                           bg-[#FFF7ED]
                            p-3">
 
 
@@ -209,8 +209,8 @@
                                    items-center
                                    justify-center
                                    rounded-xl
-                                   bg-[#FBEAE2]
-                                   text-[#A95E43]">
+                                   bg-[#FFF7ED]
+                                   text-[#F97516]">
 
                             <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="1.8">
@@ -242,7 +242,7 @@
                                        truncate
                                        text-sm
                                        font-bold
-                                       text-[#4D4038]">
+                                       text-[#172554]">
 
                                 {{ auth()->user()?->sellerProfile?->store_name ?? 'Belum ada nama toko' }}
 
@@ -299,8 +299,8 @@
                                    font-semibold
                                    transition
                                    {{ request()->routeIs('seller.dashboard')
-                                       ? 'bg-[#FBEAE2] text-[#A95E43]'
-                                       : 'text-[#6F6259] hover:bg-[#F5ECE6] hover:text-[#0a1d45]' }}">
+                                       ? 'bg-[#FFF7ED] text-[#F97516]'
+                                       : 'text-[#6F6259] hover:bg-[#FFF7ED] hover:text-[#172554]' }}">
 
                             <svg class="size-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="1.8">
@@ -339,8 +339,8 @@
                                    font-semibold
                                    transition
                                    {{ request()->routeIs('seller.products.*')
-                                       ? 'bg-[#FBEAE2] text-[#A95E43]'
-                                       : 'text-[#6F6259] hover:bg-[#F5ECE6] hover:text-[#0a1d45]' }}">
+                                       ? 'bg-[#FFF7ED] text-[#F97516]'
+                                       : 'text-[#6F6259] hover:bg-[#FFF7ED] hover:text-[#172554]' }}">
 
                             <svg class="size-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="1.8">
@@ -374,8 +374,8 @@
                                    font-semibold
                                    transition
                                    {{ request()->routeIs('seller.categories.*')
-                                       ? 'bg-[#FBEAE2] text-[#A95E43]'
-                                       : 'text-[#6F6259] hover:bg-[#F5ECE6] hover:text-[#0a1d45]' }}">
+                                       ? 'bg-[#FFF7ED] text-[#F97516]'
+                                       : 'text-[#6F6259] hover:bg-[#FFF7ED] hover:text-[#172554]' }}">
 
                             <svg class="size-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="1.8">
@@ -414,8 +414,8 @@
                                    font-semibold
                                    transition
                                    {{ request()->routeIs('seller.orders.*')
-                                       ? 'bg-[#FBEAE2] text-[#A95E43]'
-                                       : 'text-[#6F6259] hover:bg-[#F5ECE6] hover:text-[#0a1d45]' }}">
+                                       ? 'bg-[#FFF7ED] text-[#F97516]'
+                                       : 'text-[#6F6259] hover:bg-[#FFF7ED] hover:text-[#172554]' }}">
 
                             <svg class="size-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="1.8">
@@ -451,8 +451,8 @@
                                    font-semibold
                                    transition
                                    {{ request()->routeIs('seller.sales.*')
-                                       ? 'bg-[#FBEAE2] text-[#A95E43]'
-                                       : 'text-[#6F6259] hover:bg-[#F5ECE6] hover:text-[#0a1d45]' }}">
+                                       ? 'bg-[#FFF7ED] text-[#F97516]'
+                                       : 'text-[#6F6259] hover:bg-[#FFF7ED] hover:text-[#172554]' }}">
 
                             <svg class="size-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="1.8">
@@ -519,8 +519,8 @@
                                    font-semibold
                                    transition
                                    {{ request()->routeIs('seller.settings.*')
-                                       ? 'bg-[#FBEAE2] text-[#A95E43]'
-                                       : 'text-[#6F6259] hover:bg-[#F5ECE6] hover:text-[#0a1d45]' }}">
+                                       ? 'bg-[#FFF7ED] text-[#F97516]'
+                                       : 'text-[#6F6259] hover:bg-[#FFF7ED] hover:text-[#172554]' }}">
 
                             <svg class="size-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="1.8">
@@ -571,7 +571,7 @@
                        gap-3
                        border-b
                        border-[#DFD2C7]
-                       bg-[#FFFDF9]/95
+                       bg-[#FFFFFF]/95
                        px-4
                        backdrop-blur-xl
                        sm:px-5
@@ -593,7 +593,7 @@
                            bg-white
                            text-[#6F6259]
                            transition
-                           hover:bg-[#F3EAE3]
+                           hover:bg-[#FFF7ED]
                            lg:hidden">
 
                     <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -618,7 +618,7 @@
                         class="truncate
                                text-sm
                                font-black
-                               text-[#332B26]">
+                               text-[#172554]">
 
                         KampusMart
 
@@ -629,7 +629,7 @@
                                font-bold
                                uppercase
                                tracking-wider
-                               text-[#C8795A]">
+                               text-[#F97516]">
 
                         Seller Center
 
@@ -649,7 +649,7 @@
                            rounded-full
                            border
                            border-[#E7DBD1]
-                           bg-[#FAF7F2]
+                           bg-[#FFF7ED]
                            px-3 py-1.5
                            lg:inline-flex">
 
@@ -699,7 +699,7 @@
                                    rounded-xl
                                    px-1.5 py-1
                                    transition
-                                   hover:bg-[#F5ECE6]
+                                   hover:bg-[#FFF7ED]
                                    sm:gap-3
                                    sm:px-2">
 
@@ -715,7 +715,7 @@
                                            truncate
                                            text-sm
                                            font-bold
-                                           text-[#332B26]">
+                                           text-[#172554]">
 
                                     {{ auth()->user()?->name }}
 
@@ -750,7 +750,7 @@
                                            items-center
                                            justify-center
                                            rounded-xl
-                                           bg-[#C8795A]
+                                           bg-[#F97516]
                                            text-sm
                                            font-black
                                            text-white">
@@ -802,7 +802,7 @@
                             <div
                                 class="border-b
                                        border-[#EEE5DE]
-                                       bg-[#FAF7F2]
+                                       bg-[#FFF7ED]
                                        px-4 py-4">
 
                                 <div
@@ -823,7 +823,7 @@
                                                    items-center
                                                    justify-center
                                                    rounded-xl
-                                                   bg-[#C8795A]
+                                                   bg-[#F97516]
                                                    font-black
                                                    text-white">
 
@@ -839,7 +839,7 @@
                                             class="truncate
                                                    text-sm
                                                    font-bold
-                                                   text-[#332B26]">
+                                                   text-[#172554]">
 
                                             {{ auth()->user()?->name }}
 
@@ -866,11 +866,11 @@
                                            items-center
                                            gap-1.5
                                            rounded-full
-                                           bg-[#FBEAE2]
+                                           bg-[#FFF7ED]
                                            px-2.5 py-1
                                            text-[10px]
                                            font-bold
-                                           text-[#A95E43]">
+                                           text-[#F97516]">
 
                                     <svg class="size-3" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="1.8">
@@ -903,16 +903,16 @@
                                                font-semibold
                                                text-[#5F5148]
                                                transition
-                                               hover:bg-[#F5ECE6]
-                                               hover:text-[#0a1d45]">
+                                               hover:bg-[#FFF7ED]
+                                               hover:text-[#172554]">
 
                                         <div
                                             class="flex size-8
                                                    items-center
                                                    justify-center
                                                    rounded-lg
-                                                   bg-[#F4EAE2]
-                                                   text-[#4371d1]">
+                                                   bg-[#FFF7ED]
+                                                   text-[#F97516]">
 
                                             <svg class="size-4" viewBox="0 0 24 24" fill="none"
                                                 stroke="currentColor" stroke-width="1.8">
@@ -949,16 +949,16 @@
                                                text-left
                                                text-sm
                                                font-semibold
-                                               text-[#A65954]
+                                               text-[#F97516]
                                                transition
-                                               hover:bg-[#FAEDEC]">
+                                               hover:bg-[#FFF7ED]">
 
                                         <div
                                             class="flex size-8
                                                    items-center
                                                    justify-center
                                                    rounded-lg
-                                                   bg-[#FAEDEC]">
+                                                   bg-[#FFF7ED]">
 
                                             <svg class="size-4" viewBox="0 0 24 24" fill="none"
                                                 stroke="currentColor" stroke-width="1.8">

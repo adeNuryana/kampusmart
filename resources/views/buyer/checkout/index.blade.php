@@ -20,10 +20,10 @@
         dashboardUrl: @js(route('buyer.dashboard'))
     }"
         class="min-h-screen
-               bg-gradient-to-br
-               from-[#FBF8F5]
-               via-[#FAF5F1]
-               to-[#F4EAE2]">
+               bg-[#FFF7ED]
+
+
+               ">
 
 
         <main
@@ -47,7 +47,7 @@
                            text-sm font-semibold
                            text-slate-500
                            transition
-                           hover:text-[#4371d1]">
+                           hover:text-[#F97516]">
                     <i class="fa-solid fa-arrow-left"></i>
 
                     Dashboard
@@ -61,10 +61,10 @@
                        rounded-3xl
                        border
                        border-[#E6D8CD]
-                       bg-gradient-to-br
-                       from-white
-                       via-[#FBF8F5]
-                       to-[#F4EAE2]
+                       bg-[#FFF7ED]
+
+
+
                        p-5
                        shadow-sm
                        sm:p-6">
@@ -77,7 +77,7 @@
                            -top-20
                            size-52
                            rounded-full
-                           bg-[#C89B55]/10
+                           bg-[#FACC15]/10
                            blur-3xl">
                 </div>
 
@@ -93,9 +93,9 @@
                                gap-2
                                text-xs
                                font-semibold
-                               text-[#4371d1]
+                               text-[#F97516]
                                transition
-                               hover:text-[#0a1d45]
+                               hover:text-[#172554]
                                sm:text-sm">
 
                         <span
@@ -104,7 +104,7 @@
                                    items-center
                                    justify-center
                                    rounded-lg
-                                   bg-[#F4EAE2]">
+                                   bg-[#FFF7ED]">
 
                             <i
                                 class="fa-solid
@@ -137,12 +137,12 @@
                                        items-center
                                        gap-2
                                        rounded-full
-                                       bg-[#F4EAE2]
+                                       bg-[#FFF7ED]
                                        px-3
                                        py-1.5
                                        text-xs
                                        font-bold
-                                       text-[#4371d1]">
+                                       text-[#F97516]">
 
                                 <i class="fa-solid fa-bag-shopping"></i>
 
@@ -231,7 +231,7 @@
                                 class="flex
                                        items-center
                                        gap-2
-                                       text-[#4371d1]">
+                                       text-[#F97516]">
 
                                 <span
                                     class="flex
@@ -239,7 +239,7 @@
                                            items-center
                                            justify-center
                                            rounded-full
-                                           bg-[#4371d1]
+                                           bg-[#F97516]
                                            text-white">
 
                                     2
@@ -271,11 +271,11 @@
                            rounded-2xl
                            border
                            border-[#E9C9C5]
-                           bg-[#FAEDEC]
+                           bg-[#FFF7ED]
                            px-4
                            py-4
                            text-sm
-                           text-[#A65954]">
+                           text-[#F97516]">
 
 
                     <div
@@ -388,9 +388,9 @@
                                                items-center
                                                justify-center
                                                rounded-lg
-                                               bg-[#F4EAE2]
+                                               bg-[#FFF7ED]
                                                text-xs
-                                               text-[#4371d1]">
+                                               text-[#F97516]">
 
                                         <i class="fa-solid fa-store"></i>
 
@@ -438,10 +438,10 @@
                                                    items-center
                                                    justify-center
                                                    rounded-full
-                                                   bg-gradient-to-br
-                                                   from-[#0a1d45]
-                                                   via-[#4371d1]
-                                                   to-[#4371d1]
+                                                   bg-[#172554]
+
+
+
                                                    text-lg
                                                    font-black
                                                    text-white
@@ -489,7 +489,7 @@
                                                    items-center
                                                    gap-1.5
                                                    rounded-full
-                                                   bg-[#EEF3EA]
+                                                   bg-[#FFF7ED]
                                                    px-2.5
                                                    py-1
                                                    text-[9px]
@@ -535,9 +535,9 @@
                                        gap-4
                                        border-b
                                        border-[#EFE4DC]
-                                       bg-gradient-to-r
-                                       from-[#FBF8F5]
-                                       to-white
+                                       bg-[#FFF7ED]
+
+
                                        px-5
                                        py-4">
 
@@ -572,8 +572,8 @@
                                            items-center
                                            justify-center
                                            rounded-xl
-                                           bg-[#F4EAE2]
-                                           text-[#4371d1]">
+                                           bg-[#FFF7ED]
+                                           text-[#F97516]">
 
                                     <i class="fa-solid fa-box"></i>
 
@@ -642,9 +642,9 @@
                                                                items-center
                                                                justify-center
                                                                rounded-2xl
-                                                               bg-gradient-to-br
-                                                               from-[#F5EFEB]
-                                                               to-[#EEE4DC]
+                                                               bg-[#FFF7ED]
+
+
                                                                text-[#C7B4A7]
                                                                sm:size-24">
 
@@ -675,7 +675,7 @@
                                                            leading-5
                                                            text-slate-800
                                                            transition
-                                                           hover:text-[#4371d1]
+                                                           hover:text-[#F97516]
                                                            sm:text-base">
 
                                                     {{ $product->name }}
@@ -708,7 +708,7 @@
 
                                                     <span
                                                         class="font-semibold
-                                                               text-[#4371d1]">
+                                                               text-[#F97516]">
 
                                                         {{ $item->quantity }}
 
@@ -745,7 +745,7 @@
                                                     class="mt-1
                                                            text-sm
                                                            font-black
-                                                           text-[#0a1d45]
+                                                           text-[#172554]
                                                            sm:text-base">
 
                                                     Rp{{ number_format($itemSubtotal, 0, ',', '.') }}
@@ -786,12 +786,12 @@
 
                                 <span
                                     class="rounded-full
-                                           bg-[#F4EAE2]
+                                           bg-[#FFF7ED]
                                            px-3
                                            py-1.5
                                            text-xs
                                            font-bold
-                                           text-[#4371d1]">
+                                           text-[#F97516]">
 
                                     {{ $cartItems->sum('quantity') }}
                                     item
@@ -822,9 +822,9 @@
                             <div
                                 class="border-b
                                        border-[#EFE4DC]
-                                       bg-gradient-to-r
-                                       from-[#FBF8F5]
-                                       to-white
+                                       bg-[#FFF7ED]
+
+
                                        px-5
                                        py-4">
 
@@ -842,8 +842,8 @@
                                                items-center
                                                justify-center
                                                rounded-xl
-                                               bg-[#F4EAE2]
-                                               text-[#4371d1]">
+                                               bg-[#FFF7ED]
+                                               text-[#F97516]">
 
                                         <i class="fa-regular fa-user"></i>
 
@@ -939,9 +939,9 @@
                                                    text-sm
                                                    outline-none
                                                    transition
-                                                   focus:border-[#A97957]
+                                                   focus:border-[#F97516]
                                                    focus:ring-4
-                                                   focus:ring-[#F5E9DF]">
+                                                   focus:ring-[#FFF7ED]">
 
                                     </div>
 
@@ -1002,9 +1002,9 @@
                                                    outline-none
                                                    transition
                                                    placeholder:text-slate-400
-                                                   focus:border-[#A97957]
+                                                   focus:border-[#F97516]
                                                    focus:ring-4
-                                                   focus:ring-[#F5E9DF]">
+                                                   focus:ring-[#FFF7ED]">
 
                                     </div>
 
@@ -1037,7 +1037,7 @@
                    bg-white
                    p-4
                    transition
-                   hover:border-[#4371d1]
+                   hover:border-[#F97516]
                    hover:bg-[#F7F9FF]">
 
                                             <input type="radio" x-model="paymentMethod" name="payment_method"
@@ -1049,8 +1049,8 @@
                        justify-center
                        rounded-xl
                        bg-blue-50
-                       text-[#4371d1]
-                       peer-checked:bg-[#4371d1]
+                       text-[#F97516]
+                       peer-checked:bg-[#F97516]
                        peer-checked:text-white">
                                                 <i class="fa-solid fa-building-columns"></i>
                                             </div>
@@ -1071,7 +1071,7 @@
                        rounded-2xl
                        border-2
                        border-transparent
-                       peer-checked:border-[#4371d1]
+                       peer-checked:border-[#F97516]
                        pointer-events-none">
                                             </div>
 
@@ -1087,7 +1087,7 @@
                    bg-white
                    p-4
                    transition
-                   hover:border-[#4371d1]
+                   hover:border-[#F97516]
                    hover:bg-[#F7F9FF]">
 
                                             <input type="radio" x-model="paymentMethod" name="payment_method"
@@ -1176,9 +1176,9 @@
                                                outline-none
                                                transition
                                                placeholder:text-slate-400
-                                               focus:border-[#A97957]
+                                               focus:border-[#F97516]
                                                focus:ring-4
-                                               focus:ring-[#F5E9DF]">{{ old('notes') }}</textarea>
+                                               focus:ring-[#FFF7ED]">{{ old('notes') }}</textarea>
 
 
                                     <p
@@ -1223,10 +1223,10 @@
                             <div
                                 class="relative
                                        overflow-hidden
-                                       bg-gradient-to-br
-                                       from-[#0a1d45]
-                                       via-[#4371d1]
-                                       to-[#4371d1]
+                                       bg-[#172554]
+
+
+
                                        p-5
                                        text-white">
 
@@ -1318,9 +1318,9 @@
                                                        items-center
                                                        justify-center
                                                        rounded-lg
-                                                       bg-[#F4EAE2]
+                                                       bg-[#FFF7ED]
                                                        text-xs
-                                                       text-[#4371d1]">
+                                                       text-[#F97516]">
 
                                                 <i class="fa-solid fa-box"></i>
 
@@ -1413,7 +1413,7 @@
                                             class="text-2xl
                                                    font-black
                                                    tracking-tight
-                                                   text-[#0a1d45]">
+                                                   text-[#172554]">
 
                                             Rp{{ number_format($subtotal, 0, ',', '.') }}
 
@@ -1434,9 +1434,9 @@
                                            rounded-2xl
                                            border
                                            border-[#D3DFCE]
-                                           bg-gradient-to-br
-                                           from-[#F1F5ED]
-                                           to-[#E7EFE3]
+                                           bg-[#FFF7ED]
+
+
                                            p-4">
 
 
@@ -1521,16 +1521,16 @@
                                            justify-center
                                            gap-2
                                            rounded-xl
-                                           bg-gradient-to-r
-                                           from-[#0a1d45]
-                                           via-[#4371d1]
-                                           to-[#4371d1]
+                                           bg-[#172554]
+
+
+
                                            px-5
                                            text-sm
                                            font-bold
                                            text-white
                                            shadow-lg
-                                           shadow-[#4371d1]/20
+                                           shadow-[#F97516]/20
                                            transition
                                            duration-300
                                            hover:-translate-y-0.5
@@ -1623,10 +1623,10 @@
                         {{-- ACCENT --}}
                         <div
                             class="h-1.5
-                   bg-gradient-to-r
-                   from-[#0a1d45]
-                   via-[#4371d1]
-                   to-[#C8795A]">
+                   bg-[#172554]
+
+
+                   ">
                         </div>
 
 
@@ -1652,7 +1652,7 @@
                            justify-center
                            rounded-2xl
                            bg-[#EEF3FF]
-                           text-[#4371d1]">
+                           text-[#F97516]">
                                     <i class="fa-solid fa-receipt"></i>
                                 </div>
 
@@ -1747,7 +1747,7 @@
                                     Metode Pembayaran
                                 </span>
 
-                                <span class="text-sm font-bold text-[#4371d1]"
+                                <span class="text-sm font-bold text-[#F97516]"
                                     x-text="
                         paymentMethod === 'transfer'
                             ? 'Transfer'
@@ -1763,7 +1763,7 @@
                             <div
                                 class="mt-4
                        rounded-2xl
-                       bg-[#FBF8F5]
+                       bg-[#FFF7ED]
                        p-4">
 
                                 <p class="text-xs text-slate-500">
@@ -1774,7 +1774,7 @@
                                     class="mt-1
                            text-2xl
                            font-black
-                           text-[#0a1d45]">
+                           text-[#172554]">
                                     Rp{{ number_format($subtotal, 0, ',', '.') }}
                                 </p>
 
@@ -1860,14 +1860,14 @@
                        justify-center
                        gap-2
                        rounded-xl
-                       bg-[#4371d1]
+                       bg-[#F97516]
                        px-4
                        text-sm
                        font-bold
                        text-white
                        shadow-sm
                        transition
-                       hover:bg-[#315ebc]">
+                       hover:bg-[#F97516]">
 
                                 <i class="fa-solid fa-check"></i>
 

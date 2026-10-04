@@ -24,10 +24,10 @@
 
 <body
     class="min-h-screen
-           bg-gradient-to-br
-           from-[#FBF8F5]
-           via-[#FAF5F1]
-           to-[#F4EAE2]
+           bg-[#FFF7ED]
+
+
+
            text-slate-900
            antialiased">
 
@@ -43,10 +43,10 @@
             class="relative
                    hidden
                    overflow-hidden
-                   bg-gradient-to-br
-                   from-[#0a1d45]
-                   via-[#4371d1]
-                   to-[#4371d1]
+                   bg-[#172554]
+
+
+
                    p-12
                    text-white
                    lg:flex
@@ -73,7 +73,7 @@
                        -right-20
                        size-80
                        rounded-full
-                       bg-[#C8795A]/20
+                       bg-[#F97516]/20
                        blur-3xl">
             </div>
 
@@ -110,7 +110,7 @@
                     <div
                         class="flex size-11 shrink-0 items-center justify-center overflow-hidden
                                rounded-xl border border-slate-200 bg-white text-lg font-black
-                               text-[#4371d1] shadow-lg shadow-black/10">
+                               text-[#F97516] shadow-lg shadow-black/10">
 
                         @if ($siteSetting?->logo)
                             <img src="{{ asset('storage/' . $siteSetting->logo) }}" alt="{{ $siteName }}"
@@ -159,7 +159,7 @@
                                    justify-center
                                    rounded-full
                                    bg-[#E3B66D]
-                                   text-[#0a1d45]">
+                                   text-[#172554]">
 
                             <i
                                 class="fa-solid
@@ -186,10 +186,10 @@
 
                         <span
                             class="block
-                                   bg-gradient-to-r
-                                   from-[#F6D9A7]
-                                   via-white
-                                   to-[#F4C7B6]
+                                   bg-[#FFF7ED]
+
+
+
                                    bg-clip-text
                                    text-transparent">
 
@@ -365,7 +365,7 @@
                        -top-28
                        size-72
                        rounded-full
-                       bg-[#C89B55]/10
+                       bg-[#FACC15]/10
                        blur-3xl">
             </div>
 
@@ -376,7 +376,7 @@
                        -left-24
                        size-72
                        rounded-full
-                       bg-[#C8795A]/10
+                       bg-[#F97516]/10
                        blur-3xl">
             </div>
 
@@ -401,7 +401,7 @@
                         <div
                             class="flex size-10 shrink-0 items-center justify-center overflow-hidden
                                    rounded-xl border border-slate-200 bg-white font-black
-                                   text-[#4371d1] shadow-lg shadow-slate-950/10">
+                                   text-[#F97516] shadow-lg shadow-slate-950/10">
 
                             @if ($siteSetting?->logo)
                                 <img src="{{ asset('storage/' . $siteSetting->logo) }}" alt="{{ $siteName }}"
@@ -413,9 +413,9 @@
                         </div>
 
                         <span
-                            class="bg-gradient-to-r
-                                   from-[#0a1d45]
-                                   to-[#4371d1]
+                            class="bg-[#172554]
+
+
                                    bg-clip-text
                                    text-xl
                                    font-black
@@ -438,7 +438,7 @@
                            bg-white/90
                            p-5
                            shadow-xl
-                           shadow-[#4371d1]/5
+                           shadow-[#F97516]/5
                            backdrop-blur
                            sm:p-7
                            lg:border-0
@@ -458,7 +458,7 @@
                             class="mb-2
                                    text-sm
                                    font-bold
-                                   text-[#4371d1]">
+                                   text-[#F97516]">
 
                             Buat akun baru
 
@@ -499,7 +499,7 @@
                                    rounded-2xl
                                    border
                                    border-[#E9C9C5]
-                                   bg-[#FAEDEC]
+                                   bg-[#FFF7ED]
                                    px-4
                                    py-3
                                    text-sm
@@ -588,9 +588,9 @@
                                            outline-none
                                            transition
                                            placeholder:text-slate-400
-                                           focus:border-[#A97957]
+                                           focus:border-[#F97516]
                                            focus:ring-4
-                                           focus:ring-[#F5E9DF]">
+                                           focus:ring-[#FFF7ED]">
 
                             </div>
 
@@ -646,9 +646,9 @@
                                            outline-none
                                            transition
                                            placeholder:text-slate-400
-                                           focus:border-[#A97957]
+                                           focus:border-[#F97516]
                                            focus:ring-4
-                                           focus:ring-[#F5E9DF]">
+                                           focus:ring-[#FFF7ED]">
 
                             </div>
 
@@ -703,9 +703,9 @@
                    outline-none
                    transition
                    placeholder:text-slate-400
-                   focus:border-[#A97957]
+                   focus:border-[#F97516]
                    focus:ring-4
-                   focus:ring-[#F5E9DF]">
+                   focus:ring-[#FFF7ED]">
 
                             </div>
 
@@ -768,9 +768,9 @@
                                            outline-none
                                            transition
                                            placeholder:text-slate-400
-                                           focus:border-[#A97957]
+                                           focus:border-[#F97516]
                                            focus:ring-4
-                                           focus:ring-[#F5E9DF]">
+                                           focus:ring-[#FFF7ED]">
 
 
                                 <button type="button"
@@ -787,7 +787,7 @@
                                            justify-center
                                            text-slate-400
                                            transition
-                                           hover:text-[#4371d1]">
+                                           hover:text-[#F97516]">
 
                                     <i class="fa-regular"
                                         :class="showPassword
@@ -859,9 +859,9 @@
                                            outline-none
                                            transition
                                            placeholder:text-slate-400
-                                           focus:border-[#A97957]
+                                           focus:border-[#F97516]
                                            focus:ring-4
-                                           focus:ring-[#F5E9DF]">
+                                           focus:ring-[#FFF7ED]">
 
 
                                 <button type="button"
@@ -878,7 +878,7 @@
                                            justify-center
                                            text-slate-400
                                            transition
-                                           hover:text-[#4371d1]">
+                                           hover:text-[#F97516]">
 
                                     <i class="fa-regular"
                                         :class="showConfirmation
@@ -906,16 +906,16 @@
                                    justify-center
                                    gap-2
                                    rounded-xl
-                                   bg-gradient-to-r
-                                   from-[#0a1d45]
-                                   via-[#4371d1]
-                                   to-[#4371d1]
+                                   bg-[#172554]
+
+
+
                                    px-5
                                    text-sm
                                    font-bold
                                    text-white
                                    shadow-lg
-                                   shadow-[#4371d1]/20
+                                   shadow-[#F97516]/20
                                    transition
                                    duration-300
                                    hover:-translate-y-0.5
@@ -952,9 +952,9 @@
                             <a href="{{ route('login') }}"
                                 class="ml-1
                                        font-bold
-                                       text-[#4371d1]
+                                       text-[#F97516]
                                        transition
-                                       hover:text-[#4371d1]">
+                                       hover:text-[#F97516]">
 
                                 Masuk
 
@@ -975,9 +975,9 @@
                                rounded-2xl
                                border
                                border-[#D9E2D4]
-                               bg-gradient-to-br
-                               from-[#F1F5ED]
-                               to-[#E7EFE3]
+                               bg-[#FFF7ED]
+
+
                                p-4">
 
                         <div

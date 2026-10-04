@@ -20,7 +20,7 @@
                        font-semibold
                        text-[#8B7465]
                        transition
-                       hover:text-[#4371d1]">
+                       hover:text-[#F97516]">
 
                 <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 
@@ -40,12 +40,12 @@
                            items-center
                            gap-2
                            rounded-full
-                           bg-[#F1E6DE]
+                           bg-[#FFF7ED]
                            px-3
                            py-1.5
                            text-xs
                            font-bold
-                           text-[#4371d1]">
+                           text-[#F97516]">
 
                     <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
 
@@ -69,7 +69,7 @@
                            text-2xl
                            font-black
                            tracking-tight
-                           text-[#332B26]
+                           text-[#172554]
                            lg:text-3xl">
 
                     Tambah Pembeli
@@ -122,7 +122,7 @@
                 <div
                     class="border-b
                            border-[#E7DBD1]
-                           bg-[#FAF7F2]
+                           bg-[#FFF7ED]
                            p-5
                            sm:p-6">
 
@@ -138,7 +138,7 @@
                                    items-center
                                    justify-center
                                    rounded-xl
-                                   bg-[#4371d1]
+                                   bg-[#F97516]
                                    text-white">
 
                             <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -156,7 +156,7 @@
                         <div>
 
                             <h2 class="font-bold
-                                       text-[#332B26]">
+                                       text-[#172554]">
 
                                 Informasi Akun
 
@@ -201,11 +201,11 @@
                                    block
                                    text-sm
                                    font-semibold
-                                   text-[#4D4038]">
+                                   text-[#172554]">
 
                             Nama Lengkap
 
-                            <span class="text-[#A65954]">
+                            <span class="text-[#F97516]">
                                 *
                             </span>
 
@@ -247,13 +247,13 @@
                                        pl-11
                                        pr-4
                                        text-sm
-                                       text-[#4D4038]
+                                       text-[#172554]
                                        outline-none
                                        transition
                                        placeholder:text-[#B6A69B]
-                                       focus:border-[#A97957]
+                                       focus:border-[#F97516]
                                        focus:ring-4
-                                       focus:ring-[#F1E6DE]">
+                                       focus:ring-[#FFF7ED]">
 
                         </div>
 
@@ -266,7 +266,7 @@
                                        gap-1.5
                                        text-xs
                                        font-medium
-                                       text-[#A65954]">
+                                       text-[#F97516]">
 
                                 <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 
@@ -297,11 +297,11 @@
                                    block
                                    text-sm
                                    font-semibold
-                                   text-[#4D4038]">
+                                   text-[#172554]">
 
                             Email
 
-                            <span class="text-[#A65954]">
+                            <span class="text-[#F97516]">
                                 *
                             </span>
 
@@ -343,13 +343,13 @@
                                        pl-11
                                        pr-4
                                        text-sm
-                                       text-[#4D4038]
+                                       text-[#172554]
                                        outline-none
                                        transition
                                        placeholder:text-[#B6A69B]
-                                       focus:border-[#A97957]
+                                       focus:border-[#F97516]
                                        focus:ring-4
-                                       focus:ring-[#F1E6DE]">
+                                       focus:ring-[#FFF7ED]">
 
                         </div>
 
@@ -362,7 +362,7 @@
                                        gap-1.5
                                        text-xs
                                        font-medium
-                                       text-[#A65954]">
+                                       text-[#F97516]">
 
                                 <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 
@@ -393,7 +393,7 @@
                                    block
                                    text-sm
                                    font-semibold
-                                   text-[#4D4038]">
+                                   text-[#172554]">
 
                             Nomor Telepon
 
@@ -438,13 +438,13 @@
                                        pl-11
                                        pr-4
                                        text-sm
-                                       text-[#4D4038]
+                                       text-[#172554]
                                        outline-none
                                        transition
                                        placeholder:text-[#B6A69B]
-                                       focus:border-[#A97957]
+                                       focus:border-[#F97516]
                                        focus:ring-4
-                                       focus:ring-[#F1E6DE]">
+                                       focus:ring-[#FFF7ED]">
 
                         </div>
 
@@ -457,7 +457,7 @@
                                        gap-1.5
                                        text-xs
                                        font-medium
-                                       text-[#A65954]">
+                                       text-[#F97516]">
 
                                 <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="2">
@@ -489,11 +489,11 @@
                                    block
                                    text-sm
                                    font-semibold
-                                   text-[#4D4038]">
+                                   text-[#172554]">
 
                             Status Akun
 
-                            <span class="text-[#A65954]">
+                            <span class="text-[#F97516]">
                                 *
                             </span>
 
@@ -510,12 +510,12 @@
                                    px-4
                                    text-sm
                                    font-medium
-                                   text-[#4D4038]
+                                   text-[#172554]
                                    outline-none
                                    transition
-                                   focus:border-[#A97957]
+                                   focus:border-[#F97516]
                                    focus:ring-4
-                                   focus:ring-[#F1E6DE]">
+                                   focus:ring-[#FFF7ED]">
 
                             <option value="active" @selected(old('status', 'active') === 'active')>
 
@@ -558,7 +558,7 @@
                                 class="mt-2
                                        text-xs
                                        font-medium
-                                       text-[#A65954]">
+                                       text-[#F97516]">
 
                                 {{ $message }}
 
@@ -594,7 +594,7 @@
                 <div
                     class="border-b
                            border-[#E7DBD1]
-                           bg-[#FAF7F2]
+                           bg-[#FFF7ED]
                            p-5
                            sm:p-6">
 
@@ -611,7 +611,7 @@
                                    items-center
                                    justify-center
                                    rounded-xl
-                                   bg-[#C89B55]
+                                   bg-[#FACC15]
                                    text-white">
 
                             <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -631,7 +631,7 @@
                         <div>
 
                             <h2 class="font-bold
-                                       text-[#332B26]">
+                                       text-[#172554]">
 
                                 Password
 
@@ -674,11 +674,11 @@
                                    block
                                    text-sm
                                    font-semibold
-                                   text-[#4D4038]">
+                                   text-[#172554]">
 
                             Password
 
-                            <span class="text-[#A65954]">
+                            <span class="text-[#F97516]">
                                 *
                             </span>
 
@@ -698,13 +698,13 @@
                                        px-4
                                        pr-11
                                        text-sm
-                                       text-[#4D4038]
+                                       text-[#172554]
                                        outline-none
                                        transition
                                        placeholder:text-[#B6A69B]
-                                       focus:border-[#A97957]
+                                       focus:border-[#F97516]
                                        focus:ring-4
-                                       focus:ring-[#F1E6DE]">
+                                       focus:ring-[#FFF7ED]">
 
 
                             <button type="button" @click="showPassword = !showPassword"
@@ -719,8 +719,8 @@
                                        rounded-lg
                                        text-[#9C8677]
                                        transition
-                                       hover:bg-[#F1E6DE]
-                                       hover:text-[#4371d1]">
+                                       hover:bg-[#FFF7ED]
+                                       hover:text-[#F97516]">
 
 
                                 {{-- EYE --}}
@@ -776,7 +776,7 @@
                                 class="mt-2
                                        text-xs
                                        font-medium
-                                       text-[#A65954]">
+                                       text-[#F97516]">
 
                                 {{ $message }}
 
@@ -796,11 +796,11 @@
                                    block
                                    text-sm
                                    font-semibold
-                                   text-[#4D4038]">
+                                   text-[#172554]">
 
                             Konfirmasi Password
 
-                            <span class="text-[#A65954]">
+                            <span class="text-[#F97516]">
                                 *
                             </span>
 
@@ -820,13 +820,13 @@
                                        px-4
                                        pr-11
                                        text-sm
-                                       text-[#4D4038]
+                                       text-[#172554]
                                        outline-none
                                        transition
                                        placeholder:text-[#B6A69B]
-                                       focus:border-[#A97957]
+                                       focus:border-[#F97516]
                                        focus:ring-4
-                                       focus:ring-[#F1E6DE]">
+                                       focus:ring-[#FFF7ED]">
 
 
                             <button type="button" @click="showConfirmation = !showConfirmation"
@@ -841,8 +841,8 @@
                                        rounded-lg
                                        text-[#9C8677]
                                        transition
-                                       hover:bg-[#F1E6DE]
-                                       hover:text-[#4371d1]">
+                                       hover:bg-[#FFF7ED]
+                                       hover:text-[#F97516]">
 
 
                                 <svg x-show="!showConfirmation" class="size-4" viewBox="0 0 24 24" fill="none"
@@ -914,8 +914,8 @@
                            font-semibold
                            text-[#6F6259]
                            transition
-                           hover:bg-[#F3EAE3]
-                           hover:text-[#0a1d45]">
+                           hover:bg-[#FFF7ED]
+                           hover:text-[#172554]">
 
                     Batal
 
@@ -930,14 +930,14 @@
                            justify-center
                            gap-2
                            rounded-xl
-                           bg-[#4371d1]
+                           bg-[#F97516]
                            px-5
                            text-sm
                            font-bold
                            text-white
                            shadow-sm
                            transition
-                           hover:bg-[#0a1d45]
+                           hover:bg-[#172554]
                            hover:shadow-md">
 
 

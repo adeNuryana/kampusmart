@@ -9,4 +9,143 @@
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --color-blue-50: #FFF7ED;
+    --color-blue-100: #FFF7ED;
+    --color-blue-200: #FACC15;
+    --color-blue-300: #FACC15;
+    --color-blue-400: #F97516;
+    --color-blue-500: #F97516;
+    --color-blue-600: #F97516;
+    --color-blue-700: #172554;
+    --color-blue-800: #172554;
+    --color-blue-900: #172554;
+    --color-blue-950: #172554;
+
+    --color-indigo-50: #FFF7ED;
+    --color-indigo-100: #FFF7ED;
+    --color-indigo-200: #FACC15;
+    --color-indigo-300: #FACC15;
+    --color-indigo-400: #F97516;
+    --color-indigo-500: #F97516;
+    --color-indigo-600: #F97516;
+    --color-indigo-700: #172554;
+    --color-indigo-800: #172554;
+    --color-indigo-900: #172554;
+    --color-indigo-950: #172554;
+
+    --color-violet-50: #FFF7ED;
+    --color-violet-100: #FFF7ED;
+    --color-violet-200: #FACC15;
+    --color-violet-300: #FACC15;
+    --color-violet-400: #F97516;
+    --color-violet-500: #F97516;
+    --color-violet-600: #F97516;
+    --color-violet-700: #172554;
+    --color-violet-800: #172554;
+    --color-violet-900: #172554;
+    --color-violet-950: #172554;
+
+    --color-purple-50: #FFF7ED;
+    --color-purple-100: #FFF7ED;
+    --color-purple-200: #FACC15;
+    --color-purple-300: #FACC15;
+    --color-purple-400: #F97516;
+    --color-purple-500: #F97516;
+    --color-purple-600: #F97516;
+    --color-purple-700: #172554;
+    --color-purple-800: #172554;
+    --color-purple-900: #172554;
+    --color-purple-950: #172554;
+
+    --color-cyan-50: #FFF7ED;
+    --color-cyan-100: #FFF7ED;
+    --color-cyan-200: #FACC15;
+    --color-cyan-300: #FACC15;
+    --color-cyan-400: #F97516;
+    --color-cyan-500: #F97516;
+    --color-cyan-600: #F97516;
+    --color-cyan-700: #172554;
+    --color-cyan-800: #172554;
+    --color-cyan-900: #172554;
+    --color-cyan-950: #172554;
+
+    --color-sky-50: #FFF7ED;
+    --color-sky-100: #FFF7ED;
+    --color-sky-200: #FACC15;
+    --color-sky-300: #FACC15;
+    --color-sky-400: #F97516;
+    --color-sky-500: #F97516;
+    --color-sky-600: #F97516;
+    --color-sky-700: #172554;
+    --color-sky-800: #172554;
+    --color-sky-900: #172554;
+    --color-sky-950: #172554;
+
+    --color-orange-50: #FFF7ED;
+    --color-orange-100: #FFF7ED;
+    --color-orange-200: #FACC15;
+    --color-orange-300: #FACC15;
+    --color-orange-400: #F97516;
+    --color-orange-500: #F97516;
+    --color-orange-600: #F97516;
+    --color-orange-700: #172554;
+    --color-orange-800: #172554;
+    --color-orange-900: #172554;
+    --color-orange-950: #172554;
+
+    --color-amber-50: #FFF7ED;
+    --color-amber-100: #FFF7ED;
+    --color-amber-200: #FACC15;
+    --color-amber-300: #FACC15;
+    --color-amber-400: #FACC15;
+    --color-amber-500: #FACC15;
+    --color-amber-600: #172554;
+    --color-amber-700: #172554;
+    --color-amber-800: #172554;
+    --color-amber-900: #172554;
+    --color-amber-950: #172554;
+
+    --color-yellow-50: #FFF7ED;
+    --color-yellow-100: #FFF7ED;
+    --color-yellow-200: #FACC15;
+    --color-yellow-300: #FACC15;
+    --color-yellow-400: #FACC15;
+    --color-yellow-500: #FACC15;
+    --color-yellow-600: #172554;
+    --color-yellow-700: #172554;
+    --color-yellow-800: #172554;
+    --color-yellow-900: #172554;
+    --color-yellow-950: #172554;
+
+    --color-fuchsia-50: #FFF7ED;
+    --color-fuchsia-100: #FFF7ED;
+    --color-fuchsia-200: #FACC15;
+    --color-fuchsia-300: #FACC15;
+    --color-fuchsia-400: #F97516;
+    --color-fuchsia-500: #F97516;
+    --color-fuchsia-600: #F97516;
+    --color-fuchsia-700: #172554;
+    --color-fuchsia-800: #172554;
+    --color-fuchsia-900: #172554;
+    --color-fuchsia-950: #172554;
+
+    --color-pink-50: #FFF7ED;
+    --color-pink-100: #FFF7ED;
+    --color-pink-200: #FACC15;
+    --color-pink-300: #FACC15;
+    --color-pink-400: #F97516;
+    --color-pink-500: #F97516;
+    --color-pink-600: #F97516;
+    --color-pink-700: #172554;
+    --color-pink-800: #172554;
+    --color-pink-900: #172554;
+    --color-pink-950: #172554;
+}
+
+@layer utilities {
+    .blur-2xl,
+    .blur-3xl {
+        display: none;
+    }
 }

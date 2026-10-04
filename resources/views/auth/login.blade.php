@@ -52,7 +52,7 @@
         {{-- LEFT --}}
         <section
             class="relative hidden min-h-screen overflow-hidden
-                   bg-gradient-to-br from-[#071633] via-[#173b82] to-[#315ebc]
+                   bg-[#172554]
                    px-12 py-10 text-white lg:flex">
 
             <div class="pointer-events-none absolute -left-28 -top-28 size-96 rounded-full bg-blue-400/20 blur-3xl">
@@ -71,7 +71,7 @@
                     @else
                         <div
                             class="flex size-11 items-center justify-center rounded-2xl
-                                   bg-white text-base font-black text-[#315ebc] shadow-lg">
+                                   bg-white text-base font-black text-[#F97516] shadow-lg">
                             {{ strtoupper(substr($siteName, 0, 1)) }}
                         </div>
                     @endif
@@ -94,7 +94,7 @@
                         class="inline-flex items-center gap-2 rounded-full
                                border border-white/15 bg-white/10 px-3 py-1.5
                                text-xs font-semibold text-blue-50 backdrop-blur">
-                        <span class="flex size-6 items-center justify-center rounded-full bg-white text-[#315ebc]">
+                        <span class="flex size-6 items-center justify-center rounded-full bg-white text-[#F97516]">
                             <i class="fa-solid fa-bolt text-[9px]"></i>
                         </span>
 
@@ -106,8 +106,8 @@
                                tracking-tight xl:text-5xl">
                         Masuk, temukan produk,
                         <span
-                            class="mt-1 block bg-gradient-to-r
-                                   from-blue-100 via-white to-violet-200
+                            class="mt-1 block bg-[#FFF7ED]
+
                                    bg-clip-text text-transparent">
                             dan terhubung dengan seller.
                         </span>
@@ -184,14 +184,14 @@
                         @else
                             <div
                                 class="flex size-10 items-center justify-center rounded-xl
-                                       bg-gradient-to-br from-[#0a1d45] to-[#315ebc]
+                                       bg-[#172554]
                                        text-sm font-black text-white shadow-lg shadow-blue-600/20">
                                 {{ strtoupper(substr($siteName, 0, 1)) }}
                             </div>
                         @endif
 
                         <div>
-                            <p class="text-sm font-black text-[#0a1d45]">
+                            <p class="text-sm font-black text-[#172554]">
                                 {{ $siteName }}
                             </p>
                             <p class="text-[9px] text-slate-400">Campus Marketplace</p>
@@ -218,7 +218,7 @@
                         <span
                             class="inline-flex items-center gap-2 rounded-full
                                    bg-blue-50 px-3 py-1.5 text-[10px]
-                                   font-bold uppercase tracking-[0.16em] text-[#315ebc]">
+                                   font-bold uppercase tracking-[0.16em] text-[#F97516]">
                             <i class="fa-solid fa-right-to-bracket"></i>
                             Login
                         </span>
@@ -339,7 +339,7 @@
 
                                 <button type="button" @click="showPassword = !showPassword"
                                     class="absolute inset-y-0 right-0 flex w-11 items-center
-                                           justify-center text-slate-400 transition hover:text-[#315ebc]">
+                                           justify-center text-slate-400 transition hover:text-[#F97516]">
                                     <i class="fa-regular" :class="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
                                 </button>
 
@@ -350,14 +350,14 @@
 
                         <label class="flex cursor-pointer items-center gap-2 text-xs font-medium text-slate-500">
                             <input type="checkbox" name="remember" value="1"
-                                class="size-4 rounded border-slate-300 text-[#315ebc] focus:ring-blue-200">
+                                class="size-4 rounded border-slate-300 text-[#F97516] focus:ring-blue-200">
                             Ingat saya
                         </label>
 
 
                         <button type="submit"
                             class="group flex h-12 w-full items-center justify-center gap-2
-                                   rounded-xl bg-gradient-to-r from-[#0a1d45] to-[#315ebc]
+                                   rounded-xl bg-[#172554]
                                    px-5 text-sm font-bold text-white shadow-lg shadow-blue-600/20
                                    transition hover:-translate-y-0.5 hover:shadow-xl">
                             Masuk
@@ -391,7 +391,7 @@
                                            hover:bg-blue-50 hover:shadow-md">
                                     <div
                                         class="flex size-9 items-center justify-center
-                                               rounded-xl bg-[#315ebc] text-white">
+                                               rounded-xl bg-[#F97516] text-white">
                                         <i class="fa-solid fa-user-plus text-sm"></i>
                                     </div>
 
@@ -458,7 +458,7 @@
                             class="flex h-11 w-full items-center justify-center gap-2
                                    rounded-xl border border-slate-200 bg-white
                                    text-xs font-bold text-slate-500 transition
-                                   hover:border-blue-200 hover:bg-blue-50 hover:text-[#315ebc]">
+                                   hover:border-blue-200 hover:bg-blue-50 hover:text-[#F97516]">
                             <i class="fa-solid fa-house text-[10px]"></i>
                             Kembali ke Halaman Awal
                         </a>

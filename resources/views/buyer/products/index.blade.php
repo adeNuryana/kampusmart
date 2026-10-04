@@ -6,10 +6,10 @@
 
     <div
         class="min-h-screen
-               bg-gradient-to-br
-               from-[#FBF8F5]
-               via-[#FAF5F1]
-               to-[#F4EAE2]">
+               bg-[#FFF7ED]
+
+
+               ">
 
 
         <main
@@ -33,7 +33,7 @@
                            text-sm font-semibold
                            text-slate-500
                            transition
-                           hover:text-[#4371d1]">
+                           hover:text-[#F97516]">
                     <i class="fa-solid fa-arrow-left"></i>
 
                     Dashboard
@@ -47,10 +47,10 @@
                        rounded-3xl
                        border
                        border-[#E6D8CD]
-                       bg-gradient-to-br
-                       from-white
-                       via-[#FBF8F5]
-                       to-[#F4EAE2]
+                       bg-[#FFF7ED]
+
+
+
                        p-5
                        shadow-sm
                        sm:p-6">
@@ -63,7 +63,7 @@
                            -top-20
                            size-52
                            rounded-full
-                           bg-[#C89B55]/10
+                           bg-[#FACC15]/10
                            blur-3xl">
                 </div>
 
@@ -75,7 +75,7 @@
                            left-1/3
                            size-44
                            rounded-full
-                           bg-[#C8795A]/10
+                           bg-[#F97516]/10
                            blur-3xl">
                 </div>
 
@@ -87,12 +87,12 @@
                                items-center
                                gap-2
                                rounded-full
-                               bg-[#F4EAE2]
+                               bg-[#FFF7ED]
                                px-3
                                py-1.5
                                text-xs
                                font-bold
-                               text-[#4371d1]">
+                               text-[#F97516]">
 
                         <i class="fa-solid fa-store"></i>
 
@@ -155,9 +155,9 @@
                            gap-4
                            border-b
                            border-[#EFE4DC]
-                           bg-gradient-to-r
-                           from-[#FBF8F5]
-                           to-white
+                           bg-[#FFF7ED]
+
+
                            px-5
                            py-4">
 
@@ -174,8 +174,8 @@
                                    items-center
                                    justify-center
                                    rounded-xl
-                                   bg-[#F4EAE2]
-                                   text-[#4371d1]">
+                                   bg-[#FFF7ED]
+                                   text-[#F97516]">
 
                             <i class="fa-solid fa-sliders"></i>
 
@@ -213,7 +213,7 @@
                         <a href="{{ route('buyer.products.index') }}"
                             class="text-xs
                                    font-semibold
-                                   text-[#A65954]
+                                   text-[#F97516]
                                    transition
                                    hover:text-[#87443F]">
 
@@ -295,9 +295,9 @@
                                            outline-none
                                            transition
                                            placeholder:text-slate-400
-                                           focus:border-[#A97957]
+                                           focus:border-[#F97516]
                                            focus:ring-4
-                                           focus:ring-[#F5E9DF]">
+                                           focus:ring-[#FFF7ED]">
 
                             </div>
 
@@ -335,9 +335,9 @@
                                        text-slate-700
                                        outline-none
                                        transition
-                                       focus:border-[#A97957]
+                                       focus:border-[#F97516]
                                        focus:ring-4
-                                       focus:ring-[#F5E9DF]">
+                                       focus:ring-[#FFF7ED]">
 
                                 <option value="">
                                     Semua Kategori
@@ -388,9 +388,9 @@
                                        text-slate-700
                                        outline-none
                                        transition
-                                       focus:border-[#A97957]
+                                       focus:border-[#F97516]
                                        focus:ring-4
-                                       focus:ring-[#F5E9DF]">
+                                       focus:ring-[#FFF7ED]">
 
 
                                 <option value="newest" @selected(request('sort') === 'newest' || !request('sort'))>
@@ -445,10 +445,10 @@
                                        justify-center
                                        gap-2
                                        rounded-xl
-                                       bg-gradient-to-r
-                                       from-[#0a1d45]
-                                       via-[#4371d1]
-                                       to-[#4371d1]
+                                       bg-[#172554]
+
+
+
                                        px-4
                                        text-sm
                                        font-bold
@@ -480,11 +480,11 @@
                                        border
                                        border-[#E5D5C9]
                                        bg-white
-                                       text-[#4371d1]
+                                       text-[#F97516]
                                        transition
                                        hover:border-[#D6BBA8]
                                        hover:bg-[#FBF4EF]
-                                       hover:text-[#0a1d45]">
+                                       hover:text-[#172554]">
 
                                 <i class="fa-solid
                                            fa-rotate-left">
@@ -531,9 +531,9 @@
                                items-center
                                justify-center
                                rounded-lg
-                               bg-[#F4EAE2]
+                               bg-[#FFF7ED]
                                text-xs
-                               text-[#4371d1]">
+                               text-[#F97516]">
 
                         <i class="fa-solid fa-boxes-stacked"></i>
 
@@ -545,7 +545,7 @@
                         Menampilkan
 
                         <span class="font-bold
-                                   text-[#4371d1]">
+                                   text-[#F97516]">
 
                             {{ $products->total() }}
 
@@ -587,7 +587,7 @@
                                    items-center
                                    gap-2
                                    rounded-full
-                                   bg-[#EEF3EA]
+                                   bg-[#FFF7ED]
                                    px-3
                                    py-1.5
                                    text-xs
@@ -630,27 +630,27 @@
 
                         $themes = [
                             [
-                                'bar' => 'from-[#4371d1] via-[#4371d1] to-[#C89B55]',
+                                'bar' => 'bg-[#F97516]',
 
-                                'category' => 'bg-[#F4EAE2] text-[#4371d1]',
+                                'category' => 'bg-[#FFF7ED] text-[#F97516]',
                             ],
 
                             [
-                                'bar' => 'from-[#C8795A] via-[#B56F52] to-[#A95E43]',
+                                'bar' => 'bg-[#F97516]',
 
-                                'category' => 'bg-[#FBEAE2] text-[#A95E43]',
+                                'category' => 'bg-[#FFF7ED] text-[#F97516]',
                             ],
 
                             [
-                                'bar' => 'from-[#7F9275] via-[#879A7D] to-[#65795E]',
+                                'bar' => 'bg-[#172554]',
 
-                                'category' => 'bg-[#EEF3EA] text-[#65795E]',
+                                'category' => 'bg-[#FFF7ED] text-[#65795E]',
                             ],
 
                             [
-                                'bar' => 'from-[#C89B55] via-[#D1A963] to-[#AC7D38]',
+                                'bar' => 'bg-[#FACC15]',
 
-                                'category' => 'bg-[#FAF2DF] text-[#A87A37]',
+                                'category' => 'bg-[#FFF7ED] text-[#A87A37]',
                             ],
                         ];
 
@@ -674,14 +674,14 @@
                                hover:-translate-y-1.5
                                hover:border-[#DCC9BB]
                                hover:shadow-xl
-                               hover:shadow-[#4371d1]/10">
+                               hover:shadow-[#F97516]/10">
 
 
                         {{-- TOP ACCENT --}}
 
                         <div
                             class="h-1
-                                   bg-gradient-to-r
+                                   bg-[#172554]
                                    {{ $theme['bar'] }}">
                         </div>
 
@@ -698,9 +698,9 @@
                                 class="relative
                                        aspect-square
                                        overflow-hidden
-                                       bg-gradient-to-br
-                                       from-[#F5EFEB]
-                                       to-[#EEE4DC]">
+                                       bg-[#FFF7ED]
+
+                                       ">
 
 
                                 @if ($product->image)
@@ -756,7 +756,7 @@
                                                rounded-lg
                                                border
                                                border-[#EAD6A9]
-                                               bg-[#FAF2DF]/95
+                                               bg-[#FFF7ED]/95
                                                px-2
                                                py-1
                                                text-[9px]
@@ -828,7 +828,7 @@
                                            leading-5
                                            text-slate-800
                                            transition
-                                           group-hover:text-[#4371d1]
+                                           group-hover:text-[#F97516]
                                            sm:min-h-12
                                            sm:text-sm
                                            sm:leading-6">
@@ -845,9 +845,9 @@
 
                             <p
                                 class="mt-2
-                                       bg-gradient-to-r
-                                       from-[#0a1d45]
-                                       to-[#4371d1]
+                                       bg-[#172554]
+
+
                                        bg-clip-text
                                        text-sm
                                        font-black
@@ -950,12 +950,12 @@
                                                items-center
                                                justify-center
                                                rounded-full
-                                               bg-gradient-to-br
-                                               from-[#F4EAE2]
-                                               to-[#E6D3C5]
+                                               bg-[#FFF7ED]
+
+
                                                text-[10px]
                                                font-black
-                                               text-[#4371d1]
+                                               text-[#F97516]
                                                sm:size-9
                                                sm:text-xs">
 
@@ -1002,7 +1002,7 @@
                                            text-[#C7B4A7]
                                            transition
                                            group-hover:translate-x-0.5
-                                           group-hover:text-[#4371d1]">
+                                           group-hover:text-[#F97516]">
                                 </i>
 
                             </div>
@@ -1040,7 +1040,7 @@
                                    size-52
                                    -translate-x-1/2
                                    rounded-full
-                                   bg-[#C89B55]/10
+                                   bg-[#FACC15]/10
                                    blur-3xl">
                         </div>
 
@@ -1054,11 +1054,11 @@
                                        items-center
                                        justify-center
                                        rounded-3xl
-                                       bg-gradient-to-br
-                                       from-[#F4EAE2]
-                                       to-[#E9D8CB]
+                                       bg-[#FFF7ED]
+
+
                                        text-3xl
-                                       text-[#4371d1]
+                                       text-[#F97516]
                                        shadow-sm">
 
                                 <i class="fa-solid
@@ -1102,16 +1102,16 @@
                                        justify-center
                                        gap-2
                                        rounded-xl
-                                       bg-gradient-to-r
-                                       from-[#0a1d45]
-                                       via-[#4371d1]
-                                       to-[#4371d1]
+                                       bg-[#172554]
+
+
+
                                        px-5
                                        text-sm
                                        font-bold
                                        text-white
                                        shadow-lg
-                                       shadow-[#4371d1]/20
+                                       shadow-[#F97516]/20
                                        transition
                                        hover:-translate-y-0.5
                                        hover:shadow-xl">

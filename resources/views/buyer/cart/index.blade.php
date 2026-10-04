@@ -6,10 +6,10 @@
 
     <div
         class="min-h-screen
-               bg-gradient-to-br
-               from-[#FBF8F5]
-               via-[#FAF5F1]
-               to-[#F4EAE2]">
+               bg-[#FFF7ED]
+
+
+               ">
 
         <main
             class="mx-auto
@@ -32,7 +32,7 @@
                            text-sm font-semibold
                            text-slate-500
                            transition
-                           hover:text-[#4371d1]">
+                           hover:text-[#F97516]">
                     <i class="fa-solid fa-arrow-left"></i>
 
                     Dashboard
@@ -46,10 +46,10 @@
                        rounded-3xl
                        border
                        border-[#E6D8CD]
-                       bg-gradient-to-br
-                       from-white
-                       via-[#FBF8F5]
-                       to-[#F4EAE2]
+                       bg-[#FFF7ED]
+
+
+
                        p-5
                        shadow-sm
                        sm:p-6">
@@ -64,7 +64,7 @@
                            -top-20
                            size-52
                            rounded-full
-                           bg-[#C89B55]/10
+                           bg-[#FACC15]/10
                            blur-3xl">
                 </div>
 
@@ -86,12 +86,12 @@
                                    items-center
                                    gap-2
                                    rounded-full
-                                   bg-[#F4EAE2]
+                                   bg-[#FFF7ED]
                                    px-3
                                    py-1.5
                                    text-xs
                                    font-bold
-                                   text-[#4371d1]">
+                                   text-[#F97516]">
 
                             <i class="fa-solid fa-cart-shopping"></i>
 
@@ -152,7 +152,7 @@
                                 <p
                                     class="text-xl
                                            font-black
-                                           text-[#4371d1]">
+                                           text-[#F97516]">
 
                                     {{ $cartItems->sum('quantity') }}
 
@@ -217,11 +217,11 @@
                            rounded-2xl
                            border
                            border-[#E9C9C5]
-                           bg-[#FAEDEC]
+                           bg-[#FFF7ED]
                            px-4
                            py-4
                            text-sm
-                           text-[#A65954]">
+                           text-[#F97516]">
 
                     <div
                         class="mb-2
@@ -282,7 +282,7 @@
                                size-52
                                -translate-x-1/2
                                rounded-full
-                               bg-[#C89B55]/10
+                               bg-[#FACC15]/10
                                blur-3xl">
                     </div>
 
@@ -297,11 +297,11 @@
                                    items-center
                                    justify-center
                                    rounded-3xl
-                                   bg-gradient-to-br
-                                   from-[#F4EAE2]
-                                   to-[#E9D8CB]
+                                   bg-[#FFF7ED]
+
+
                                    text-3xl
-                                   text-[#4371d1]
+                                   text-[#F97516]
                                    shadow-sm">
 
                             <i class="fa-solid fa-cart-shopping"></i>
@@ -342,16 +342,16 @@
                                    justify-center
                                    gap-2
                                    rounded-xl
-                                   bg-gradient-to-r
-                                   from-[#0a1d45]
-                                   via-[#4371d1]
-                                   to-[#4371d1]
+                                   bg-[#172554]
+
+
+
                                    px-5
                                    text-sm
                                    font-bold
                                    text-white
                                    shadow-lg
-                                   shadow-[#4371d1]/20
+                                   shadow-[#F97516]/20
                                    transition
                                    duration-300
                                    hover:-translate-y-0.5
@@ -423,10 +423,10 @@
                                            gap-4
                                            border-b
                                            border-[#EFE4DC]
-                                           bg-gradient-to-r
-                                           from-[#FBF8F5]
-                                           via-white
-                                           to-[#F4EAE2]
+                                           bg-[#FFF7ED]
+
+
+
                                            px-4
                                            py-4
                                            sm:px-5">
@@ -458,10 +458,10 @@
                                                        items-center
                                                        justify-center
                                                        rounded-full
-                                                       bg-gradient-to-br
-                                                       from-[#0a1d45]
-                                                       via-[#4371d1]
-                                                       to-[#4371d1]
+                                                       bg-[#172554]
+
+
+
                                                        font-black
                                                        text-white
                                                        shadow-sm">
@@ -486,7 +486,7 @@
                                                     class="fa-solid
                                                            fa-store
                                                            text-xs
-                                                           text-[#C8795A]">
+                                                           text-[#F97516]">
                                                 </i>
 
                                                 <p
@@ -523,12 +523,12 @@
                                     <span
                                         class="shrink-0
                                                rounded-full
-                                               bg-[#F4EAE2]
+                                               bg-[#FFF7ED]
                                                px-3
                                                py-1.5
                                                text-[10px]
                                                font-bold
-                                               text-[#4371d1]
+                                               text-[#F97516]
                                                sm:text-xs">
 
                                         {{ $items->count() }}
@@ -649,9 +649,9 @@
                                                                    items-center
                                                                    justify-center
                                                                    rounded-2xl
-                                                                   bg-gradient-to-br
-                                                                   from-[#F5EFEB]
-                                                                   to-[#EEE4DC]
+                                                                   bg-[#FFF7ED]
+
+
                                                                    text-[#C7B4A7]
                                                                    sm:size-24">
 
@@ -684,7 +684,7 @@
                                                                leading-5
                                                                text-slate-800
                                                                transition
-                                                               hover:text-[#4371d1]
+                                                               hover:text-[#F97516]
                                                                sm:text-base">
 
                                                         {{ $product->name }}
@@ -740,7 +740,7 @@
                                                         class="mt-2
                                                                text-sm
                                                                font-black
-                                                               text-[#4371d1]
+                                                               text-[#F97516]
                                                                sm:text-base">
 
                                                         Rp{{ number_format($product->price, 0, ',', '.') }}
@@ -811,9 +811,9 @@
                        size-10
                        items-center
                        justify-center
-                       text-[#4371d1]
+                       text-[#F97516]
                        transition
-                       hover:bg-[#F4EAE2]
+                       hover:bg-[#FFF7ED]
                        disabled:cursor-not-allowed
                        disabled:text-slate-300">
 
@@ -842,7 +842,7 @@
                        text-center
                        text-sm
                        font-bold
-                       text-[#0a1d45]
+                       text-[#172554]
                        outline-none
                        focus:ring-0">
 
@@ -857,9 +857,9 @@
                        size-10
                        items-center
                        justify-center
-                       text-[#4371d1]
+                       text-[#F97516]
                        transition
-                       hover:bg-[#F4EAE2]
+                       hover:bg-[#FFF7ED]
                        disabled:cursor-not-allowed
                        disabled:text-slate-300">
 
@@ -903,7 +903,7 @@
                                                                 <p class="mt-1
                text-sm
                font-black
-               text-[#0a1d45]
+               text-[#172554]
                sm:text-base"
                                                                     x-text="
             formatPrice(
@@ -962,7 +962,7 @@
            text-center
            text-sm
            font-bold
-           text-[#0a1d45]
+           text-[#172554]
            outline-none
            focus:ring-0">
                                                     </form>
@@ -1004,7 +1004,7 @@
                                                         <p class="mt-1
                text-sm
                font-black
-               text-[#0a1d45]
+               text-[#172554]
                sm:text-base"
                                                             x-text="
             formatPrice(
@@ -1044,8 +1044,8 @@
                                                                rounded-xl
                                                                text-slate-400
                                                                transition
-                                                               hover:bg-[#FAEDEC]
-                                                               hover:text-[#A65954]
+                                                               hover:bg-[#FFF7ED]
+                                                               hover:text-[#F97516]
                                                                sm:size-10">
 
                                                         <i
@@ -1076,9 +1076,9 @@
                                            gap-4
                                            border-t
                                            border-[#EFE4DC]
-                                           bg-gradient-to-r
-                                           from-[#FCF9F7]
-                                           to-[#F8F0EA]
+                                           bg-[#FFF7ED]
+
+
                                            px-4
                                            py-5
                                            sm:flex-row
@@ -1110,7 +1110,7 @@
                                             class="mt-1
                                                    text-xl
                                                    font-black
-                                                   text-[#0a1d45]">
+                                                   text-[#172554]">
 
                                             Rp{{ number_format($sellerSubtotal, 0, ',', '.') }}
 
@@ -1130,16 +1130,16 @@
                                                justify-center
                                                gap-2
                                                rounded-xl
-                                               bg-gradient-to-r
-                                               from-[#0a1d45]
-                                               via-[#4371d1]
-                                               to-[#4371d1]
+                                               bg-[#172554]
+
+
+
                                                px-5
                                                text-sm
                                                font-bold
                                                text-white
                                                shadow-lg
-                                               shadow-[#4371d1]/15
+                                               shadow-[#F97516]/15
                                                transition
                                                duration-300
                                                hover:-translate-y-0.5
@@ -1191,10 +1191,10 @@
                                        overflow-hidden
                                        border-b
                                        border-[#EFE4DC]
-                                       bg-gradient-to-br
-                                       from-[#0a1d45]
-                                       via-[#4371d1]
-                                       to-[#4371d1]
+                                       bg-[#172554]
+
+
+
                                        p-5
                                        text-white">
 
@@ -1289,9 +1289,9 @@
                                                        items-center
                                                        justify-center
                                                        rounded-lg
-                                                       bg-[#F4EAE2]
+                                                       bg-[#FFF7ED]
                                                        text-xs
-                                                       text-[#4371d1]">
+                                                       text-[#F97516]">
 
                                                 <i class="fa-solid fa-store"></i>
 
@@ -1335,7 +1335,7 @@
                                                        items-center
                                                        justify-center
                                                        rounded-lg
-                                                       bg-[#EEF3EA]
+                                                       bg-[#FFF7ED]
                                                        text-xs
                                                        text-[#65795E]">
 
@@ -1407,7 +1407,7 @@
                                         <span
                                             class="text-xl
                                                    font-black
-                                                   text-[#0a1d45]">
+                                                   text-[#172554]">
 
                                             Rp{{ number_format($subtotal, 0, ',', '.') }}
 
@@ -1428,9 +1428,9 @@
                                            rounded-2xl
                                            border
                                            border-[#D7E1D2]
-                                           bg-gradient-to-br
-                                           from-[#F1F5ED]
-                                           to-[#E7EFE3]
+                                           bg-[#FFF7ED]
+
+
                                            p-4">
 
 

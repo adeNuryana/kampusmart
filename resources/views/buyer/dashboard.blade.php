@@ -46,31 +46,31 @@
 
         $productThemes = [
             [
-                'bar' => 'from-[#4371d1] via-[#4371d1] to-[#C89B55]',
+                'bar' => 'bg-[#F97516]',
 
-                'badge' => 'bg-[#F4EAE2] text-[#4371d1]',
+                'badge' => 'bg-[#FFF7ED] text-[#F97516]',
             ],
 
             [
-                'bar' => 'from-[#C8795A] via-[#B66F52] to-[#A95E43]',
+                'bar' => 'bg-[#F97516]',
 
-                'badge' => 'bg-[#FBEAE2] text-[#A95E43]',
+                'badge' => 'bg-[#FFF7ED] text-[#F97516]',
             ],
 
             [
-                'bar' => 'from-[#7F9275] via-[#879A7D] to-[#65795E]',
+                'bar' => 'bg-[#172554]',
 
-                'badge' => 'bg-[#EEF3EA] text-[#65795E]',
+                'badge' => 'bg-[#FFF7ED] text-[#65795E]',
             ],
 
             [
-                'bar' => 'from-[#C89B55] via-[#D1A963] to-[#AC7D38]',
+                'bar' => 'bg-[#FACC15]',
 
-                'badge' => 'bg-[#FAF2DF] text-[#A87A37]',
+                'badge' => 'bg-[#FFF7ED] text-[#A87A37]',
             ],
 
             [
-                'bar' => 'from-[#B97972] via-[#C98C84] to-[#9B5F59]',
+                'bar' => 'bg-[#F97516]',
 
                 'badge' => 'bg-[#F8EDEC] text-[#9C625D]',
             ],
@@ -82,10 +82,10 @@
 
     <div
         class="min-h-screen
-               bg-gradient-to-br
-               from-[#FBF8F5]
-               via-[#FAF5F1]
-               to-[#F4EAE2]">
+               bg-[#FFF7ED]
+
+
+               ">
 
 
         <main
@@ -107,14 +107,14 @@
                 class="relative
                        overflow-hidden
                        rounded-3xl
-                       bg-gradient-to-br
-                       from-[#0a1d45]
-                       via-[#4371d1]
-                       to-[#4371d1]
+                       bg-[#172554]
+
+
+
                        p-5
                        text-white
                        shadow-xl
-                       shadow-[#4371d1]/15
+                       shadow-[#F97516]/15
                        sm:p-7
                        md:p-8">
 
@@ -140,7 +140,7 @@
                            right-5
                            size-64
                            rounded-full
-                           bg-[#C8795A]/20
+                           bg-[#F97516]/20
                            blur-3xl">
                 </div>
 
@@ -199,7 +199,7 @@
                                        justify-center
                                        rounded-full
                                        bg-[#E3B66D]
-                                       text-[#0a1d45]">
+                                       text-[#172554]">
 
                                 <i
                                     class="fa-solid
@@ -279,7 +279,7 @@
                                        py-2.5
                                        text-sm
                                        font-bold
-                                       text-[#0a1d45]
+                                       text-[#172554]
                                        shadow-lg
                                        shadow-black/10
                                        transition
@@ -460,9 +460,9 @@
                                rounded-2xl
                                border
                                border-[#E5D8CE]
-                               bg-gradient-to-br
-                               from-white
-                               to-[#F8F0EA]
+                               bg-[#FFF7ED]
+
+
                                p-4
                                shadow-sm
                                transition
@@ -484,10 +484,10 @@
                                        items-center
                                        justify-center
                                        rounded-xl
-                                       bg-[#F4EAE2]
-                                       text-[#4371d1]
+                                       bg-[#FFF7ED]
+                                       text-[#F97516]
                                        transition
-                                       group-hover:bg-[#4371d1]
+                                       group-hover:bg-[#F97516]
                                        group-hover:text-white">
 
                                 <i class="fa-solid
@@ -504,7 +504,7 @@
                                        py-1
                                        text-xs
                                        font-bold
-                                       text-[#4371d1]
+                                       text-[#F97516]
                                        shadow-sm">
 
                                 {{ $cartCount }}
@@ -547,9 +547,9 @@
                            rounded-2xl
                            border
                            border-[#F1D4C2]
-                           bg-gradient-to-br
-                           from-[#FFF4EC]
-                           to-[#FBE7D9]
+                           bg-[#FFF7ED]
+
+
                            p-4
                            shadow-sm
                            transition
@@ -571,7 +571,7 @@
                                    items-center
                                    justify-center
                                    rounded-xl
-                                   bg-[#C8795A]
+                                   bg-[#F97516]
                                    text-white">
 
                             <i class="fa-solid
@@ -588,7 +588,7 @@
                                    py-1
                                    text-xs
                                    font-bold
-                                   text-[#A95E43]">
+                                   text-[#F97516]">
 
                             {{ $activeOrderCount }}
 
@@ -629,9 +629,9 @@
                            rounded-2xl
                            border
                            border-[#D6E1D0]
-                           bg-gradient-to-br
-                           from-[#F1F5ED]
-                           to-[#E3ECDD]
+                           bg-[#FFF7ED]
+
+
                            p-4
                            shadow-sm
                            transition
@@ -710,9 +710,9 @@
                     class="rounded-2xl
                            border
                            border-[#ECD7AF]
-                           bg-gradient-to-br
-                           from-[#FAF3E4]
-                           to-[#F4E4C5]
+                           bg-[#FFF7ED]
+
+
                            p-4
                            shadow-sm">
 
@@ -723,7 +723,7 @@
                                items-center
                                justify-center
                                rounded-xl
-                               bg-[#C89B55]
+                               bg-[#FACC15]
                                text-white">
 
                         <i class="fa-solid
@@ -748,7 +748,7 @@
                         class="mt-1
                                text-lg
                                font-black
-                               text-[#4371d1]">
+                               text-[#F97516]">
 
                         Rp{{ number_format($totalTransaction, 0, ',', '.') }}
 
@@ -782,7 +782,7 @@
                            -top-20
                            size-48
                            rounded-full
-                           bg-[#C8795A]/10
+                           bg-[#F97516]/10
                            blur-3xl">
                 </div>
 
@@ -814,12 +814,12 @@
                                    items-center
                                    justify-center
                                    rounded-xl
-                                   bg-gradient-to-br
-                                   from-[#C8795A]
-                                   to-[#A95E43]
+                                   bg-[#F97516]
+
+
                                    text-white
                                    shadow-lg
-                                   shadow-[#C8795A]/20">
+                                   shadow-[#F97516]/20">
 
                             <i class="fa-solid
                                        fa-clock-rotate-left">
@@ -861,9 +861,9 @@
                             class="shrink-0
                                    text-xs
                                    font-semibold
-                                   text-[#4371d1]
+                                   text-[#F97516]
                                    transition
-                                   hover:text-[#0a1d45]
+                                   hover:text-[#172554]
                                    sm:text-sm">
 
                             Lihat Semua
@@ -953,9 +953,9 @@
                                items-center
                                justify-center
                                rounded-2xl
-                               bg-gradient-to-br
-                               from-[#0a1d45]
-                               to-[#4371d1]
+                               bg-[#172554]
+
+
                                text-white
                                shadow-sm">
                                                 <i class="fa-solid fa-bag-shopping text-sm"></i>
@@ -1009,7 +1009,7 @@
                                    text-slate-500">
 
                                                     <span>
-                                                        <i class="fa-solid fa-box mr-1 text-[#4371d1]"></i>
+                                                        <i class="fa-solid fa-box mr-1 text-[#F97516]"></i>
                                                         {{ $totalQty }} item
                                                     </span>
 
@@ -1052,7 +1052,7 @@
                                font-bold
                                text-slate-700">
                                                 @if ($order->payment_method === 'transfer')
-                                                    <i class="fa-solid fa-building-columns mr-1 text-[#4371d1]"></i>
+                                                    <i class="fa-solid fa-building-columns mr-1 text-[#F97516]"></i>
                                                 @elseif ($order->payment_method === 'cash')
                                                     <i class="fa-solid fa-money-bill-wave mr-1 text-emerald-600"></i>
                                                 @endif
@@ -1077,7 +1077,7 @@
                                                 class="mt-1
                                text-sm
                                font-black
-                               text-[#0a1d45]
+                               text-[#172554]
                                sm:text-base">
                                                 Rp{{ number_format($order->subtotal, 0, ',', '.') }}
                                             </p>
@@ -1135,10 +1135,10 @@
                                    items-center
                                    justify-center
                                    rounded-2xl
-                                   bg-gradient-to-br
-                                   from-[#F4EAE2]
-                                   to-[#EAD9CD]
-                                   text-[#4371d1]">
+                                   bg-[#FFF7ED]
+
+
+                                   text-[#F97516]">
 
                             <i
                                 class="fa-solid
@@ -1180,14 +1180,14 @@
                                    items-center
                                    gap-2
                                    rounded-xl
-                                   bg-[#4371d1]
+                                   bg-[#F97516]
                                    px-4
                                    py-2.5
                                    text-xs
                                    font-bold
                                    text-white
                                    transition
-                                   hover:bg-[#0a1d45]">
+                                   hover:bg-[#172554]">
 
                             Mulai Belanja
 

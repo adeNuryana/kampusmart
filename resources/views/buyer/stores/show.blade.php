@@ -24,10 +24,10 @@
 
     <div
         class="min-h-screen
-               bg-gradient-to-br
-               from-[#FBF8F5]
-               via-[#FAF5F1]
-               to-[#F4EAE2]"
+               bg-[#FFF7ED]
+
+
+               "
     >
 
         <main class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
@@ -41,7 +41,7 @@
                            text-sm font-semibold
                            text-slate-500
                            transition
-                           hover:text-[#4371d1]"
+                           hover:text-[#F97516]"
                 >
                     <i class="fa-solid fa-arrow-left"></i>
 
@@ -56,10 +56,10 @@
                 class="relative
                        overflow-hidden
                        rounded-3xl
-                       bg-gradient-to-br
-                       from-[#0a1d45]
-                       via-[#254b94]
-                       to-[#4371d1]
+                       bg-[#172554]
+
+
+
                        p-6
                        text-white
                        shadow-xl
@@ -271,7 +271,7 @@
                                                font-bold
                                                uppercase
                                                tracking-wider
-                                               text-[#4371d1]"
+                                               text-[#F97516]"
                                     >
                                         {{ $product->category->name }}
                                     </p>
@@ -294,7 +294,7 @@
                                     class="mt-3
                                            text-lg
                                            font-black
-                                           text-[#0a1d45]"
+                                           text-[#172554]"
                                 >
                                     Rp{{ number_format(
                                         $product->price,

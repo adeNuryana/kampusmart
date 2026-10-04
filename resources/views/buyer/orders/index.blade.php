@@ -6,10 +6,10 @@
 
     <div
         class="min-h-screen
-               bg-gradient-to-br
-               from-[#F8FAFC]
-               via-[#F7F9FD]
-               to-[#EEF3FB]">
+               bg-[#FFF7ED]
+
+
+               ">
 
         <main
             class="mx-auto
@@ -41,7 +41,7 @@
                            text-slate-500
                            transition
                            hover:bg-white
-                           hover:text-[#315ebc]
+                           hover:text-[#F97516]
                            hover:shadow-sm"
                 >
                     <i class="fa-solid fa-arrow-left text-xs"></i>
@@ -63,15 +63,15 @@
                        rounded-[28px]
                        border
                        border-white/70
-                       bg-gradient-to-br
-                       from-[#0a1d45]
-                       via-[#244d9f]
-                       to-[#4371d1]
+                       bg-[#172554]
+
+
+
                        px-5
                        py-6
                        text-white
                        shadow-xl
-                       shadow-[#315ebc]/10
+                       shadow-[#F97516]/10
                        sm:px-7
                        sm:py-8"
             >
@@ -344,10 +344,10 @@
                                    gap-4
                                    border-b
                                    border-slate-100
-                                   bg-gradient-to-r
-                                   from-white
-                                   via-white
-                                   to-blue-50/40
+                                   bg-[#FFF7ED]
+
+
+
                                    px-4
                                    py-4
                                    sm:flex-row
@@ -365,7 +365,7 @@
                                            items-center
                                            justify-center
                                            rounded-2xl
-                                           bg-[#0a1d45]
+                                           bg-[#172554]
                                            text-white
                                            shadow-sm"
                                 >
@@ -400,7 +400,7 @@
 
                                     <div class="mt-1.5 flex items-center gap-2">
 
-                                        <i class="fa-solid fa-store text-[10px] text-[#4371d1]"></i>
+                                        <i class="fa-solid fa-store text-[10px] text-[#F97516]"></i>
 
                                         <p
                                             class="truncate
@@ -483,7 +483,7 @@
                                                    py-1
                                                    text-[10px]
                                                    font-bold
-                                                   text-[#315ebc]"
+                                                   text-[#F97516]"
                                         >
                                             {{ $order->items->count() }} produk
                                         </span>
@@ -607,7 +607,7 @@
                                                         class="mt-0.5
                                                                text-base
                                                                font-black
-                                                               text-[#315ebc]"
+                                                               text-[#F97516]"
                                                     >
                                                         {{ $item->quantity }}
                                                     </p>
@@ -627,9 +627,9 @@
                                     class="rounded-2xl
                                            border
                                            border-slate-200
-                                           bg-gradient-to-br
-                                           from-slate-50
-                                           to-blue-50/50
+                                           bg-[#FFF7ED]
+
+
                                            p-4"
                                 >
 
@@ -656,7 +656,7 @@
                                                    text-2xl
                                                    font-black
                                                    tracking-tight
-                                                   text-[#0a1d45]"
+                                                   text-[#172554]"
                                         >
                                             Rp{{ number_format($order->subtotal, 0, ',', '.') }}
                                         </p>
@@ -686,7 +686,7 @@
                                                    justify-center
                                                    rounded-xl
                                                    bg-blue-50
-                                                   text-[#315ebc]"
+                                                   text-[#F97516]"
                                         >
                                             <i class="fa-solid {{ $paymentIcon }} text-sm"></i>
                                         </div>
@@ -785,7 +785,7 @@
                                            sm:flex-row"
                                 >
 
-                                    
+
 
                                     @if (Route::has('buyer.orders.show'))
 
@@ -807,7 +807,7 @@
                                                    transition
                                                    hover:border-blue-200
                                                    hover:bg-blue-50
-                                                   hover:text-[#315ebc]"
+                                                   hover:text-[#F97516]"
                                         >
                                             Lihat Detail
 
@@ -854,7 +854,7 @@
                                    rounded-3xl
                                    bg-blue-50
                                    text-3xl
-                                   text-[#315ebc]"
+                                   text-[#F97516]"
                         >
                             <i class="fa-solid fa-bag-shopping"></i>
                         </div>
@@ -884,7 +884,7 @@
                                    justify-center
                                    gap-2
                                    rounded-xl
-                                   bg-[#315ebc]
+                                   bg-[#F97516]
                                    px-5
                                    text-sm
                                    font-bold
@@ -893,7 +893,7 @@
                                    shadow-blue-600/15
                                    transition
                                    hover:-translate-y-0.5
-                                   hover:bg-[#244d9f]"
+                                   hover:bg-[#172554]"
                         >
                             <i class="fa-solid fa-bag-shopping"></i>
                             Mulai Belanja
@@ -946,7 +946,7 @@
 
                         dari
 
-                        <span class="font-bold text-[#315ebc]">
+                        <span class="font-bold text-[#F97516]">
                             {{ $orders->total() }}
                         </span>
 
@@ -994,7 +994,7 @@
                                        transition
                                        hover:border-blue-200
                                        hover:bg-blue-50
-                                       hover:text-[#315ebc]"
+                                       hover:text-[#F97516]"
                             >
                                 <i class="fa-solid fa-chevron-left"></i>
                             </a>
@@ -1018,7 +1018,7 @@
                                            items-center
                                            justify-center
                                            rounded-xl
-                                           bg-[#315ebc]
+                                           bg-[#F97516]
                                            text-xs
                                            font-bold
                                            text-white
@@ -1046,7 +1046,7 @@
                                            transition
                                            hover:border-blue-200
                                            hover:bg-blue-50
-                                           hover:text-[#315ebc]"
+                                           hover:text-[#F97516]"
                                 >
                                     {{ $page }}
                                 </a>
@@ -1074,7 +1074,7 @@
                                        transition
                                        hover:border-blue-200
                                        hover:bg-blue-50
-                                       hover:text-[#315ebc]"
+                                       hover:text-[#F97516]"
                             >
                                 <i class="fa-solid fa-chevron-right"></i>
                             </a>

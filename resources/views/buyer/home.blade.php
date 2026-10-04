@@ -78,43 +78,43 @@
         $categoryThemes = [
             [
                 'icon' => 'fa-bag-shopping',
-                'box' => 'from-blue-50 to-indigo-50 text-[#315ebc]',
-                'active' => 'border-blue-200 bg-blue-50',
+                'box' => 'bg-[#FFF7ED] text-[#F97516]',
+                'active' => 'border-[#F97516] bg-[#FFF7ED]',
             ],
             [
                 'icon' => 'fa-mobile-screen-button',
-                'box' => 'from-violet-50 to-fuchsia-50 text-violet-600',
-                'active' => 'border-violet-200 bg-violet-50',
+                'box' => 'bg-[#FFF7ED] text-[#F97516]',
+                'active' => 'border-[#F97516] bg-[#FFF7ED]',
             ],
             [
                 'icon' => 'fa-laptop',
-                'box' => 'from-cyan-50 to-sky-50 text-cyan-600',
-                'active' => 'border-cyan-200 bg-cyan-50',
+                'box' => 'bg-[#FFF7ED] text-[#F97516]',
+                'active' => 'border-[#F97516] bg-[#FFF7ED]',
             ],
             [
                 'icon' => 'fa-shirt',
-                'box' => 'from-rose-50 to-pink-50 text-rose-600',
-                'active' => 'border-rose-200 bg-rose-50',
+                'box' => 'bg-[#FFF7ED] text-[#F97516]',
+                'active' => 'border-[#F97516] bg-[#FFF7ED]',
             ],
             [
                 'icon' => 'fa-house',
-                'box' => 'from-amber-50 to-orange-50 text-amber-600',
-                'active' => 'border-amber-200 bg-amber-50',
+                'box' => 'bg-[#FFF7ED] text-[#F97516]',
+                'active' => 'border-[#F97516] bg-[#FFF7ED]',
             ],
             [
                 'icon' => 'fa-utensils',
-                'box' => 'from-emerald-50 to-green-50 text-emerald-600',
-                'active' => 'border-emerald-200 bg-emerald-50',
+                'box' => 'bg-[#FFF7ED] text-[#F97516]',
+                'active' => 'border-[#F97516] bg-[#FFF7ED]',
             ],
             [
                 'icon' => 'fa-headphones',
-                'box' => 'from-slate-100 to-slate-50 text-slate-600',
-                'active' => 'border-slate-300 bg-slate-100',
+                'box' => 'bg-[#FFF7ED] text-[#172554]',
+                'active' => 'border-[#172554] bg-[#FFF7ED]',
             ],
             [
                 'icon' => 'fa-gamepad',
-                'box' => 'from-purple-50 to-indigo-50 text-purple-600',
-                'active' => 'border-purple-200 bg-purple-50',
+                'box' => 'bg-[#FFF7ED] text-[#F97516]',
+                'active' => 'border-[#F97516] bg-[#FFF7ED]',
             ],
         ];
     @endphp
@@ -174,9 +174,9 @@
                                    items-center
                                    justify-center
                                    rounded-xl
-                                   bg-gradient-to-br
-                                   from-[#0a1d45]
-                                   to-[#4371d1]
+                                   bg-[#172554]
+
+
                                    text-sm
                                    font-black
                                    text-white
@@ -195,7 +195,7 @@
                             class="text-lg
                                    font-black
                                    tracking-tight
-                                   text-[#0a1d45]"
+                                   text-[#172554]"
                         >
                             {{ $siteSetting?->site_name ?? 'KampusMart' }}
                         </p>
@@ -287,10 +287,10 @@
                                shrink-0
                                items-center
                                justify-center
-                               bg-[#315ebc]
+                               bg-[#F97516]
                                text-white
                                transition
-                               hover:bg-[#244d9f]
+                               hover:bg-[#172554]
                                sm:w-12"
                     >
                         <i class="fa-solid fa-magnifying-glass text-sm"></i>
@@ -323,7 +323,7 @@
                                        border
                                        border-slate-200
                                        bg-white
-                                       text-[#315ebc]
+                                       text-[#F97516]
                                        transition
                                        hover:border-blue-200
                                        hover:bg-blue-50
@@ -362,7 +362,7 @@
                             >
                                 <x-user-avatar :user="auth()->user()"
                                     class="size-8 rounded-lg border border-blue-100 bg-blue-50
-                                           text-xs font-black text-[#315ebc]" />
+                                           text-xs font-black text-[#F97516]" />
 
                                 <div class="max-w-32">
 
@@ -407,7 +407,7 @@
                                 class="inline-flex
                                        items-center
                                        rounded-xl
-                                       bg-[#315ebc]
+                                       bg-[#F97516]
                                        px-4
                                        py-2.5
                                        text-sm
@@ -417,7 +417,7 @@
                                        shadow-blue-600/15
                                        transition
                                        hover:-translate-y-0.5
-                                       hover:bg-[#244d9f]"
+                                       hover:bg-[#172554]"
                             >
                                 Daftar
                             </a>
@@ -485,10 +485,10 @@
                 class="relative
                        overflow-hidden
                        rounded-[30px]
-                       bg-gradient-to-br
-                       from-[#071633]
-                       via-[#173b82]
-                       to-[#315ebc]
+                       bg-[#172554]
+
+
+
                        px-5
                        py-8
                        text-white
@@ -562,7 +562,7 @@
                                    justify-center
                                    rounded-full
                                    bg-white
-                                   text-[#315ebc]"
+                                   text-[#F97516]"
                         >
                             <i class="fa-solid fa-bolt text-[9px]"></i>
                         </span>
@@ -583,10 +583,10 @@
                         <span
                             class="mt-1
                                    block
-                                   bg-gradient-to-r
-                                   from-blue-100
-                                   via-white
-                                   to-violet-200
+                                   bg-[#FFF7ED]
+
+
+
                                    bg-clip-text
                                    text-transparent"
                         >
@@ -625,7 +625,7 @@
                                    py-3
                                    text-sm
                                    font-bold
-                                   text-[#0a1d45]
+                                   text-[#172554]
                                    shadow-xl
                                    shadow-black/10
                                    transition
@@ -763,7 +763,7 @@
                                    justify-center
                                    rounded-2xl
                                    bg-blue-50
-                                   text-[#315ebc]"
+                                   text-[#F97516]"
                         >
                             <i class="fa-solid fa-store"></i>
                         </div>
@@ -811,9 +811,9 @@
                            rounded-[28px]
                            border
                            border-slate-200
-                           bg-gradient-to-br
-                           from-[#0a1d45]
-                           to-[#173b82]
+                           bg-[#172554]
+
+
                            p-5
                            text-white
                            shadow-sm
@@ -941,7 +941,7 @@
                                justify-center
                                rounded-xl
                                bg-slate-100
-                               text-[#315ebc]"
+                               text-[#F97516]"
                     >
                         <i class="fa-solid {{ $benefit['icon'] }}"></i>
                     </div>
@@ -1020,7 +1020,7 @@
                                    font-bold
                                    uppercase
                                    tracking-[0.16em]
-                                   text-[#315ebc]"
+                                   text-[#F97516]"
                         >
                             <i class="fa-solid fa-layer-group"></i>
                             Kategori
@@ -1055,8 +1055,8 @@
                                    gap-2
                                    text-xs
                                    font-bold
-                                   text-[#315ebc]
-                                   hover:text-[#0a1d45]"
+                                   text-[#F97516]
+                                   hover:text-[#172554]"
                         >
                             Lihat Semua
                             <i class="fa-solid fa-arrow-right text-[10px]"></i>
@@ -1091,7 +1091,7 @@
                                    font-bold
                                    transition"
                             :class="selectedCategory === null
-                                ? 'border-[#315ebc] bg-[#315ebc] text-white'
+                                ? 'border-[#F97516] bg-[#F97516] text-white'
                                 : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'"
                         >
                             Semua
@@ -1116,7 +1116,7 @@
                                        font-bold
                                        transition"
                                 :class="selectedCategory === {{ $category->id }}
-                                    ? 'border-[#315ebc] bg-[#315ebc] text-white'
+                                    ? 'border-[#F97516] bg-[#F97516] text-white'
                                     : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'"
                             >
                                 {{ $category->name }}
@@ -1175,7 +1175,7 @@
                                            items-center
                                            justify-center
                                            rounded-2xl
-                                           bg-gradient-to-br
+                                           bg-[#172554]
                                            transition
                                            group-hover:scale-105
                                            sm:size-13
@@ -1291,7 +1291,7 @@
                             <template x-if="!loading">
                                 <span>
                                     Ditemukan
-                                    <strong class="text-[#315ebc]" x-text="total">
+                                    <strong class="text-[#F97516]" x-text="total">
                                         {{ $initialTotal }}
                                     </strong>
                                     produk
@@ -1314,8 +1314,8 @@
                                    gap-2
                                    text-xs
                                    font-bold
-                                   text-[#315ebc]
-                                   hover:text-[#0a1d45]
+                                   text-[#F97516]
+                                   hover:text-[#172554]
                                    sm:inline-flex"
                         >
                             Lihat Semua
@@ -1466,7 +1466,7 @@
                                                        py-1
                                                        text-[9px]
                                                        font-bold
-                                                       text-[#315ebc]
+                                                       text-[#F97516]
                                                        shadow-sm
                                                        backdrop-blur"
                                             >
@@ -1507,7 +1507,7 @@
                                                    leading-5
                                                    text-slate-700
                                                    transition
-                                                   group-hover:text-[#315ebc]
+                                                   group-hover:text-[#F97516]
                                                    sm:text-sm"
                                         >
                                             {{ $product->name }}
@@ -1518,7 +1518,7 @@
                                                    text-base
                                                    font-black
                                                    tracking-tight
-                                                   text-[#0a1d45]
+                                                   text-[#172554]
                                                    sm:text-lg"
                                         >
                                             Rp{{ number_format($product->price ?? 0, 0, ',', '.') }}
@@ -1551,7 +1551,7 @@
                                                            font-medium
                                                            text-slate-500"
                                                 >
-                                                    <i class="fa-solid fa-store mr-1 text-[#315ebc]"></i>
+                                                    <i class="fa-solid fa-store mr-1 text-[#F97516]"></i>
                                                     {{ $product->user->name }}
                                                 </span>
                                             @endif
@@ -1678,10 +1678,10 @@
                        rounded-[28px]
                        border
                        border-slate-200
-                       bg-gradient-to-br
-                       from-[#0a1d45]
-                       via-[#153b82]
-                       to-[#244d9f]
+                       bg-[#172554]
+
+
+
                        p-4
                        text-white
                        shadow-xl
@@ -1848,7 +1848,7 @@
                                                font-bold
                                                leading-5
                                                text-slate-700
-                                               group-hover:text-[#315ebc]
+                                               group-hover:text-[#F97516]
                                                sm:text-sm"
                                     >
                                         {{ $product->name }}
@@ -1858,7 +1858,7 @@
                                         class="mt-2
                                                text-base
                                                font-black
-                                               text-[#0a1d45]
+                                               text-[#172554]
                                                sm:text-lg"
                                     >
                                         Rp{{ number_format($product->price ?? 0, 0, ',', '.') }}
@@ -1877,7 +1877,7 @@
                                                    font-semibold
                                                    text-slate-500"
                                         >
-                                            <i class="fa-solid fa-store mr-1 text-[#315ebc]"></i>
+                                            <i class="fa-solid fa-store mr-1 text-[#F97516]"></i>
                                             {{ $product->user?->name ?? 'Seller' }}
                                         </p>
 
@@ -1971,7 +1971,7 @@
                                items-center
                                justify-center
                                rounded-xl
-                               bg-[#315ebc]
+                               bg-[#F97516]
                                font-black
                                text-white"
                     >
@@ -1979,7 +1979,7 @@
                     </div>
 
                     <div>
-                        <h3 class="font-black text-[#0a1d45]">
+                        <h3 class="font-black text-[#172554]">
                             {{ $siteSetting?->site_name ?? 'KampusMart' }}
                         </h3>
 
@@ -2010,9 +2010,9 @@
                 </h4>
 
                 <div class="mt-4 flex flex-col gap-3 text-sm text-slate-500">
-                    <a href="#produk" class="hover:text-[#315ebc]">Produk</a>
-                    <a href="#kategori" class="hover:text-[#315ebc]">Kategori</a>
-                    <a href="{{ route('home') }}" class="hover:text-[#315ebc]">Beranda</a>
+                    <a href="#produk" class="hover:text-[#F97516]">Produk</a>
+                    <a href="#kategori" class="hover:text-[#F97516]">Kategori</a>
+                    <a href="{{ route('home') }}" class="hover:text-[#F97516]">Beranda</a>
                 </div>
             </div>
 
@@ -2123,7 +2123,7 @@
                        justify-center
                        gap-1
                        py-3
-                       text-[#315ebc]"
+                       text-[#F97516]"
             >
                 <i class="fa-solid fa-house text-base"></i>
                 <span class="text-[9px] font-bold">Home</span>
@@ -2221,7 +2221,7 @@
                     >
                         <x-user-avatar :user="auth()->user()"
                             class="size-5 rounded-full bg-blue-100 text-[8px]
-                                   font-black text-[#315ebc]" />
+                                   font-black text-[#F97516]" />
                         <span class="text-[9px] font-semibold">Akun</span>
                     </a>
                 @else

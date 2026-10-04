@@ -12,7 +12,7 @@
             <a href="{{ route('admin.sellers.index') }}"
                 class="inline-flex items-center gap-2
                        text-sm font-semibold text-[#8B7465]
-                       transition hover:text-[#4371d1]">
+                       transition hover:text-[#F97516]">
 
                 <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="m15 18-6-6 6-6" />
@@ -29,9 +29,9 @@
 
                     <div
                         class="inline-flex items-center gap-2
-                               rounded-full bg-[#FBEAE2]
+                               rounded-full bg-[#FFF7ED]
                                px-3 py-1.5 text-xs font-bold
-                               text-[#A95E43]">
+                               text-[#F97516]">
 
                         <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                             <path d="M4 10v10h16V10" />
@@ -44,7 +44,7 @@
 
                     <h1
                         class="mt-3 text-2xl font-black
-                               tracking-tight text-[#332B26]
+                               tracking-tight text-[#172554]
                                lg:text-3xl">
                         Detail Penjual
                     </h1>
@@ -58,9 +58,9 @@
 
                 <a href="{{ route('admin.sellers.edit', $seller) }}"
                     class="inline-flex h-11 items-center justify-center gap-2
-                           rounded-xl bg-[#C8795A] px-5
+                           rounded-xl bg-[#F97516] px-5
                            text-sm font-bold text-white shadow-sm
-                           transition hover:bg-[#B66F52]">
+                           transition hover:bg-[#F97516]">
 
                     <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                         <path d="M12 20h9" />
@@ -79,7 +79,7 @@
             <div
                 class="mb-6 flex items-center gap-3
                        rounded-2xl border border-[#D3DFCE]
-                       bg-[#EEF3EA] px-4 py-3
+                       bg-[#FFF7ED] px-4 py-3
                        text-sm text-[#65795E]">
 
                 <svg class="size-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -101,9 +101,9 @@
                        bg-white shadow-sm">
 
                 <div
-                    class="h-1.5 bg-gradient-to-r
-                           from-[#C8795A] via-[#A86B4E]
-                           to-[#4371d1]">
+                    class="h-1.5 bg-[#F97516]
+
+                           ">
                 </div>
 
 
@@ -119,7 +119,7 @@
                         @else
                             <div
                                 class="flex size-24 items-center justify-center
-                                       rounded-3xl bg-[#C8795A]
+                                       rounded-3xl bg-[#F97516]
                                        text-3xl font-black
                                        uppercase text-white">
 
@@ -130,7 +130,7 @@
 
 
                         <h2 class="mt-4 text-xl font-black
-                                   text-[#332B26]">
+                                   text-[#172554]">
                             {{ $seller->name }}
                         </h2>
 
@@ -139,7 +139,7 @@
                             <span
                                 class="mt-3 inline-flex items-center gap-2
                                        rounded-full border border-[#D3DFCE]
-                                       bg-[#EEF3EA] px-3 py-1.5
+                                       bg-[#FFF7ED] px-3 py-1.5
                                        text-xs font-bold text-[#65795E]">
 
                                 <span class="size-1.5 rounded-full bg-[#718268]"></span>
@@ -150,10 +150,10 @@
                             <span
                                 class="mt-3 inline-flex items-center gap-2
                                        rounded-full border border-[#ECD2CF]
-                                       bg-[#FAEDEC] px-3 py-1.5
-                                       text-xs font-bold text-[#A65954]">
+                                       bg-[#FFF7ED] px-3 py-1.5
+                                       text-xs font-bold text-[#F97516]">
 
-                                <span class="size-1.5 rounded-full bg-[#A65954]"></span>
+                                <span class="size-1.5 rounded-full bg-[#F97516]"></span>
 
                                 Nonaktif
                             </span>
@@ -167,7 +167,7 @@
                         <div class="flex justify-between gap-4 py-4">
                             <dt class="text-slate-500">NIM</dt>
 
-                            <dd class="font-semibold text-[#4D4038]">
+                            <dd class="font-semibold text-[#172554]">
                                 {{ $seller->sellerProfile?->nim ?? '-' }}
                             </dd>
                         </div>
@@ -180,7 +180,7 @@
                             </dt>
 
                             <dd class="mt-1 break-all
-                                       font-semibold text-[#4D4038]">
+                                       font-semibold text-[#172554]">
                                 {{ $seller->email }}
                             </dd>
 
@@ -193,7 +193,7 @@
                                 No. HP
                             </dt>
 
-                            <dd class="font-semibold text-[#4D4038]">
+                            <dd class="font-semibold text-[#172554]">
                                 {{ $seller->phone ?? '-' }}
                             </dd>
 
@@ -207,7 +207,7 @@
                             </dt>
 
                             <dd class="mt-1 font-semibold
-                                       text-[#4D4038]">
+                                       text-[#172554]">
                                 {{ $seller->sellerProfile?->faculty ?? '-' }}
                             </dd>
 
@@ -230,14 +230,14 @@
                 <div
                     class="flex items-center justify-between gap-4
                            border-b border-[#E7DBD1]
-                           bg-[#FAF7F2]
+                           bg-[#FFF7ED]
                            p-5 sm:p-6">
 
                     <div class="flex items-center gap-3">
 
                         <div
                             class="flex size-10 items-center justify-center
-                                   rounded-xl bg-[#4371d1]
+                                   rounded-xl bg-[#F97516]
                                    text-white">
 
                             <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -250,7 +250,7 @@
                         </div>
 
                         <div>
-                            <h2 class="font-bold text-[#332B26]">
+                            <h2 class="font-bold text-[#172554]">
                                 Informasi Toko
                             </h2>
 
@@ -267,7 +267,7 @@
                 <div class="p-5 sm:p-6">
 
                     <p class="text-2xl font-black
-                               tracking-tight text-[#332B26]">
+                               tracking-tight text-[#172554]">
 
                         {{ $seller->sellerProfile?->store_name ?? '-' }}
 
@@ -287,11 +287,11 @@
                         <div
                             class="rounded-2xl
                                    border border-[#E7DBD1]
-                                   bg-[#FAF7F2] p-4">
+                                   bg-[#FFF7ED] p-4">
 
                             <div
                                 class="flex size-9 items-center justify-center
-                                       rounded-xl bg-[#EEF3EA]
+                                       rounded-xl bg-[#FFF7ED]
                                        text-[#65795E]">
 
                                 <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -312,7 +312,7 @@
                             </p>
 
                             <p class="mt-1 font-bold
-                                       text-[#4D4038]">
+                                       text-[#172554]">
                                 {{ $seller->sellerProfile?->whatsapp ?? '-' }}
                             </p>
 
@@ -322,12 +322,12 @@
                         <div
                             class="rounded-2xl
                                    border border-[#E7DBD1]
-                                   bg-[#FAF7F2] p-4">
+                                   bg-[#FFF7ED] p-4">
 
                             <div
                                 class="flex size-9 items-center justify-center
-                                       rounded-xl bg-[#F1E6DE]
-                                       text-[#4371d1]">
+                                       rounded-xl bg-[#FFF7ED]
+                                       text-[#F97516]">
 
                                 <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="1.8">
@@ -349,7 +349,7 @@
                             </p>
 
                             <p class="mt-1 font-bold
-                                       text-[#4D4038]">
+                                       text-[#172554]">
                                 {{ $seller->created_at->format('d M Y') }}
                             </p>
 

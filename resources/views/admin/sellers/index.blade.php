@@ -17,9 +17,9 @@
 
                 <div
                     class="inline-flex items-center gap-2
-                           rounded-full bg-[#FBEAE2]
+                           rounded-full bg-[#FFF7ED]
                            px-3 py-1.5 text-xs font-bold
-                           text-[#A95E43]">
+                           text-[#F97516]">
 
                     <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                         <path d="M4 10v10h16V10" />
@@ -33,7 +33,7 @@
 
                 <h1
                     class="mt-3 text-2xl font-black
-                           tracking-tight text-[#332B26]
+                           tracking-tight text-[#172554]
                            lg:text-3xl">
                     Kelola Penjual
                 </h1>
@@ -46,9 +46,9 @@
 
             <a href="{{ route('admin.sellers.create') }}"
                 class="inline-flex h-11 items-center justify-center gap-2
-                       rounded-xl bg-[#C8795A] px-5
+                       rounded-xl bg-[#F97516] px-5
                        text-sm font-bold text-white shadow-sm
-                       transition hover:bg-[#B66F52] hover:shadow-md">
+                       transition hover:bg-[#F97516] hover:shadow-md">
 
                 <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M12 5v14" />
@@ -69,7 +69,7 @@
             <div
                 class="mb-5 flex items-start gap-3
                        rounded-2xl border border-[#D3DFCE]
-                       bg-[#EEF3EA] px-4 py-3.5
+                       bg-[#FFF7ED] px-4 py-3.5
                        text-[#65795E]">
 
                 <div
@@ -106,7 +106,7 @@
             <form method="GET" action="{{ route('admin.sellers.index') }}"
                 class="flex flex-col gap-4
                        border-b border-[#E7DBD1]
-                       bg-[#FAF7F2] p-5
+                       bg-[#FFF7ED] p-5
                        lg:flex-row lg:items-center">
 
                 <div class="flex flex-wrap gap-2">
@@ -115,8 +115,8 @@
                         class="rounded-xl px-4 py-2
                                text-sm font-semibold transition
                                {{ !request('status')
-                                   ? 'bg-[#4371d1] text-white shadow-sm'
-                                   : 'bg-white text-[#7C695C] hover:bg-[#F1E6DE] hover:text-[#4371d1]' }}">
+                                   ? 'bg-[#F97516] text-white shadow-sm'
+                                   : 'bg-white text-[#7C695C] hover:bg-[#FFF7ED] hover:text-[#F97516]' }}">
                         Semua
                     </a>
 
@@ -125,7 +125,7 @@
                                text-sm font-semibold transition
                                {{ request('status') === 'active'
                                    ? 'bg-[#718268] text-white shadow-sm'
-                                   : 'bg-white text-[#7C695C] hover:bg-[#EEF3EA] hover:text-[#65795E]' }}">
+                                   : 'bg-white text-[#7C695C] hover:bg-[#FFF7ED] hover:text-[#65795E]' }}">
                         Aktif
                     </a>
 
@@ -133,8 +133,8 @@
                         class="rounded-xl px-4 py-2
                                text-sm font-semibold transition
                                {{ request('status') === 'inactive'
-                                   ? 'bg-[#A65954] text-white shadow-sm'
-                                   : 'bg-white text-[#7C695C] hover:bg-[#FAEDEC] hover:text-[#A65954]' }}">
+                                   ? 'bg-[#F97516] text-white shadow-sm'
+                                   : 'bg-white text-[#7C695C] hover:bg-[#FFF7ED] hover:text-[#F97516]' }}">
                         Nonaktif
                     </a>
 
@@ -157,11 +157,11 @@
                         class="h-11 w-full rounded-xl
                                border border-[#DFD2C7]
                                bg-white pl-11 pr-4
-                               text-sm text-[#4D4038]
+                               text-sm text-[#172554]
                                outline-none transition
                                placeholder:text-[#B3A195]
-                               focus:border-[#A97957]
-                               focus:ring-4 focus:ring-[#F1E6DE]">
+                               focus:border-[#F97516]
+                               focus:ring-4 focus:ring-[#FFF7ED]">
 
                     @if (request('status'))
                         <input type="hidden" name="status" value="{{ request('status') }}">
@@ -177,7 +177,7 @@
 
                 <table class="w-full min-w-[950px]">
 
-                    <thead class="bg-[#F8F3ED]">
+                    <thead class="bg-[#FFF7ED]">
 
                         <tr
                             class="text-left text-xs font-bold uppercase
@@ -199,7 +199,7 @@
 
                         @forelse ($sellers as $seller)
                             <tr class="text-sm transition
-                                       hover:bg-[#FBF7F3]">
+                                       hover:bg-[#FFF7ED]">
 
                                 {{-- SELLER --}}
                                 <td class="px-5 py-4">
@@ -216,7 +216,7 @@
                                             <div
                                                 class="flex size-11 shrink-0
                                                        items-center justify-center
-                                                       rounded-xl bg-[#C8795A]
+                                                       rounded-xl bg-[#F97516]
                                                        text-sm font-black
                                                        uppercase text-white">
 
@@ -230,7 +230,7 @@
 
                                             <p
                                                 class="font-bold
-                                                       text-[#332B26]">
+                                                       text-[#172554]">
                                                 {{ $seller->name }}
                                             </p>
 
@@ -251,7 +251,7 @@
                                 {{-- STORE --}}
                                 <td
                                     class="px-5 py-4
-                                           font-semibold text-[#4D4038]">
+                                           font-semibold text-[#172554]">
 
                                     {{ $seller->sellerProfile?->store_name ?? '-' }}
 
@@ -277,7 +277,7 @@
                                         <span
                                             class="inline-flex items-center gap-2
                                                    rounded-full border border-[#D3DFCE]
-                                                   bg-[#EEF3EA] px-3 py-1.5
+                                                   bg-[#FFF7ED] px-3 py-1.5
                                                    text-xs font-bold text-[#65795E]">
 
                                             <span class="size-1.5 rounded-full bg-[#718268]"></span>
@@ -288,10 +288,10 @@
                                         <span
                                             class="inline-flex items-center gap-2
                                                    rounded-full border border-[#ECD2CF]
-                                                   bg-[#FAEDEC] px-3 py-1.5
-                                                   text-xs font-bold text-[#A65954]">
+                                                   bg-[#FFF7ED] px-3 py-1.5
+                                                   text-xs font-bold text-[#F97516]">
 
-                                            <span class="size-1.5 rounded-full bg-[#A65954]"></span>
+                                            <span class="size-1.5 rounded-full bg-[#F97516]"></span>
 
                                             Nonaktif
                                         </span>
@@ -309,8 +309,8 @@
                                             class="inline-flex size-9
                                                    items-center justify-center
                                                    rounded-xl text-[#8B7465]
-                                                   transition hover:bg-[#F1E6DE]
-                                                   hover:text-[#4371d1]">
+                                                   transition hover:bg-[#FFF7ED]
+                                                   hover:text-[#F97516]">
 
                                             <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                 stroke-width="1.8">
@@ -325,7 +325,7 @@
                                             class="inline-flex size-9
                                                    items-center justify-center
                                                    rounded-xl text-[#A87A37]
-                                                   transition hover:bg-[#FAF2DF]">
+                                                   transition hover:bg-[#FFF7ED]">
 
                                             <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                 stroke-width="1.8">
@@ -352,7 +352,7 @@
                                                 class="inline-flex size-9
                                                        items-center justify-center
                                                        rounded-xl transition
-                                                       {{ $seller->status === 'active' ? 'text-[#A65954] hover:bg-[#FAEDEC]' : 'text-[#65795E] hover:bg-[#EEF3EA]' }}">
+                                                       {{ $seller->status === 'active' ? 'text-[#F97516] hover:bg-[#FFF7ED]' : 'text-[#65795E] hover:bg-[#FFF7ED]' }}">
 
                                                 @if ($seller->status === 'active')
                                                     <svg class="size-4.5" viewBox="0 0 24 24" fill="none"
@@ -392,8 +392,8 @@
                                         <div
                                             class="mx-auto flex size-16
                                                    items-center justify-center
-                                                   rounded-2xl bg-[#FBEAE2]
-                                                   text-[#C8795A]">
+                                                   rounded-2xl bg-[#FFF7ED]
+                                                   text-[#F97516]">
 
                                             <svg class="size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                 stroke-width="1.7">
@@ -408,7 +408,7 @@
 
                                         <p
                                             class="mt-4 font-bold
-                                                   text-[#4D4038]">
+                                                   text-[#172554]">
                                             Belum ada penjual
                                         </p>
 
@@ -434,7 +434,7 @@
 
             @if ($sellers->hasPages())
                 <div class="border-t border-[#E7DBD1]
-                           bg-[#FAF7F2] px-5 py-4">
+                           bg-[#FFF7ED] px-5 py-4">
 
                     {{ $sellers->links() }}
 

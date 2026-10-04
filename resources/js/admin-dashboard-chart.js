@@ -16,24 +16,6 @@ if (canvas) {
 
     const ctx = canvas.getContext('2d');
 
-    const gradient = ctx.createLinearGradient(
-        0,
-        0,
-        0,
-        300
-    );
-
-    gradient.addColorStop(
-        0,
-        'rgba(111, 78, 55, 0.25)'
-    );
-
-    gradient.addColorStop(
-        1,
-        'rgba(111, 78, 55, 0.01)'
-    );
-
-
     new Chart(ctx, {
         type: 'line',
 
@@ -46,9 +28,9 @@ if (canvas) {
 
                     data: values,
 
-                    borderColor: '#4371d1',
+                    borderColor: '#F97516',
 
-                    backgroundColor: gradient,
+                    backgroundColor: 'rgba(249, 117, 22, 0.12)',
 
                     fill: true,
 
@@ -62,12 +44,12 @@ if (canvas) {
 
                     pointBackgroundColor: '#FFFFFF',
 
-                    pointBorderColor: '#4371d1',
+                    pointBorderColor: '#F97516',
 
                     pointBorderWidth: 2,
 
                     pointHoverBackgroundColor:
-                        '#4371d1',
+                        '#F97516',
 
                     pointHoverBorderColor:
                         '#FFFFFF',
@@ -96,11 +78,11 @@ if (canvas) {
 
 
                 tooltip: {
-                    backgroundColor: '#332B26',
+                    backgroundColor: '#172554',
 
                     titleColor: '#FFFFFF',
 
-                    bodyColor: '#F4EAE2',
+                    bodyColor: '#FFF7ED',
 
                     padding: 12,
 
@@ -143,7 +125,7 @@ if (canvas) {
                     },
 
                     ticks: {
-                        color: '#927D6F',
+                        color: '#172554',
 
                         font: {
                             size: 10,
@@ -174,7 +156,7 @@ if (canvas) {
                     },
 
                     ticks: {
-                        color: '#927D6F',
+                        color: '#172554',
 
                         padding: 10,
 

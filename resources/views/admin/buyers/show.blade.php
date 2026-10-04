@@ -22,7 +22,7 @@
                        font-semibold
                        text-[#8B7465]
                        transition
-                       hover:text-[#4371d1]">
+                       hover:text-[#F97516]">
 
                 <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 
@@ -53,12 +53,12 @@
                                items-center
                                gap-2
                                rounded-full
-                               bg-[#F1E6DE]
+                               bg-[#FFF7ED]
                                px-3
                                py-1.5
                                text-xs
                                font-bold
-                               text-[#4371d1]">
+                               text-[#F97516]">
 
                         <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
 
@@ -77,7 +77,7 @@
                                text-2xl
                                font-black
                                tracking-tight
-                               text-[#332B26]
+                               text-[#172554]
                                lg:text-3xl">
 
                         Detail Pembeli
@@ -105,14 +105,14 @@
                            justify-center
                            gap-2
                            rounded-xl
-                           bg-[#4371d1]
+                           bg-[#F97516]
                            px-5
                            text-sm
                            font-bold
                            text-white
                            shadow-sm
                            transition
-                           hover:bg-[#0a1d45]
+                           hover:bg-[#172554]
                            hover:shadow-md">
 
                     <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -156,10 +156,10 @@
                        top-0
                        h-1
                        w-full
-                       bg-gradient-to-r
-                       from-[#4371d1]
-                       via-[#A67552]
-                       to-[#C89B55]">
+                       bg-[#F97516]
+
+
+                       ">
             </div>
 
 
@@ -180,7 +180,7 @@
                            items-center
                            justify-center
                            rounded-3xl
-                           bg-[#4371d1]
+                           bg-[#F97516]
                            text-3xl
                            font-black
                            uppercase
@@ -207,7 +207,7 @@
                         <h2
                             class="text-xl
                                    font-black
-                                   text-[#332B26]">
+                                   text-[#172554]">
 
                             {{ $buyer->name }}
 
@@ -224,7 +224,7 @@
                                        rounded-full
                                        border
                                        border-[#D3DFCE]
-                                       bg-[#EEF3EA]
+                                       bg-[#FFF7ED]
                                        px-3
                                        py-1.5
                                        text-xs
@@ -249,17 +249,17 @@
                                        rounded-full
                                        border
                                        border-[#ECD2CF]
-                                       bg-[#FAEDEC]
+                                       bg-[#FFF7ED]
                                        px-3
                                        py-1.5
                                        text-xs
                                        font-bold
-                                       text-[#A65954]">
+                                       text-[#F97516]">
 
                                 <span
                                     class="size-1.5
                                            rounded-full
-                                           bg-[#A65954]">
+                                           bg-[#F97516]">
                                 </span>
 
                                 Nonaktif
@@ -373,7 +373,7 @@
                 <div
                     class="border-b
                            border-[#E7DBD1]
-                           bg-[#FAF7F2]
+                           bg-[#FFF7ED]
                            p-5
                            sm:p-6">
 
@@ -389,7 +389,7 @@
                                    items-center
                                    justify-center
                                    rounded-xl
-                                   bg-[#4371d1]
+                                   bg-[#F97516]
                                    text-white">
 
                             <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -407,7 +407,7 @@
                         <div>
 
                             <h3 class="font-bold
-                                       text-[#332B26]">
+                                       text-[#172554]">
 
                                 Informasi Akun
 
@@ -454,7 +454,7 @@
                             class="mt-1.5
                                    text-sm
                                    font-semibold
-                                   text-[#4D4038]">
+                                   text-[#172554]">
 
                             {{ $buyer->name }}
 
@@ -541,7 +541,7 @@
                 <div
                     class="border-b
                            border-[#E7DBD1]
-                           bg-[#FAF7F2]
+                           bg-[#FFF7ED]
                            p-5
                            sm:p-6">
 
@@ -557,7 +557,7 @@
                                    items-center
                                    justify-center
                                    rounded-xl
-                                   bg-[#C89B55]
+                                   bg-[#FACC15]
                                    text-white">
 
                             <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -578,7 +578,7 @@
                         <div>
 
                             <h3 class="font-bold
-                                       text-[#332B26]">
+                                       text-[#172554]">
 
                                 Status Akun
 
@@ -625,12 +625,12 @@
                             class="mt-2
                                    inline-flex
                                    rounded-lg
-                                   bg-[#F1E6DE]
+                                   bg-[#FFF7ED]
                                    px-3
                                    py-1.5
                                    text-xs
                                    font-bold
-                                   text-[#4371d1]">
+                                   text-[#F97516]">
 
                             Pembeli
 
@@ -666,7 +666,7 @@
                                            rounded-full
                                            border
                                            border-[#D3DFCE]
-                                           bg-[#EEF3EA]
+                                           bg-[#FFF7ED]
                                            px-3
                                            py-1.5
                                            text-xs
@@ -690,17 +690,17 @@
                                            rounded-full
                                            border
                                            border-[#ECD2CF]
-                                           bg-[#FAEDEC]
+                                           bg-[#FFF7ED]
                                            px-3
                                            py-1.5
                                            text-xs
                                            font-bold
-                                           text-[#A65954]">
+                                           text-[#F97516]">
 
                                     <span
                                         class="size-1.5
                                                rounded-full
-                                               bg-[#A65954]">
+                                               bg-[#F97516]">
                                     </span>
 
                                     Nonaktif
@@ -850,7 +850,7 @@
                                items-center
                                justify-center
                                rounded-xl
-                               {{ $buyer->status === 'active' ? 'bg-[#FAEDEC] text-[#A65954]' : 'bg-[#EEF3EA] text-[#65795E]' }}">
+                               {{ $buyer->status === 'active' ? 'bg-[#FFF7ED] text-[#F97516]' : 'bg-[#FFF7ED] text-[#65795E]' }}">
 
                         @if ($buyer->status === 'active')
                             <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -876,7 +876,7 @@
                     <div>
 
                         <h3 class="font-bold
-                                   text-[#332B26]">
+                                   text-[#172554]">
 
                             Kontrol Akun
 
@@ -929,7 +929,7 @@
                                font-bold
                                transition
                                {{ $buyer->status === 'active'
-                                   ? 'bg-[#A65954] text-white hover:bg-[#8D4944]'
+                                   ? 'bg-[#F97516] text-white hover:bg-[#8D4944]'
                                    : 'bg-[#718268] text-white hover:bg-[#65795E]' }}">
 
 

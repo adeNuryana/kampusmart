@@ -6,10 +6,10 @@
 
     <div
         class="min-h-screen
-               bg-gradient-to-br
-               from-[#FBF8F5]
-               via-[#FAF5F1]
-               to-[#F4EAE2]">
+               bg-[#FFF7ED]
+
+
+               ">
 
 
         <main
@@ -33,7 +33,7 @@
                            text-sm font-semibold
                            text-slate-500
                            transition
-                           hover:text-[#4371d1]">
+                           hover:text-[#F97516]">
                     <i class="fa-solid fa-arrow-left"></i>
 
                     Dashboard
@@ -47,10 +47,10 @@
                        rounded-3xl
                        border
                        border-[#E6D8CD]
-                       bg-gradient-to-br
-                       from-white
-                       via-[#FBF8F5]
-                       to-[#F4EAE2]
+                       bg-[#FFF7ED]
+
+
+
                        p-5
                        shadow-sm
                        sm:p-6">
@@ -63,7 +63,7 @@
                            -top-20
                            size-52
                            rounded-full
-                           bg-[#C89B55]/10
+                           bg-[#FACC15]/10
                            blur-3xl">
                 </div>
 
@@ -75,7 +75,7 @@
                            left-1/3
                            size-44
                            rounded-full
-                           bg-[#C8795A]/10
+                           bg-[#F97516]/10
                            blur-3xl">
                 </div>
 
@@ -87,12 +87,12 @@
                                items-center
                                gap-2
                                rounded-full
-                               bg-[#F4EAE2]
+                               bg-[#FFF7ED]
                                px-3
                                py-1.5
                                text-xs
                                font-bold
-                               text-[#4371d1]">
+                               text-[#F97516]">
 
                         <i class="fa-regular fa-user"></i>
 
@@ -162,7 +162,7 @@
                                    -top-16
                                    size-44
                                    rounded-full
-                                   bg-[#4371d1]/10
+                                   bg-[#F97516]/10
                                    blur-3xl">
                         </div>
 
@@ -173,10 +173,10 @@
                             {{-- AVATAR --}}
 
                             <x-user-avatar :user="$buyer"
-                                class="mx-auto size-24 rounded-full bg-gradient-to-br
-                                       from-[#0a1d45] via-[#4371d1] to-[#9A6948]
+                                class="mx-auto size-24 rounded-full bg-[#172554]
+
                                        text-3xl font-black uppercase text-white shadow-xl
-                                       shadow-[#4371d1]/20 ring-4 ring-[#F4EAE2]" />
+                                       shadow-[#F97516]/20 ring-4 ring-[#FFF7ED]" />
 
 
 
@@ -211,12 +211,12 @@
                                            items-center
                                            gap-1.5
                                            rounded-full
-                                           bg-[#F4EAE2]
+                                           bg-[#FFF7ED]
                                            px-3
                                            py-1.5
                                            text-xs
                                            font-bold
-                                           text-[#4371d1]">
+                                           text-[#F97516]">
 
                                     <i class="fa-solid fa-user"></i>
 
@@ -279,12 +279,12 @@
                                                    gap-2
                                                    text-sm
                                                    font-semibold
-                                                   text-[#A65954]">
+                                                   text-[#F97516]">
 
                                             <span
                                                 class="size-2
                                                        rounded-full
-                                                       bg-[#A65954]">
+                                                       bg-[#F97516]">
                                             </span>
 
                                             Nonaktif
@@ -423,9 +423,9 @@
                                        rounded-2xl
                                        border
                                        border-[#D7E1D2]
-                                       bg-gradient-to-br
-                                       from-[#F1F5ED]
-                                       to-[#E7EFE3]
+                                       bg-[#FFF7ED]
+
+
                                        p-4">
 
                                 <div
@@ -488,9 +488,9 @@
                         <div
                             class="border-b
                                    border-[#EFE4DC]
-                                   bg-gradient-to-r
-                                   from-[#FBF8F5]
-                                   to-white
+                                   bg-[#FFF7ED]
+
+
                                    px-5
                                    py-4
                                    sm:px-6
@@ -509,8 +509,8 @@
                                            items-center
                                            justify-center
                                            rounded-xl
-                                           bg-[#F4EAE2]
-                                           text-[#4371d1]">
+                                           bg-[#FFF7ED]
+                                           text-[#F97516]">
 
                                     <i class="fa-regular fa-address-card"></i>
 
@@ -558,7 +558,7 @@
                                            rounded-2xl
                                            border
                                            border-[#D1DEC9]
-                                           bg-[#EEF3EA]
+                                           bg-[#FFF7ED]
                                            px-4
                                            py-3
                                            text-sm
@@ -641,9 +641,9 @@
                                                        text-sm
                                                        outline-none
                                                        transition
-                                                       focus:border-[#A97957]
+                                                       focus:border-[#F97516]
                                                        focus:ring-4
-                                                       focus:ring-[#F5E9DF]">
+                                                       focus:ring-[#FFF7ED]">
 
                                         </div>
 
@@ -653,7 +653,7 @@
                                                 class="mt-2
                                                        text-xs
                                                        font-medium
-                                                       text-[#A65954]">
+                                                       text-[#F97516]">
 
                                                 {{ $message }}
 
@@ -714,9 +714,9 @@
                                                        text-sm
                                                        outline-none
                                                        transition
-                                                       focus:border-[#A97957]
+                                                       focus:border-[#F97516]
                                                        focus:ring-4
-                                                       focus:ring-[#F5E9DF]">
+                                                       focus:ring-[#FFF7ED]">
 
                                         </div>
 
@@ -726,7 +726,7 @@
                                                 class="mt-2
                                                        text-xs
                                                        font-medium
-                                                       text-[#A65954]">
+                                                       text-[#F97516]">
 
                                                 {{ $message }}
 
@@ -789,9 +789,9 @@
                                                        outline-none
                                                        transition
                                                        placeholder:text-slate-400
-                                                       focus:border-[#A97957]
+                                                       focus:border-[#F97516]
                                                        focus:ring-4
-                                                       focus:ring-[#F5E9DF]">
+                                                       focus:ring-[#FFF7ED]">
 
                                         </div>
 
@@ -801,7 +801,7 @@
                                                 class="mt-2
                                                        text-xs
                                                        font-medium
-                                                       text-[#A65954]">
+                                                       text-[#F97516]">
 
                                                 {{ $message }}
 
@@ -829,16 +829,16 @@
                                                justify-center
                                                gap-2
                                                rounded-xl
-                                               bg-gradient-to-r
-                                               from-[#0a1d45]
-                                               via-[#4371d1]
-                                               to-[#4371d1]
+                                               bg-[#172554]
+
+
+
                                                px-5
                                                text-sm
                                                font-bold
                                                text-white
                                                shadow-lg
-                                               shadow-[#4371d1]/15
+                                               shadow-[#F97516]/15
                                                transition
                                                duration-300
                                                hover:-translate-y-0.5
@@ -883,9 +883,9 @@
                         <div
                             class="border-b
                                    border-[#EFE4DC]
-                                   bg-gradient-to-r
-                                   from-[#FBF8F5]
-                                   to-white
+                                   bg-[#FFF7ED]
+
+
                                    px-5
                                    py-4
                                    sm:px-6
@@ -904,7 +904,7 @@
                                            items-center
                                            justify-center
                                            rounded-xl
-                                           bg-[#FAF2DF]
+                                           bg-[#FFF7ED]
                                            text-[#A87A37]">
 
                                     <i class="fa-solid fa-lock"></i>
@@ -954,7 +954,7 @@
                                            rounded-2xl
                                            border
                                            border-[#D1DEC9]
-                                           bg-[#EEF3EA]
+                                           bg-[#FFF7ED]
                                            px-4
                                            py-3
                                            text-sm
@@ -1037,9 +1037,9 @@
                                                        outline-none
                                                        transition
                                                        placeholder:text-slate-400
-                                                       focus:border-[#A97957]
+                                                       focus:border-[#F97516]
                                                        focus:ring-4
-                                                       focus:ring-[#F5E9DF]">
+                                                       focus:ring-[#FFF7ED]">
 
 
                                             <button type="button"
@@ -1056,7 +1056,7 @@
                                                        justify-center
                                                        text-slate-400
                                                        transition
-                                                       hover:text-[#4371d1]">
+                                                       hover:text-[#F97516]">
 
                                                 <i class="fa-regular"
                                                     :class="showCurrent
@@ -1075,7 +1075,7 @@
                                                 class="mt-2
                                                        text-xs
                                                        font-medium
-                                                       text-[#A65954]">
+                                                       text-[#F97516]">
 
                                                 {{ $message }}
 
@@ -1129,9 +1129,9 @@
                                                            outline-none
                                                            transition
                                                            placeholder:text-slate-400
-                                                           focus:border-[#A97957]
+                                                           focus:border-[#F97516]
                                                            focus:ring-4
-                                                           focus:ring-[#F5E9DF]">
+                                                           focus:ring-[#FFF7ED]">
 
 
                                                 <button type="button"
@@ -1148,7 +1148,7 @@
                                                            justify-center
                                                            text-slate-400
                                                            transition
-                                                           hover:text-[#4371d1]">
+                                                           hover:text-[#F97516]">
 
                                                     <i class="fa-regular"
                                                         :class="showNew
@@ -1167,7 +1167,7 @@
                                                     class="mt-2
                                                            text-xs
                                                            font-medium
-                                                           text-[#A65954]">
+                                                           text-[#F97516]">
 
                                                     {{ $message }}
 
@@ -1215,9 +1215,9 @@
                                                            outline-none
                                                            transition
                                                            placeholder:text-slate-400
-                                                           focus:border-[#A97957]
+                                                           focus:border-[#F97516]
                                                            focus:ring-4
-                                                           focus:ring-[#F5E9DF]">
+                                                           focus:ring-[#FFF7ED]">
 
 
                                                 <button type="button"
@@ -1234,7 +1234,7 @@
                                                            justify-center
                                                            text-slate-400
                                                            transition
-                                                           hover:text-[#4371d1]">
+                                                           hover:text-[#F97516]">
 
                                                     <i class="fa-regular"
                                                         :class="showConfirmation
@@ -1264,7 +1264,7 @@
                                            rounded-2xl
                                            border
                                            border-[#ECD7AF]
-                                           bg-[#FAF2DF]
+                                           bg-[#FFF7ED]
                                            p-4">
 
                                     <div
@@ -1274,7 +1274,7 @@
                                                items-center
                                                justify-center
                                                rounded-lg
-                                               bg-[#C89B55]
+                                               bg-[#FACC15]
                                                text-xs
                                                text-white">
 
@@ -1313,16 +1313,16 @@
                                                justify-center
                                                gap-2
                                                rounded-xl
-                                               bg-gradient-to-r
-                                               from-[#0a1d45]
-                                               via-[#0a1d45]
-                                               to-[#4371d1]
+                                               bg-[#172554]
+
+
+
                                                px-5
                                                text-sm
                                                font-bold
                                                text-white
                                                shadow-lg
-                                               shadow-[#4371d1]/15
+                                               shadow-[#F97516]/15
                                                transition
                                                duration-300
                                                hover:-translate-y-0.5

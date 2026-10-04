@@ -14,10 +14,10 @@
 
             <div
                 class="inline-flex items-center gap-2
-                       rounded-full bg-[#FBEAE2]
+                       rounded-full bg-[#FFF7ED]
                        px-3 py-1.5
                        text-xs font-bold
-                       text-[#A95E43]">
+                       text-[#F97516]">
 
                 <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
 
@@ -43,7 +43,7 @@
             <h1
                 class="mt-3 text-2xl
                        font-black tracking-tight
-                       text-[#332B26]
+                       text-[#172554]
                        lg:text-3xl">
 
                 Pengaturan
@@ -86,10 +86,10 @@
 
                     <div
                         class="h-1.5
-                               bg-gradient-to-r
-                               from-[#C8795A]
-                               via-[#A95E43]
-                               to-[#4371d1]">
+                               bg-[#F97516]
+
+
+                               ">
                     </div>
 
 
@@ -109,7 +109,7 @@
                                 class="mx-auto flex size-24
                                        items-center justify-center
                                        rounded-3xl
-                                       bg-[#C8795A]
+                                       bg-[#F97516]
                                        text-3xl font-black
                                        text-white
                                        shadow-sm">
@@ -123,7 +123,7 @@
                         <div class="mt-5 text-center">
 
                             <h2 class="text-lg font-black
-                                       text-[#332B26]">
+                                       text-[#172554]">
 
                                 {{ $seller->name }}
 
@@ -143,10 +143,10 @@
                                        items-center gap-2
                                        rounded-full
                                        border border-[#EBCFC2]
-                                       bg-[#FBEAE2]
+                                       bg-[#FFF7ED]
                                        px-3 py-1.5
                                        text-xs font-bold
-                                       text-[#A95E43]">
+                                       text-[#F97516]">
 
                                 <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="1.8">
@@ -189,7 +189,7 @@
                                         class="inline-flex
                                                items-center gap-2
                                                rounded-full
-                                               bg-[#EEF3EA]
+                                               bg-[#FFF7ED]
                                                px-2.5 py-1
                                                text-xs font-bold
                                                text-[#65795E]">
@@ -208,15 +208,15 @@
                                         class="inline-flex
                                                items-center gap-2
                                                rounded-full
-                                               bg-[#FAEDEC]
+                                               bg-[#FFF7ED]
                                                px-2.5 py-1
                                                text-xs font-bold
-                                               text-[#A65954]">
+                                               text-[#F97516]">
 
                                         <span
                                             class="size-1.5
                                                    rounded-full
-                                                   bg-[#A65954]">
+                                                   bg-[#F97516]">
                                         </span>
 
                                         Nonaktif
@@ -242,7 +242,7 @@
 
                                 <span
                                     class="text-sm font-semibold
-                                           text-[#4D4038]">
+                                           text-[#172554]">
 
                                     {{ $seller->created_at->timezone('Asia/Jakarta')->locale('id')->translatedFormat('d M Y') }}
 
@@ -266,7 +266,7 @@
 
                                 <span
                                     class="text-sm font-semibold
-                                           text-[#4D4038]">
+                                           text-[#172554]">
 
                                     {{ $seller->sellerProfile?->nim ?? '-' }}
 
@@ -291,7 +291,7 @@
                                 <span
                                     class="text-right text-sm
                                            font-semibold
-                                           text-[#4D4038]">
+                                           text-[#172554]">
 
                                     {{ $seller->sellerProfile?->faculty ?? '-' }}
 
@@ -331,7 +331,7 @@
                     <div
                         class="border-b
                                border-[#E7DBD1]
-                               bg-[#FAF7F2]
+                               bg-[#FFF7ED]
                                p-5 sm:p-6">
 
                         <div class="flex items-center gap-3">
@@ -341,7 +341,7 @@
                                        shrink-0
                                        items-center justify-center
                                        rounded-xl
-                                       bg-[#C8795A]
+                                       bg-[#F97516]
                                        text-white">
 
                                 <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -359,7 +359,7 @@
                             <div>
 
                                 <h2 class="font-bold
-                                           text-[#332B26]">
+                                           text-[#172554]">
 
                                     Informasi Seller & Toko
 
@@ -389,7 +389,7 @@
                                 class="mb-5 flex items-start gap-3
                                        rounded-2xl
                                        border border-[#D3DFCE]
-                                       bg-[#EEF3EA]
+                                       bg-[#FFF7ED]
                                        px-4 py-3.5">
 
                                 <div
@@ -435,11 +435,11 @@
 
                         <div
                             class="mb-5 flex items-start gap-3 rounded-2xl border border-[#E8D8B9]
-                                   bg-[#FAF2DF] px-4 py-3.5">
+                                   bg-[#FFF7ED] px-4 py-3.5">
 
                             <div
                                 class="flex size-8 shrink-0 items-center justify-center rounded-lg
-                                       bg-[#C89B55] text-white">
+                                       bg-[#FACC15] text-white">
 
                                 <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="1.8">
@@ -482,7 +482,7 @@
                                     <label for="name"
                                         class="mb-2 block
                                                text-sm font-semibold
-                                               text-[#4D4038]">
+                                               text-[#172554]">
 
                                         Nama Lengkap
 
@@ -506,11 +506,11 @@
                                     <label for="store_name"
                                         class="mb-2 block
                                                text-sm font-semibold
-                                               text-[#4D4038]">
+                                               text-[#172554]">
 
                                         Nama Toko
 
-                                        <span class="text-[#A65954]">
+                                        <span class="text-[#F97516]">
                                             *
                                         </span>
 
@@ -524,19 +524,19 @@
                                                rounded-xl border
                                                {{ $errors->has('store_name') ? 'border-[#D79B96]' : 'border-[#DFD2C7]' }}
                                                bg-white px-4
-                                               text-sm text-[#4D4038]
+                                               text-sm text-[#172554]
                                                outline-none transition
                                                placeholder:text-[#B3A195]
-                                               focus:border-[#C8795A]
+                                               focus:border-[#F97516]
                                                focus:ring-4
-                                               focus:ring-[#FBEAE2]">
+                                               focus:ring-[#FFF7ED]">
 
 
                                     @error('store_name')
                                         <p
                                             class="mt-2 text-xs
                                                    font-medium
-                                                   text-[#A65954]">
+                                                   text-[#F97516]">
 
                                             {{ $message }}
 
@@ -553,7 +553,7 @@
                                     <label for="email"
                                         class="mb-2 block
                                                text-sm font-semibold
-                                               text-[#4D4038]">
+                                               text-[#172554]">
 
                                         Email
 
@@ -577,7 +577,7 @@
                                     <label for="phone"
                                         class="mb-2 block
                                                text-sm font-semibold
-                                               text-[#4D4038]">
+                                               text-[#172554]">
 
                                         Nomor Telepon
 
@@ -602,7 +602,7 @@
                                     <label for="whatsapp"
                                         class="mb-2 block
                                                text-sm font-semibold
-                                               text-[#4D4038]">
+                                               text-[#172554]">
 
                                         WhatsApp
 
@@ -627,7 +627,7 @@
                                     <label for="nim"
                                         class="mb-2 block
                                                text-sm font-semibold
-                                               text-[#4D4038]">
+                                               text-[#172554]">
 
                                         NIM
 
@@ -652,7 +652,7 @@
                                     <label for="faculty"
                                         class="mb-2 block
                                                text-sm font-semibold
-                                               text-[#4D4038]">
+                                               text-[#172554]">
 
                                         Fakultas
 
@@ -677,7 +677,7 @@
                                     <label for="description"
                                         class="mb-2 block
                                                text-sm font-semibold
-                                               text-[#4D4038]">
+                                               text-[#172554]">
 
                                         Deskripsi Toko
 
@@ -690,19 +690,19 @@
                                                {{ $errors->has('description') ? 'border-[#D79B96]' : 'border-[#DFD2C7]' }}
                                                bg-white px-4 py-3
                                                text-sm leading-6
-                                               text-[#4D4038]
+                                               text-[#172554]
                                                outline-none transition
                                                placeholder:text-[#B3A195]
-                                               focus:border-[#C8795A]
+                                               focus:border-[#F97516]
                                                focus:ring-4
-                                               focus:ring-[#FBEAE2]">{{ old('description', $seller->sellerProfile?->description) }}</textarea>
+                                               focus:ring-[#FFF7ED]">{{ old('description', $seller->sellerProfile?->description) }}</textarea>
 
 
                                     @error('description')
                                         <p
                                             class="mt-2 text-xs
                                                    font-medium
-                                                   text-[#A65954]">
+                                                   text-[#F97516]">
 
                                             {{ $message }}
 
@@ -719,7 +719,7 @@
                                     <label for="photo"
                                         class="mb-2 block
                                                text-sm font-semibold
-                                               text-[#4D4038]">
+                                               text-[#172554]">
 
                                         Foto Seller
 
@@ -729,7 +729,7 @@
                                     <div
                                         class="rounded-2xl
                                                border border-[#E7DBD1]
-                                               bg-[#FAF7F2]
+                                               bg-[#FFF7ED]
                                                p-4">
 
                                         <div
@@ -769,9 +769,9 @@
                                                         class="flex h-full
                                                                w-full items-center
                                                                justify-center
-                                                               bg-[#FBEAE2]
+                                                               bg-[#FFF7ED]
                                                                text-xl font-black
-                                                               text-[#A95E43]">
+                                                               text-[#F97516]">
 
                                                         {{ strtoupper(substr($seller->name, 0, 1)) }}
 
@@ -796,12 +796,12 @@
                                                            file:mr-3
                                                            file:rounded-lg
                                                            file:border-0
-                                                           file:bg-[#FBEAE2]
+                                                           file:bg-[#FFF7ED]
                                                            file:px-3
                                                            file:py-1.5
                                                            file:text-xs
                                                            file:font-bold
-                                                           file:text-[#A95E43]">
+                                                           file:text-[#F97516]">
 
 
                                                 <p
@@ -824,7 +824,7 @@
                                         <p
                                             class="mt-2 text-xs
                                                    font-medium
-                                                   text-[#A65954]">
+                                                   text-[#F97516]">
 
                                             {{ $message }}
 
@@ -849,12 +849,12 @@
                                     class="inline-flex h-11
                                            items-center justify-center
                                            gap-2 rounded-xl
-                                           bg-[#C8795A]
+                                           bg-[#F97516]
                                            px-5
                                            text-sm font-bold
                                            text-white
                                            shadow-sm transition
-                                           hover:bg-[#B66F52]
+                                           hover:bg-[#F97516]
                                            hover:shadow-md">
 
                                     <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -897,7 +897,7 @@
                     <div
                         class="border-b
                                border-[#E7DBD1]
-                               bg-[#FAF7F2]
+                               bg-[#FFF7ED]
                                p-5 sm:p-6">
 
                         <div class="flex items-center gap-3">
@@ -907,7 +907,7 @@
                                        shrink-0
                                        items-center justify-center
                                        rounded-xl
-                                       bg-[#C89B55]
+                                       bg-[#FACC15]
                                        text-white">
 
                                 <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -927,7 +927,7 @@
                             <div>
 
                                 <h2 class="font-bold
-                                           text-[#332B26]">
+                                           text-[#172554]">
 
                                     Keamanan Akun
 
@@ -955,7 +955,7 @@
                                 class="mb-5 flex items-start gap-3
                                        rounded-2xl
                                        border border-[#D3DFCE]
-                                       bg-[#EEF3EA]
+                                       bg-[#FFF7ED]
                                        px-4 py-3.5">
 
                                 <div
@@ -1019,11 +1019,11 @@
                                     <label for="current_password"
                                         class="mb-2 block
                                                text-sm font-semibold
-                                               text-[#4D4038]">
+                                               text-[#172554]">
 
                                         Password Saat Ini
 
-                                        <span class="text-[#A65954]">
+                                        <span class="text-[#F97516]">
                                             *
                                         </span>
 
@@ -1043,12 +1043,12 @@
                                                    rounded-xl border
                                                    bg-white
                                                    px-4 pr-12
-                                                   text-sm text-[#4D4038]
+                                                   text-sm text-[#172554]
                                                    outline-none transition
                                                    placeholder:text-[#B3A195]
-                                                   focus:border-[#C89B55]
+                                                   focus:border-[#FACC15]
                                                    focus:ring-4
-                                                   focus:ring-[#FAF2DF]
+                                                   focus:ring-[#FFF7ED]
                                                    {{ $errors->getBag('updatePassword')->has('current_password') ? 'border-[#D79B96]' : 'border-[#DFD2C7]' }}">
 
 
@@ -1065,7 +1065,7 @@
                                                    rounded-lg
                                                    text-[#9C8677]
                                                    transition
-                                                   hover:bg-[#FAF2DF]
+                                                   hover:bg-[#FFF7ED]
                                                    hover:text-[#A87A37]">
 
                                             <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -1088,7 +1088,7 @@
                                         <p
                                             class="mt-2 text-xs
                                                    font-medium
-                                                   text-[#A65954]">
+                                                   text-[#F97516]">
 
                                             {{ $message }}
 
@@ -1109,11 +1109,11 @@
                                         <label for="password"
                                             class="mb-2 block
                                                    text-sm font-semibold
-                                                   text-[#4D4038]">
+                                                   text-[#172554]">
 
                                             Password Baru
 
-                                            <span class="text-[#A65954]">
+                                            <span class="text-[#F97516]">
                                                 *
                                             </span>
 
@@ -1133,12 +1133,12 @@
                                                        rounded-xl border
                                                        bg-white
                                                        px-4 pr-12
-                                                       text-sm text-[#4D4038]
+                                                       text-sm text-[#172554]
                                                        outline-none transition
                                                        placeholder:text-[#B3A195]
-                                                       focus:border-[#C89B55]
+                                                       focus:border-[#FACC15]
                                                        focus:ring-4
-                                                       focus:ring-[#FAF2DF]
+                                                       focus:ring-[#FFF7ED]
                                                        {{ $errors->getBag('updatePassword')->has('password') ? 'border-[#D79B96]' : 'border-[#DFD2C7]' }}">
 
 
@@ -1155,7 +1155,7 @@
                                                        rounded-lg
                                                        text-[#9C8677]
                                                        transition
-                                                       hover:bg-[#FAF2DF]
+                                                       hover:bg-[#FFF7ED]
                                                        hover:text-[#A87A37]">
 
                                                 <svg class="size-4" viewBox="0 0 24 24" fill="none"
@@ -1178,7 +1178,7 @@
                                             <p
                                                 class="mt-2 text-xs
                                                        font-medium
-                                                       text-[#A65954]">
+                                                       text-[#F97516]">
 
                                                 {{ $message }}
 
@@ -1195,11 +1195,11 @@
                                         <label for="password_confirmation"
                                             class="mb-2 block
                                                    text-sm font-semibold
-                                                   text-[#4D4038]">
+                                                   text-[#172554]">
 
                                             Konfirmasi Password
 
-                                            <span class="text-[#A65954]">
+                                            <span class="text-[#F97516]">
                                                 *
                                             </span>
 
@@ -1220,12 +1220,12 @@
                                                        border border-[#DFD2C7]
                                                        bg-white
                                                        px-4 pr-12
-                                                       text-sm text-[#4D4038]
+                                                       text-sm text-[#172554]
                                                        outline-none transition
                                                        placeholder:text-[#B3A195]
-                                                       focus:border-[#C89B55]
+                                                       focus:border-[#FACC15]
                                                        focus:ring-4
-                                                       focus:ring-[#FAF2DF]">
+                                                       focus:ring-[#FFF7ED]">
 
 
                                             <button type="button"
@@ -1241,7 +1241,7 @@
                                                        rounded-lg
                                                        text-[#9C8677]
                                                        transition
-                                                       hover:bg-[#FAF2DF]
+                                                       hover:bg-[#FFF7ED]
                                                        hover:text-[#A87A37]">
 
                                                 <svg class="size-4" viewBox="0 0 24 24" fill="none"
@@ -1272,7 +1272,7 @@
                                 class="mt-5 flex items-start gap-3
                                        rounded-2xl
                                        border border-[#E8D8B9]
-                                       bg-[#FAF2DF]
+                                       bg-[#FFF7ED]
                                        p-4">
 
                                 <div
@@ -1280,7 +1280,7 @@
                                            shrink-0 items-center
                                            justify-center
                                            rounded-lg
-                                           bg-[#C89B55]
+                                           bg-[#FACC15]
                                            text-white">
 
                                     <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -1320,7 +1320,7 @@
                                     class="inline-flex h-11
                                            items-center justify-center
                                            gap-2 rounded-xl
-                                           bg-[#C89B55]
+                                           bg-[#FACC15]
                                            px-5
                                            text-sm font-bold
                                            text-white

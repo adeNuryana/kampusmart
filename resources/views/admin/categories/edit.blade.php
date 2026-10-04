@@ -17,7 +17,7 @@
                        text-sm font-semibold
                        text-[#8B7465]
                        transition
-                       hover:text-[#4371d1]">
+                       hover:text-[#F97516]">
 
                 <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 
@@ -41,10 +41,10 @@
                     <div
                         class="inline-flex items-center
                                gap-2 rounded-full
-                               bg-[#F4EAE2]
+                               bg-[#FFF7ED]
                                px-3 py-1.5
                                text-xs font-bold
-                               text-[#4371d1]">
+                               text-[#F97516]">
 
                         <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
 
@@ -61,7 +61,7 @@
                     <h1
                         class="mt-3 text-2xl
                                font-black tracking-tight
-                               text-[#332B26]
+                               text-[#172554]
                                lg:text-3xl">
 
                         Edit Kategori
@@ -85,7 +85,7 @@
                                items-center gap-2
                                rounded-full border
                                border-[#D3DFCE]
-                               bg-[#EEF3EA]
+                               bg-[#FFF7ED]
                                px-3 py-1.5
                                text-xs font-bold
                                text-[#65795E]">
@@ -103,13 +103,13 @@
                                items-center gap-2
                                rounded-full border
                                border-[#ECD2CF]
-                               bg-[#FAEDEC]
+                               bg-[#FFF7ED]
                                px-3 py-1.5
                                text-xs font-bold
-                               text-[#A65954]">
+                               text-[#F97516]">
 
                         <span class="size-1.5 rounded-full
-                                   bg-[#A65954]">
+                                   bg-[#F97516]">
                         </span>
 
                         Nonaktif
@@ -132,14 +132,14 @@
                 class="mb-6 flex items-start gap-3
                        rounded-2xl border
                        border-[#ECD2CF]
-                       bg-[#FAEDEC]
+                       bg-[#FFF7ED]
                        px-4 py-3.5">
 
                 <div
                     class="flex size-8 shrink-0
                            items-center justify-center
                            rounded-lg
-                           bg-[#A65954]
+                           bg-[#F97516]
                            text-white">
 
                     <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -156,7 +156,7 @@
                 <div>
 
                     <p class="text-sm font-bold
-                               text-[#A65954]">
+                               text-[#F97516]">
 
                         Data belum dapat disimpan.
 
@@ -197,7 +197,7 @@
                 {{-- HEADER --}}
                 <div
                     class="border-b border-[#E7DBD1]
-                           bg-[#FAF7F2]
+                           bg-[#FFF7ED]
                            p-5 sm:p-6">
 
                     <div class="flex items-center gap-3">
@@ -207,7 +207,7 @@
                                    shrink-0 items-center
                                    justify-center
                                    rounded-xl
-                                   bg-[#4371d1]
+                                   bg-[#F97516]
                                    text-white">
 
                             <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -226,7 +226,7 @@
                         <div>
 
                             <h2 class="font-bold
-                                       text-[#332B26]">
+                                       text-[#172554]">
 
                                 Informasi Kategori
 
@@ -256,11 +256,11 @@
                         <label for="name"
                             class="mb-2 block
                                    text-sm font-semibold
-                                   text-[#4D4038]">
+                                   text-[#172554]">
 
                             Nama Kategori
 
-                            <span class="text-[#A65954]">
+                            <span class="text-[#F97516]">
                                 *
                             </span>
 
@@ -273,18 +273,18 @@
                                    rounded-xl border
                                    {{ $errors->has('name') ? 'border-[#D79B96]' : 'border-[#DFD2C7]' }}
                                    bg-white px-4
-                                   text-sm text-[#4D4038]
+                                   text-sm text-[#172554]
                                    outline-none transition
-                                   focus:border-[#A97957]
+                                   focus:border-[#F97516]
                                    focus:ring-4
-                                   focus:ring-[#F1E6DE]">
+                                   focus:ring-[#FFF7ED]">
 
 
                         @error('name')
                             <p
                                 class="mt-2 text-xs
                                        font-medium
-                                       text-[#A65954]">
+                                       text-[#F97516]">
 
                                 {{ $message }}
 
@@ -301,7 +301,7 @@
                         <label
                             class="mb-2 block
                                    text-sm font-semibold
-                                   text-[#4D4038]">
+                                   text-[#172554]">
 
                             Slug Saat Ini
 
@@ -313,7 +313,7 @@
                                    items-center gap-3
                                    rounded-xl
                                    border border-[#E7DBD1]
-                                   bg-[#FAF7F2]
+                                   bg-[#FFF7ED]
                                    px-4">
 
                             <svg class="size-4 shrink-0
@@ -355,7 +355,7 @@
                         <label for="icon"
                             class="mb-2 block
                                    text-sm font-semibold
-                                   text-[#4D4038]">
+                                   text-[#172554]">
 
                             Icon
 
@@ -369,10 +369,10 @@
                             <label for="icon"
                                 class="mb-2 block
                text-sm font-semibold
-               text-[#4D4038]">
+               text-[#172554]">
                                 Icon Kategori
 
-                                <span class="text-[#A65954]">
+                                <span class="text-[#F97516]">
                                     *
                                 </span>
                             </label>
@@ -383,11 +383,11 @@
                rounded-xl border
                border-[#DFD2C7]
                bg-white px-4
-               text-sm text-[#4D4038]
+               text-sm text-[#172554]
                outline-none transition
-               focus:border-[#6F4E37]
+               focus:border-[#172554]
                focus:ring-4
-               focus:ring-[#F4EAE2]">
+               focus:ring-[#FFF7ED]">
 
                                 <option value="food">
                                     Makanan
@@ -447,7 +447,7 @@
                             @error('icon')
                                 <p class="mt-2 text-xs
                    font-medium
-                   text-[#A65954]">
+                   text-[#F97516]">
                                     {{ $message }}
                                 </p>
                             @enderror
@@ -458,13 +458,13 @@
                             <div x-cloak x-show="icon === 'custom'" x-transition
                                 class="mt-4 rounded-2xl
                border border-[#E7DBD1]
-               bg-[#FAF7F2]
+               bg-[#FFF7ED]
                p-4">
 
                                 <label for="icon_image"
                                     class="mb-2 block
                    text-sm font-semibold
-                   text-[#4D4038]">
+                   text-[#172554]">
                                     Upload Icon
                                 </label>
 
@@ -519,12 +519,12 @@
                            file:mr-3
                            file:rounded-lg
                            file:border-0
-                           file:bg-[#F4EAE2]
+                           file:bg-[#FFF7ED]
                            file:px-3
                            file:py-1.5
                            file:text-xs
                            file:font-bold
-                           file:text-[#6F4E37]">
+                           file:text-[#172554]">
 
 
                                         <p
@@ -545,7 +545,7 @@
                                     <p
                                         class="mt-2 text-xs
                        font-medium
-                       text-[#A65954]">
+                       text-[#F97516]">
                                         {{ $message }}
                                     </p>
                                 @enderror
@@ -564,7 +564,7 @@
                         <label for="description"
                             class="mb-2 block
                                    text-sm font-semibold
-                                   text-[#4D4038]">
+                                   text-[#172554]">
 
                             Deskripsi
 
@@ -577,19 +577,19 @@
                                    border-[#DFD2C7]
                                    bg-white p-4
                                    text-sm leading-6
-                                   text-[#4D4038]
+                                   text-[#172554]
                                    outline-none
                                    placeholder:text-[#B3A195]
-                                   focus:border-[#A97957]
+                                   focus:border-[#F97516]
                                    focus:ring-4
-                                   focus:ring-[#F1E6DE]">{{ old('description', $category->description) }}</textarea>
+                                   focus:ring-[#FFF7ED]">{{ old('description', $category->description) }}</textarea>
 
 
                         @error('description')
                             <p
                                 class="mt-2 text-xs
                                        font-medium
-                                       text-[#A65954]">
+                                       text-[#F97516]">
 
                                 {{ $message }}
 
@@ -606,7 +606,7 @@
                         <label for="status"
                             class="mb-2 block
                                    text-sm font-semibold
-                                   text-[#4D4038]">
+                                   text-[#172554]">
 
                             Status
 
@@ -618,11 +618,11 @@
                                    rounded-xl border
                                    border-[#DFD2C7]
                                    bg-white px-4
-                                   text-sm text-[#4D4038]
+                                   text-sm text-[#172554]
                                    outline-none
-                                   focus:border-[#A97957]
+                                   focus:border-[#F97516]
                                    focus:ring-4
-                                   focus:ring-[#F1E6DE]">
+                                   focus:ring-[#FFF7ED]">
 
                             <option value="active" @selected(old('status', $category->status) === 'active')>
 
@@ -668,7 +668,7 @@
                            text-sm font-semibold
                            text-[#6F6259]
                            transition
-                           hover:bg-[#F3EAE3]">
+                           hover:bg-[#FFF7ED]">
 
                     Batal
 
@@ -679,11 +679,11 @@
                     class="inline-flex h-11
                            items-center justify-center
                            gap-2 rounded-xl
-                           bg-[#4371d1]
+                           bg-[#F97516]
                            px-6 text-sm
                            font-bold text-white
                            shadow-sm transition
-                           hover:bg-[#0a1d45]">
+                           hover:bg-[#172554]">
 
                     <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 

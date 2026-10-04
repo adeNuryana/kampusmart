@@ -80,6 +80,7 @@ class ProductController extends Controller
 
         return view('buyer.products.index', compact('products', 'categories'));
     }
+
     public function show(Product $product): View
     {
         $product->load(['category', 'user.sellerProfile']);
@@ -92,12 +93,19 @@ class ProductController extends Controller
 
         $seller = $product->user;
 
+        $visibleProducts = static fn () => Product::query()
+            ->with(['category', 'user.sellerProfile'])
+            ->where('status', 'active')
+            ->where('stock', '>', 0)
+            ->whereHas('user', function ($query) {
+                $query->where('role', 'seller')->where('status', 'active');
+            });
+
         $sellerProducts = collect();
 
         if ($seller) {
-            $sellerProducts = Product::query()
-                ->with(['category', 'user.sellerProfile'])
-                ->whereBelongsTo($seller, 'user')
+            $sellerProducts = $visibleProducts()
+                ->where('seller_id', $seller->id)
                 ->where('id', '!=', $product->id)
                 ->latest()
                 ->take(5)
@@ -110,13 +118,16 @@ class ProductController extends Controller
     |--------------------------------------------------------------------------
     */
 
-        $relatedProducts = Product::query()
-            ->with(['category', 'user.sellerProfile'])
-            ->where('category_id', $product->category_id)
-            ->where('id', '!=', $product->id)
-            ->latest()
-            ->take(5)
-            ->get();
+        $relatedProducts = collect();
+
+        if ($product->category_id) {
+            $relatedProducts = $visibleProducts()
+                ->where('category_id', $product->category_id)
+                ->where('id', '!=', $product->id)
+                ->latest()
+                ->take(5)
+                ->get();
+        }
 
         return view('buyer.products.show', compact('product', 'sellerProducts', 'relatedProducts'));
     }

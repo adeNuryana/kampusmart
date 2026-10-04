@@ -68,10 +68,7 @@
         dashboardUrl: @js(route('buyer.dashboard'))
     }"
         class="min-h-screen
-               bg-gradient-to-br
-               from-[#FBF8F5]
-               via-[#FAF5F1]
-               to-[#F4EAE2]">
+               bg-[#FFF7ED]">
 
 
         <main
@@ -100,7 +97,7 @@
 
 
                 <a href="{{ route('home') }}" class="transition
-                           hover:text-[#4371d1]">
+                           hover:text-[#F97516]">
 
                     Home
 
@@ -116,7 +113,7 @@
 
 
                 @if ($product->category)
-                    <span class="text-[#4371d1]">
+                    <span class="text-[#F97516]">
 
                         {{ $product->category->name }}
 
@@ -149,7 +146,7 @@
                        text-sm font-semibold
                        text-slate-500
                        transition
-                       hover:text-[#4371d1]">
+                       hover:text-[#F97516]">
                     <i class="fa-solid fa-arrow-left"></i>
 
                     Dashboard
@@ -172,7 +169,7 @@
                        border-[#E8DAD0]
                        bg-white
                        shadow-xl
-                       shadow-[#4371d1]/5">
+                       shadow-[#F97516]/5">
 
 
                 {{-- DECORATION --}}
@@ -184,7 +181,7 @@
                            -top-24
                            size-64
                            rounded-full
-                           bg-[#C89B55]/10
+                           bg-[#FACC15]/10
                            blur-3xl">
                 </div>
 
@@ -212,10 +209,7 @@
                                    aspect-square
                                    overflow-hidden
                                    rounded-2xl
-                                   bg-gradient-to-br
-                                   from-[#F5EEE9]
-                                   via-[#FAF6F3]
-                                   to-[#EFE5DD]">
+                                   bg-[#FFF7ED]">
 
 
                             @if ($imageUrl)
@@ -279,7 +273,7 @@
                                            px-3 py-1.5
                                            text-xs
                                            font-semibold
-                                           text-[#4371d1]
+                                           text-[#F97516]
                                            shadow-sm
                                            backdrop-blur">
 
@@ -287,7 +281,7 @@
                                         class="fa-solid
                                                fa-layer-group
                                                mr-1
-                                               text-[#C8795A]">
+                                               text-[#F97516]">
                                     </i>
 
                                     {{ $product->category->name }}
@@ -312,7 +306,7 @@
                                            overflow-hidden
                                            rounded-xl
                                            border-2
-                                           border-[#4371d1]
+                                           border-[#F97516]
                                            bg-white
                                            p-0.5
                                            shadow-sm">
@@ -354,11 +348,11 @@
                             @if ($product->category)
                                 <span
                                     class="rounded-full
-                                           bg-[#F4EAE2]
+                                           bg-[#FFF7ED]
                                            px-3 py-1
                                            text-[11px]
                                            font-semibold
-                                           text-[#4371d1]">
+                                           text-[#F97516]">
 
                                     <i
                                         class="fa-solid
@@ -376,7 +370,7 @@
                             @if (($product->stock ?? 0) > 0)
                                 <span
                                     class="rounded-full
-                                           bg-[#EEF3EA]
+                                           bg-[#FFF7ED]
                                            px-3 py-1
                                            text-[11px]
                                            font-semibold
@@ -394,11 +388,11 @@
                             @else
                                 <span
                                     class="rounded-full
-                                           bg-[#FAEDEC]
+                                           bg-[#FFF7ED]
                                            px-3 py-1
                                            text-[11px]
                                            font-semibold
-                                           text-[#A65954]">
+                                           text-[#F97516]">
 
                                     <i
                                         class="fa-solid
@@ -453,7 +447,7 @@
                                 <i
                                     class="fa-solid
                                            fa-box
-                                           text-[#C89B55]">
+                                           text-[#FACC15]">
                                 </i>
 
                                 Stok
@@ -477,7 +471,7 @@
                                 <i
                                     class="fa-solid
                                            fa-store
-                                           text-[#C8795A]">
+                                           text-[#F97516]">
                                 </i>
 
                                 {{ $seller?->name ?? 'Seller' }}
@@ -499,10 +493,7 @@
                                    rounded-2xl
                                    border
                                    border-[#E8D8CC]
-                                   bg-gradient-to-br
-                                   from-[#FBF4EF]
-                                   via-[#F8EEE7]
-                                   to-[#F2E2D7]
+                                   bg-[#FFF7ED]
                                    p-4
                                    sm:p-5">
 
@@ -514,7 +505,7 @@
                                        -top-8
                                        size-24
                                        rounded-full
-                                       bg-[#C8795A]/10">
+                                       bg-[#F97516]/10">
                             </div>
 
 
@@ -539,7 +530,7 @@
                                     <span
                                         class="text-sm
                                                font-bold
-                                               text-[#4371d1]">
+                                               text-[#F97516]">
 
                                         Rp
 
@@ -550,7 +541,7 @@
                                         class="text-2xl
                                                font-black
                                                tracking-tight
-                                               text-[#0a1d45]
+                                               text-[#172554]
                                                sm:text-3xl">
 
                                         {{ number_format($product->price ?? 0, 0, ',', '.') }}
@@ -582,8 +573,8 @@
                                            items-center
                                            justify-center
                                            rounded-lg
-                                           bg-[#F4EAE2]
-                                           text-[#4371d1]">
+                                           bg-[#FFF7ED]
+                                           text-[#F97516]">
 
                                     <i
                                         class="fa-solid
@@ -627,8 +618,8 @@
                             class="mt-7
                                    rounded-2xl
                                    border
-                                   border-[#E9DCD2]
-                                   bg-[#FCF8F5]
+                                   border-[#FACC15]/40
+                                   bg-[#FFFFFF]
                                    p-4
                                    sm:p-5">
 
@@ -659,7 +650,7 @@
 
                                         Stok tersedia:
 
-                                        <strong class="text-[#4371d1]">
+                                        <strong class="text-[#F97516]">
 
                                             {{ $product->stock ?? 0 }}
 
@@ -679,25 +670,21 @@
                                            overflow-hidden
                                            rounded-xl
                                            border
-                                           border-[#E1D2C7]
+                                           border-[#F97516]/30
                                            bg-white
                                            shadow-sm">
 
 
                                     <button type="button"
-                                        @click="
-                                            if (quantity > 1) {
-                                                quantity--
-                                            }
-                                        "
+                                        @click="quantity = Math.max(quantity - 1, 1)"
                                         :disabled="quantity <= 1"
                                         class="flex
                                                size-10
                                                items-center
                                                justify-center
-                                               text-[#4371d1]
+                                               text-[#F97516]
                                                transition
-                                               hover:bg-[#F6EEE8]
+                                               hover:bg-[#FACC15]/15
                                                disabled:cursor-not-allowed
                                                disabled:text-slate-300">
 
@@ -715,33 +702,26 @@
                                         class="h-10
                                                w-12
                                                border-x
-                                               border-[#E9DCD2]
+                                               border-[#FACC15]/40
                                                bg-white
                                                text-center
                                                text-sm
                                                font-bold
-                                               text-[#0a1d45]
+                                               text-[#172554]
                                                outline-none">
 
 
                                     <button type="button"
-                                        @click="
-                                            if (
-                                                quantity <
-                                                maxStock
-                                            ) {
-                                                quantity++
-                                            }
-                                        "
+                                        @click="quantity = Math.min(quantity + 1, maxStock)"
                                         :disabled="quantity >=
                                             maxStock"
                                         class="flex
                                                size-10
                                                items-center
                                                justify-center
-                                               text-[#4371d1]
+                                               text-[#F97516]
                                                transition
-                                               hover:bg-[#F6EEE8]
+                                               hover:bg-[#FACC15]/15
                                                disabled:cursor-not-allowed
                                                disabled:text-slate-300">
 
@@ -767,7 +747,7 @@
                                        items-center
                                        justify-between
                                        border-t
-                                       border-[#E9DCD2]
+                                       border-[#FACC15]/40
                                        pt-4">
 
 
@@ -782,7 +762,7 @@
                                 <span
                                     class="text-lg
                                            font-black
-                                           text-[#0a1d45]"
+                                           text-[#172554]"
                                     x-text="
                                         new Intl.NumberFormat(
                                             'id-ID',
@@ -835,12 +815,12 @@
                                                        gap-2
                                                        rounded-xl
                                                        border-2
-                                                       border-[#4371d1]
+                                                       border-[#F97516]
                                                        bg-white
                                                        px-4 py-3
                                                        text-sm
                                                        font-bold
-                                                       text-[#4371d1]
+                                                       text-[#F97516]
                                                        transition
                                                        hover:bg-[#F7EEE8]">
 
@@ -868,18 +848,16 @@
            justify-center
            gap-2
            rounded-xl
-           bg-gradient-to-r
-           from-[#0a1d45]
-           via-[#4371d1]
-           to-[#4371d1]
+           bg-[#F97516]
            px-4 py-3
            text-sm
            font-bold
            text-white
            shadow-lg
-           shadow-[#4371d1]/20
+           shadow-[#F97516]/20
            transition
            hover:-translate-y-0.5
+           hover:bg-[#172554]
            hover:shadow-xl">
 
                                             <i class="fa-solid fa-bag-shopping"></i>
@@ -896,18 +874,16 @@
                                                    justify-center
                                                    gap-2
                                                    rounded-xl
-                                                   bg-gradient-to-r
-                                                   from-[#0a1d45]
-                                                   via-[#4371d1]
-                                                   to-[#4371d1]
+                                                   bg-[#F97516]
                                                    px-4 py-3
                                                    text-sm
                                                    font-bold
                                                    text-white
                                                    shadow-lg
-                                                   shadow-[#4371d1]/20
+                                                   shadow-[#F97516]/20
                                                    transition
                                                    hover:-translate-y-0.5
+                                                   hover:bg-[#172554]
                                                    hover:shadow-xl">
 
                                             <i
@@ -928,12 +904,12 @@
                                            rounded-xl
                                            border
                                            border-[#EBCBC7]
-                                           bg-[#FAEDEC]
+                                           bg-[#FFF7ED]
                                            px-4 py-3
                                            text-center
                                            text-sm
                                            font-semibold
-                                           text-[#A65954]">
+                                           text-[#F97516]">
 
                                     <i
                                         class="fa-solid
@@ -967,10 +943,7 @@
            rounded-3xl
            border
            border-[#E4DED6]
-           bg-gradient-to-br
-           from-white
-           via-[#FBF8F5]
-           to-[#F1F5ED]
+           bg-white
            p-4
            shadow-sm
            sm:p-6">
@@ -1030,9 +1003,7 @@
                            items-center
                            justify-center
                            rounded-full
-                           bg-gradient-to-br
-                           from-[#E7EEDF]
-                           to-[#D5E1CF]
+                           bg-[#FFF7ED]
                            text-xl
                            text-[#65795E]
                            shadow-sm
@@ -1084,7 +1055,7 @@
                                         class="fa-solid
                                    fa-location-dot
                                    mr-1
-                                   text-[#C8795A]">
+                                   text-[#F97516]">
                                     </i>
 
                                     {{ $sellerLocation }}
@@ -1112,10 +1083,8 @@
            items-center
            justify-center
            gap-2
-           rounded-xl
-           bg-gradient-to-r
-           from-[#0a1d45]
-           to-[#4371d1]
+            rounded-xl
+            bg-[#F97516]
            px-5
            py-2.5
            text-sm
@@ -1151,19 +1120,14 @@
             {{-- PRODUCTS FROM SELLER --}}
             {{-- ===================================================== --}}
 
-            @if ($sellerProducts->isNotEmpty())
-
-                <section
+            <section
                     class="relative
                mt-5
                overflow-hidden
                rounded-3xl
                border
                border-[#E5D8CE]
-               bg-gradient-to-br
-               from-white
-               via-[#FBF8F5]
-               to-[#F4EAE2]
+               bg-white
                shadow-sm">
 
 
@@ -1176,7 +1140,7 @@
                    -top-20
                    size-52
                    rounded-full
-                   bg-[#4371d1]/10
+                   bg-[#F97516]/10
                    blur-3xl">
                     </div>
 
@@ -1207,13 +1171,10 @@
                            items-center
                            justify-center
                            rounded-xl
-                           bg-gradient-to-br
-                           from-[#0a1d45]
-                           via-[#4371d1]
-                           to-[#9A6948]
+                           bg-[#172554]
                            text-white
                            shadow-lg
-                           shadow-[#4371d1]/20">
+                           shadow-[#F97516]/20">
 
                                 <i class="fa-solid fa-store"></i>
 
@@ -1243,7 +1204,7 @@
                                     Produk lain dari
 
                                     <span class="font-semibold
-                                   text-[#4371d1]">
+                                   text-[#F97516]">
 
                                         {{ $seller?->name ?? 'Seller' }}
 
@@ -1260,8 +1221,8 @@
 
                         @auth
 
-                            @if (auth()->user()->role === 'buyer')
-                                <button type="button"
+                            @if (auth()->user()->role === 'buyer' && $seller)
+                                <a href="{{ route('buyer.stores.show', $seller) }}"
                                     class="hidden
                                shrink-0
                                items-center
@@ -1274,7 +1235,7 @@
                                py-2.5
                                text-sm
                                font-semibold
-                               text-[#4371d1]
+                               text-[#F97516]
                                transition
                                hover:bg-[#F7EEE8]
                                sm:inline-flex">
@@ -1287,7 +1248,7 @@
                                    text-xs">
                                     </i>
 
-                                </button>
+                                </a>
                             @endif
 
                         @endauth
@@ -1311,7 +1272,7 @@
                    lg:grid-cols-5">
 
 
-                        @foreach ($sellerProducts as $index => $sellerProduct)
+                        @forelse ($sellerProducts as $index => $sellerProduct)
                             @php
 
                                 $sellerProductImage =
@@ -1331,31 +1292,31 @@
 
                                 $sellerProductThemes = [
                                     [
-                                        'bar' => 'from-[#4371d1] via-[#4371d1] to-[#C89B55]',
+                                        'bar' => 'bg-[#F97516]',
 
-                                        'badge' => 'bg-[#F4EAE2] text-[#4371d1]',
+                                        'badge' => 'bg-[#FFF7ED] text-[#F97516]',
                                     ],
 
                                     [
-                                        'bar' => 'from-[#C8795A] via-[#B56F52] to-[#A95E43]',
+                                        'bar' => 'bg-[#172554]',
 
-                                        'badge' => 'bg-[#FBEAE2] text-[#A95E43]',
+                                        'badge' => 'bg-[#FFF7ED] text-[#F97516]',
                                     ],
 
                                     [
-                                        'bar' => 'from-[#7F9275] via-[#879A7D] to-[#65795E]',
+                                        'bar' => 'bg-[#F97516]',
 
-                                        'badge' => 'bg-[#EEF3EA] text-[#65795E]',
+                                        'badge' => 'bg-[#FFF7ED] text-[#65795E]',
                                     ],
 
                                     [
-                                        'bar' => 'from-[#C89B55] via-[#D1A963] to-[#AC7D38]',
+                                        'bar' => 'bg-[#FACC15]',
 
-                                        'badge' => 'bg-[#FAF2DF] text-[#A87A37]',
+                                        'badge' => 'bg-[#FFF7ED] text-[#A87A37]',
                                     ],
 
                                     [
-                                        'bar' => 'from-[#B97972] via-[#C98C84] to-[#9B5F59]',
+                                        'bar' => 'bg-[#172554]',
 
                                         'badge' => 'bg-[#F8EDEC] text-[#9C625D]',
                                     ],
@@ -1378,14 +1339,13 @@
                            hover:-translate-y-1.5
                            hover:border-[#E0CFC2]
                            hover:shadow-xl
-                           hover:shadow-[#4371d1]/10">
+                           hover:shadow-[#F97516]/10">
 
 
                                 {{-- COLOR ACCENT --}}
 
                                 <div
                                     class="h-1
-                               bg-gradient-to-r
                                {{ $sellerProductTheme['bar'] }}">
                                 </div>
 
@@ -1413,9 +1373,7 @@
                                        size-full
                                        items-center
                                        justify-center
-                                       bg-gradient-to-br
-                                       from-[#F5EFEB]
-                                       to-[#EEE4DC]">
+                                       bg-[#FFF7ED]">
 
                                             <i
                                                 class="fa-regular
@@ -1465,7 +1423,7 @@
                                    leading-5
                                    text-slate-700
                                    transition
-                                   group-hover:text-[#4371d1]
+                                   group-hover:text-[#F97516]
                                    sm:text-sm">
 
                                         {{ $sellerProduct->name }}
@@ -1475,13 +1433,9 @@
 
                                     <p
                                         class="mt-2
-                                   bg-gradient-to-r
-                                   from-[#0a1d45]
-                                   to-[#4371d1]
-                                   bg-clip-text
+                                   text-[#172554]
                                    text-sm
                                    font-black
-                                   text-transparent
                                    sm:text-lg">
 
                                         Rp{{ number_format($sellerProduct->price ?? 0, 0, ',', '.') }}
@@ -1532,7 +1486,7 @@
                                             <span
                                                 class="text-[9px]
                                            font-semibold
-                                           text-[#A65954]
+                                           text-[#F97516]
                                            sm:text-[10px]">
 
                                                 Habis
@@ -1545,7 +1499,21 @@
                                 </div>
 
                             </a>
-                        @endforeach
+                        @empty
+                            <div
+                                class="col-span-full rounded-2xl border border-dashed border-[#FACC15] bg-[#FFF7ED] px-6 py-8 text-center">
+                                <div
+                                    class="mx-auto flex size-11 items-center justify-center rounded-xl bg-white text-[#F97516] shadow-sm">
+                                    <i class="fa-solid fa-store"></i>
+                                </div>
+                                <p class="mt-3 text-sm font-bold text-[#172554]">
+                                    Belum ada produk lain dari toko ini
+                                </p>
+                                <p class="mt-1 text-xs text-slate-500">
+                                    Produk baru dari {{ $seller?->name ?? 'seller' }} akan muncul di sini.
+                                </p>
+                            </div>
+                        @endforelse
 
                     </div>
 
@@ -1555,14 +1523,14 @@
 
                     @auth
 
-                        @if (auth()->user()->role === 'buyer')
+                        @if (auth()->user()->role === 'buyer' && $seller)
                             <div
                                 class="relative
                            px-5
                            pb-5
                            sm:hidden">
 
-                                <button type="button"
+                                <a href="{{ route('buyer.stores.show', $seller) }}"
                                     class="flex
                                w-full
                                items-center
@@ -1576,7 +1544,7 @@
                                py-3
                                text-sm
                                font-semibold
-                               text-[#4371d1]
+                               text-[#F97516]
                                transition
                                hover:bg-[#F7EEE8]">
 
@@ -1588,16 +1556,14 @@
                                    text-xs">
                                     </i>
 
-                                </button>
+                                </a>
 
                             </div>
                         @endif
 
                     @endauth
 
-                </section>
-
-            @endif
+            </section>
 
 
 
@@ -1605,19 +1571,14 @@
             {{-- RELATED PRODUCTS --}}
             {{-- ===================================================== --}}
 
-            @if ($relatedProducts->isNotEmpty())
-
-                <section
+            <section
                     class="relative
                mt-5
                overflow-hidden
                rounded-3xl
                border
                border-[#E7D9CF]
-               bg-gradient-to-br
-               from-white
-               via-[#FBF6F2]
-               to-[#F7EEE8]
+               bg-white
                shadow-sm">
 
 
@@ -1630,7 +1591,7 @@
                    -top-16
                    size-40
                    rounded-full
-                   bg-[#C89B55]/10
+                   bg-[#FACC15]/10
                    blur-3xl">
                     </div>
 
@@ -1653,12 +1614,10 @@
                            items-center
                            justify-center
                            rounded-xl
-                           bg-gradient-to-br
-                           from-[#C89B55]
-                           to-[#A97957]
+                           bg-[#F97516]
                            text-white
                            shadow-lg
-                           shadow-[#C89B55]/20">
+                           shadow-[#FACC15]/20">
 
                                 <i class="fa-solid
                                fa-boxes-stacked">
@@ -1688,7 +1647,7 @@
                                     Produk lain dari kategori
 
                                     <span class="font-medium
-                                   text-[#4371d1]">
+                                   text-[#F97516]">
 
                                         {{ $product->category?->name }}
 
@@ -1719,7 +1678,7 @@
                    lg:grid-cols-5">
 
 
-                        @foreach ($relatedProducts as $index => $relatedProduct)
+                        @forelse ($relatedProducts as $index => $relatedProduct)
                             @php
 
                                 $relatedImage =
@@ -1739,27 +1698,27 @@
 
                                 $relatedColors = [
                                     [
-                                        'bar' => 'from-[#4371d1] to-[#4371d1]',
-                                        'badge' => 'bg-[#F4EAE2] text-[#4371d1]',
+                                        'bar' => 'bg-[#F97516]',
+                                        'badge' => 'bg-[#FFF7ED] text-[#F97516]',
                                     ],
 
                                     [
-                                        'bar' => 'from-[#C8795A] to-[#A95E43]',
-                                        'badge' => 'bg-[#FBEAE2] text-[#A95E43]',
+                                        'bar' => 'bg-[#172554]',
+                                        'badge' => 'bg-[#FFF7ED] text-[#F97516]',
                                     ],
 
                                     [
-                                        'bar' => 'from-[#7F9275] to-[#647A5D]',
-                                        'badge' => 'bg-[#EEF3EA] text-[#65795E]',
+                                        'bar' => 'bg-[#F97516]',
+                                        'badge' => 'bg-[#FFF7ED] text-[#65795E]',
                                     ],
 
                                     [
-                                        'bar' => 'from-[#C89B55] to-[#AC7D38]',
-                                        'badge' => 'bg-[#FAF2DF] text-[#A87A37]',
+                                        'bar' => 'bg-[#FACC15]',
+                                        'badge' => 'bg-[#FFF7ED] text-[#A87A37]',
                                     ],
 
                                     [
-                                        'bar' => 'from-[#B97972] to-[#9B5F59]',
+                                        'bar' => 'bg-[#172554]',
                                         'badge' => 'bg-[#F8EDEC] text-[#9C625D]',
                                     ],
                                 ];
@@ -1781,12 +1740,11 @@
                            hover:-translate-y-1.5
                            hover:border-[#E3D3C7]
                            hover:shadow-xl
-                           hover:shadow-[#4371d1]/10">
+                           hover:shadow-[#F97516]/10">
 
 
                                 <div
                                     class="h-1
-                               bg-gradient-to-r
                                {{ $relatedTheme['bar'] }}">
                                 </div>
 
@@ -1814,9 +1772,7 @@
                                        size-full
                                        items-center
                                        justify-center
-                                       bg-gradient-to-br
-                                       from-[#F5EFEB]
-                                       to-[#EEE4DC]">
+                                       bg-[#FFF7ED]">
 
                                             <i
                                                 class="fa-regular
@@ -1862,7 +1818,7 @@
                                    leading-5
                                    text-slate-700
                                    transition
-                                   group-hover:text-[#4371d1]
+                                   group-hover:text-[#F97516]
                                    sm:text-sm">
 
                                         {{ $relatedProduct->name }}
@@ -1872,13 +1828,9 @@
 
                                     <p
                                         class="mt-2
-                                   bg-gradient-to-r
-                                   from-[#0a1d45]
-                                   to-[#4371d1]
-                                   bg-clip-text
+                                   text-[#172554]
                                    text-sm
                                    font-black
-                                   text-transparent
                                    sm:text-lg">
 
                                         Rp{{ number_format($relatedProduct->price ?? 0, 0, ',', '.') }}
@@ -1914,7 +1866,7 @@
                                                 class="fa-solid
                                            fa-store
                                            mr-1
-                                           text-[#A97957]">
+                                           text-[#F97516]">
                                             </i>
 
                                             {{ $relatedProduct->user?->name }}
@@ -1926,13 +1878,25 @@
                                 </div>
 
                             </a>
-                        @endforeach
+                        @empty
+                            <div
+                                class="col-span-full rounded-2xl border border-dashed border-[#FACC15] bg-[#FFF7ED] px-6 py-8 text-center">
+                                <div
+                                    class="mx-auto flex size-11 items-center justify-center rounded-xl bg-white text-[#F97516] shadow-sm">
+                                    <i class="fa-solid fa-boxes-stacked"></i>
+                                </div>
+                                <p class="mt-3 text-sm font-bold text-[#172554]">
+                                    Belum ada produk lain dari kategori ini
+                                </p>
+                                <p class="mt-1 text-xs text-slate-500">
+                                    Rekomendasi kategori {{ $product->category?->name ?? 'yang sama' }} akan muncul di sini.
+                                </p>
+                            </div>
+                        @endforelse
 
                     </div>
 
-                </section>
-
-            @endif
+            </section>
         </main>
 
         {{-- ========================================================= --}}
@@ -1980,9 +1944,9 @@
                                justify-center
                                rounded-xl
                                border
-                               border-[#315ebc]
+                               border-[#172554]
                                bg-white
-                               text-[#315ebc]
+                               text-[#172554]
                                shadow-sm
                                transition
                                active:scale-95"
@@ -2009,9 +1973,7 @@
                            justify-center
                            gap-2
                            rounded-xl
-                           bg-gradient-to-r
-                           from-[#0a1d45]
-                           to-[#315ebc]
+                           bg-[#172554]
                            px-4
                            text-sm
                            font-bold
@@ -2035,7 +1997,7 @@
                            justify-center
                            gap-2
                            rounded-xl
-                           bg-[#315ebc]
+                           bg-[#172554]
                            px-4
                            text-sm
                            font-bold
@@ -2092,10 +2054,7 @@
                 {{-- TOP ACCENT --}}
                 <div
                     class="h-1.5
-                   bg-gradient-to-r
-                   from-[#0a1d45]
-                   via-[#4371d1]
-                   to-[#C8795A]">
+                   bg-[#F97516]">
                 </div>
 
 
@@ -2117,8 +2076,8 @@
                            items-center
                            justify-center
                            rounded-2xl
-                           bg-[#EEF3FF]
-                           text-[#4371d1]">
+                           bg-[#FFF7ED]
+                           text-[#F97516]">
                             <i class="fa-solid fa-bag-shopping"></i>
                         </div>
 
@@ -2172,7 +2131,7 @@
                        rounded-2xl
                        border
                        border-[#E8DAD0]
-                       bg-[#FBF8F5]
+                       bg-[#FFF7ED]
                        p-4">
 
                         {{-- IMAGE --}}
@@ -2208,7 +2167,7 @@
                                    font-bold
                                    uppercase
                                    tracking-wider
-                                   text-[#4371d1]">
+                                   text-[#F97516]">
                                     {{ $product->category->name }}
                                 </p>
                             @endif
@@ -2232,7 +2191,7 @@
                                 <i
                                     class="fa-solid
                                    fa-store
-                                   text-[#C8795A]"></i>
+                                   text-[#F97516]"></i>
 
                                 {{ $sellerProfile?->store_name ?? ($seller?->name ?? 'Seller') }}
                             </p>
@@ -2242,7 +2201,7 @@
                                 class="mt-2
                                text-base
                                font-black
-                               text-[#0a1d45]">
+                               text-[#172554]">
                                 Rp{{ number_format($product->price ?? 0, 0, ',', '.') }}
                             </p>
 
@@ -2312,7 +2271,7 @@
                             class="flex items-center
                            justify-between
                            gap-4
-                           bg-[#FBF8F5]
+                           bg-[#FFF7ED]
                            px-4 py-4">
 
                             <div>
@@ -2337,7 +2296,7 @@
                             <span
                                 class="text-lg
                                font-black
-                               text-[#0a1d45]"
+                               text-[#172554]"
                                 x-text="
                             new Intl.NumberFormat(
                                 'id-ID',
@@ -2380,7 +2339,7 @@
                                        py-1
                                        text-[10px]
                                        font-bold
-                                       text-[#4371d1]"
+                                       text-[#F97516]"
                                 x-text="
                                     paymentMethod === 'transfer'
                                         ? 'Transfer'
@@ -2403,7 +2362,7 @@
                                        bg-white
                                        p-4
                                        transition
-                                       hover:border-[#4371d1]
+                                       hover:border-[#F97516]
                                        hover:bg-blue-50/40">
 
                                 <input type="radio" value="transfer" x-model="paymentMethod" class="peer sr-only">
@@ -2418,9 +2377,9 @@
                                                justify-center
                                                rounded-xl
                                                bg-blue-50
-                                               text-[#4371d1]
+                                               text-[#F97516]
                                                transition
-                                               peer-checked:bg-[#4371d1]
+                                               peer-checked:bg-[#F97516]
                                                peer-checked:text-white">
                                         <i class="fa-solid fa-building-columns"></i>
                                     </div>
@@ -2446,7 +2405,7 @@
                                            rounded-2xl
                                            border-2
                                            border-transparent
-                                           peer-checked:border-[#4371d1]">
+                                           peer-checked:border-[#F97516]">
                                 </div>
 
                             </label>
@@ -2525,7 +2484,7 @@
                        rounded-2xl
                        border
                        border-[#D3DFCE]
-                       bg-[#EEF3EA]
+                       bg-[#FFF7ED]
                        p-4">
 
                         <div
@@ -2618,14 +2577,14 @@
                                    justify-center
                                    gap-2
                                    rounded-xl
-                                   bg-[#4371d1]
+                                   bg-[#F97516]
                                    px-4
                                    text-sm
                                    font-bold
                                    text-white
                                    shadow-sm
                                    transition
-                                   hover:bg-[#315ebc]
+                                   hover:bg-[#172554]
                                    disabled:cursor-not-allowed
                                    disabled:bg-slate-300
                                    disabled:text-slate-500">

@@ -8,22 +8,22 @@
         $bars = [38, 55, 31, 68, 58, 82];
 
         $barColors = [
-            'from-[#4371d1] to-[#4371d1]',
-            'from-[#C8795A] to-[#A95E43]',
+            'from-[#F97516] to-[#F97516]',
+            'from-[#F97516] to-[#F97516]',
             'from-[#7F9275] to-[#65795E]',
-            'from-[#C89B55] to-[#A87A37]',
+            'from-[#FACC15] to-[#A87A37]',
             'from-[#B97972] to-[#9B5F59]',
-            'from-[#0a1d45] to-[#4371d1]',
+            'from-[#172554] to-[#F97516]',
         ];
     @endphp
 
 
     <div
         class="min-h-screen
-               bg-gradient-to-br
-               from-[#FAF7F2]
-               via-[#F8F3EC]
-               to-[#F2EADF]">
+               bg-[#FFF7ED]
+
+
+               ">
 
         <div
             class="mx-auto
@@ -46,10 +46,10 @@
                        rounded-3xl
                        border
                        border-[#E5D8CC]
-                       bg-gradient-to-br
-                       from-[#FFFDF9]
-                       via-[#FAF7F2]
-                       to-[#F3EADF]
+                       bg-[#FFF7ED]
+
+
+
                        p-5
                        shadow-sm
                        sm:p-6">
@@ -62,7 +62,7 @@
                            -top-20
                            size-56
                            rounded-full
-                           bg-[#C89B55]/10
+                           bg-[#FACC15]/10
                            blur-3xl">
                 </div>
 
@@ -74,7 +74,7 @@
                            left-1/3
                            size-48
                            rounded-full
-                           bg-[#C8795A]/10
+                           bg-[#F97516]/10
                            blur-3xl">
                 </div>
 
@@ -95,7 +95,7 @@
            items-center
            gap-2
            rounded-full
-           bg-[#4371d1]
+           bg-[#F97516]
            px-3.5
            py-1.5
            text-xs
@@ -186,7 +186,7 @@
                                 class="mt-1
                                        text-lg
                                        font-black
-                                       text-[#0a1d45]">
+                                       text-[#172554]">
 
                                 {{ number_format($totalBuyers + $totalSellers) }}
 
@@ -254,7 +254,7 @@
                            rounded-3xl
                            border
                            border-[#E6D9CE]
-                           bg-[#FFFDF9]
+                           bg-[#FFFFFF]
                            p-5
                            shadow-sm
                            transition
@@ -269,10 +269,10 @@
                                top-0
                                h-1
                                w-full
-                               bg-gradient-to-r
-                               from-[#4371d1]
-                               via-[#9B7356]
-                               to-[#C89B55]">
+                               bg-[#F97516]
+
+
+                               ">
                     </div>
 
 
@@ -302,7 +302,7 @@
                                        text-3xl
                                        font-black
                                        tracking-tight
-                                       text-[#332B26]">
+                                       text-[#172554]">
 
                                 {{ number_format($totalBuyers) }}
 
@@ -325,7 +325,7 @@
                             class="flex size-12 shrink-0
            items-center justify-center
            rounded-2xl
-           bg-[#4371d1]
+           bg-[#F97516]
            text-white
            shadow-sm">
 
@@ -355,7 +355,7 @@
                            rounded-3xl
                            border
                            border-[#E6D9CE]
-                           bg-[#FFFDF9]
+                           bg-[#FFFFFF]
                            p-5
                            shadow-sm
                            transition
@@ -370,10 +370,10 @@
                                top-0
                                h-1
                                w-full
-                               bg-gradient-to-r
-                               from-[#C8795A]
-                               via-[#B66F52]
-                               to-[#9C6048]">
+                               bg-[#F97516]
+
+
+                               ">
                     </div>
 
 
@@ -403,7 +403,7 @@
                                        text-3xl
                                        font-black
                                        tracking-tight
-                                       text-[#332B26]">
+                                       text-[#172554]">
 
                                 {{ number_format($totalSellers) }}
 
@@ -425,7 +425,7 @@
                             class="flex size-12 shrink-0
            items-center justify-center
            rounded-2xl
-           bg-[#C8795A]
+           bg-[#F97516]
            text-white
            shadow-sm">
 
@@ -454,7 +454,7 @@
                            rounded-3xl
                            border
                            border-[#DCE5D7]
-                           bg-[#FFFDF9]
+                           bg-[#FFFFFF]
                            p-5
                            shadow-sm
                            transition
@@ -469,10 +469,10 @@
                                top-0
                                h-1
                                w-full
-                               bg-gradient-to-r
-                               from-[#65795E]
-                               via-[#7F9275]
-                               to-[#A3B398]">
+                               bg-[#172554]
+
+
+                               ">
                     </div>
 
 
@@ -562,7 +562,7 @@
                            rounded-3xl
                            border
                            border-[#ECD2CF]
-                           bg-[#FFFDF9]
+                           bg-[#FFFFFF]
                            p-5
                            shadow-sm
                            transition
@@ -577,10 +577,10 @@
                                top-0
                                h-1
                                w-full
-                               bg-gradient-to-r
-                               from-[#A65954]
-                               via-[#B97972]
-                               to-[#D49A91]">
+                               bg-[#F97516]
+
+
+                               ">
                     </div>
 
 
@@ -621,7 +621,7 @@
                                 class="mt-2
                                        text-xs
                                        font-medium
-                                       text-[#A65954]">
+                                       text-[#F97516]">
 
                                 Perlu ditinjau
 
@@ -634,7 +634,7 @@
                             class="flex size-12 shrink-0
            items-center justify-center
            rounded-2xl
-           bg-[#A65954]
+           bg-[#F97516]
            text-white
            shadow-sm">
 
@@ -692,7 +692,7 @@
                gap-4
                border-b
                border-[#E7DBD1]
-               bg-[#FAF7F2]
+               bg-[#FFF7ED]
                px-5
                py-5
                sm:px-6
@@ -715,7 +715,7 @@
                        items-center
                        justify-center
                        rounded-xl
-                       bg-[#4371d1]
+                       bg-[#F97516]
                        text-white">
 
                                 <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -747,7 +747,7 @@
                                 <h2
                                     class="text-base
                            font-bold
-                           text-[#332B26]
+                           text-[#172554]
                            sm:text-lg">
 
                                     Pertumbuhan Pengguna
@@ -811,7 +811,7 @@
                                transition"
                                         :class="period === 'month'
                                             ?
-                                            'bg-[#4371d1] text-white shadow-sm' :
+                                            'bg-[#F97516] text-white shadow-sm' :
                                             'text-[#8B7465] hover:bg-[#F5EDE7]'">
 
                                         1 Bulan
@@ -839,7 +839,7 @@
                                transition"
                                         :class="period === 'year'
                                             ?
-                                            'bg-[#4371d1] text-white shadow-sm' :
+                                            'bg-[#F97516] text-white shadow-sm' :
                                             'text-[#8B7465] hover:bg-[#F5EDE7]'">
 
                                         1 Tahun
@@ -878,7 +878,7 @@
                                p-0
                                text-xs
                                font-semibold
-                               text-[#0a1d45]
+                               text-[#172554]
                                outline-none
                                focus:ring-0">
 
@@ -904,12 +904,12 @@
                            px-3
                            text-xs
                            font-semibold
-                           text-[#0a1d45]
+                           text-[#172554]
                            outline-none
                            transition
-                           focus:border-[#4371d1]
+                           focus:border-[#F97516]
                            focus:ring-4
-                           focus:ring-[#F1E6DE]">
+                           focus:ring-[#FFF7ED]">
 
 
                                     @foreach ($availableYears as $year)
@@ -962,7 +962,7 @@
                                     class="mt-1
                            text-2xl
                            font-black
-                           text-[#332B26]">
+                           text-[#172554]">
 
                                     {{ number_format(array_sum($chartValues)) }}
 
@@ -976,18 +976,18 @@
                        items-center
                        gap-2
                        rounded-full
-                       bg-[#F4EAE2]
+                       bg-[#FFF7ED]
                        px-3
                        py-1.5
                        text-xs
                        font-semibold
-                       text-[#4371d1]">
+                       text-[#F97516]">
 
 
                                 <span
                                     class="size-2
                            rounded-full
-                           bg-[#4371d1]">
+                           bg-[#F97516]">
                                 </span>
 
 
@@ -1081,7 +1081,7 @@
                            rounded-3xl
                            border
                            border-[#E5D8CC]
-                           bg-[#FFFDF9]
+                           bg-[#FFFFFF]
                            shadow-sm">
 
 
@@ -1120,7 +1120,7 @@
                             <div>
 
                                 <h2 class="font-bold
-                                           text-[#332B26]">
+                                           text-[#172554]">
 
                                     Memerlukan Tindakan
 
@@ -1167,7 +1167,7 @@
            shrink-0
            items-center justify-center
            rounded-xl
-           bg-[#A65954]
+           bg-[#F97516]
            text-white">
 
                                         <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -1217,7 +1217,7 @@
                                            items-center
                                            gap-2
                                            rounded-xl
-                                           bg-[#A65954]
+                                           bg-[#F97516]
                                            px-4
                                            py-2
                                            text-xs
@@ -1333,7 +1333,7 @@
                                     <p
                                         class="text-sm
                                                font-bold
-                                               text-[#4D4038]">
+                                               text-[#172554]">
 
                                         Kelola Penjual
 
@@ -1375,7 +1375,7 @@
                        rounded-3xl
                        border
                        border-[#E5D8CC]
-                       bg-[#FFFDF9]
+                       bg-[#FFFFFF]
                        shadow-sm">
 
 
@@ -1400,7 +1400,7 @@
                         <h2
                             class="text-base
                                    font-bold
-                                   text-[#332B26]
+                                   text-[#172554]
                                    sm:text-lg">
 
                             Aktivitas Terbaru
@@ -1427,12 +1427,12 @@
                                items-center
                                gap-2
                                rounded-full
-                               bg-[#F4EAE2]
+                               bg-[#FFF7ED]
                                px-3
                                py-1.5
                                text-xs
                                font-bold
-                               text-[#4371d1]">
+                               text-[#F97516]">
 
                         <span
                             class="size-2
@@ -1456,7 +1456,7 @@
                                min-w-[780px]">
 
 
-                        <thead class="bg-[#F8F3ED]">
+                        <thead class="bg-[#FFF7ED]">
 
 
                             <tr
@@ -1538,11 +1538,11 @@
                                     */
 
                                     $roleClass = match ($user?->role) {
-                                        'seller' => 'bg-[#FAF2DF] text-[#A87A37]',
+                                        'seller' => 'bg-[#FFF7ED] text-[#A87A37]',
 
-                                        'buyer' => 'bg-[#EEF3EA] text-[#65795E]',
+                                        'buyer' => 'bg-[#FFF7ED] text-[#65795E]',
 
-                                        'admin', 'superadmin' => 'bg-[#F4EAE2] text-[#4371d1]',
+                                        'admin', 'superadmin' => 'bg-[#FFF7ED] text-[#F97516]',
 
                                         default => 'bg-slate-100 text-slate-600',
                                     };
@@ -1554,33 +1554,33 @@
                                     */
 
                                     $activityClass = match ($activity->action) {
-                                        'order_created' => 'bg-[#F4EAE2] text-[#4371d1]',
+                                        'order_created' => 'bg-[#FFF7ED] text-[#F97516]',
 
-                                        'order_sold' => 'bg-[#EEF3EA] text-[#65795E]',
+                                        'order_sold' => 'bg-[#FFF7ED] text-[#65795E]',
 
-                                        'order_cancelled' => 'bg-[#FAEDEC] text-[#A65954]',
+                                        'order_cancelled' => 'bg-[#FFF7ED] text-[#F97516]',
 
                                         'product_created' => 'bg-[#EDF3EA] text-[#65795E]',
 
-                                        'product_updated' => 'bg-[#FAF2DF] text-[#A87A37]',
+                                        'product_updated' => 'bg-[#FFF7ED] text-[#A87A37]',
 
-                                        'product_deleted' => 'bg-[#FAEDEC] text-[#A65954]',
+                                        'product_deleted' => 'bg-[#FFF7ED] text-[#F97516]',
 
                                         'seller_profile_updated',
                                         'buyer_profile_updated'
-                                            => 'bg-[#F5EAE4] text-[#4371d1]',
+                                            => 'bg-[#F5EAE4] text-[#F97516]',
 
-                                        'seller_created' => 'bg-[#FBEAE2] text-[#A95E43]',
+                                        'seller_created' => 'bg-[#FFF7ED] text-[#F97516]',
 
-                                        'seller_updated' => 'bg-[#F4EAE2] text-[#4371d1]',
+                                        'seller_updated' => 'bg-[#FFF7ED] text-[#F97516]',
 
-                                        'seller_deleted' => 'bg-[#FAEDEC] text-[#A65954]',
+                                        'seller_deleted' => 'bg-[#FFF7ED] text-[#F97516]',
 
-                                        'category_created' => 'bg-[#EEF3EA] text-[#65795E]',
+                                        'category_created' => 'bg-[#FFF7ED] text-[#65795E]',
 
-                                        'category_updated' => 'bg-[#FAF2DF] text-[#A87A37]',
+                                        'category_updated' => 'bg-[#FFF7ED] text-[#A87A37]',
 
-                                        'category_deleted' => 'bg-[#FAEDEC] text-[#A65954]',
+                                        'category_deleted' => 'bg-[#FFF7ED] text-[#F97516]',
 
                                         default => 'bg-slate-100 text-slate-600',
                                     };
@@ -1590,7 +1590,7 @@
 
 
                                 <tr class="transition
-                                           hover:bg-[#FBF7F3]">
+                                           hover:bg-[#FFF7ED]">
 
 
                                     {{-- TIME --}}
@@ -1832,7 +1832,7 @@
                                                    rounded-full
                                                    border
                                                    border-[#D3DFCE]
-                                                   bg-[#EEF3EA]
+                                                   bg-[#FFF7ED]
                                                    px-3
                                                    py-1.5
                                                    text-xs
@@ -1871,7 +1871,7 @@
                                                        items-center
                                                        justify-center
                                                        rounded-2xl
-                                                       bg-[#F1E6DE]
+                                                       bg-[#FFF7ED]
                                                        text-[#A38B7B]">
 
                                                     <i
