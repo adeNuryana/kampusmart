@@ -39,23 +39,24 @@ Route::get('/buyer/produk/{product}', [BuyerProductController::class, 'show'])->
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 
-    Route::post('/login', [AuthController::class, 'login'])->name('login.process');
+    Route::post('/login', [AuthController::class, 'login'])
+        ->middleware('throttle:login')
+        ->name('login.process');
     Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 
-    Route::post('/register', [AuthController::class, 'register'])->name('register.process');
-
+    Route::post('/register', [AuthController::class, 'register'])
+        ->middleware('throttle:registration')
+        ->name('register.process');
 
     Route::get(
         '/auth/google',
         [GoogleAuthController::class, 'redirect']
-    )->name('google.redirect');
-
+    )->middleware('throttle:oauth')->name('google.redirect');
 
     Route::get(
         '/auth/google/callback',
         [GoogleAuthController::class, 'callback']
-    )->name('google.callback');
-
+    )->middleware('throttle:oauth')->name('google.callback');
 
 });
 

@@ -35,13 +35,23 @@ class GoogleAuthController extends Controller
         try {
             $googleUser = Socialite::driver('google')->user();
 
+            $email = $googleUser->getEmail();
+
+            if (! is_string($email) || trim($email) === '') {
+                return redirect()
+                    ->route('login')
+                    ->withErrors([
+                        'email' => 'Akun Google tidak memberikan alamat email yang valid.',
+                    ]);
+            }
+
             /*
             |--------------------------------------------------------------------------
             | CARI USER BERDASARKAN EMAIL
             |--------------------------------------------------------------------------
             */
 
-            $user = User::query()->where('email', $googleUser->getEmail())->first();
+            $user = User::query()->where('email', $email)->first();
 
             /*
             |--------------------------------------------------------------------------
@@ -53,11 +63,11 @@ class GoogleAuthController extends Controller
             |
             */
 
-            if (!$user) {
+            if (! $user) {
                 $user = User::create([
                     'name' => $googleUser->getName() ?: 'Buyer KampusMart',
 
-                    'email' => $googleUser->getEmail(),
+                    'email' => $email,
 
                     'google_id' => $googleUser->getId(),
 
@@ -66,6 +76,8 @@ class GoogleAuthController extends Controller
                     'password' => Hash::make(Str::random(40)),
 
                     'role' => 'buyer',
+
+                    'status' => 'active',
                 ]);
             } else {
                 /*
@@ -79,6 +91,14 @@ class GoogleAuthController extends Controller
                         ->route('login')
                         ->withErrors([
                             'email' => 'Login Google hanya tersedia untuk akun pembeli.',
+                        ]);
+                }
+
+                if ($user->status !== 'active') {
+                    return redirect()
+                        ->route('login')
+                        ->withErrors([
+                            'email' => 'Akun Anda sedang nonaktif. Hubungi administrator.',
                         ]);
                 }
 
