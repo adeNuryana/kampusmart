@@ -29,7 +29,18 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->configureRateLimiting();
 
-        View::composer('*', function ($view) {
+        View::composer([
+            'auth.login',
+            'auth.register',
+            'buyer.home',
+            'components.floating-whatsapp',
+            'layouts.admin',
+            'layouts.buyer',
+            'layouts.public',
+            'layouts.seller',
+            'partials.favicon',
+            'seller.sales.pdf',
+        ], function ($view) {
             $siteSetting = SiteSetting::query()->first();
 
             $view->with('siteSetting', $siteSetting);

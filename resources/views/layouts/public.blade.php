@@ -885,6 +885,7 @@
     </div>
 
     <x-floating-whatsapp />
+    <x-flash-error-popup />
 
 </body>
 

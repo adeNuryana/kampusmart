@@ -1013,6 +1013,8 @@
 
     @stack('scripts')
 
+    <x-flash-error-popup />
+
 </body>
 
 </html>
