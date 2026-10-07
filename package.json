@@ -16,5 +16,8 @@
     "dependencies": {
         "alpinejs": "^3.16.1",
         "chart.js": "^4.5.1"
+    },
+    "overrides": {
+        "shell-quote": "^1.12.0"
     }
 }
