@@ -65,3 +65,28 @@ Kelola worker dengan systemd, Supervisor, atau process manager platform. Setelah
 - Tinjau log di `storage/logs` dan jalankan audit dependency secara berkala.
 
 Untuk mengosongkan cache konfigurasi saat troubleshooting, jalankan `php artisan optimize:clear`, perbaiki `.env`, lalu jalankan kembali `php artisan optimize`.
+
+## Upload dan error 413
+
+Produk dapat mengunggah sampai lima gambar berukuran maksimal 2 MB per gambar. Nginx dan PHP-FPM harus menerima request sedikit lebih besar daripada total tersebut:
+
+```nginx
+client_max_body_size 16M;
+error_page 413 /413.html;
+
+location = /413.html {
+    root /var/www/coness/public;
+    internal;
+}
+```
+
+Gunakan `public/413.html` sebagai popup statis karena request 413 ditolak Nginx sebelum Laravel berjalan. Contoh lengkap tersedia di `deploy/nginx-errors.conf.example`.
+
+Selaraskan konfigurasi PHP-FPM:
+
+```ini
+upload_max_filesize = 3M
+post_max_size = 16M
+```
+
+Validasi Laravel tetap membatasi setiap gambar menjadi 2 MB. Setelah mengubah konfigurasi, uji konfigurasi Nginx lalu muat ulang Nginx dan PHP-FPM.

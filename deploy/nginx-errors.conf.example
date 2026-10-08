@@ -1,0 +1,17 @@
+# Place these directives inside the co-ness.com `server { ... }` block.
+# The application permits up to five images of 2 MB each per request.
+client_max_body_size 16M;
+
+# Nginx rejects oversized bodies before Laravel/PHP runs, so this page must be
+# static and served directly by Nginx.
+error_page 413 /413.html;
+
+location = /413.html {
+    root /var/www/coness/public;
+    internal;
+}
+
+# Also add this directive to the site's existing `location ~ \.php$ { ... }`
+# block so Laravel can render errors for requests that reach PHP:
+#
+# fastcgi_intercept_errors off;
