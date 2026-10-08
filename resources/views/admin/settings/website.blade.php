@@ -33,8 +33,7 @@
             <p class="mt-2 text-sm
                        leading-6 text-slate-500">
 
-                Atur nama, kontak WhatsApp Admin, logo,
-                dan favicon yang digunakan pada website.
+                Atur identitas website dan hak perubahan profil seller.
 
             </p>
 
@@ -394,6 +393,61 @@
                 </div>
 
 
+                {{-- SELLER PROFILE FIELD LOCKS --}}
+                @php
+                    $lockedSellerFields = old(
+                        'seller_profile_locked_fields',
+                        $setting->lockedSellerProfileFields(),
+                    );
+                @endphp
+
+                <div class="border-t border-[#E7DBD1]">
+                    <div class="flex flex-col gap-4 bg-[#FAF7F2] p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+                        <div>
+                            <h2 class="font-bold text-[#332B26]">Kunci Profil Seller</h2>
+                            <p class="mt-1 text-xs leading-5 text-slate-500">
+                                Field yang dikunci hanya dapat diubah oleh super admin. Pilih semua sekaligus atau atur satu per satu.
+                            </p>
+                        </div>
+
+                        <div class="flex gap-2">
+                            <button type="button" id="lockAllSellerFields"
+                                class="inline-flex h-9 items-center justify-center rounded-xl border border-[#DFD2C7] bg-white px-3 text-xs font-bold text-[#A65954] transition hover:bg-[#FAEDEC]">
+                                Kunci Semua
+                            </button>
+                            <button type="button" id="unlockAllSellerFields"
+                                class="inline-flex h-9 items-center justify-center rounded-xl border border-[#D3DFCE] bg-white px-3 text-xs font-bold text-[#65795E] transition hover:bg-[#EEF3EA]">
+                                Buka Semua
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="grid gap-3 p-5 sm:grid-cols-2 sm:p-6 lg:grid-cols-3">
+                        @foreach ($sellerProfileFields as $field => $label)
+                            <label
+                                class="flex cursor-pointer items-center justify-between gap-4 rounded-2xl border border-[#E7DBD1] bg-white p-4 transition hover:border-[#CDBBAE] hover:bg-[#FAF7F2]">
+                                <span>
+                                    <span class="block text-sm font-bold text-[#4D4038]">{{ $label }}</span>
+                                    <span class="mt-1 block text-[11px] text-slate-400">Kunci dari akun seller</span>
+                                </span>
+
+                                <input type="checkbox" name="seller_profile_locked_fields[]"
+                                    value="{{ $field }}" @checked(in_array($field, $lockedSellerFields, true))
+                                    class="seller-profile-lock size-5 rounded border-[#CDBBAE] text-[#4371d1] focus:ring-[#4371d1]">
+                            </label>
+                        @endforeach
+                    </div>
+
+                    @error('seller_profile_locked_fields')
+                        <p class="px-5 pb-5 text-xs font-medium text-[#A65954] sm:px-6">{{ $message }}</p>
+                    @enderror
+
+                    @error('seller_profile_locked_fields.*')
+                        <p class="px-5 pb-5 text-xs font-medium text-[#A65954] sm:px-6">{{ $message }}</p>
+                    @enderror
+                </div>
+
+
 
                 {{-- ACTION --}}
                 <div
@@ -414,7 +468,7 @@
                                transition
                                hover:bg-[#0a1d45]">
 
-                        Simpan Branding
+                        Simpan Pengaturan
 
                     </button>
 
@@ -461,6 +515,20 @@
 
                 bindImagePreview('logo', 'logoPreview', 'logoPlaceholder');
                 bindImagePreview('favicon', 'faviconPreview', 'faviconPlaceholder');
+
+                const sellerFieldLocks = document.querySelectorAll('.seller-profile-lock');
+
+                document.getElementById('lockAllSellerFields')?.addEventListener('click', function() {
+                    sellerFieldLocks.forEach(function(field) {
+                        field.checked = true;
+                    });
+                });
+
+                document.getElementById('unlockAllSellerFields')?.addEventListener('click', function() {
+                    sellerFieldLocks.forEach(function(field) {
+                        field.checked = false;
+                    });
+                });
 
             }
         );

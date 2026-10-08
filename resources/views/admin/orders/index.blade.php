@@ -55,6 +55,18 @@
 
         </section>
 
+        @if (session('success'))
+            <div class="mb-6 rounded-2xl border border-emerald-200 bg-emerald-50 px-5 py-4 text-sm font-semibold text-emerald-700">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if (session('warning'))
+            <div class="mb-6 rounded-2xl border border-amber-200 bg-amber-50 px-5 py-4 text-sm font-semibold text-amber-700">
+                {{ session('warning') }}
+            </div>
+        @endif
+
 
 
         {{-- ===================================================== --}}
@@ -681,7 +693,7 @@
 
                                 <td class="px-5 py-4">
 
-                                    <div class="flex justify-end">
+                                    <div class="flex justify-end gap-1">
 
                                         <a href="{{ route('admin.orders.show', $order) }}" title="Lihat Detail"
                                             class="inline-flex
@@ -705,6 +717,23 @@
                                             </svg>
 
                                         </a>
+
+                                        <form action="{{ route('admin.orders.destroy', $order) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <button type="submit" title="Hapus Pesanan"
+                                                onclick="return confirm('Hapus pesanan {{ $order->order_number }}? Stok akan dikembalikan, kecuali pesanan yang sebelumnya sudah dibatalkan.')"
+                                                class="inline-flex size-9 items-center justify-center rounded-xl text-[#A65954] transition hover:bg-[#FAEDEC]">
+                                                <svg class="size-4.5" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="1.8">
+                                                    <path d="M4 7h16" />
+                                                    <path d="M9 7V4h6v3" />
+                                                    <path d="m7 7 1 13h8l1-13" />
+                                                    <path d="M10 11v5M14 11v5" />
+                                                </svg>
+                                            </button>
+                                        </form>
 
                                     </div>
 

@@ -122,6 +122,7 @@ Route::middleware(['auth', 'role:admin'])
 
         Route::get('/pesanan', [AdminOrderController::class, 'index'])->name('orders.index');
         Route::get('/pesanan/{order}', [AdminOrderController::class, 'show'])->name('orders.show');
+        Route::delete('/pesanan/{order}', [AdminOrderController::class, 'destroy'])->name('orders.destroy');
 
         /*
         |--------------------------------------------------------------------------

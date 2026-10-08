@@ -8,6 +8,7 @@ use App\Services\ImageCompressor;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class WebsiteSettingController extends Controller
@@ -23,7 +24,9 @@ class WebsiteSettingController extends Controller
             ],
         );
 
-        return view('admin.settings.website', compact('setting'));
+        $sellerProfileFields = SiteSetting::SELLER_PROFILE_FIELDS;
+
+        return view('admin.settings.website', compact('setting', 'sellerProfileFields'));
     }
 
     public function update(Request $request): RedirectResponse
@@ -36,6 +39,13 @@ class WebsiteSettingController extends Controller
             'logo' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048', 'dimensions:max_width=6000,max_height=6000'],
 
             'favicon' => ['nullable', 'file', 'mimes:ico,jpg,jpeg,png,webp', 'max:1024'],
+
+            'seller_profile_locked_fields' => ['nullable', 'array'],
+
+            'seller_profile_locked_fields.*' => [
+                'string',
+                Rule::in(array_keys(SiteSetting::SELLER_PROFILE_FIELDS)),
+            ],
         ]);
 
         $setting = SiteSetting::query()->firstOrCreate(
@@ -47,6 +57,9 @@ class WebsiteSettingController extends Controller
 
         $setting->site_name = $validated['site_name'];
         $setting->admin_whatsapp = $validated['admin_whatsapp'] ?? null;
+        $setting->seller_profile_locked_fields = array_values(array_unique(
+            $validated['seller_profile_locked_fields'] ?? []
+        ));
 
         if ($request->hasFile('logo')) {
             $logoPath = $this->imageCompressor->store(
@@ -85,6 +98,6 @@ class WebsiteSettingController extends Controller
 
         $setting->save();
 
-        return back()->with('success', 'Branding website berhasil diperbarui.');
+        return back()->with('success', 'Pengaturan website berhasil diperbarui.');
     }
 }

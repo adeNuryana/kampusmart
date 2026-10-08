@@ -4,6 +4,13 @@
 
 @section('content')
 
+    @php
+        $lockedProfileFields = $lockedProfileFields ?? array_keys($profileFieldLabels ?? []);
+        $profileFieldLabels = $profileFieldLabels ?? [];
+        $allProfileFieldsLocked = count($lockedProfileFields) === count($profileFieldLabels);
+        $noProfileFieldsLocked = $lockedProfileFields === [];
+    @endphp
+
     <div class="mx-auto max-w-6xl">
 
         {{-- ===================================================== --}}
@@ -451,12 +458,23 @@
 
                             <div>
                                 <p class="text-sm font-bold text-[#8A672F]">
-                                    Data identitas dikelola oleh admin
+                                    @if ($allProfileFieldsLocked)
+                                        Data identitas dikunci super admin
+                                    @elseif ($noProfileFieldsLocked)
+                                        Semua data identitas dapat diubah
+                                    @else
+                                        Sebagian data identitas dikunci
+                                    @endif
                                 </p>
 
                                 <p class="mt-1 text-xs leading-5 text-[#8A672F]">
-                                    Nama, email, nomor telepon, WhatsApp, NIM, dan fakultas dikelola oleh
-                                    super admin. Hubungi super admin jika ada data yang perlu diperbarui.
+                                    @if ($allProfileFieldsLocked)
+                                        Seluruh data identitas hanya dapat diperbarui oleh super admin.
+                                    @elseif ($noProfileFieldsLocked)
+                                        Super admin mengizinkan seller memperbarui seluruh data identitasnya.
+                                    @else
+                                        Field dengan tampilan abu-abu dikunci dan hanya dapat diperbarui oleh super admin.
+                                    @endif
                                 </p>
                             </div>
 
@@ -489,12 +507,18 @@
                                     </label>
 
 
+                                    @php($nameLocked = in_array('name', $lockedProfileFields, true))
                                     <input type="text" name="name" id="name"
-                                        value="{{ $seller->name }}" readonly aria-readonly="true"
-                                        class="h-11 w-full
-                                               cursor-not-allowed rounded-xl border border-[#DFD2C7]
-                                               bg-[#F5F1EC] px-4 text-sm text-[#806F64]
-                                               outline-none">
+                                        value="{{ old('name', $seller->name) }}" @readonly($nameLocked)
+                                        aria-readonly="{{ $nameLocked ? 'true' : 'false' }}" @required(! $nameLocked)
+                                        class="h-11 w-full rounded-xl border px-4 text-sm outline-none
+                                               {{ $nameLocked
+                                                   ? 'cursor-not-allowed border-[#DFD2C7] bg-[#F5F1EC] text-[#806F64]'
+                                                   : 'border-[#DFD2C7] bg-white text-[#4D4038] transition focus:border-[#C8795A] focus:ring-4 focus:ring-[#FBEAE2]' }}">
+
+                                    @error('name')
+                                        <p class="mt-2 text-xs font-medium text-[#A65954]">{{ $message }}</p>
+                                    @enderror
 
                                 </div>
 
@@ -560,12 +584,18 @@
                                     </label>
 
 
+                                    @php($emailLocked = in_array('email', $lockedProfileFields, true))
                                     <input type="email" name="email" id="email"
-                                        value="{{ $seller->email }}" readonly aria-readonly="true"
-                                        class="h-11 w-full
-                                               cursor-not-allowed rounded-xl border border-[#DFD2C7]
-                                               bg-[#F5F1EC] px-4 text-sm text-[#806F64]
-                                               outline-none">
+                                        value="{{ old('email', $seller->email) }}" @readonly($emailLocked)
+                                        aria-readonly="{{ $emailLocked ? 'true' : 'false' }}" @required(! $emailLocked)
+                                        class="h-11 w-full rounded-xl border px-4 text-sm outline-none
+                                               {{ $emailLocked
+                                                   ? 'cursor-not-allowed border-[#DFD2C7] bg-[#F5F1EC] text-[#806F64]'
+                                                   : 'border-[#DFD2C7] bg-white text-[#4D4038] transition focus:border-[#C8795A] focus:ring-4 focus:ring-[#FBEAE2]' }}">
+
+                                    @error('email')
+                                        <p class="mt-2 text-xs font-medium text-[#A65954]">{{ $message }}</p>
+                                    @enderror
 
                                 </div>
 
@@ -584,13 +614,19 @@
                                     </label>
 
 
+                                    @php($phoneLocked = in_array('phone', $lockedProfileFields, true))
                                     <input type="text" name="phone" id="phone"
-                                        value="{{ $seller->phone }}" readonly aria-readonly="true"
+                                        value="{{ old('phone', $seller->phone) }}" @readonly($phoneLocked)
+                                        aria-readonly="{{ $phoneLocked ? 'true' : 'false' }}"
                                         placeholder="Belum diatur"
-                                        class="h-11 w-full
-                                               cursor-not-allowed rounded-xl border border-[#DFD2C7]
-                                               bg-[#F5F1EC] px-4 text-sm text-[#806F64]
-                                               outline-none placeholder:text-[#A28A7A]">
+                                        class="h-11 w-full rounded-xl border px-4 text-sm outline-none placeholder:text-[#A28A7A]
+                                               {{ $phoneLocked
+                                                   ? 'cursor-not-allowed border-[#DFD2C7] bg-[#F5F1EC] text-[#806F64]'
+                                                   : 'border-[#DFD2C7] bg-white text-[#4D4038] transition focus:border-[#C8795A] focus:ring-4 focus:ring-[#FBEAE2]' }}">
+
+                                    @error('phone')
+                                        <p class="mt-2 text-xs font-medium text-[#A65954]">{{ $message }}</p>
+                                    @enderror
 
                                 </div>
 
@@ -609,13 +645,20 @@
                                     </label>
 
 
+                                    @php($whatsappLocked = in_array('whatsapp', $lockedProfileFields, true))
                                     <input type="text" name="whatsapp" id="whatsapp"
-                                        value="{{ $seller->sellerProfile?->whatsapp }}" readonly aria-readonly="true"
+                                        value="{{ old('whatsapp', $seller->sellerProfile?->whatsapp) }}"
+                                        @readonly($whatsappLocked) aria-readonly="{{ $whatsappLocked ? 'true' : 'false' }}"
+                                        @required(! $whatsappLocked)
                                         placeholder="Belum diatur"
-                                        class="h-11 w-full
-                                               cursor-not-allowed rounded-xl border border-[#DFD2C7]
-                                               bg-[#F5F1EC] px-4 text-sm text-[#806F64]
-                                               outline-none placeholder:text-[#A28A7A]">
+                                        class="h-11 w-full rounded-xl border px-4 text-sm outline-none placeholder:text-[#A28A7A]
+                                               {{ $whatsappLocked
+                                                   ? 'cursor-not-allowed border-[#DFD2C7] bg-[#F5F1EC] text-[#806F64]'
+                                                   : 'border-[#DFD2C7] bg-white text-[#4D4038] transition focus:border-[#C8795A] focus:ring-4 focus:ring-[#FBEAE2]' }}">
+
+                                    @error('whatsapp')
+                                        <p class="mt-2 text-xs font-medium text-[#A65954]">{{ $message }}</p>
+                                    @enderror
 
                                 </div>
 
@@ -634,13 +677,19 @@
                                     </label>
 
 
+                                    @php($nimLocked = in_array('nim', $lockedProfileFields, true))
                                     <input type="text" name="nim" id="nim"
-                                        value="{{ $seller->sellerProfile?->nim }}" readonly aria-readonly="true"
+                                        value="{{ old('nim', $seller->sellerProfile?->nim) }}" @readonly($nimLocked)
+                                        aria-readonly="{{ $nimLocked ? 'true' : 'false' }}"
                                         placeholder="Belum diatur"
-                                        class="h-11 w-full
-                                               cursor-not-allowed rounded-xl border border-[#DFD2C7]
-                                               bg-[#F5F1EC] px-4 text-sm text-[#806F64]
-                                               outline-none placeholder:text-[#A28A7A]">
+                                        class="h-11 w-full rounded-xl border px-4 text-sm outline-none placeholder:text-[#A28A7A]
+                                               {{ $nimLocked
+                                                   ? 'cursor-not-allowed border-[#DFD2C7] bg-[#F5F1EC] text-[#806F64]'
+                                                   : 'border-[#DFD2C7] bg-white text-[#4D4038] transition focus:border-[#C8795A] focus:ring-4 focus:ring-[#FBEAE2]' }}">
+
+                                    @error('nim')
+                                        <p class="mt-2 text-xs font-medium text-[#A65954]">{{ $message }}</p>
+                                    @enderror
 
                                 </div>
 
@@ -659,13 +708,19 @@
                                     </label>
 
 
+                                    @php($facultyLocked = in_array('faculty', $lockedProfileFields, true))
                                     <input type="text" name="faculty" id="faculty"
-                                        value="{{ $seller->sellerProfile?->faculty }}" readonly aria-readonly="true"
+                                        value="{{ old('faculty', $seller->sellerProfile?->faculty) }}"
+                                        @readonly($facultyLocked) aria-readonly="{{ $facultyLocked ? 'true' : 'false' }}"
                                         placeholder="Belum diatur"
-                                        class="h-11 w-full
-                                               cursor-not-allowed rounded-xl border border-[#DFD2C7]
-                                               bg-[#F5F1EC] px-4 text-sm text-[#806F64]
-                                               outline-none placeholder:text-[#A28A7A]">
+                                        class="h-11 w-full rounded-xl border px-4 text-sm outline-none placeholder:text-[#A28A7A]
+                                               {{ $facultyLocked
+                                                   ? 'cursor-not-allowed border-[#DFD2C7] bg-[#F5F1EC] text-[#806F64]'
+                                                   : 'border-[#DFD2C7] bg-white text-[#4D4038] transition focus:border-[#C8795A] focus:ring-4 focus:ring-[#FBEAE2]' }}">
+
+                                    @error('faculty')
+                                        <p class="mt-2 text-xs font-medium text-[#A65954]">{{ $message }}</p>
+                                    @enderror
 
                                 </div>
 

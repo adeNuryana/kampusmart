@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Seller;
 
 use App\Http\Controllers\Controller;
+use App\Models\SiteSetting;
 use App\Services\ActivityLogger;
 use App\Services\ImageCompressor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
 
@@ -26,9 +28,14 @@ class SettingController extends Controller
 
         $seller->load('sellerProfile');
 
+        $setting = SiteSetting::query()->first();
+        $lockedProfileFields = $setting?->lockedSellerProfileFields()
+            ?? array_keys(SiteSetting::SELLER_PROFILE_FIELDS);
+        $profileFieldLabels = SiteSetting::SELLER_PROFILE_FIELDS;
+
         return view(
             'seller.settings.index',
-            compact('seller')
+            compact('seller', 'lockedProfileFields', 'profileFieldLabels')
         );
     }
 
@@ -42,13 +49,13 @@ class SettingController extends Controller
     {
         $seller = $request->user();
 
-        $validated = $request->validate([
-            /*
-            |--------------------------------------------------------------------------
-            | Seller Profile
-            |--------------------------------------------------------------------------
-            */
+        $setting = SiteSetting::query()->first();
+        $lockedFields = $setting?->lockedSellerProfileFields()
+            ?? array_keys(SiteSetting::SELLER_PROFILE_FIELDS);
 
+        $fieldIsEditable = fn (string $field): bool => ! in_array($field, $lockedFields, true);
+
+        $rules = [
             'store_name' => [
                 'required',
                 'string',
@@ -68,7 +75,50 @@ class SettingController extends Controller
                 'max:2048',
                 'dimensions:max_width=6000,max_height=6000',
             ],
-        ]);
+        ];
+
+        if ($fieldIsEditable('name')) {
+            $rules['name'] = ['required', 'string', 'max:255'];
+        }
+
+        if ($fieldIsEditable('email')) {
+            $rules['email'] = [
+                'required',
+                'email',
+                'max:255',
+                Rule::unique('users', 'email')->ignore($seller->id),
+            ];
+        }
+
+        if ($fieldIsEditable('phone')) {
+            $rules['phone'] = ['nullable', 'string', 'max:20'];
+        }
+
+        if ($fieldIsEditable('whatsapp')) {
+            $rules['whatsapp'] = ['required', 'string', 'max:20'];
+        }
+
+        if ($fieldIsEditable('nim')) {
+            $rules['nim'] = ['nullable', 'string', 'max:50'];
+        }
+
+        if ($fieldIsEditable('faculty')) {
+            $rules['faculty'] = ['nullable', 'string', 'max:255'];
+        }
+
+        $validated = $request->validate($rules);
+
+        $sellerData = [];
+
+        foreach (['name', 'email', 'phone'] as $field) {
+            if ($fieldIsEditable($field)) {
+                $sellerData[$field] = $validated[$field] ?? null;
+            }
+        }
+
+        if ($sellerData !== []) {
+            $seller->update($sellerData);
+        }
 
         /*
         |--------------------------------------------------------------------------
@@ -109,11 +159,17 @@ class SettingController extends Controller
             [
                 'store_name' => $validated['store_name'],
 
-                'whatsapp' => $profile?->whatsapp ?? '',
+                'whatsapp' => $fieldIsEditable('whatsapp')
+                    ? $validated['whatsapp']
+                    : ($profile?->whatsapp ?? ''),
 
-                'nim' => $profile?->nim,
+                'nim' => $fieldIsEditable('nim')
+                    ? ($validated['nim'] ?? null)
+                    : $profile?->nim,
 
-                'faculty' => $profile?->faculty,
+                'faculty' => $fieldIsEditable('faculty')
+                    ? ($validated['faculty'] ?? null)
+                    : $profile?->faculty,
 
                 'description' => $validated['description'] ?? null,
 
@@ -135,6 +191,10 @@ class SettingController extends Controller
             $profile,
             [
                 'store_name' => $profile->store_name,
+                'editable_fields' => array_values(array_diff(
+                    array_keys(SiteSetting::SELLER_PROFILE_FIELDS),
+                    $lockedFields
+                )),
             ]
         );
 

@@ -821,15 +821,38 @@
                                            leading-5
                                            text-[#7C695C]">
 
-                                    Admin hanya memantau transaksi.
-                                    Penerimaan, pemrosesan, dan
-                                    penyelesaian pesanan dilakukan
-                                    oleh seller.
+                                    Penerimaan dan penyelesaian pesanan dilakukan oleh seller. Super admin dapat
+                                    menghapus pesanan jika diperlukan.
 
                                 </p>
 
                             </div>
 
+                        </div>
+
+                        <div class="mt-6 border-t border-[#E7DBD1] pt-5">
+                            <p class="text-sm font-bold text-[#A65954]">Hapus Pesanan</p>
+                            <p class="mt-1 text-xs leading-5 text-slate-500">
+                                Pesanan akan dihapus permanen. Stok produk dikembalikan secara otomatis, kecuali stok
+                                pesanan yang dibatalkan karena sebelumnya sudah dikembalikan.
+                            </p>
+
+                            <form action="{{ route('admin.orders.destroy', $order) }}" method="POST" class="mt-4">
+                                @csrf
+                                @method('DELETE')
+
+                                <button type="submit"
+                                    onclick="return confirm('Hapus pesanan {{ $order->order_number }} secara permanen?')"
+                                    class="inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-[#A65954] px-5 text-sm font-bold text-white transition hover:bg-[#914944]">
+                                    <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.8">
+                                        <path d="M4 7h16" />
+                                        <path d="M9 7V4h6v3" />
+                                        <path d="m7 7 1 13h8l1-13" />
+                                    </svg>
+                                    Hapus Pesanan dan Kembalikan Stok
+                                </button>
+                            </form>
                         </div>
 
                     </div>
