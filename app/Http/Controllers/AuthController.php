@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -35,7 +36,7 @@ class AuthController extends Controller
             $remember,
         );
 
-        if (!$authenticated) {
+        if (! $authenticated) {
             return back()
                 ->withErrors([
                     'email' => 'Email atau password salah.',
@@ -55,10 +56,12 @@ class AuthController extends Controller
             default => $this->logout($request),
         };
     }
+
     public function showRegister(): View
     {
         return view('auth.register');
     }
+
     public function register(Request $request): RedirectResponse
     {
         $validated = $request->validate(
@@ -98,7 +101,9 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->route('buyer.dashboard');
+        event(new Registered($user));
+
+        return redirect()->route('verification.notice');
     }
 
     public function logout(Request $request): RedirectResponse

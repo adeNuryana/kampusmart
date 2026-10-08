@@ -32,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
         View::composer([
             'auth.login',
             'auth.register',
+            'auth.verify-email',
             'buyer.home',
             'components.floating-whatsapp',
             'layouts.admin',

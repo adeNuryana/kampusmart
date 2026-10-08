@@ -455,8 +455,8 @@
                                 </p>
 
                                 <p class="mt-1 text-xs leading-5 text-[#8A672F]">
-                                    Nama, email, nomor telepon, WhatsApp, NIM, dan fakultas tidak dapat
-                                    diubah dari akun seller. Hubungi admin jika ada data yang perlu diperbarui.
+                                    Nama, email, nomor telepon, WhatsApp, NIM, dan fakultas dikelola oleh
+                                    super admin. Hubungi super admin jika ada data yang perlu diperbarui.
                                 </p>
                             </div>
 

@@ -232,6 +232,24 @@
 
                     </div>
 
+                    <div class="mb-6 flex items-start gap-3 rounded-2xl border border-blue-200 bg-blue-50 p-4">
+                        <div class="flex size-8 shrink-0 items-center justify-center rounded-xl bg-blue-100 text-[#315EBB]">
+                            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8">
+                                <path d="M12 3 4 6v5c0 5 3.4 8.6 8 10 4.6-1.4 8-5 8-10V6Z" />
+                                <path d="m9 12 2 2 4-4" />
+                            </svg>
+                        </div>
+
+                        <div>
+                            <p class="text-sm font-bold text-[#315EBB]">Data yang dikelola super admin</p>
+                            <p class="mt-1 text-xs leading-5 text-blue-700/80">
+                                Nama, email, nomor HP, WhatsApp, NIM, dan fakultas dikunci pada akun seller.
+                                Perubahan data tersebut dilakukan melalui halaman ini.
+                            </p>
+                        </div>
+                    </div>
+
 
                     <div class="grid gap-5 md:grid-cols-2">
 
@@ -381,7 +399,7 @@
                             </h2>
 
                             <p class="mt-1 text-xs text-slate-500">
-                                Informasi yang akan ditampilkan kepada pembeli.
+                                Informasi toko, termasuk WhatsApp dan fakultas yang dikelola super admin.
                             </p>
                         </div>
 

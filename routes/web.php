@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\SellerController;
 use App\Http\Controllers\Admin\SettingController as AdminSettingController;
 use App\Http\Controllers\Admin\WebsiteSettingController;
+use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\GoogleAuthController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Buyer\CartController;
@@ -69,6 +70,19 @@ Route::middleware('guest')->group(function () {
 Route::post('/logout', [AuthController::class, 'logout'])
     ->middleware('auth')
     ->name('logout');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/email/verify', [EmailVerificationController::class, 'notice'])
+        ->name('verification.notice');
+
+    Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])
+        ->middleware(['signed', 'throttle:6,1'])
+        ->name('verification.verify');
+
+    Route::post('/email/verification-notification', [EmailVerificationController::class, 'send'])
+        ->middleware('throttle:6,1')
+        ->name('verification.send');
+});
 
 /*
     |--------------------------------------------------------------------------
@@ -192,7 +206,7 @@ Route::middleware(['auth', 'role:seller'])
                 |--------------------------------------------------------------------------
                 */
 
-Route::middleware(['auth', 'role:buyer'])
+Route::middleware(['auth', 'role:buyer', 'verified'])
     ->prefix('buyer')
     ->name('buyer.')
     ->group(function () {

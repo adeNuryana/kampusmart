@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\View\View;
 
 class BuyerController extends Controller
 {
@@ -43,13 +43,13 @@ class BuyerController extends Controller
 
         return view('admin.buyers.index', compact('buyers'));
     }
+
     public function edit(User $buyer): View
     {
         abort_if($buyer->role !== 'buyer', 404);
 
         return view('admin.buyers.edit', compact('buyer'));
     }
-
 
     public function updateStatus(Request $request, User $buyer)
     {
@@ -73,12 +73,14 @@ class BuyerController extends Controller
                 : 'Akun pembeli berhasil dinonaktifkan.'
         );
     }
+
     public function show(User $buyer): View
     {
         abort_if($buyer->role !== 'buyer', 404);
 
         return view('admin.buyers.show', compact('buyer'));
     }
+
     public function update(Request $request, User $buyer)
     {
         abort_if($buyer->role !== 'buyer', 404);
@@ -115,25 +117,34 @@ class BuyerController extends Controller
             ],
         ]);
 
+        $emailChanged = $buyer->email !== $validated['email'];
+
         $buyer->name = $validated['name'];
         $buyer->email = $validated['email'];
         $buyer->phone = $validated['phone'] ?? null;
         $buyer->status = $validated['status'];
 
-        if (!empty($validated['password'])) {
+        if (! empty($validated['password'])) {
             $buyer->password = $validated['password'];
         }
 
         $buyer->save();
 
+        if ($emailChanged) {
+            $buyer->forceFill(['email_verified_at' => null])->save();
+            $buyer->sendEmailVerificationNotification();
+        }
+
         return redirect()
             ->route('admin.buyers.index')
             ->with('success', 'Data pembeli berhasil diperbarui.');
     }
+
     public function create(): View
     {
         return view('admin.buyers.create');
     }
+
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -168,7 +179,7 @@ class BuyerController extends Controller
             ],
         ]);
 
-        $buyer = new User();
+        $buyer = new User;
 
         $buyer->name = $validated['name'];
         $buyer->email = $validated['email'];
@@ -177,12 +188,11 @@ class BuyerController extends Controller
         $buyer->role = 'buyer';
         $buyer->status = $validated['status'];
 
-        // Karena dibuat oleh Admin
-        $buyer->email_verified_at = now();
-
         $buyer->password = $validated['password'];
 
         $buyer->save();
+
+        $buyer->sendEmailVerificationNotification();
 
         return redirect()
             ->route('admin.buyers.index')

@@ -31,7 +31,6 @@ class ProfileController extends Controller
         );
     }
 
-
     /*
     |--------------------------------------------------------------------------
     | Update Profile
@@ -75,6 +74,7 @@ class ProfileController extends Controller
 
         $oldPhoto = $buyer->photo;
         $photoPath = $oldPhoto;
+        $emailChanged = $buyer->email !== $validated['email'];
 
         if ($request->hasFile('photo')) {
             $photoPath = $this->imageCompressor->store(
@@ -92,11 +92,16 @@ class ProfileController extends Controller
             'photo' => $photoPath,
         ]);
 
+        if ($emailChanged) {
+            $buyer->forceFill(['email_verified_at' => null])->save();
+            $buyer->sendEmailVerificationNotification();
+        }
+
         if (
             $request->hasFile('photo') &&
             $oldPhoto &&
-            !str_starts_with($oldPhoto, 'http://') &&
-            !str_starts_with($oldPhoto, 'https://')
+            ! str_starts_with($oldPhoto, 'http://') &&
+            ! str_starts_with($oldPhoto, 'https://')
         ) {
             Storage::disk('public')->delete($oldPhoto);
         }
@@ -106,12 +111,18 @@ class ProfileController extends Controller
             'memperbarui profil',
             $buyer
         );
+
+        if ($emailChanged) {
+            return redirect()
+                ->route('verification.notice')
+                ->with('status', 'verification-link-sent');
+        }
+
         return back()->with(
             'profile_success',
             'Profil berhasil diperbarui.'
         );
     }
-
 
     /*
     |--------------------------------------------------------------------------
@@ -137,11 +148,9 @@ class ProfileController extends Controller
             ]
         );
 
-
         $request->user()->update([
             'password' => $validated['password'],
         ]);
-
 
         return back()->with(
             'password_success',

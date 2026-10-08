@@ -79,6 +79,8 @@ class GoogleAuthController extends Controller
 
                     'status' => 'active',
                 ]);
+
+                $user->markEmailAsVerified();
             } else {
                 /*
                 |--------------------------------------------------------------------------
@@ -113,6 +115,10 @@ class GoogleAuthController extends Controller
 
                     'google_avatar' => $googleUser->getAvatar(),
                 ]);
+
+                if (! $user->hasVerifiedEmail()) {
+                    $user->markEmailAsVerified();
+                }
             }
 
             /*
