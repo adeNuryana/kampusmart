@@ -963,6 +963,29 @@
 
         </section>
 
+        <section class="mt-6 overflow-hidden rounded-3xl border border-red-200 bg-white shadow-sm">
+            <div class="flex flex-col gap-5 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+                <div>
+                    <h2 class="font-bold text-red-700">Hapus Akun Pembeli</h2>
+                    <p class="mt-1 max-w-2xl text-sm leading-6 text-slate-500">
+                        Akun, keranjang, dan seluruh pesanan pembeli akan dihapus permanen. Stok dari pesanan yang belum
+                        dibatalkan akan dikembalikan otomatis.
+                    </p>
+                </div>
+
+                <form action="{{ route('admin.buyers.destroy', $buyer) }}" method="POST" class="shrink-0">
+                    @csrf
+                    @method('DELETE')
+
+                    <button type="submit"
+                        onclick="return confirm('Hapus akun pembeli {{ addslashes($buyer->name) }} secara permanen?')"
+                        class="inline-flex h-11 w-full items-center justify-center rounded-xl bg-red-600 px-5 text-sm font-bold text-white transition hover:bg-red-700 sm:w-auto">
+                        Hapus Pembeli
+                    </button>
+                </form>
+            </div>
+        </section>
+
     </div>
 
 @endsection

@@ -103,6 +103,7 @@ Route::middleware(['auth', 'role:admin'])
         Route::patch('/pembeli/{buyer}/status', [BuyerController::class, 'updateStatus'])->name('buyers.status');
         Route::get('/pembeli/{buyer}/edit', [BuyerController::class, 'edit'])->name('buyers.edit');
         Route::put('/pembeli/{buyer}', [BuyerController::class, 'update'])->name('buyers.update');
+        Route::delete('/pembeli/{buyer}', [BuyerController::class, 'destroy'])->name('buyers.destroy');
 
         /*
         |--------------------------------------------------------------------------
@@ -119,6 +120,7 @@ Route::middleware(['auth', 'role:admin'])
         Route::put('/sellers/{seller}', [SellerController::class, 'update'])->name('sellers.update');
         // UPDATE STATUS
         Route::patch('/sellers/{seller}/status', [SellerController::class, 'updateStatus'])->name('sellers.status');
+        Route::delete('/sellers/{seller}', [SellerController::class, 'destroy'])->name('sellers.destroy');
 
         Route::get('/pesanan', [AdminOrderController::class, 'index'])->name('orders.index');
         Route::get('/pesanan/{order}', [AdminOrderController::class, 'show'])->name('orders.show');

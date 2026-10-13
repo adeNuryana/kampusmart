@@ -20,12 +20,14 @@ class SiteSetting extends Model
         'admin_whatsapp',
         'logo',
         'favicon',
+        'seller_registration_enabled',
         'seller_profile_locked_fields',
     ];
 
     protected function casts(): array
     {
         return [
+            'seller_registration_enabled' => 'boolean',
             'seller_profile_locked_fields' => 'array',
         ];
     }

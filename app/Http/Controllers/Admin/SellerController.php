@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
+use App\Models\Product;
 use App\Models\User;
+use App\Services\ActivityLogger;
 use App\Services\ImageCompressor;
+use App\Services\OrderDeletionService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +19,10 @@ use Illuminate\View\View;
 
 class SellerController extends Controller
 {
-    public function __construct(private readonly ImageCompressor $imageCompressor) {}
+    public function __construct(
+        private readonly ImageCompressor $imageCompressor,
+        private readonly OrderDeletionService $orderDeletionService,
+    ) {}
 
     public function index(Request $request): View
     {
@@ -59,12 +66,10 @@ class SellerController extends Controller
         ));
     }
 
-
     public function create(): View
     {
         return view('admin.sellers.create');
     }
-
 
     public function store(Request $request)
     {
@@ -137,7 +142,6 @@ class SellerController extends Controller
             ],
         ]);
 
-
         /*
     |--------------------------------------------------------------------------
     | Upload Foto
@@ -155,10 +159,9 @@ class SellerController extends Controller
             );
         }
 
-
         DB::transaction(function () use ($validated, $photoPath) {
 
-            $seller = new User();
+            $seller = new User;
 
             $seller->name = $validated['name'];
             $seller->email = $validated['email'];
@@ -173,7 +176,6 @@ class SellerController extends Controller
             $seller->password = $validated['password'];
 
             $seller->save();
-
 
             /*
         |--------------------------------------------------------------------------
@@ -198,7 +200,6 @@ class SellerController extends Controller
             ]);
         });
 
-
         return redirect()
             ->route('admin.sellers.index')
             ->with(
@@ -206,6 +207,7 @@ class SellerController extends Controller
                 'Akun penjual berhasil dibuat.'
             );
     }
+
     public function show(User $seller): View
     {
         abort_unless($seller->role === 'seller', 404);
@@ -215,7 +217,6 @@ class SellerController extends Controller
         return view('admin.sellers.show', compact('seller'));
     }
 
-
     public function edit(User $seller): View
     {
         abort_unless($seller->role === 'seller', 404);
@@ -224,7 +225,6 @@ class SellerController extends Controller
 
         return view('admin.sellers.edit', compact('seller'));
     }
-
 
     public function updateStatus(
         Request $request,
@@ -251,6 +251,7 @@ class SellerController extends Controller
                 : 'Akun penjual berhasil dinonaktifkan.'
         );
     }
+
     public function update(Request $request, User $seller): RedirectResponse
     {
 
@@ -330,7 +331,6 @@ class SellerController extends Controller
             ],
         ]);
 
-
         DB::transaction(function () use (
             $validated,
             $seller,
@@ -354,7 +354,6 @@ class SellerController extends Controller
                 $validated['status'];
             $seller->phone = $validated['phone'] ?? null;
 
-
             /*
         |--------------------------------------------------------------------------
         | Password hanya diubah jika Admin mengisinya
@@ -367,7 +366,6 @@ class SellerController extends Controller
             }
 
             $seller->save();
-
 
             /*
         |--------------------------------------------------------------------------
@@ -394,7 +392,6 @@ class SellerController extends Controller
                 $photoPath = $newPhotoPath;
             }
 
-
             /*
         |--------------------------------------------------------------------------
         | Update informasi toko
@@ -407,25 +404,19 @@ class SellerController extends Controller
                         'user_id' => $seller->id,
                     ],
                     [
-                        'store_name' =>
-                        $validated['store_name'],
+                        'store_name' => $validated['store_name'],
 
-                        'whatsapp' =>
-                        $validated['whatsapp'],
+                        'whatsapp' => $validated['whatsapp'],
 
-                        'nim' =>
-                        $validated['nim'] ?? null,
+                        'nim' => $validated['nim'] ?? null,
 
-                        'faculty' =>
-                        $validated['faculty'] ?? null,
+                        'faculty' => $validated['faculty'] ?? null,
 
-                        'description' =>
-                        $validated['description'] ?? null,
+                        'description' => $validated['description'] ?? null,
                         'photo' => $photoPath,
                     ]
                 );
         });
-
 
         return redirect()
             ->route('admin.sellers.show', $seller)
@@ -433,5 +424,71 @@ class SellerController extends Controller
                 'success',
                 'Data penjual berhasil diperbarui.'
             );
+    }
+
+    public function destroy(User $seller): RedirectResponse
+    {
+        abort_unless($seller->role === 'seller', 404);
+
+        $result = DB::transaction(function () use ($seller): array {
+            $lockedSeller = User::query()
+                ->whereKey($seller->id)
+                ->with('sellerProfile')
+                ->lockForUpdate()
+                ->firstOrFail();
+
+            abort_unless($lockedSeller->role === 'seller', 404);
+
+            $products = Product::query()
+                ->where('seller_id', $lockedSeller->id)
+                ->with('images')
+                ->orderBy('id')
+                ->lockForUpdate()
+                ->get();
+
+            $filePaths = $products
+                ->flatMap(fn (Product $product) => $product->images->pluck('path')->push($product->image))
+                ->push($lockedSeller->sellerProfile?->photo)
+                ->push($lockedSeller->photo)
+                ->filter()
+                ->unique()
+                ->values();
+
+            $orders = Order::query()
+                ->where('seller_id', $lockedSeller->id)
+                ->orderBy('id')
+                ->get();
+
+            foreach ($orders as $order) {
+                $this->orderDeletionService->delete($order);
+            }
+
+            $sellerName = $lockedSeller->name;
+
+            ActivityLogger::log(
+                'seller_deleted',
+                'menghapus akun penjual '.$sellerName,
+                $lockedSeller,
+                [
+                    'email' => $lockedSeller->email,
+                    'deleted_products' => $products->count(),
+                    'deleted_orders' => $orders->count(),
+                ]
+            );
+
+            $lockedSeller->delete();
+
+            return compact('sellerName', 'filePaths');
+        });
+
+        $result['filePaths']->each(function (string $path): void {
+            if (! str_starts_with($path, 'http://') && ! str_starts_with($path, 'https://')) {
+                Storage::disk('public')->delete($path);
+            }
+        });
+
+        return redirect()
+            ->route('admin.sellers.index')
+            ->with('success', 'Akun penjual '.$result['sellerName'].' beserta produk dan pesanannya berhasil dihapus.');
     }
 }

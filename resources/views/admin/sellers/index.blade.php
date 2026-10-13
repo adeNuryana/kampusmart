@@ -375,6 +375,23 @@
 
                                         </form>
 
+                                        <form action="{{ route('admin.sellers.destroy', $seller) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <button type="submit" title="Hapus Penjual"
+                                                onclick="return confirm('Hapus akun penjual {{ addslashes($seller->name) }} secara permanen? Profil toko, seluruh produk, dan pesanan penjual ikut dihapus.')"
+                                                class="inline-flex size-9 items-center justify-center rounded-xl text-red-600 transition hover:bg-red-50">
+                                                <svg class="size-4.5" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="1.8">
+                                                    <path d="M4 7h16" />
+                                                    <path d="M9 7V4h6v3" />
+                                                    <path d="m7 7 1 13h8l1-13" />
+                                                    <path d="M10 11v5M14 11v5" />
+                                                </svg>
+                                            </button>
+                                        </form>
+
                                     </div>
 
                                 </td>

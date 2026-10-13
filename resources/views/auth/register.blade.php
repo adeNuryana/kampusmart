@@ -9,6 +9,7 @@
 
     @php
         $siteName = $siteSetting?->site_name ?? 'KampusMart';
+        $sellerRegistrationEnabled = (bool) ($siteSetting?->seller_registration_enabled ?? false);
     @endphp
 
     <title>Daftar - {{ $siteName }}</title>
@@ -1012,9 +1013,13 @@
                                        leading-5
                                        text-slate-500">
 
-                                Akun seller tidak dapat didaftarkan
-                                melalui halaman ini. Akun seller dibuat
-                                oleh Super Admin {{ $siteName }}.
+                                @if ($sellerRegistrationEnabled)
+                                    Pendaftaran penjual sedang dibuka. Hubungi
+                                    Super Admin {{ $siteName }} melalui halaman login.
+                                @else
+                                    Pendaftaran penjual sedang ditutup oleh
+                                    Super Admin {{ $siteName }}.
+                                @endif
 
                             </p>
 

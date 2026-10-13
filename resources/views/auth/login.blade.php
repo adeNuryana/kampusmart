@@ -26,7 +26,10 @@
                 'Terima kasih.',
         );
 
-        $sellerWhatsappUrl = $adminWhatsapp ? "https://wa.me/{$adminWhatsapp}?text={$sellerMessage}" : null;
+        $sellerRegistrationEnabled = (bool) ($siteSetting?->seller_registration_enabled ?? false);
+        $sellerWhatsappUrl = $sellerRegistrationEnabled && $adminWhatsapp
+            ? "https://wa.me/{$adminWhatsapp}?text={$sellerMessage}"
+            : null;
     @endphp
     <title>Masuk - {{ $siteName }}</title>
 
@@ -427,7 +430,7 @@
                                         Hubungi admin untuk akun seller.
                                     </p>
                                 </a>
-                            @else
+                            @elseif ($sellerRegistrationEnabled)
                                 <div
                                     class="rounded-2xl border border-slate-200
                                            bg-slate-50 p-4 opacity-70">
@@ -443,6 +446,24 @@
 
                                     <p class="mt-1 text-[10px] leading-4 text-slate-400">
                                         WhatsApp admin belum tersedia.
+                                    </p>
+                                </div>
+                            @else
+                                <div
+                                    class="rounded-2xl border border-slate-200
+                                           bg-slate-50 p-4 opacity-70">
+                                    <div
+                                        class="flex size-9 items-center justify-center
+                                               rounded-xl bg-slate-200 text-slate-500">
+                                        <i class="fa-solid fa-store-slash"></i>
+                                    </div>
+
+                                    <p class="mt-3 text-xs font-black text-slate-600">
+                                        Daftar Penjual
+                                    </p>
+
+                                    <p class="mt-1 text-[10px] leading-4 text-slate-400">
+                                        Pendaftaran penjual sedang ditutup.
                                     </p>
                                 </div>
                             @endif

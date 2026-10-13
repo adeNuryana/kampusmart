@@ -3,14 +3,22 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\User;
+use App\Services\ActivityLogger;
+use App\Services\OrderDeletionService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
 
 class BuyerController extends Controller
 {
+    public function __construct(private readonly OrderDeletionService $orderDeletionService) {}
+
     public function index(Request $request): View
     {
         $search = $request->string('search')->trim();
@@ -200,5 +208,68 @@ class BuyerController extends Controller
                 'success',
                 'Akun pembeli berhasil ditambahkan.'
             );
+    }
+
+    public function destroy(User $buyer): RedirectResponse
+    {
+        abort_if($buyer->role !== 'buyer', 404);
+
+        $photoPath = $buyer->photo;
+
+        $result = DB::transaction(function () use ($buyer): array {
+            $lockedBuyer = User::query()
+                ->whereKey($buyer->id)
+                ->lockForUpdate()
+                ->firstOrFail();
+
+            abort_if($lockedBuyer->role !== 'buyer', 404);
+
+            $orders = Order::query()
+                ->where('buyer_id', $lockedBuyer->id)
+                ->orderBy('id')
+                ->get();
+
+            $restoredQuantity = 0;
+
+            foreach ($orders as $order) {
+                $orderResult = $this->orderDeletionService->delete($order);
+                $restoredQuantity += $orderResult['restoredQuantity'];
+            }
+
+            $buyerName = $lockedBuyer->name;
+
+            ActivityLogger::log(
+                'buyer_deleted',
+                'menghapus akun pembeli '.$buyerName,
+                $lockedBuyer,
+                [
+                    'email' => $lockedBuyer->email,
+                    'deleted_orders' => $orders->count(),
+                    'restored_stock_quantity' => $restoredQuantity,
+                ]
+            );
+
+            $lockedBuyer->delete();
+
+            return compact('buyerName', 'restoredQuantity');
+        });
+
+        if (
+            $photoPath
+            && ! str_starts_with($photoPath, 'http://')
+            && ! str_starts_with($photoPath, 'https://')
+        ) {
+            Storage::disk('public')->delete($photoPath);
+        }
+
+        $message = 'Akun pembeli '.$result['buyerName'].' berhasil dihapus.';
+
+        if ($result['restoredQuantity'] > 0) {
+            $message .= ' Sebanyak '.$result['restoredQuantity'].' stok dari pesanannya telah dikembalikan.';
+        }
+
+        return redirect()
+            ->route('admin.buyers.index')
+            ->with('success', $message);
     }
 }

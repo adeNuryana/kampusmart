@@ -33,7 +33,7 @@
             <p class="mt-2 text-sm
                        leading-6 text-slate-500">
 
-                Atur identitas website dan hak perubahan profil seller.
+                Atur identitas website, pendaftaran penjual, dan hak perubahan profil seller.
 
             </p>
 
@@ -180,6 +180,39 @@
                                 {{ $message }}
 
                             </p>
+                        @enderror
+
+                    </div>
+
+
+
+                    {{-- SELLER REGISTRATION --}}
+                    <div>
+
+                        <input type="hidden" name="seller_registration_enabled" value="0">
+
+                        <label for="seller_registration_enabled"
+                            class="flex cursor-pointer items-center justify-between gap-5 rounded-2xl border border-[#E7DBD1] bg-[#FAF7F2] p-5 transition hover:border-[#CDBBAE]">
+
+                            <span>
+                                <span class="block text-sm font-bold text-[#4D4038]">
+                                    Pendaftaran Penjual
+                                </span>
+
+                                <span class="mt-1 block text-xs leading-5 text-slate-500">
+                                    Jika aktif, calon penjual dapat menghubungi admin melalui tombol WhatsApp di halaman login.
+                                </span>
+                            </span>
+
+                            <input type="checkbox" name="seller_registration_enabled"
+                                id="seller_registration_enabled" value="1"
+                                @checked(old('seller_registration_enabled', $setting->seller_registration_enabled))
+                                class="size-5 shrink-0 rounded border-[#CDBBAE] text-[#4371d1] focus:ring-[#4371d1]">
+
+                        </label>
+
+                        @error('seller_registration_enabled')
+                            <p class="mt-2 text-xs font-medium text-[#A65954]">{{ $message }}</p>
                         @enderror
 
                     </div>

@@ -36,6 +36,8 @@ class WebsiteSettingController extends Controller
 
             'admin_whatsapp' => ['nullable', 'string', 'min:9', 'max:25', 'regex:/^[+0-9()\-\s]+$/'],
 
+            'seller_registration_enabled' => ['sometimes', 'boolean'],
+
             'logo' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048', 'dimensions:max_width=6000,max_height=6000'],
 
             'favicon' => ['nullable', 'file', 'mimes:ico,jpg,jpeg,png,webp', 'max:1024'],
@@ -57,6 +59,9 @@ class WebsiteSettingController extends Controller
 
         $setting->site_name = $validated['site_name'];
         $setting->admin_whatsapp = $validated['admin_whatsapp'] ?? null;
+        if (array_key_exists('seller_registration_enabled', $validated)) {
+            $setting->seller_registration_enabled = $validated['seller_registration_enabled'];
+        }
         $setting->seller_profile_locked_fields = array_values(array_unique(
             $validated['seller_profile_locked_fields'] ?? []
         ));
