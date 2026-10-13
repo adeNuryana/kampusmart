@@ -5,6 +5,7 @@ use App\Http\Middleware\SecurityHeaders;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Middleware\ThrottleRequests;
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -14,6 +15,12 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        $middleware->redirectUsersTo(function (Request $request): string {
+            $user = $request->user();
+
+            return route($user?->dashboardRouteName() ?? 'home');
+        });
+
         // Run the limiter before sessions and route bindings so abusive traffic
         // is rejected before it can trigger more expensive application work.
         $middleware->prependToGroup(

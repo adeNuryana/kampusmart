@@ -56,6 +56,15 @@
         $products = $products ?? collect();
         $cartCount = (int) ($cartCount ?? 0);
         $cartBadge = $cartCount > 99 ? '99+' : (string) $cartCount;
+        $currentUser = auth()->user();
+        $dashboardUrl = $currentUser
+            ? route($currentUser->dashboardRouteName())
+            : route('login');
+        $dashboardLabel = match ($currentUser?->role) {
+            'admin' => 'Dashboard Admin',
+            'seller' => 'Dashboard Seller',
+            default => 'Dashboard Buyer',
+        };
 
         $initialProducts = $isFiltering ? $products : $latestProducts;
 
@@ -343,45 +352,43 @@
                             </a>
                         @endif
 
-                        @if (auth()->user()->role === 'buyer')
-                            <a
-                                href="{{ route('buyer.dashboard') }}"
-                                class="hidden
-                                       items-center
-                                       gap-2.5
-                                       rounded-xl
-                                       border
-                                       border-slate-200
-                                       bg-white
-                                       px-2.5
-                                       py-1.5
-                                       transition
-                                       hover:border-blue-200
-                                       hover:bg-blue-50
-                                       lg:flex"
-                            >
-                                <x-user-avatar :user="auth()->user()"
-                                    class="size-8 rounded-lg border border-blue-100 bg-blue-50
-                                           text-xs font-black text-[#315ebc]" />
+                        <a
+                            href="{{ $dashboardUrl }}"
+                            class="hidden
+                                   items-center
+                                   gap-2.5
+                                   rounded-xl
+                                   border
+                                   border-slate-200
+                                   bg-white
+                                   px-2.5
+                                   py-1.5
+                                   transition
+                                   hover:border-blue-200
+                                   hover:bg-blue-50
+                                   lg:flex"
+                        >
+                            <x-user-avatar :user="auth()->user()"
+                                class="size-8 rounded-lg border border-blue-100 bg-blue-50
+                                       text-xs font-black text-[#315ebc]" />
 
-                                <div class="max-w-32">
+                            <div class="max-w-32">
 
-                                    <p
-                                        class="truncate
-                                               text-xs
-                                               font-bold
-                                               text-slate-700"
-                                    >
-                                        {{ auth()->user()->name }}
-                                    </p>
+                                <p
+                                    class="truncate
+                                           text-xs
+                                           font-bold
+                                           text-slate-700"
+                                >
+                                    {{ auth()->user()->name }}
+                                </p>
 
-                                    <p class="text-[9px] text-slate-400">
-                                        Dashboard Buyer
-                                    </p>
+                                <p class="text-[9px] text-slate-400">
+                                    {{ $dashboardLabel }}
+                                </p>
 
-                                </div>
-                            </a>
-                        @endif
+                            </div>
+                        </a>
 
                     @else
 
@@ -2173,7 +2180,7 @@
                     </a>
                 @else
                     <a
-                        href="{{ route('home') }}"
+                        href="{{ $dashboardUrl }}"
                         class="flex
                                flex-col
                                items-center
@@ -2235,8 +2242,10 @@
                                py-3
                                text-slate-400"
                     >
-                        <i class="fa-regular fa-user text-base"></i>
-                        <span class="text-[9px] font-semibold">Akun</span>
+                        <x-user-avatar :user="auth()->user()"
+                            class="size-5 rounded-full bg-blue-100 text-[8px]
+                                   font-black text-[#315ebc]" />
+                        <span class="text-[9px] font-semibold">Dashboard</span>
                     </a>
                 @endif
 

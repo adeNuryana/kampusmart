@@ -31,6 +31,16 @@ class User extends Authenticatable implements MustVerifyEmail
         $this->notify(new VerifyEmailNotification);
     }
 
+    public function dashboardRouteName(): string
+    {
+        return match ($this->role) {
+            'admin' => 'admin.dashboard',
+            'seller' => 'seller.dashboard',
+            'buyer' => 'buyer.dashboard',
+            default => 'home',
+        };
+    }
+
     public function sellerProfile(): HasOne
     {
         return $this->hasOne(SellerProfile::class);
